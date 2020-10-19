@@ -1,0 +1,20 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<pages:PopupPage xmlns="http://xamarin.com/schemas/2014/forms" 
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:pages="clr-namespace:Rg.Plugins.Popup.Pages;assembly=Rg.Plugins.Popup"
+             x:Class="BDI3Mobile.Views.ScoringInstructionsView">
+    <StackLayout Margin="0,0,0,0"  WidthRequest="800" BackgroundColor="White" HorizontalOptions="Center" VerticalOptions="Center">
+        <BoxView HeightRequest="4" WidthRequest="4" Margin="0,0,0,0"  VerticalOptions="StartAndExpand" BackgroundColor="#147CBD"   />
+        <Label Text="Scoring Instructions" FontAttributes="Bold" FontSize="18" TextColor="Black" Margin="20,20,0,0" />
+        <Label Text="For each design, count the number of errors. An error is defined as any of the following:" FontSize="14" TextColor="Black" Margin="20,20,0,0" />
+        <Label Text="1. The drawing falls outside the sold line (1 error for each instance)."  FontSize="14" TextColor="Black" Margin="20,0,0,0" />
+        <Label Text="2. The drawing begins more than 1/4inch away from the design's start point."   FontSize="14" TextColor="Black" Margin="20,0,0,0" />
+        <Label Text="3. The drawing ends more than 1/4inch aways from the design's end point."   FontSize="14" TextColor="Black" Margin="20,0,0,0" />
+        <Label Text="4. In Design B, the start and end points of the drawing overlap by more than 1/4inch."   FontSize="14" TextColor="Black" Margin="20,0,0,0" />
+        <Label Text="5. The child reverses direction after beginning the drawing."   FontSize="14" TextColor="Black" Margin="20,0,0,0" />
+        <Label Text="Examples of correct drawings and erros are show on the next page."   FontSize="14" TextColor="Black" Margin="20,0,0,0" />
+        <Button Text="Close" Command="{Binding closebuttonCommand}" Margin="20,20,0,0" FontSize="Medium" WidthRequest="150" TextColor="White" BackgroundColor="#147CBD" HorizontalOptions="Center" VerticalOptions="Center">
+            </Button>
+        <Label Text="" Margin="20,20,0,0"/>
+    </StackLayout>
+</pages:PopupPage>

@@ -1,0 +1,14 @@
+﻿div, table, span {
+    font-family: Arial !important;
+    font-size: 16px !important;
+}
+
+p {
+    font-family: Arial !important;
+    font-size: 16px !important;
+    margin-right: 20px;
+}
+
+.scoringClass mjx-math {
+    font-weight: bold !important;
+}

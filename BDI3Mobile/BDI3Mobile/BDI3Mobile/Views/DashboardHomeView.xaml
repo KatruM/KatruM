@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ContentPage xmlns:Views="clr-namespace:BDI3Mobile.Views"
+             xmlns:Common="clr-namespace:BDI3Mobile.Common"
+             xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:local="clr-namespace:PopupDemoApp"
+             x:Class="BDI3Mobile.Views.DashboardHomeView">
+    <ContentView.Padding>
+        <OnPlatform x:TypeArguments="Thickness" iOS="0,22,0,0" />
+    </ContentView.Padding>
+    <Grid BackgroundColor="{x:Static Common:Colors.BackgroundColor}">
+        <StackLayout Spacing="0">
+            <StackLayout HeightRequest="50" VerticalOptions="Center" BackgroundColor="{x:Static Common:Colors.PrimaryColor}" Margin="0" Orientation="Horizontal" Padding="25,5,25,5" Spacing="25">
+                <Grid Margin="0" RowSpacing="0" ColumnSpacing="0" VerticalOptions="Start" HorizontalOptions="Start" HeightRequest="180" WidthRequest="180">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition/>
+                    </Grid.ColumnDefinitions>
+
+                    <Image Source="RiversideWhite.png" HeightRequest="150" Grid.Column="0">
+                        <Image.Aspect>
+                            <OnPlatform x:TypeArguments="Aspect">
+                                <On Platform="iOS" Value="AspectFit"></On>
+                                <On Platform="Android" Value="AspectFit"></On>
+                                <On Platform="UWP" Value="AspectFill"></On>
+                            </OnPlatform>
+                        </Image.Aspect>
+                    </Image>
+
+                </Grid>
+                <BoxView HorizontalOptions="FillAndExpand"  />
+              <StackLayout x:Name="stkSync" VerticalOptions ="Center" Orientation="Horizontal">
+                    <Image x:Name="imgSync" Source="iconDashboardSync.png" >
+                        <Image.GestureRecognizers>
+                            <TapGestureRecognizer Tapped="Syncing"/>
+                        </Image.GestureRecognizers>
+                    </Image>
+                <!--<Image x:Name="imgSyncDisable" Source="iconsync_disabled.png" />-->
+               </StackLayout>
+                <!--<BoxView WidthRequest="2" BackgroundColor="White" Margin="0,10,0,10" />-->
+                <!--<Image Source="iconinfo.png"  />-->
+                <Image Source="iconhelp.png"  >
+                    <Image.GestureRecognizers>
+                        <TapGestureRecognizer Tapped="DashboardHelp_Tapped"/>
+                    </Image.GestureRecognizers>
+                </Image>
+                <Image Source="iconphone.png" WidthRequest="30" HeightRequest="30" >
+                    <Image.GestureRecognizers>
+                        <TapGestureRecognizer  Tapped="SupportIconTapped"/>
+                    </Image.GestureRecognizers>
+                </Image>
+                <Image Source="iconLogout.png">
+                    <Image.GestureRecognizers>
+                        <TapGestureRecognizer  Command="{Binding HomeCommand}"/>
+                    </Image.GestureRecognizers>
+                </Image>
+            </StackLayout>
+            <Grid Margin="0" Padding="25,15,25,15" ColumnSpacing="0" BackgroundColor="White">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="4*"/>
+                    <ColumnDefinition Width="6*"/>
+                </Grid.ColumnDefinitions>
+
+                <StackLayout Padding="0" Orientation="Horizontal" Margin="0" VerticalOptions="Center" Spacing="0" Grid.Column="0">
+                    <Label TextColor="{x:Static Common:Colors.TableFieldsColor}" Text="Hello" FontSize="Default" HorizontalOptions="Start" VerticalOptions="Center"/>
+                    <Label TextColor="{x:Static Common:Colors.TableFieldsColor}" Margin="10,0,0,0" Text="{Binding UserFullName}" FontAttributes="Bold" FontSize="Default" HorizontalOptions="Start"  VerticalOptions="Center"/>
+                </StackLayout>
+
+
+                <StackLayout Padding="0" Orientation="Horizontal" Margin="0" VerticalOptions="Center" Spacing="10" Grid.Column="1" HorizontalOptions="End">
+                    <Label TextColor="{x:Static Common:Colors.TitleColor}" VerticalOptions="Center" Text="{Binding PendingString}" FontSize="Default" FontFamily="{StaticResource ARIALMT}"/>
+                    <Label TextColor="{x:Static Common:Colors.TitleColor}" Text="|" FontSize="Default" VerticalOptions="Center" FontFamily="{StaticResource ARIALMT}"/>
+                    <Label Text="{Binding FailedString}" TextColor="{x:Static Common:Colors.TitleColor}" FontSize="Default" VerticalOptions="Center" FontFamily="{StaticResource ARIALMT}"/>
+                    <Label Text="|" TextColor="{x:Static Common:Colors.TitleColor}" FontSize="Default" VerticalOptions="Center" FontFamily="{StaticResource ARIALMT}"/>
+                    <Label Text="{Binding CurrentTime}" TextColor="{x:Static Common:Colors.TitleColor}" FontSize="Default" VerticalOptions="Center" FontFamily="{StaticResource ARIALMT}"/>
+                </StackLayout>
+            </Grid>
+            <ContentView BackgroundColor="{x:Static Common:Colors.BackgroundColor}" VerticalOptions="FillAndExpand" Padding="30,0,30,30">
+                <Views:DashboardView />
+            </ContentView>
+        </StackLayout>
+         
+    </Grid>
+</ContentPage>

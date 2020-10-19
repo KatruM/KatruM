@@ -1,0 +1,266 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<pages:PopupPage
+                xmlns:pages="clr-namespace:Rg.Plugins.Popup.Pages;assembly=Rg.Plugins.Popup"
+                xmlns="http://xamarin.com/schemas/2014/forms" 
+                xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+                x:Class="BDI3Mobile.Views.ItemLevelNavigationPage.AcademicMenuNavigation"
+                xmlns:local="clr-namespace:BDI3Mobile;assembly=BDI3Mobile"
+                xmlns:ios="clr-namespace:Xamarin.Forms.PlatformConfiguration.iOSSpecific;assembly=Xamarin.Forms.Core"
+                xmlns:converter="clr-namespace:BDI3Mobile.ValueConverter" xmlns:htmllabel="clr-namespace:LabelHtml.Forms.Plugin.Abstractions;assembly=HtmlLabel.Forms.Plugin">
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <converter:SyncConverter x:Key="SyncConverter"/>
+            <DataTemplate x:Key="Level1Template">
+                <ViewCell>
+                    <Grid Margin="0,1,0,1" ColumnSpacing="5" BackgroundColor="White">
+                        <Grid.GestureRecognizers>
+                            <TapGestureRecognizer Command="{Binding SelectedCommand}"/>
+                        </Grid.GestureRecognizers>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="Auto"/>
+                            <ColumnDefinition Width="Auto"/>
+                        </Grid.ColumnDefinitions>
+
+                        <htmllabel:HtmlLabel IsEnabled="False" TextType="Html" Padding="10,10,0,10" Margin="0,12,0,0" LineBreakMode="TailTruncation" MaxLines="1" VerticalOptions="Center" Grid.Column="0" Text="{Binding Text,Mode=TwoWay}" FontSize="15" TextColor="Black">
+                            <htmllabel:HtmlLabel.IsVisible>
+                                <OnPlatform x:TypeArguments="x:Boolean">
+                                    <On Platform="iOS">True</On>
+                                    <On Platform="UWP">False</On>
+                                    <On Platform="Android">False</On>
+                                </OnPlatform>
+                            </htmllabel:HtmlLabel.IsVisible>
+                        </htmllabel:HtmlLabel>
+                        <Label IsEnabled="False" TextType="Html" Padding="10,10,0,10" LineBreakMode="TailTruncation" MaxLines="1" VerticalOptions="Center" Grid.Column="0" Text="{Binding Text,Mode=TwoWay}" FontSize="15" TextColor="Black">
+                            <Label.IsVisible>
+                                <OnPlatform x:TypeArguments="x:Boolean">
+                                    <On Platform="iOS">False</On>
+                                    <On Platform="UWP">True</On>
+                                    <On Platform="Android">True</On>
+                                </OnPlatform>
+                            </Label.IsVisible>
+                        </Label>
+
+                        <Image IsEnabled="False" Margin="0,10,0,10" VerticalOptions="Center" Grid.Column="1" WidthRequest="15" HeightRequest="15">
+                            <Image.Source>
+                                <FileImageSource File="{Binding ImageName}" />
+                            </Image.Source>
+                        </Image>
+                    </Grid>
+                </ViewCell>
+            </DataTemplate>
+            <DataTemplate x:Key="Level2Template">
+                <ViewCell>
+                    <Grid Padding="0" Margin="0">
+                        <Grid.GestureRecognizers>
+                            <TapGestureRecognizer Command="{Binding SelectedCommand}"/>
+                        </Grid.GestureRecognizers>
+                        <Grid BackgroundColor="White" Padding="0" Margin="0,1,0,1" ColumnSpacing="5">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="7*"/>
+                                <ColumnDefinition Width="3*"/>
+                            </Grid.ColumnDefinitions>
+                            <Grid Grid.Column="0" ColumnSpacing="5" Padding="0" Margin="0">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="Auto"/>
+                                    <ColumnDefinition Width="Auto"/>
+                                </Grid.ColumnDefinitions>
+                                <Label IsEnabled="False" LineBreakMode="TailTruncation" Padding="20,10,0,10" VerticalOptions="Center" Grid.Column="0" Text="{Binding Text,Mode=TwoWay}" MaxLines="1" FontSize="15" TextColor="Black"/>
+                                <Image IsEnabled="False" Margin="0,10,10,10" VerticalOptions="Center" Grid.Column="1" Source="{Binding ImageName}" WidthRequest="15" HeightRequest="15"/>
+                            </Grid>
+                            <Label IsEnabled="False" TextType="Html" MaxLines="1" LineBreakMode="TailTruncation" Grid.Column="1" VerticalOptions="Center" HorizontalOptions="Center" FontSize="15" IsVisible="{Binding ShowSubDomainStatus, Mode=TwoWay}" Text="{Binding SubDomainStatus, Mode=TwoWay}"/>
+                        </Grid>
+                    </Grid>
+                </ViewCell>
+            </DataTemplate>
+            <DataTemplate x:Key="AreaTemplate">
+                <ViewCell>
+                    <Grid Padding="0" Margin="0">
+                        <Grid.GestureRecognizers>
+                            <TapGestureRecognizer Command="{Binding SelectedCommand}"/>
+                        </Grid.GestureRecognizers>
+                        <Grid BackgroundColor="White" Padding="0" Margin="0,1,0,1" ColumnSpacing="5">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="7*"/>
+                                <ColumnDefinition Width="3*"/>
+                            </Grid.ColumnDefinitions>
+                            <Grid Grid.Column="0" ColumnSpacing="5" Padding="0" Margin="0">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="Auto"/>
+                                    <ColumnDefinition Width="Auto"/>
+                                </Grid.ColumnDefinitions>
+                                <Label IsEnabled="False" LineBreakMode="TailTruncation" Padding="30,10,0,10" VerticalOptions="Center" Grid.Column="0" Text="{Binding Text,Mode=TwoWay}" MaxLines="1" FontSize="15" TextColor="Black"/>
+                                <Image IsEnabled="False" Margin="0,10,10,10" VerticalOptions="Center" Grid.Column="1" Source="{Binding ImageName}" WidthRequest="15" HeightRequest="15"/>
+                            </Grid>
+                            <Label IsEnabled="False" TextType="Html" MaxLines="1" LineBreakMode="TailTruncation" Grid.Column="1" VerticalOptions="Center" HorizontalOptions="Center" FontSize="15" IsVisible="{Binding ShowSubDomainStatus, Mode=TwoWay}" Text="{Binding SubDomainStatus, Mode=TwoWay}"/>
+                        </Grid>
+                    </Grid>
+                </ViewCell>
+            </DataTemplate>
+            <DataTemplate x:Key="Level3Template">
+                <ViewCell>
+                    <Grid Padding="0" Margin="0">
+                        <Grid.GestureRecognizers>
+                            <TapGestureRecognizer Command="{Binding SelectedCommand}"/>
+                        </Grid.GestureRecognizers>
+                        <Grid  Padding="0" Margin="0,1,0,1" ColumnSpacing="3" BackgroundColor="White">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="14*"/>
+                                <ColumnDefinition Width="2*"/>
+                            </Grid.ColumnDefinitions>
+                            <StackLayout Spacing="0" Padding="35,10,0,0" Margin="0" Orientation="Vertical" Grid.Column="0">
+                                <Label IsEnabled="False" TextType="Html" VerticalOptions="CenterAndExpand" Text="{Binding Code,Mode=TwoWay}" FontSize="15" MaxLines="1" LineBreakMode="TailTruncation" TextColor="Black"/>
+                                <Label IsEnabled="False" TextType="Html" VerticalOptions="Center" Text="{Binding Text,Mode=TwoWay}" FontSize="15" MaxLines="1" LineBreakMode="TailTruncation" TextColor="Black">
+                                <Label.Margin>
+                        <OnPlatform x:TypeArguments="Thickness">
+                            <On Platform="iOS" Value="0,5,0,5"/>
+                        </OnPlatform>
+                         </Label.Margin>
+                                    </Label>
+                                <StackLayout.GestureRecognizers>
+                                    <TapGestureRecognizer Command="{Binding SelectedCommand}"/>
+                                </StackLayout.GestureRecognizers>
+                            </StackLayout>
+                            <StackLayout Grid.Column="1" Margin="0,10,5,10" >
+                                <Image IsEnabled="False"  VerticalOptions="CenterAndExpand" WidthRequest="24" HeightRequest="24">
+                                    <Image.Source>
+                                        <FileImageSource File="{Binding ProgressImage}" />
+                                    </Image.Source>
+                                </Image>
+                            </StackLayout>
+                        </Grid>
+                    </Grid>
+
+                </ViewCell>
+            </DataTemplate>
+            <DataTemplate  x:Key="StartingPointTemplate">
+                <ViewCell>
+                    <Grid Padding="0" Margin="0" BackgroundColor="LightGray">
+                        <Grid.GestureRecognizers>
+                            <TapGestureRecognizer Command="{Binding SelectedCommand}"/>
+                        </Grid.GestureRecognizers>
+                        <Grid  Padding="0" Margin="0,1,0,1" ColumnSpacing="0" RowSpacing="0">
+                            <Label IsEnabled="False" TextType="Html" Padding="20,20,10,20" Text="{Binding Text,Mode=TwoWay}" TextColor="Black" Font="Bold,15"/>
+                        </Grid>
+                    </Grid>
+                </ViewCell>
+            </DataTemplate>
+            <local:NavigationDataTemplateSelector x:Key="NavigationDataTemplateSelector"
+                Level1Template="{StaticResource Level1Template}"
+                Level2Template="{StaticResource Level2Template}"
+                Level3Template="{StaticResource Level3Template}"
+                AreaTemplate="{StaticResource AreaTemplate}"
+                StartingPointTemplate="{StaticResource StartingPointTemplate}"/>
+        </ResourceDictionary>
+    </ContentPage.Resources>
+    <Frame x:Name="MainFrame" Padding="0,4,0,0" HorizontalOptions="Start" VerticalOptions="FillAndExpand" WidthRequest="500">
+        <Frame.Margin>
+            <OnPlatform x:TypeArguments="Thickness">
+                <On Platform="UWP" Value="0,90,0,0"/>
+            </OnPlatform>
+        </Frame.Margin>
+
+        <Grid BackgroundColor="#f4f4f4" RowSpacing="0">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="50"/>
+                <RowDefinition Height="40"/>
+                <RowDefinition Height="Auto"/>
+            </Grid.RowDefinitions>
+            <StackLayout Grid.Row="0" BackgroundColor="#f4f4f4">
+                <StackLayout.Margin>
+                    <OnPlatform x:TypeArguments="Thickness">
+                        <On Platform="Android" Value="0,-5,0,0"/>
+                    </OnPlatform>
+                </StackLayout.Margin>
+                <Grid HorizontalOptions="End">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="3*"></ColumnDefinition>
+                        <ColumnDefinition Width="1*"></ColumnDefinition>
+                    </Grid.ColumnDefinitions>
+                    <StackLayout Grid.Column="1" Orientation="Horizontal" HorizontalOptions="End" Padding="0">
+                        <Label Text="Close" FontSize="16" TextColor="#2673b9" >
+                            <Label.Margin>
+                                <OnPlatform x:TypeArguments="Thickness">
+                                    <On Platform="UWP" Value="0,15,10,0"/>
+                                    <On Platform="Android" Value="0,5,10,0"/>
+                                    <On Platform="iOS" Value="0,5,10,0"/>
+                                </OnPlatform>
+                            </Label.Margin>
+                            <Label.GestureRecognizers>
+                                <TapGestureRecognizer Command="{Binding ItemLevelCloseCommand}"/>
+                            </Label.GestureRecognizers>
+                        </Label>
+                    </StackLayout>
+                </Grid>
+            </StackLayout>
+            <StackLayout Grid.Row="1" BackgroundColor="#f4f4f4" Orientation="Horizontal">
+                <Label Text="Test Record Navigation" FontSize="20" HorizontalOptions="Start" FontAttributes="Bold">
+                    <Label.Margin>
+                        <OnPlatform x:TypeArguments="Thickness">
+                            <On Platform="UWP" Value="10,0,0,0"/>
+                            <On Platform="Android" Value="5,0,0,0"/>
+                            <On Platform="iOS" Value="5,0,0,0"/>
+                        </OnPlatform>
+                    </Label.Margin>
+                </Label>
+                <Image Source="iconInfoCircle.png" WidthRequest="15" HeightRequest="15" Margin="0,0,0,10" HorizontalOptions="Start" VerticalOptions="Start" >
+                    <Image.GestureRecognizers>
+                        <TapGestureRecognizer Command="{Binding InfoIconNavigationCommand}"/>
+                    </Image.GestureRecognizers>
+                </Image>
+            </StackLayout>
+            <StackLayout Grid.Row="2">
+                <ListView HasUnevenRows="True" Footer="" ios:ListView.SeparatorStyle="FullWidth" ItemsSource="{Binding MenuList,Mode=TwoWay}" Margin="0" ItemTemplate="{StaticResource NavigationDataTemplateSelector}" ios:ListView.RowAnimationsEnabled="false">
+                    <!--<ListView.ItemTemplate>
+                    <DataTemplate>
+                        <ViewCell>
+                                <Grid Padding="0" x:Name="mainitemGrid" Margin="0,1,0,1" BackgroundColor="White" RowSpacing="0" ColumnSpacing="0">
+                                    <Grid HeightRequest="{Binding Instance,Converter={StaticResource BoolToVisibleConverter},ConverterParameter=1}" Padding="0" Margin="0" ColumnSpacing="5" BackgroundColor="White">
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="Auto"/>
+                                            <ColumnDefinition Width="Auto"/>
+                                        </Grid.ColumnDefinitions>
+                                        <Label TextType="Html" Padding="10,10,0,10" LineBreakMode="TailTruncation" MaxLines="1" VerticalOptions="Center" Grid.Column="0" Text="{Binding Text,Mode=TwoWay}" FontSize="15" TextColor="Black"/>
+                                        <Image Margin="0,10,0,10" VerticalOptions="Center" Grid.Column="1" Source="{imageSource:ImageResource BDI3Mobile.OpenGlyph.png}" WidthRequest="25" HeightRequest="25"/>
+                                    </Grid>
+
+                                    <Grid HeightRequest="{Binding Instance,Converter={StaticResource BoolToVisibleConverter},ConverterParameter=2}" BackgroundColor="White" Padding="0" Margin="0" ColumnSpacing="5">
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="7*"/>
+                                            <ColumnDefinition Width="3*"/>
+                                        </Grid.ColumnDefinitions>
+                                        <Grid Grid.Column="0" ColumnSpacing="5" Padding="0" Margin="0">
+                                            <Grid.ColumnDefinitions>
+                                                <ColumnDefinition Width="Auto"/>
+                                                <ColumnDefinition Width="Auto"/>
+                                            </Grid.ColumnDefinitions>
+                                            <Label LineBreakMode="TailTruncation" Padding="20,10,0,10" VerticalOptions="Center" Grid.Column="0" Text="{Binding Text,Mode=TwoWay}" MaxLines="1" FontSize="15" TextColor="Black"/>
+                                            <Image Margin="0,10,10,10" VerticalOptions="Center" Grid.Column="1" Source="{imageSource:ImageResource BDI3Mobile.OpenGlyph.png}" WidthRequest="25" HeightRequest="25"/>
+                                        </Grid>
+                                        <Label TextType="Html" MaxLines="1" LineBreakMode="TailTruncation" Grid.Column="1" VerticalOptions="Center" HorizontalOptions="Center" FontSize="15" Text="in-progress"/>
+                                    </Grid>
+
+                                    <Grid  HeightRequest="{Binding Instance,Converter={StaticResource BoolToVisibleConverter},ConverterParameter=3}" Padding="0" Margin="0" ColumnSpacing="5" BackgroundColor="White">
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="8*"/>
+                                            <ColumnDefinition Width="2*"/>
+                                        </Grid.ColumnDefinitions>
+                                        <StackLayout Padding="25,10,0,10" Margin="0" Orientation="Vertical" Grid.Column="0">
+                                            <Label TextType="Html" VerticalOptions="Center" Text="{Binding Code,Mode=TwoWay}" FontSize="15" MaxLines="1" LineBreakMode="TailTruncation" TextColor="Black"/>
+                                            <Label TextType="Html" VerticalOptions="Center" Text="{Binding Text,Mode=TwoWay}" FontSize="15" MaxLines="1" LineBreakMode="TailTruncation" TextColor="Black"/>
+                                        </StackLayout>
+                                        <Image Grid.Column="1" Margin="0,10,5,10" VerticalOptions="Center"  Source="completed_TickMark.png" WidthRequest="24" HeightRequest="24"/>
+                                    </Grid>
+
+                                    <Grid HeightRequest="{Binding Instance,Converter={StaticResource BoolToVisibleConverter},ConverterParameter=4}" BackgroundColor="LightGray" Padding="0" Margin="0" ColumnSpacing="0" RowSpacing="0">
+                                        <Label TextType="Html" Padding="20,0,0,20" Text="{Binding Text,Mode=TwoWay}" FontSize="15" TextColor="Gray"/>
+                                    </Grid>
+
+                                </Grid>
+                            </ViewCell>
+                    </DataTemplate>
+                    </ListView.ItemTemplate>-->
+                </ListView>
+            </StackLayout>
+        </Grid>
+    </Frame>
+</pages:PopupPage>

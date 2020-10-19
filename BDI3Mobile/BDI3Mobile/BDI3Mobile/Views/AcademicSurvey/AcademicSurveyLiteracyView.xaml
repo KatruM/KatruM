@@ -1,0 +1,383 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:Common="clr-namespace:BDI3Mobile.Common"
+             xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+             xmlns:sys="clr-namespace:System;assembly=mscorlib"
+             xmlns:renderer="clr-namespace:BDI3Mobile.CustomRenderer"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:converter="clr-namespace:BDI3Mobile.ValueConverter"
+             mc:Ignorable="d"
+             x:Class="BDI3Mobile.Views.AcademicSurvey.AcademicSurveyLiteracyView">
+
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <converter:BoolToColorConverter x:Key="BoolToColorConverter"/>
+            <converter:BoolToMarginConverter x:Key="BoolToMarginConverter"/>
+        </ResourceDictionary>
+    </ContentPage.Resources>
+
+
+    <ContentPage.Content>
+        <Grid HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand">
+            <Grid BackgroundColor="{x:Static Common:Colors.BackgroundColor}" RowSpacing="0">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="52"/>
+                    <RowDefinition Height="40"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="40"/>
+                </Grid.RowDefinitions>
+                <AbsoluteLayout Grid.Row="0" BackgroundColor="{x:Static Common:Colors.AcademicLiteracyHeaderBckGrd}" Padding="12.5, 10.5, 0, 2">
+                    <StackLayout Orientation="Horizontal" AbsoluteLayout.LayoutBounds="0,1,-1,-1" AbsoluteLayout.LayoutFlags="YProportional">
+                        <Image Source="BackBlack.png" HeightRequest="30" WidthRequest="20" VerticalOptions="End"/>
+                        <Label Text="Dashboard" TextColor="#262626" VerticalTextAlignment="Center" FontSize="17" />
+                        <StackLayout.GestureRecognizers>
+                            <TapGestureRecognizer Command="{Binding BackCommand}"/>
+                        </StackLayout.GestureRecognizers>
+                    </StackLayout>
+                    <Label Text="{Binding AdministrationHeader}" AbsoluteLayout.LayoutBounds="0.5,1,-1,-1" AbsoluteLayout.LayoutFlags="PositionProportional" FontSize="17" TextColor="#262626" />
+                    <StackLayout Spacing="8" Orientation="Horizontal" AbsoluteLayout.LayoutBounds="1,1,-1,-1" AbsoluteLayout.LayoutFlags="PositionProportional" Margin="0,0,24,0">
+                        <Image Source="iconSynca.png" HeightRequest="22" WidthRequest="22" VerticalOptions="End" Margin="0,0,0,3">
+                            <Image.GestureRecognizers>
+                                <TapGestureRecognizer Command="{Binding SaveCommand}" />
+                            </Image.GestureRecognizers>
+                        </Image>
+                        <Image Source="iconReportb.png" HeightRequest="25" WidthRequest="25" VerticalOptions="End" Margin="0,0,0,3">
+                            <!--<Image.GestureRecognizers>
+                                <TapGestureRecognizer Command="{Binding ReloadCommand}" />
+                            </Image.GestureRecognizers>-->
+                        </Image>
+                        <Image Source="iconRecordNotec.png" HeightRequest="25" WidthRequest="25" VerticalOptions="End" Margin="0,0,0,3">
+                            <Image.GestureRecognizers>
+                                <TapGestureRecognizer Command="{Binding OpenRecordToolCommand}" />
+                            </Image.GestureRecognizers>
+                        </Image>
+                        <Image Source="iconNavbard.png" HeightRequest="22" WidthRequest="22" VerticalOptions="End" Margin="0,0,0,3">
+                            <Image.GestureRecognizers>
+                                <TapGestureRecognizer Command="{Binding ItemNavigationCommand}" />
+                            </Image.GestureRecognizers>
+                        </Image>
+                    </StackLayout>
+                </AbsoluteLayout>
+                
+                <Grid Grid.Row="1" BackgroundColor="White" Padding="40,0,20,0">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="4*"/>
+                        <ColumnDefinition Width="0.5*"/>
+                        <ColumnDefinition Width="2*"/>
+                    </Grid.ColumnDefinitions>
+                    <StackLayout x:Name="PropStack" Grid.Column="0" VerticalOptions="Center" Orientation="Horizontal" Spacing="15">
+                        <StackLayout x:Name="ChildColumn" Spacing="2" Orientation="Horizontal">
+                            <Label x:Name="childNameHeader" Text="Child: "/>
+                            <Label x:Name="childName" TextColor="{x:Static Common:Colors.HyperlinkTextColor}">
+                                <Label.GestureRecognizers>
+                                    <TapGestureRecognizer Tapped="TapGestureRecognizer_Tapped"/>
+                                </Label.GestureRecognizers>
+                            </Label>
+                        </StackLayout>
+                        <StackLayout x:Name="DOBColumn" Spacing="2" Orientation="Horizontal">
+                            <Label x:Name="dobHeader" Text="DOB: "/>
+                            <Label x:Name="dob" />
+                        </StackLayout>
+                        <StackLayout x:Name="AgeColumn" Spacing="2" Orientation="Horizontal">
+                            <Label x:Name="ageHeader" Text="Age: "/>
+                            <Label x:Name="age"/>
+                        </StackLayout>
+                        <StackLayout x:Name="TestDateColumn" Spacing="2" Orientation="Horizontal">
+                            <Label x:Name="testDateHeader" Text="Test Date: "/>
+                            <Label x:Name="testDate" BindingContext="{x:Reference DatePicker_DOB}" Text="{Binding SelectedDate}" TextColor="{x:Static Common:Colors.HyperlinkTextColor}" >
+                                <Label.GestureRecognizers>
+                                    <TapGestureRecognizer Tapped="OpenTestDatePicker_Tapped"/>
+                                </Label.GestureRecognizers>
+                            </Label>
+                        </StackLayout>
+                    </StackLayout>
+                    <StackLayout Grid.Column="1"></StackLayout>
+                    <StackLayout Grid.Column="2" Orientation="Horizontal" HorizontalOptions="End" Margin="0,0,10,0" VerticalOptions="Center" Spacing="25">
+                        <StackLayout Orientation="Horizontal" Spacing="7">
+                            <Image Source="{Binding BasalImage, FallbackValue=completed_TickMark.png}"  HeightRequest="22" WidthRequest="22"/>
+                            <Label x:Name="basal" Text="Basal Obtained" VerticalOptions="Center"/>
+                        </StackLayout>
+                        <StackLayout Orientation="Horizontal" Spacing="7">
+                            <Image Source="{Binding CeilingImage, FallbackValue=notStarted.png}" HeightRequest="22" WidthRequest="22"/>
+                            <Label x:Name="ceiling" Text="Ceiling Obtained" VerticalOptions="Center"/>
+                        </StackLayout>
+                    </StackLayout>
+                </Grid>
+
+                <Grid Grid.Row="2"  RowSpacing="25">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+
+                    <Grid Grid.Column="0">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height=".6*"/>
+                            <RowDefinition Height="*"/>
+                        </Grid.RowDefinitions>
+
+                        <Grid x:Name="FluencyRows" Margin="35,15,32,0" BackgroundColor="Transparent" Grid.Row="0" RowSpacing="0">
+
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="40" />
+                                <RowDefinition Height="*" />
+                            </Grid.RowDefinitions>
+
+                            <Grid RowSpacing="0" BackgroundColor="#ffffff"  HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" Grid.Row="0">
+                                <Grid.RowDefinitions>
+                                    <RowDefinition />
+                                </Grid.RowDefinitions>
+
+                                <Grid.Margin>
+                                    <OnPlatform x:TypeArguments="Thickness">
+                                        <On Platform="iOS" Value="0,-18,-8,15"/>
+                                    </OnPlatform>
+                                </Grid.Margin>
+
+                                <renderer:MyFrame Padding="0"  HasShadow="False" CornerRadius="3">
+                                    <StackLayout BackgroundColor="{x:Static Common:Colors.CardContentHeaderColor}">
+                                        <Label HorizontalTextAlignment="Start" Text="{Binding FluencyHeaderText}" Margin="20,10,0,0" FontAttributes="Bold" FontSize="18" TextColor="White"/>
+                                    </StackLayout>
+                                </renderer:MyFrame>
+                            </Grid>
+
+                            <ScrollView Grid.Row="1">
+                                <StackLayout BackgroundColor="#ffffff" Padding="0" >
+                                    <Label Text="{Binding FluencyText}" TextType="Html" HorizontalOptions="StartAndExpand" VerticalOptions="StartAndExpand" Margin="20,10,0,0" FontSize="14" />
+                                </StackLayout>
+                            </ScrollView>
+
+                            
+                        </Grid>
+
+                        <renderer:MyFrame HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" Grid.Row="1" Margin="35,15,32,15" Padding="0" HasShadow="False" CornerRadius="3">
+                            <Image Aspect="Fill" Grid.Row="1" x:Name="imageView1" Source="{Binding ImagePath}"/>
+                        </renderer:MyFrame>
+                        
+                    </Grid>
+
+                    <Grid Grid.Column="1">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="110"/>
+                            <RowDefinition Height="*"/>
+                        </Grid.RowDefinitions>
+
+                        <renderer:MyFrame Grid.Row="0" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" Padding="25,18,8,25" HasShadow="False" CornerRadius="3" BackgroundColor="#ffffff">
+                            <renderer:MyFrame.Margin>
+                                <OnPlatform x:TypeArguments="Thickness">
+                                    <On Platform="UWP" Value="0,15,32,0"/>
+                                    <On Platform="Android" Value="0,15,32,0"/>
+                                    <On Platform="iOS" Value="0,18,32,0"/>
+                                </OnPlatform>
+                            </renderer:MyFrame.Margin>
+
+
+                            <Grid ColumnSpacing="0"  RowSpacing="0" >
+                                <Grid.ColumnDefinitions  >
+                                    <ColumnDefinition />
+                                    <ColumnDefinition />
+                                    <ColumnDefinition />
+                                    <ColumnDefinition />
+                                    <ColumnDefinition />
+                                </Grid.ColumnDefinitions >
+
+                                <StackLayout Grid.Column="0" Orientation="Vertical"  Spacing="6" BackgroundColor="#ffffff">
+                                    <Label Text="Materials" FontSize="16" FontAttributes="Bold"/>
+                                    <Label Text="{Binding MaterialText}" FontSize="14"/>
+                                </StackLayout>
+
+                                <BoxView Grid.Column="1" HorizontalOptions="End" VerticalOptions="FillAndExpand" BackgroundColor="#e6e1e1" WidthRequest="2" />
+
+                                <Label Grid.Column="2" FontAttributes="Bold" HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand"  FontSize="30" TextColor="Black" Text="00:00"/>
+
+                                <Button Grid.Column="3" Text="Start" TextColor="White"/>
+
+                                <Image Grid.Column="4" Source="iconrefreshgray.png" Margin="20,0,0,0" HorizontalOptions="StartAndExpand" VerticalOptions="CenterAndExpand"/>
+
+                            </Grid>
+                            
+                        </renderer:MyFrame>
+
+                        <Grid x:Name="FluencyRows1" Grid.Row="1" Margin="0,20,32,25" BackgroundColor="Transparent"  RowSpacing="0">
+
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="40" />
+                                <RowDefinition Height="60"/>
+                                <RowDefinition Height="10" />
+                                <RowDefinition Height="Auto" />
+                            </Grid.RowDefinitions>
+
+                            <Grid RowSpacing="0" BackgroundColor="#ffffff"  HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" Grid.Row="0">
+
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition/>
+                                    <ColumnDefinition/>
+                                    <ColumnDefinition/>
+                                </Grid.ColumnDefinitions>
+                                
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="60"/>
+                                    <!--<RowDefinition/>-->
+                                </Grid.RowDefinitions>
+
+                                <Grid.Margin>
+                                    <OnPlatform x:TypeArguments="Thickness">
+                                        <On Platform="iOS" Value="0,-18,-8,15"/>
+                                    </OnPlatform>
+                                </Grid.Margin>
+
+                                <renderer:MyFrame Grid.Column="0" Grid.Row="0" Padding="0"  HasShadow="False" CornerRadius="3">
+                                    <StackLayout BackgroundColor="{Binding Row1Bckgrd}">
+                                        <BoxView  BackgroundColor="{Binding Row1BoxColor}" HorizontalOptions="FillAndExpand" HeightRequest="3" />
+                                        <Label TextColor="{Binding Row1TextColor}" HorizontalTextAlignment="Start" VerticalTextAlignment="Center" Margin="20,0,0,0" Text="{Binding RowHeader1}" FontAttributes="{Binding Row1FontAttribute}" FontSize="18"/>
+                                        <StackLayout.GestureRecognizers>
+                                            <TapGestureRecognizer Command="{Binding Row1TappedCommand}"/>
+                                        </StackLayout.GestureRecognizers>
+                                    </StackLayout>
+                                </renderer:MyFrame>
+
+                                <renderer:MyFrame Grid.Column="1" Grid.Row="0" Padding="0"  HasShadow="False" CornerRadius="3">
+                                    <StackLayout BackgroundColor="{Binding Row2Bckgrd}">
+                                        <BoxView  BackgroundColor="{Binding Row2BoxColor}" HorizontalOptions="FillAndExpand" HeightRequest="3" />
+                                        <Label TextColor="{Binding Row2TextColor}" HorizontalTextAlignment="Start" VerticalTextAlignment="Center" Margin="20,0,0,0" Text="{Binding RowHeader2}"  FontAttributes="{Binding Row2FontAttribute}" FontSize="18"/>
+                                        <StackLayout.GestureRecognizers>
+                                            <TapGestureRecognizer Command="{Binding Row2TappedCommand}"/>
+                                        </StackLayout.GestureRecognizers>
+                                    </StackLayout>
+                                </renderer:MyFrame>
+
+                                <renderer:MyFrame Grid.Column="2" Grid.Row="0" Padding="0"  HasShadow="False" CornerRadius="3">
+                                    <StackLayout BackgroundColor="{Binding Row3Bckgrd}">
+                                        <BoxView  BackgroundColor="{Binding Row3BoxColor}" HorizontalOptions="FillAndExpand" HeightRequest="3" />
+                                        <Label TextColor="{Binding Row3TextColor}" HorizontalTextAlignment="Start" VerticalTextAlignment="Center" Margin="20,0,0,0" Text="{Binding RowHeader3}" FontAttributes="{Binding Row3FontAttribute}" FontSize="18"/>
+                                        <StackLayout.GestureRecognizers>
+                                            <TapGestureRecognizer Command="{Binding Row3TappedCommand}"/>
+                                        </StackLayout.GestureRecognizers>
+                                    </StackLayout>
+                                </renderer:MyFrame>
+
+                                <!--<BoxView Grid.Row="1" Grid.ColumnSpan="3" VerticalOptions="FillAndExpand" WidthRequest="70" HeightRequest="0" BackgroundColor="Red" />-->
+                            </Grid>
+
+                            <Grid Grid.Row="1" BackgroundColor="#ffffff" ColumnSpacing="0">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="110"/>
+                                    <ColumnDefinition Width="130"/>
+                                    <ColumnDefinition Width="200"/>
+                                    <ColumnDefinition Width="*" />
+                                </Grid.ColumnDefinitions>
+
+                                <Label Margin="20,0,0,0" Grid.Column="0" HorizontalTextAlignment="Center" VerticalOptions="End" Text="Row"  FontAttributes="Bold" FontSize="19"/>
+                                <Label Grid.Column="1" HorizontalTextAlignment="Center" VerticalOptions="End"  Text="Item"  FontAttributes="Bold" FontSize="19"/>
+                                <Label Grid.Column="2" HorizontalTextAlignment="Center" VerticalOptions="End" Text="Correct Response"  FontAttributes="Bold" FontSize="19"/>
+                                <Label Grid.Column="3" HorizontalTextAlignment="Center" VerticalOptions="End" Text="Points"  FontAttributes="Bold" FontSize="19"/>
+                            </Grid>
+                            <StackLayout Grid.Row="2" BackgroundColor="#ffffff" VerticalOptions="FillAndExpand">
+                                <BoxView  Margin="35,5,45,0" HeightRequest=".7" BackgroundColor="#736d6d" />
+                            </StackLayout>
+
+                            <!--<StackLayout Grid.Row="3" BackgroundColor="LightBlue" Padding="0" >
+                                <Label Text="{Binding FluencyText}" HorizontalOptions="StartAndExpand" VerticalOptions="StartAndExpand" Margin="20,10,0,0" FontSize="14" />
+                            </StackLayout>-->
+
+                            <renderer:MyListView x:Name="listView" BackgroundColor="#ffffff" SelectionMode="None" Grid.Row="3" HeightRequest="600"  ItemsSource="{Binding RowContentTallyPointCollection,Mode=TwoWay}" HorizontalOptions="FillAndExpand" HasUnevenRows="True">
+
+                                <renderer:MyListView.ItemTemplate>
+                                    <DataTemplate>
+                                        <ViewCell>
+                                            <ViewCell.View>
+                                                <Grid Grid.Row="3" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand"  ColumnSpacing="0" HeightRequest="80">
+                                                    <Grid.ColumnDefinitions>
+                                                        <ColumnDefinition Width="110"/>
+                                                        <ColumnDefinition Width="130"/>
+                                                        <ColumnDefinition Width="200"/>
+                                                        <ColumnDefinition Width="*" />
+                                                    </Grid.ColumnDefinitions>
+
+                                                    <Label Text="{Binding RowNum}" HorizontalOptions="Center" VerticalOptions="Center" Margin="20,0,0,0" Grid.Column="0" FontAttributes="Bold" FontSize="14"/>
+                                                    <Label Text="{Binding sequenceNo}" HorizontalOptions="Center" VerticalOptions="Center" Grid.Column="1" FontAttributes="Bold" FontSize="14"/>
+                                                    <Label Text="{Binding text}" HorizontalOptions="Center" VerticalOptions="Center" Grid.Column="2" FontAttributes="Bold" FontSize="14"/>
+
+                                                    <Grid Grid.Column="3" ColumnSpacing="35" HorizontalOptions="CenterAndExpand" VerticalOptions="Center">
+                                                        <Grid.ColumnDefinitions>
+                                                            <ColumnDefinition/>
+                                                            <ColumnDefinition/>
+                                                        </Grid.ColumnDefinitions>
+
+                                                        <Grid Grid.Column="0" x:Name="outerGridpoint" BackgroundColor="{Static Common:Colors.RubicPointborder}" WidthRequest="50" HeightRequest="50" HorizontalOptions="Start" VerticalOptions="Start">
+                                                            <Grid x:Name="innerGridPoint" Margin="{Binding IsSelected,Mode=TwoWay,Converter={StaticResource BoolToMarginConverter}}" BackgroundColor="{Binding IsSelected,Mode=TwoWay,Converter={StaticResource BoolToColorConverter}}">
+                                                                <Label Text="1" FontSize="14" TextColor="#3d3f3f" FontAttributes="Bold" HorizontalOptions="Center" VerticalOptions="Center"/>
+                                                                <!--<Button Text="{Binding points }" Clicked="Button_Clicked" FontSize="20" TextColor="#3d3f3f" FontAttributes="Bold" HorizontalOptions="Center" VerticalOptions="Center"/>-->
+                                                                <!--<Grid.GestureRecognizers>
+                                                                        <TapGestureRecognizer Tapped="InnerRubbicPointsTapped"/>
+                                                                    </Grid.GestureRecognizers>-->
+                                                            </Grid>
+                                                            <Grid.GestureRecognizers>
+                                                                <TapGestureRecognizer Tapped="Column_1TallyPointTapped"/>
+                                                            </Grid.GestureRecognizers>
+                                                        </Grid>
+
+                                                        <Grid Grid.Column="1" x:Name="outerGridpoint1" BackgroundColor="{Static Common:Colors.RubicPointborder}" WidthRequest="50" HeightRequest="50" HorizontalOptions="Start" VerticalOptions="Start">
+                                                            <Grid x:Name="innerGridPoint1" Margin="{Binding IsSelected,Mode=TwoWay,Converter={StaticResource BoolToMarginConverter}}" BackgroundColor="{Binding IsSelected,Mode=TwoWay,Converter={StaticResource BoolToColorConverter}}">
+                                                                <Label Text="0" FontSize="14" TextColor="#3d3f3f" FontAttributes="Bold" HorizontalOptions="Center" VerticalOptions="Center"/>
+                                                                <!--<Button Text="{Binding points }" Clicked="Button_Clicked" FontSize="20" TextColor="#3d3f3f" FontAttributes="Bold" HorizontalOptions="Center" VerticalOptions="Center"/>-->
+                                                                <!--<Grid.GestureRecognizers>
+                                                                        <TapGestureRecognizer Tapped="InnerRubbicPointsTapped"/>
+                                                                    </Grid.GestureRecognizers>-->
+                                                            </Grid>
+                                                            <Grid.GestureRecognizers>
+                                                                <TapGestureRecognizer Tapped="Column_2TallyPointTapped"/>
+                                                            </Grid.GestureRecognizers>
+                                                        </Grid>
+
+                                                    </Grid>
+                                                </Grid>
+                                            </ViewCell.View>
+                                        </ViewCell>
+                                    </DataTemplate>
+                                </renderer:MyListView.ItemTemplate>
+                            </renderer:MyListView>
+
+                            <!--<Label BackgroundColor="LightSalmon" HorizontalOptions="Center" VerticalOptions="Center"  Grid.Column="3"  Text="Points"  FontAttributes="Bold" FontSize="19"/>-->
+                           
+                        </Grid>
+                    </Grid>
+
+
+                </Grid>
+
+                <AbsoluteLayout x:Name="footer" Grid.Row="3" Padding="12.5, 10.5, 0, 2" BackgroundColor="{x:Static Common:Colors.AcademicLiteracyHeaderBckGrd}">
+
+                    <StackLayout Orientation="Horizontal" AbsoluteLayout.LayoutBounds="0,1,-1,-1" AbsoluteLayout.LayoutFlags="YProportional">
+                        <Image Source="BackBlack.png" HeightRequest="30" WidthRequest="20" VerticalOptions="End"/>
+                        <Label Text="Previous Page" TextColor="#262626" VerticalTextAlignment="Center" FontSize="17" />
+                        <StackLayout.GestureRecognizers>
+                            <TapGestureRecognizer Command="{Binding PreviousItemCommand}"/>
+                        </StackLayout.GestureRecognizers>
+                    </StackLayout>
+
+                    <StackLayout Orientation="Horizontal" AbsoluteLayout.LayoutBounds="1,1,-1,-1" AbsoluteLayout.LayoutFlags="PositionProportional" Margin="0,0,24,0">
+                        <Label Text="Next Page" TextColor="#262626" VerticalTextAlignment="Center" FontSize="17" />
+                        <Image Source="NextBlack.png" HeightRequest="30" WidthRequest="20" VerticalOptions="End"/>
+                        <StackLayout.GestureRecognizers>
+                            <TapGestureRecognizer Command="{Binding NextItemCommand}"/>
+                        </StackLayout.GestureRecognizers>
+                    </StackLayout>
+                </AbsoluteLayout>
+            </Grid>
+            <Grid x:Name="DatePickerGrid" HeightRequest="210" WidthRequest="300" VerticalOptions="StartAndExpand" Margin="0,70,0,0"  HorizontalOptions="Center">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="50" />
+                    <RowDefinition Height="*" />
+                </Grid.RowDefinitions>
+                <!--<Frame BackgroundColor="{x:Static Common:Colors.PrimaryColor}" Grid.RowSpan="2" CornerRadius="20">
+                    <Label Text="SELECT A DATE" TextColor="White" FontSize="17" FontAttributes="Bold" HorizontalTextAlignment="Center" />
+                </Frame>
+                <Frame HasShadow="false" BackgroundColor="White" CornerRadius="20" Grid.Row="1" Padding="0" />-->
+                <renderer:MyDatePicker x:Name="DatePicker_DOB" Format="MM/dd/yyyy" MaximumDate="{x:Static sys:DateTime.Now}" VerticalOptions="CenterAndExpand" WidthRequest="0" HeightRequest="0" IsEnabled="True"/>
+            </Grid>
+        </Grid>
+    </ContentPage.Content>
+
+</ContentPage>

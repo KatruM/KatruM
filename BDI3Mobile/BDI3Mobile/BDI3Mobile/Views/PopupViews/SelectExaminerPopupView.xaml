@@ -1,0 +1,43 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<pages:PopupPage
+    xmlns:pages="clr-namespace:Rg.Plugins.Popup.Pages;assembly=Rg.Plugins.Popup"
+    xmlns:common="clr-namespace:BDI3Mobile.Common"
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    BackgroundColor="Transparent"
+    xmlns:ios="clr-namespace:Xamarin.Forms.PlatformConfiguration.iOSSpecific;assembly=Xamarin.Forms.Core"
+    x:Class="BDI3Mobile.Views.PopupViews.SelectExaminerPopupView">
+
+    <Frame x:Name="ExaminerPopupView" BorderColor="LightGray" HasShadow="False" CornerRadius="20" BackgroundColor="Transparent" HeightRequest="210" WidthRequest="300" Padding=".8" VerticalOptions="Center" HorizontalOptions="Center">
+            <!--<Frame.BorderColor>
+                <OnPlatform x:TypeArguments="Color" iOS="Transparent"></OnPlatform>
+            </Frame.BorderColor>-->
+        <!--<Frame.CornerRadius>
+            <OnPlatform x:TypeArguments="x:Single">
+                <On Platform="iOS" Value="0"></On>
+            </OnPlatform>
+        </Frame.CornerRadius>-->
+        <Grid  VerticalOptions="FillAndExpand" HorizontalOptions="Start">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="50" />
+                <RowDefinition Height="*" />
+            </Grid.RowDefinitions>
+            <Frame BackgroundColor="{x:Static common:Colors.PrimaryColor}" Grid.RowSpan="2" CornerRadius="20" HasShadow="False">
+                <Label Text="SELECT EXAMINER" TextColor="White" FontSize="17" FontAttributes="Bold" HorizontalTextAlignment="Center" />
+            </Frame>
+            <Frame HasShadow="False" BackgroundColor="White" CornerRadius="20" Grid.Row="1" Padding="0" />
+            <ListView x:Name="ExaminerListview" BackgroundColor="White" CachingStrategy="RecycleElement" Grid.Row="1" ItemsSource="{Binding ExaminerList, Mode=TwoWay}" Margin="0,0,0,0" ItemTapped="Examiner_Tapped" Footer="" ios:ListView.SeparatorStyle="FullWidth">
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <ViewCell>
+                        <StackLayout Orientation="Horizontal" Padding="10" BackgroundColor="White">
+                            <Label Text="{Binding text}" TextColor="Black" VerticalOptions="Center" HorizontalOptions="FillAndExpand"/>
+                            <Image HeightRequest="20" WidthRequest="20" VerticalOptions="Center" Source="checkmark.png" IsVisible="{Binding selected}" />
+                        </StackLayout>
+                        </ViewCell>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
+        </Grid>
+    </Frame>
+</pages:PopupPage>

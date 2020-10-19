@@ -1,0 +1,48 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<pages:PopupPage
+    xmlns:pages="clr-namespace:Rg.Plugins.Popup.Pages;assembly=Rg.Plugins.Popup"
+    xmlns="http://xamarin.com/schemas/2014/forms" xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    x:Class="BDI3Mobile.Views.PopupViews.ImagePopupView">
+
+    <Frame HorizontalOptions="Center" VerticalOptions="Center" Margin="30,0,30,0"  WidthRequest="850" HeightRequest="600" Padding="0" BackgroundColor="White">
+        <StackLayout>
+            <BoxView Color="#147cbd" HeightRequest="6" />
+            <Grid Padding="0,10,0,0" BackgroundColor="White">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="*"/>
+                </Grid.RowDefinitions>
+
+                <Image Grid.Row="0" Source="iconclose.png" WidthRequest="15" HeightRequest="15" Margin="0,5,30,0" HorizontalOptions="End">
+                    <Image.GestureRecognizers>
+                        <TapGestureRecognizer Tapped="CloseImagePopup"/>
+                    </Image.GestureRecognizers>
+                </Image>
+                <StackLayout Grid.Row="1" Orientation="Horizontal">
+                    <StackLayout BackgroundColor="White" HeightRequest="350">
+                        <Image x:Name="image1" HorizontalOptions="Center"  Margin="12,0,0,0" VerticalOptions="CenterAndExpand"  Source="backimage.png">
+                            <Image.GestureRecognizers>
+                                <TapGestureRecognizer Tapped="ImageCarosalView"/>
+                            </Image.GestureRecognizers>
+                        </Image>
+                    </StackLayout>
+                   
+                    <Grid Padding="0" RowSpacing="0" ColumnSpacing="0" Margin="50,0,50,50" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand">
+
+                        <Image x:Name="mainimage" HeightRequest="500"/>
+                    </Grid>
+                    <StackLayout BackgroundColor="White" HeightRequest="350">
+                        <Image x:Name="image2" HorizontalOptions="Center" Margin="0,0,12,0"  VerticalOptions="CenterAndExpand"  Source="nextimage.png">
+                            <Image.GestureRecognizers>
+                                <TapGestureRecognizer Tapped="ImageCarosalView"/>
+                            </Image.GestureRecognizers>
+                        </Image>
+                    </StackLayout>
+                   
+                </StackLayout>
+               
+            </Grid>
+        </StackLayout>
+       
+    </Frame>
+</pages:PopupPage>

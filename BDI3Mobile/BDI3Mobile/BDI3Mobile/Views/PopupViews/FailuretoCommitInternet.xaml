@@ -1,0 +1,20 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<pages:PopupPage  xmlns:pages="clr-namespace:Rg.Plugins.Popup.Pages;assembly=Rg.Plugins.Popup"
+             xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+                  xmlns:customrenderer="clr-namespace:BDI3Mobile.CustomRenderer"
+                  x:Class="BDI3Mobile.Views.PopupViews.FailuretoCommitInternet">
+    <StackLayout x:Name="ContentFrame" VerticalOptions="Center" HorizontalOptions="Center" WidthRequest="400" HeightRequest="228"   BackgroundColor="White" Opacity="1">
+        <BoxView Color="Red" HeightRequest="3" />
+        <StackLayout Padding="24,30,0,0" >
+            <Label   Text="Failure to Commit" FontSize="20" FontAttributes="Bold" TextColor="Black" />
+        </StackLayout>
+        <StackLayout Padding="24,25,0,0" Spacing="0" >
+            <Label   Text="Internet connection was lost. Please reconnect and " FontSize="14"></Label>
+            <Label   Text="commit again." FontSize="14"></Label>
+        </StackLayout>
+        <StackLayout Padding="0,10,0,0" HorizontalOptions="Center" VerticalOptions="Center" Orientation="Horizontal">
+            <customrenderer:CustomButtonUWP HorizontalOptions="Center" Text="Ok" FontSize="20" BackgroundColor="#147CBD" WidthRequest="122" HeightRequest="40" TextColor="#FFFFFF" BorderColor="#147cbd" BorderWidth="2" FontAttributes="Bold" Command="{Binding CancelCommand}"/>
+        </StackLayout>
+    </StackLayout>
+</pages:PopupPage>

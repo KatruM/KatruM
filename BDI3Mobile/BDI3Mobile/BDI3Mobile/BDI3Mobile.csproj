@@ -1,0 +1,147 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netstandard2.0</TargetFramework>
+  </PropertyGroup>
+
+  <!--<PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
+    <DebugType>pdbonly</DebugType>
+    <DebugSymbols>true</DebugSymbols>
+  </PropertyGroup>-->
+
+  <ItemGroup>
+    <Compile Remove="Views\TreeView\Model\AdaptObservableCollection.cs" />
+    <Compile Remove="Views\TreeView\TreeView.cs" />
+    <Compile Remove="Views\TreeView\TreeViewHelper\TreeViewHelper.cs" />
+    <Compile Remove="Views\TreeView\TreeViewNode.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Remove="BDI3_Mobile.zip" />
+    <None Remove="ClinicalScoring\ScoringBundles\Bdi3ScoringTables.zip" />
+    <None Remove="CollpsedGlyph.png" />
+    <None Remove="es5\tex-mml-chtml.js" />
+    <None Remove="OpenGlyph.png" />
+    <None Remove="Views\TreeView\Resource\CollpsedGlyph.png" />
+    <None Remove="Views\TreeView\Resource\OpenGlyph.png" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <EmbeddedResource Include="BDI3_Mobile.zip" />
+    <EmbeddedResource Include="es5\tex-mml-chtml.js">
+    </EmbeddedResource>
+    <None Remove="ClinicalScoring\ScoringBundles\parserSerialized.bin" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <EmbeddedResource Include="CollpsedGlyph.png" />
+    <EmbeddedResource Include="OpenGlyph.png" />
+    <EmbeddedResource Include="Views\TreeView\Resource\CollpsedGlyph.png" />
+    <EmbeddedResource Include="Views\TreeView\Resource\OpenGlyph.png" />
+  </ItemGroup>
+    
+   
+
+  <ItemGroup Condition="'$(TargetFramework)'=='netstandard2.0'">
+    <PackageReference Include="Microsoft.Bcl" Version="1.1.10">
+     <NoWarn>NU1701</NoWarn>
+     </PackageReference>
+     <PackageReference Include="Microsoft.Bcl.Async" Version="1.0.168">
+             <NoWarn>NU1701</NoWarn>
+     </PackageReference>
+     <PackageReference Include="PCLStorage" Version="1.0.2">
+             <NoWarn>NU1701</NoWarn>
+     </PackageReference>
+     <PackageReference Include="ExifLib.PCL" Version="1.0.2-pre01">
+     <NoWarn>NU1701</NoWarn>
+     </PackageReference>
+    <PackageReference Include="IntelliAbb.Xamarin.Controls" Version="1.0.148" />
+    <PackageReference Include="JWT" Version="7.2.1" />
+    <PackageReference Include="Microsoft.AppCenter" Version="3.4.1" />
+    <PackageReference Include="Microsoft.AppCenter.Analytics" Version="3.4.1" />
+    <PackageReference Include="Microsoft.AppCenter.Crashes" Version="3.4.1" />
+    <PackageReference Include="Microsoft.CSharp" Version="4.7.0" />
+    <PackageReference Include="PCLStorage" Version="1.0.2" />
+    <PackageReference Include="Rg.Plugins.Popup" Version="1.2.0.223" />
+    <PackageReference Include="System.Net.Http" Version="4.3.4" />
+    <PackageReference Include="Xam.Plugin.Connectivity" Version="3.2.0" />
+    <PackageReference Include="Xam.Plugin.HtmlLabel" Version="4.1.3" />
+    <PackageReference Include="Newtonsoft.Json" Version="12.0.3" />
+    <PackageReference Include="Xamarin.Essentials" Version="1.5.3.2" />
+    <PackageReference Include="Acr.UserDialogs" Version="7.1.0.446" />
+    <PackageReference Include="Xamarin.HotReload" Version="2.0.13" />
+    <PackageReference Include="sqlite-net-pcl" Version="1.7.335" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Update="Views\PopupViews\FormNoBasalCeiling.xaml.cs">
+      <DependentUpon>FormNoBasalCeiling.xaml</DependentUpon>
+    </Compile>
+    <Compile Update="Views\PopupViews\FluencyTimerLimitPopUp.xaml.cs">
+      <DependentUpon>FluencyTimerLimitPopUp.xaml</DependentUpon>
+    </Compile>
+    <Compile Update="Views\PopupViews\FormCommitPopUp.xaml.cs">
+      <DependentUpon>FormCommitPopUp.xaml</DependentUpon>
+    </Compile>
+    <Compile Update="Views\PopupViews\TimerLimitPopUp.xaml.cs">
+      <DependentUpon>TimerLimitPopUp.xaml</DependentUpon>
+    </Compile>
+    <Compile Update="Views\PopupViews\ImagePopupView.xaml.cs">
+      <DependentUpon>ImagePopupView.xaml</DependentUpon>
+    </Compile>
+    <Compile Update="Views\ItemAdministrationView\RecordToolsPOPView.xaml.cs">
+      <DependentUpon>RecordToolsPOPView.xaml</DependentUpon>
+    </Compile>
+    <Compile Update="Views\ItemAdministrationView\TestsessionOverviewView.xaml.cs">
+      <DependentUpon>TestsessionOverviewView.xaml</DependentUpon>
+      <IncludeInPackage>true</IncludeInPackage>
+    </Compile>
+    <Compile Update="Views\PopupViews\CustomPopupView.xaml.cs">
+      <DependentUpon>CustomPopupView.xaml</DependentUpon>
+    </Compile>
+    <Compile Update="Views\ItemLevelNavigationPage\ItemLevelNavigationPage.xaml.cs">
+      <DependentUpon>ItemLevelNavigationPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Update="Views\InAppBrowserXaml.xaml.cs">
+      <DependentUpon>InAppBrowserXaml.xaml</DependentUpon>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Update="Controls\DefaultEntry.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Controls\FrameEntry.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Views\Reports\BAESReport.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Views\Reports\DevelopmentalReport.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Views\Reports\ScreenerReport.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
+    <Folder Include="Views\AddChildViews\" />
+    <Folder Include="ViewModels\ChildViewModels\" />
+    <Folder Include="Models\BL\" />
+    <Folder Include="Views\TreeView\TreeViewHelper\" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="BDI3Mobile.sln" />
+  </ItemGroup>
+  <ItemGroup>
+    <Reference Include="ClinicalScoring">
+      <HintPath>dlls\ClinicalScoring.dll</HintPath>
+    </Reference>
+    <Reference Include="Windows.Foundation.UniversalApiContract">
+      <HintPath>C:\Program Files (x86)\Windows Kits\10\References\10.0.18362.0\Windows.Foundation.UniversalApiContract\8.0.0.0\Windows.Foundation.UniversalApiContract.winmd</HintPath>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <PackageReference Include="Xamarin.Forms" Version="4.7.0.1239" />
+    <PackageReference Include="Xamarin.FFImageLoading.Svg.Forms" Version="2.4.11.982" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\ClinicalScoring\ClinicalScoring.csproj" />
+  </ItemGroup>
+</Project>

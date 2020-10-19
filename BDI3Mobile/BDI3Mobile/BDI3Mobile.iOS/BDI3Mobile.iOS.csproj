@@ -1,0 +1,511 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+	<PropertyGroup>
+		<ConcurrentGarbageCollection>true</ConcurrentGarbageCollection>
+	</PropertyGroup>
+	<PropertyGroup>
+		<Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+		<Platform Condition=" '$(Platform)' == '' ">iPhoneSimulator</Platform>
+		<ProductVersion>8.0.30703</ProductVersion>
+		<SchemaVersion>2.0</SchemaVersion>
+		<ProjectGuid>{DF62CE8C-BCD0-4FCB-A81F-6202581898AF}</ProjectGuid>
+		<ProjectTypeGuids>{FEACFBD2-3405-455C-9665-78FE426C6842};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
+		<TemplateGuid>{6143fdea-f3c2-4a09-aafa-6e230626515e}</TemplateGuid>
+		<OutputType>Exe</OutputType>
+		<RootNamespace>BDI3Mobile.iOS</RootNamespace>
+		<IPhoneResourcePrefix>Resources</IPhoneResourcePrefix>
+		<AssemblyName>BDI3Mobile.iOS</AssemblyName>
+		<MtouchHttpClientHandler>NSUrlSessionHandler</MtouchHttpClientHandler>
+		<NuGetPackageImportStamp>
+		</NuGetPackageImportStamp>
+	</PropertyGroup>
+	<PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|iPhoneSimulator' ">
+		<DebugSymbols>true</DebugSymbols>
+		<DebugType>full</DebugType>
+		<Optimize>false</Optimize>
+		<OutputPath>bin\iPhoneSimulator\Debug</OutputPath>
+		<DefineConstants>DEBUG</DefineConstants>
+		<ErrorReport>prompt</ErrorReport>
+		<WarningLevel>4</WarningLevel>
+		<ConsolePause>false</ConsolePause>
+		<MtouchArch>x86_64</MtouchArch>
+		<MtouchLink>None</MtouchLink>
+		<MtouchDebug>true</MtouchDebug>
+		<MtouchHttpClientHandler>HttpClientHandler</MtouchHttpClientHandler>
+		<CodesignKey>iPhone Distribution</CodesignKey>
+		<CodesignProvision>BDI3</CodesignProvision>
+	</PropertyGroup>
+	<PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|iPhoneSimulator' ">
+		<DebugType>none</DebugType>
+		<Optimize>true</Optimize>
+		<OutputPath>bin\iPhoneSimulator\Release</OutputPath>
+		<ErrorReport>prompt</ErrorReport>
+		<WarningLevel>4</WarningLevel>
+		<MtouchLink>None</MtouchLink>
+		<MtouchArch>x86_64</MtouchArch>
+		<ConsolePause>false</ConsolePause>
+	</PropertyGroup>
+	<PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|iPhone' ">
+		<DebugSymbols>true</DebugSymbols>
+		<DebugType>full</DebugType>
+		<Optimize>false</Optimize>
+		<OutputPath>bin\iPhone\Debug</OutputPath>
+		<DefineConstants>DEBUG</DefineConstants>
+		<ErrorReport>prompt</ErrorReport>
+		<WarningLevel>4</WarningLevel>
+		<ConsolePause>false</ConsolePause>
+		<MtouchArch>ARM64</MtouchArch>
+		<CodesignKey>iPhone Distribution: Riverside Assessments, LLC (343SLVHLD7)</CodesignKey>
+		<MtouchDebug>true</MtouchDebug>
+		<CodesignEntitlements>Entitlements.plist</CodesignEntitlements>
+		<MtouchLink>None</MtouchLink>
+		<MtouchInterpreter>
+		</MtouchInterpreter>
+	</PropertyGroup>
+	<PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|iPhone' ">
+		<DebugType>none</DebugType>
+		<Optimize>true</Optimize>
+		<OutputPath>bin\iPhone\Release</OutputPath>
+		<ErrorReport>prompt</ErrorReport>
+		<WarningLevel>4</WarningLevel>
+		<MtouchArch>ARM64</MtouchArch>
+		<ConsolePause>false</ConsolePause>
+		<CodesignKey>iPhone Distribution: Riverside Assessments, LLC (343SLVHLD7)</CodesignKey>
+		<CodesignEntitlements>Entitlements.plist</CodesignEntitlements>
+		<MtouchFloat32>true</MtouchFloat32>
+		<CodesignProvision>BDI3</CodesignProvision>
+	</PropertyGroup>
+	<PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Ad-Hoc|iPhone' ">
+		<DebugType>none</DebugType>
+		<Optimize>True</Optimize>
+		<OutputPath>bin\iPhone\Ad-Hoc</OutputPath>
+		<ErrorReport>prompt</ErrorReport>
+		<WarningLevel>4</WarningLevel>
+		<ConsolePause>False</ConsolePause>
+		<MtouchArch>ARM64</MtouchArch>
+		<BuildIpa>True</BuildIpa>
+		<CodesignKey>Apple Development: nishtks28@gmail.com (C9Y263JL2Z)</CodesignKey>
+		<CodesignEntitlements>Entitlements.plist</CodesignEntitlements>
+	</PropertyGroup>
+	<PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'AppStore|iPhone' ">
+		<DebugType>none</DebugType>
+		<Optimize>True</Optimize>
+		<OutputPath>bin\iPhone\AppStore</OutputPath>
+		<ErrorReport>prompt</ErrorReport>
+		<WarningLevel>4</WarningLevel>
+		<ConsolePause>False</ConsolePause>
+		<MtouchArch>ARM64</MtouchArch>
+		<CodesignProvision>Automatic:AppStore</CodesignProvision>
+		<CodesignKey>iPhone Distribution</CodesignKey>
+		<CodesignEntitlements>Entitlements.plist</CodesignEntitlements>
+	</PropertyGroup>
+	<ItemGroup>
+		<Compile Include="CustomRenderer\BorderlessEntryRenderer.cs" />
+		<Compile Include="CustomRenderer\MyDatePickerRenderer.cs" />
+		<Compile Include="Main.cs" />
+		<Compile Include="AppDelegate.cs" />
+		<None Include="Entitlements.plist" />
+		<None Include="Info.plist" />
+		<Compile Include="Properties\AssemblyInfo.cs" />
+		<BundleResource Include="Resources\arialbd.ttf" />
+		<BundleResource Include="Resources\ARIALMT.ttf" />
+		<BundleResource Include="Resources\SFProTextRegular.ttf" />
+		<BundleResource Include="Resources\icon_calendar.png" />
+		<BundleResource Include="Resources\icon_calendar%402x.png" />
+		<BundleResource Include="Resources\icon_calendar%403x.png" />
+		<BundleResource Include="Resources\iconPerson.png" />
+		<BundleResource Include="Resources\iconPerson%402x.png" />
+		<BundleResource Include="Resources\iconPerson%403x.png" />
+		<Compile Include="CustomRenderer\MyListViewRenderer.cs" />
+		<Compile Include="CustomRenderer\ExtendedWebViewRenderer.cs" />
+		<BundleResource Include="Resources\iconDashboardSync.png" />
+		<Compile Include="DependencyService\CreateHtmlFiles.cs" />
+		<Compile Include="UIDocumentInteractionControllerDelegateClass.cs" />
+		<Compile Include="CustomRenderer\CustomButtonRenderer.cs" />
+		<BundleResource Include="Resources\Arial-BoldMT.otf" />
+		<BundleResource Include="Resources\SplashIcon.png" />
+	</ItemGroup>
+	<ItemGroup>
+		<ImageAsset Include="Assets.xcassets\AppIcon.appiconset\Contents.json">
+			<Visible>false</Visible>
+		</ImageAsset>
+		<ImageAsset Include="Assets.xcassets\AppIcon.appiconset\Icon180.png">
+			<Visible>false</Visible>
+		</ImageAsset>
+		<ImageAsset Include="Assets.xcassets\AppIcon.appiconset\Icon120.png">
+			<Visible>false</Visible>
+		</ImageAsset>
+		<ImageAsset Include="Assets.xcassets\AppIcon.appiconset\Icon87.png">
+			<Visible>false</Visible>
+		</ImageAsset>
+		<ImageAsset Include="Assets.xcassets\AppIcon.appiconset\Icon60.png">
+			<Visible>false</Visible>
+		</ImageAsset>
+		<ImageAsset Include="Assets.xcassets\AppIcon.appiconset\Icon20.png">
+			<Visible>false</Visible>
+		</ImageAsset>
+		<ImageAsset Include="Assets.xcassets\ic_sync.imageset\Contents.json">
+			<Visible>false</Visible>
+		</ImageAsset>
+		<ImageAsset Include="Assets.xcassets\ic_sync.imageset\icon-sync-complete.png">
+			<Visible>false</Visible>
+		</ImageAsset>
+		<ImageAsset Include="Assets.xcassets\ic_sync.imageset\icon-sync-complete%402x.png">
+			<Visible>false</Visible>
+		</ImageAsset>
+		<ImageAsset Include="Assets.xcassets\ic_sync.imageset\icon-sync-complete%403x.png">
+			<Visible>false</Visible>
+		</ImageAsset>
+		<ImageAsset Include="Assets.xcassets\ic_home.imageset\Contents.json">
+			<Visible>false</Visible>
+		</ImageAsset>
+		<ImageAsset Include="Assets.xcassets\ic_help.imageset\Contents.json">
+			<Visible>false</Visible>
+		</ImageAsset>
+		<ImageAsset Include="Assets.xcassets\ic_info.imageset\Contents.json">
+			<Visible>false</Visible>
+		</ImageAsset>
+		<ImageAsset Include="Assets.xcassets\ic_help.imageset\ic_help.png">
+			<Visible>false</Visible>
+		</ImageAsset>
+		<ImageAsset Include="Assets.xcassets\ic_help.imageset\icon-help.png">
+			<Visible>false</Visible>
+		</ImageAsset>
+		<ImageAsset Include="Assets.xcassets\ic_help.imageset\icon-help%402x.png">
+			<Visible>false</Visible>
+		</ImageAsset>
+		<ImageAsset Include="Assets.xcassets\ic_info.imageset\ic_info.png">
+			<Visible>false</Visible>
+		</ImageAsset>
+		<ImageAsset Include="Assets.xcassets\ic_info.imageset\icon-info.png">
+			<Visible>false</Visible>
+		</ImageAsset>
+		<ImageAsset Include="Assets.xcassets\ic_info.imageset\icon-info%402x.png">
+			<Visible>false</Visible>
+		</ImageAsset>
+		<ImageAsset Include="Assets.xcassets\ic_home.imageset\ic_home.png">
+			<Visible>false</Visible>
+		</ImageAsset>
+		<ImageAsset Include="Assets.xcassets\ic_home.imageset\icon-menu-home.png">
+			<Visible>false</Visible>
+		</ImageAsset>
+		<ImageAsset Include="Assets.xcassets\ic_home.imageset\icon-menu-home%402x.png">
+			<Visible>false</Visible>
+		</ImageAsset>
+		<ImageAsset Include="Assets.xcassets\shape.imageset\Contents.json">
+			<Visible>false</Visible>
+		</ImageAsset>
+		<ImageAsset Include="Assets.xcassets\shape.imageset\shape.png">
+			<Visible>false</Visible>
+		</ImageAsset>
+		<ImageAsset Include="Assets.xcassets\shape.imageset\shape%401x.png">
+			<Visible>false</Visible>
+		</ImageAsset>
+		<ImageAsset Include="Assets.xcassets\shape.imageset\shape%402x.png">
+			<Visible>false</Visible>
+		</ImageAsset>
+		<ImageAsset Include="Assets.xcassets\AppIcon.appiconset\iOS-167x167.png">
+			<Visible>false</Visible>
+		</ImageAsset>
+		<ImageAsset Include="Assets.xcassets\AppIcon.appiconset\iTunesArtwork1024x1024.png">
+			<Visible>false</Visible>
+		</ImageAsset>
+		<ImageAsset Include="Assets.xcassets\AppIcon.appiconset\iOS-152x152-2.png">
+			<Visible>false</Visible>
+		</ImageAsset>
+		<ImageAsset Include="Assets.xcassets\AppIcon.appiconset\iOS-80x80-2.png">
+			<Visible>false</Visible>
+		</ImageAsset>
+		<ImageAsset Include="Assets.xcassets\AppIcon.appiconset\iOS-58x58.png">
+			<Visible>false</Visible>
+		</ImageAsset>
+		<ImageAsset Include="Assets.xcassets\AppIcon.appiconset\iOS-20x20.png">
+			<Visible>false</Visible>
+		</ImageAsset>
+		<ImageAsset Include="Assets.xcassets\AppIcon.appiconset\iOS-76x76.png">
+			<Visible>false</Visible>
+		</ImageAsset>
+		<ImageAsset Include="Assets.xcassets\AppIcon.appiconset\iOS-40x40.png">
+			<Visible>false</Visible>
+		</ImageAsset>
+		<InterfaceDefinition Include="LaunchScreen.storyboard" />
+	</ItemGroup>
+	<ItemGroup>
+		<Reference Include="System" />
+		<Reference Include="System.Xml" />
+		<Reference Include="System.Core" />
+		<Reference Include="Xamarin.Forms.Core, Version=2.0.0.0, Culture=neutral, PublicKeyToken=null" />
+		<Reference Include="Xamarin.iOS" />
+		<Reference Include="System.Xml.Linq" />
+	</ItemGroup>
+	<ItemGroup>
+		<PackageReference Include="IntelliAbb.Xamarin.Controls">
+			<Version>1.0.148</Version>
+		</PackageReference>
+		<PackageReference Include="PCLStorage">
+			<Version>1.0.2</Version>
+		</PackageReference>
+		<PackageReference Include="Rg.Plugins.Popup">
+			<Version>1.2.0.223</Version>
+		</PackageReference>
+		<PackageReference Include="Xam.Plugin.HtmlLabel">
+			<Version>4.1.3</Version>
+		</PackageReference>
+		<PackageReference Include="Microsoft.Bcl.Build">
+			<Version>1.0.21</Version>
+		</PackageReference>
+		<PackageReference Include="System.Configuration.ConfigurationManager">
+			<Version>4.7.0</Version>
+		</PackageReference>
+		<PackageReference Include="Plugin.DeviceOrientation">
+			<Version>1.0.7</Version>
+		</PackageReference>
+		<PackageReference Include="Xamarin.Forms">
+			<Version>4.7.0.1239</Version>
+		</PackageReference>
+		<PackageReference Include="Xamarin.FFImageLoading.Svg.Forms">
+			<Version>2.4.11.982</Version>
+		</PackageReference>
+	</ItemGroup>
+	<Import Project="$(MSBuildExtensionsPath)\Xamarin\iOS\Xamarin.iOS.CSharp.targets" />
+	<ItemGroup>
+		<ProjectReference Include="..\BDI3Mobile\BDI3Mobile.csproj">
+			<Project>{F2B51A1B-80D8-46A5-B4C9-D5A4102D5303}</Project>
+			<Name>BDI3Mobile</Name>
+		</ProjectReference>
+	</ItemGroup>
+	<ItemGroup>
+		<BundleResource Include="Resources\RiversideWhite.png" />
+		<BundleResource Include="Resources\close.png" />
+	</ItemGroup>
+	<ItemGroup>
+		<BundleResource Include="Resources\Riverside_Insights.png" />
+	</ItemGroup>
+	<ItemGroup>
+		<Folder Include="Assets.xcassets\ic_help.imageset\" />
+		<Folder Include="Assets.xcassets\ic_home.imageset\" />
+		<Folder Include="Assets.xcassets\ic_info.imageset\" />
+		<Folder Include="Assets.xcassets\ic_sync.imageset\" />
+		<Folder Include="Assets.xcassets\shape.imageset\" />
+	</ItemGroup>
+	<ItemGroup>
+		<BundleResource Include="Resources\Riverside_Insights_Horiz.png" />
+	</ItemGroup>
+	<ItemGroup>
+		<BundleResource Include="Resources\DgroupAcopy.png" />
+	</ItemGroup>
+	<ItemGroup>
+		<BundleResource Include="Resources\DgroupCcopy.png" />
+	</ItemGroup>
+	<ItemGroup>
+		<BundleResource Include="Resources\DgroupRcopy.png" />
+	</ItemGroup>
+	<ItemGroup>
+		<BundleResource Include="Resources\iconsync.png" />
+	</ItemGroup>
+	<ItemGroup>
+		<BundleResource Include="Resources\iconhelp.png" />
+	</ItemGroup>
+	<ItemGroup>
+		<BundleResource Include="Resources\iconinfo.png" />
+	</ItemGroup>
+	<ItemGroup>
+		<BundleResource Include="Resources\iconphone.png" />
+	</ItemGroup>
+	<ItemGroup>
+		<BundleResource Include="Resources\home.png" />
+	</ItemGroup>
+	<ItemGroup>
+		<BundleResource Include="Resources\iconclose.png" />
+		<BundleResource Include="Resources\downArrow.png" />
+		<BundleResource Include="Resources\checked.png" />
+		<BundleResource Include="Resources\unchecked.png" />
+		<BundleResource Include="Resources\back.png" />
+		<BundleResource Include="Resources\save.png" />
+		<BundleResource Include="Resources\reload.png" />
+		<BundleResource Include="Resources\checkmark.png" />
+		<BundleResource Include="Resources\star.png" />
+	</ItemGroup>
+	<ItemGroup>
+		<BundleResource Include="Resources\iconASyncsa.png" />
+	</ItemGroup>
+	<ItemGroup>
+		<BundleResource Include="Resources\icon_add_record.png" />
+	</ItemGroup>
+	<ItemGroup>
+		<BundleResource Include="Resources\icon_arrow_small_blue.png" />
+	</ItemGroup>
+	<ItemGroup>
+		<BundleResource Include="Resources\icon_arrow_small_white.png" />
+	</ItemGroup>
+	<ItemGroup>
+		<BundleResource Include="Resources\icon_edit.png" />
+	</ItemGroup>
+	<ItemGroup>
+		<BundleResource Include="Resources\icon_refresh_white.png" />
+	</ItemGroup>
+	<ItemGroup>
+		<BundleResource Include="Resources\icon_search_gray.png" />
+	</ItemGroup>
+	<ItemGroup>
+		<BundleResource Include="Resources\icon_search_white.png" />
+	</ItemGroup>
+	<ItemGroup>
+		<BundleResource Include="Resources\shape.png" />
+	</ItemGroup>
+	<ItemGroup>
+		<BundleResource Include="Resources\icondelete.png" />
+	</ItemGroup>
+	<ItemGroup>
+		<BundleResource Include="Resources\iconedit.png" />
+	</ItemGroup>
+	<ItemGroup>
+		<BundleResource Include="Resources\iconmove.png" />
+	</ItemGroup>
+	<ItemGroup>
+		<BundleResource Include="Resources\shape.png" />
+	</ItemGroup>
+	<ItemGroup>
+		<BundleResource Include="Resources\shap.png" />
+	</ItemGroup>
+	<ItemGroup>
+		<BundleResource Include="Resources\icondeleteblue.png" />
+	</ItemGroup>
+	<ItemGroup>
+		<BundleResource Include="Resources\iconASync.png" />
+	</ItemGroup>
+	<ItemGroup>
+		<BundleResource Include="Resources\iconeditwhite.png" />
+	</ItemGroup>
+	<ItemGroup>
+		<BundleResource Include="Resources\iconpluswhite.png" />
+	</ItemGroup>
+	<ItemGroup>
+		<BundleResource Include="Resources\icondeletesa.png" />
+	</ItemGroup>
+	<ItemGroup>
+		<BundleResource Include="Resources\iconLogout.png" />
+	</ItemGroup>
+	<ItemGroup>
+		<BundleResource Include="Resources\iconarrow3.png" />
+	</ItemGroup>
+	<ItemGroup>
+		<BundleResource Include="Resources\icon_tick_white.png" />
+	</ItemGroup>
+	<ItemGroup>
+		<BundleResource Include="Resources\icon_report_white.png" />
+	</ItemGroup>
+	<ItemGroup>
+		<BundleResource Include="Resources\iconInfoCircle%403x.png" />
+	</ItemGroup>
+	<ItemGroup>
+		<BundleResource Include="Resources\iconInfoCircle.png" />
+	</ItemGroup>
+	<ItemGroup>
+		<BundleResource Include="Resources\iconInfoCircle%402x.png" />
+	</ItemGroup>
+	<ItemGroup>
+		<BundleResource Include="Resources\completed_TickMark.png" />
+	</ItemGroup>
+	<ItemGroup>
+		<BundleResource Include="Resources\iconNavbar.png" />
+	</ItemGroup>
+	<ItemGroup>
+		<BundleResource Include="Resources\iconRecordNote.png" />
+	</ItemGroup>
+	<ItemGroup>
+		<BundleResource Include="Resources\notStarted.png" />
+	</ItemGroup>
+	<ItemGroup>
+		<BundleResource Include="Resources\iconStatusSkipped%403x.png" />
+	</ItemGroup>
+	<ItemGroup>
+		<BundleResource Include="Resources\iconStatusSkipped.png" />
+	</ItemGroup>
+	<ItemGroup>
+		<BundleResource Include="Resources\iconStatusSkipped%402x.png" />
+	</ItemGroup>
+	<ItemGroup>
+		<BundleResource Include="Resources\iconStatusNonitem%403x.png" />
+	</ItemGroup>
+	<ItemGroup>
+		<BundleResource Include="Resources\iconStatusNonitem.png" />
+	</ItemGroup>
+	<ItemGroup>
+		<BundleResource Include="Resources\iconStatusNonitem%402x.png" />
+	</ItemGroup>
+	<ItemGroup>
+		<BundleResource Include="Resources\next.png" />
+	</ItemGroup>
+	<ItemGroup>
+		<BundleResource Include="Resources\backimage.png" />
+	</ItemGroup>
+	<ItemGroup>
+		<BundleResource Include="Resources\nextimage.png" />
+	</ItemGroup>
+	<ItemGroup>
+		<BundleResource Include="Resources\bab.png" />
+	</ItemGroup>
+	<ItemGroup>
+		<BundleResource Include="Resources\store.png" />
+		<BundleResource Include="Resources\Arow.png" />
+	</ItemGroup>
+	<ItemGroup>
+		<BundleResource Include="Resources\iconNavbard.png" />
+	</ItemGroup>
+	<ItemGroup>
+		<BundleResource Include="Resources\iconRecordNotec.png" />
+	</ItemGroup>
+	<ItemGroup>
+		<BundleResource Include="Resources\iconReportb.png" />
+	</ItemGroup>
+	<ItemGroup>
+		<BundleResource Include="Resources\iconSynca.png" />
+	</ItemGroup>
+	<ItemGroup>
+		<BundleResource Include="Resources\iconrefreshgray.png" />
+	</ItemGroup>
+	<ItemGroup>
+		<BundleResource Include="Resources\BackBlack.png" />
+	</ItemGroup>
+	<ItemGroup>
+		<BundleResource Include="Resources\NextBlack.png" />
+	</ItemGroup>
+	<ItemGroup>
+		<BundleResource Include="Resources\BackBlackSmall.png" />
+	</ItemGroup>
+	<ItemGroup>
+		<BundleResource Include="Resources\arrow2x.png" />
+	</ItemGroup>
+	<ItemGroup>
+		<BundleResource Include="Resources\arrowBlue_1x.png" />
+	</ItemGroup>
+	<ItemGroup>
+		<BundleResource Include="Resources\menuuparrow.png" />
+	</ItemGroup>
+	<ItemGroup>
+		<BundleResource Include="Resources\menudownarrow.png" />
+	</ItemGroup>
+	<ItemGroup>
+		<BundleResource Include="Resources\tickblue1x.png" />
+	</ItemGroup>
+	<ItemGroup>
+		<BundleResource Include="Resources\iconrefreshblue.png" />
+	</ItemGroup>
+	<ItemGroup>
+		<BundleResource Include="Resources\saveblack.png" />
+	</ItemGroup>
+	<ItemGroup>
+		<BundleResource Include="Resources\MDSLogo.png" />
+	</ItemGroup>
+	<ItemGroup>
+		<BundleResource Include="Resources\ceiling_obtained.png" />
+	</ItemGroup>
+	<ItemGroup>
+		<BundleResource Include="Resources\iconDashboardSync.png" />
+	</ItemGroup>
+	<ItemGroup>
+		<ITunesArtwork Include="iTunesArtwork" />
+		<ITunesArtwork Include="iTunesArtwork%402x" />
+	</ItemGroup>
+</Project>

@@ -1,0 +1,396 @@
+﻿<?xml version="1.0" encoding="UTF-8" ?>
+<pages:PopupPage xmlns="http://xamarin.com/schemas/2014/forms"
+                 xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+                 xmlns:common="clr-namespace:BDI3Mobile.Common"
+                 xmlns:pages="clr-namespace:Rg.Plugins.Popup.Pages;assembly=Rg.Plugins.Popup"
+                 xmlns:renderer="clr-namespace:BDI3Mobile.CustomRenderer"
+                 xmlns:behaviour="clr-namespace:BDI3Mobile.Behaviors"
+                 xmlns:sys="clr-namespace:System;assembly=mscorlib"
+                 xmlns:controls="clr-namespace:XLabs.Forms.Controls;assembly=XLabs.Forms"
+                 xmlns:Common="clr-namespace:BDI3Mobile.Common"
+                 x:Name="Page"
+                 xmlns:ios="clr-namespace:Xamarin.Forms.PlatformConfiguration.iOSSpecific;assembly=Xamarin.Forms.Core"
+                 x:Class="BDI3Mobile.Views.PopupViews.AssessmentConfigPopupView">   
+    <AbsoluteLayout x:Name="MainLayout">
+        <Frame AbsoluteLayout.LayoutBounds="0,0,1,1" AbsoluteLayout.LayoutFlags="All" BackgroundColor="#cc1416" x:Name="MainFrame" HorizontalOptions="Center" VerticalOptions="Center" Padding="0,4,0,0">
+            <Frame.Margin>
+                <OnPlatform x:TypeArguments="Thickness">
+                    <On Platform="UWP" Value="180,110,180,110"/>
+                    <On Platform="Android" Value="20,20,20,20"/>
+                    <On Platform="iOS" Value="20,0,20,0"/>
+                </OnPlatform>
+            </Frame.Margin>
+            <Grid x:Name="MainGrid" BackgroundColor="White" HorizontalOptions="Center" VerticalOptions="Center" Padding="24,36,24,32" >
+                <Grid.Padding>
+                     <OnPlatform x:TypeArguments="Thickness">
+                                                        <On Platform="Android" Value="24,36,24,32"></On>
+                                                       <On Platform="iOS" Value="24,0,24,15"></On>
+                                                       <On Platform="UWP" Value="24,36,24,32"></On>
+                 </OnPlatform>
+                </Grid.Padding>
+                <Grid.GestureRecognizers>
+                    <TapGestureRecognizer x:Name="FrameGesture" Tapped="OuterGrid_Tapped"></TapGestureRecognizer>
+                </Grid.GestureRecognizers>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                </Grid.RowDefinitions>
+                <StackLayout Grid.Row="0" Margin="0,0,0,24">
+                    <Grid HorizontalOptions="End">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="3*"></ColumnDefinition>
+                            <ColumnDefinition Width="1*"></ColumnDefinition>
+                        </Grid.ColumnDefinitions>
+                        <StackLayout Grid.Column="1" Orientation="Horizontal" HorizontalOptions="End" Padding="0" Margin="0,0,10,0" Spacing="0">
+                            <Label Text="*" TextColor="Red" />
+                            <Label Text="=Required Fields" TextColor="{x:Static common:Colors.AssessmentConfigPopupAssessmentTypeColor}" />
+                        </StackLayout>
+                    </Grid>
+                    <Label Text="Assessment Configuration" FontAttributes="Bold" HorizontalOptions="Start">
+                        <Label.FontSize>
+                            <OnPlatform x:TypeArguments="x:Double">
+                                <On Platform="Android">25</On>
+                                <On Platform="iOS">25</On>
+                                <On Platform="UWP">25</On>
+                            </OnPlatform>
+                        </Label.FontSize>
+                    </Label>
+
+                    <Label>
+                        <Label.FormattedText>
+                            <FormattedString>
+                                <Span Text="You have chosen to start a new assessment for "/>
+                                <Span Text="{Binding FullName}" FontAttributes="Bold"/>
+                                <Span Text=". " FontAttributes="Bold"/>
+                                <Span Text="Configure your assessment below to get started."/>
+                            </FormattedString>
+                        </Label.FormattedText>
+                    </Label>
+                    <BoxView Color="{x:Static common:Colors.BoxviewBGColor}" HeightRequest="1"  Margin="26,24,42,0">
+                        <BoxView.Margin>
+                            <OnPlatform x:TypeArguments="Thickness">
+                                   <On Platform="UWP" Value="26,24,42,0"/>
+                                   <On Platform="iOS" Value="26,10,42,0"/>
+                                   <On Platform="Android" Value="26,24,42,0"/>
+                            </OnPlatform>
+                        </BoxView.Margin>
+                        </BoxView>
+                </StackLayout>
+                <StackLayout Grid.Row="1" >
+                    <StackLayout Spacing="0" Orientation="Horizontal" Margin="2,0,0,0">
+                        <StackLayout.Margin>
+                            <OnPlatform x:TypeArguments="Thickness">
+                                <On Platform="UWP" Value="3,0,0,-8"/>
+                            </OnPlatform>
+                        </StackLayout.Margin>
+                        <Label Text="ASSESSMENT TYPE" TextColor="{x:Static common:Colors.AssessmentConfigPopupAssessmentTypeColor}" FontSize="12.5"/>
+                        <Label Text="*" TextColor="Red" VerticalTextAlignment="Start"/>
+                    </StackLayout>
+                    <Grid  HeightRequest="50" HorizontalOptions="FillAndExpand" Margin="0,0,0,10" InputTransparent="False" BackgroundColor="Blue" > 
+                        <CollectionView  BackgroundColor="White" x:Name="RecordFormsCollectionView" HorizontalScrollBarVisibility="Default" VerticalOptions="Start" VerticalScrollBarVisibility="Never" SelectionMode="Single" ItemsSource="{Binding OrgRecordFormList}" ItemsLayout="HorizontalList" SelectionChanged="OnRecordFormCollectionViewItemSelected" SelectedItem="{Binding SelectedItem}">
+                            <CollectionView.ItemTemplate >
+                                <DataTemplate>
+                                    <Grid BackgroundColor="White" Padding="10" ColumnSpacing="0" HorizontalOptions="StartAndExpand">
+                                        <VisualStateManager.VisualStateGroups>
+                                            <VisualStateGroup Name="CommonStates">
+                                                <VisualState Name="Normal" />
+                                                <VisualState Name="Selected">
+                                                    <VisualState.Setters>
+                                                        <Setter Property="BackgroundColor" Value="White" />
+                                                    </VisualState.Setters>
+                                                </VisualState>
+                                            </VisualStateGroup>
+                                        </VisualStateManager.VisualStateGroups>
+                                        <Grid.RowDefinitions>
+                                                <RowDefinition Height="35" />
+                                            </Grid.RowDefinitions>
+                                            <Grid.ColumnDefinitions>
+                                                <ColumnDefinition Width="40" />
+                                                <ColumnDefinition Width="100*" />                                                
+                                            </Grid.ColumnDefinitions>
+                                        <StackLayout>
+                                        <Label  x:Name="compleOuterBorder"  BackgroundColor="White" Grid.Column="0" TextColor="Gray" HorizontalOptions="Start" VerticalOptions="Start" Text="&#x25CB;">
+                                            <Label.FontSize>
+                                                <OnPlatform x:TypeArguments="x:Double">
+                                                    <On Platform="Android">30</On>
+                                                    <On Platform="UWP">35</On>
+                                                    <On Platform="iOS">45</On>
+                                                </OnPlatform>
+                                            </Label.FontSize>
+                                            <Label.Margin>
+                                                <OnPlatform x:TypeArguments="Thickness">
+                                                    <On Platform="UWP" Value="-10,2,0,0"/>
+                                                    <On Platform="Android" Value="10,2,2,0"/>
+                                                </OnPlatform>
+                                            </Label.Margin>
+                                        </Label>
+                                        </StackLayout>
+                                        <StackLayout>
+                                            <Label x:Name="completeChecked" Grid.Column="0" Text= "&#x25CF;" InputTransparent="True" IsVisible="{Binding IsChecked}" TextColor="DarkCyan">
+                                                <Label.FontSize>
+                                                    <OnPlatform x:TypeArguments="x:Double">
+                                                        <On Platform="Android">22</On>
+                                                        <On Platform="UWP">34</On>
+                                                        <On Platform="iOS">23</On>
+                                                    </OnPlatform>
+                                                </Label.FontSize>
+                                                <Label.Margin>
+                                                    <OnPlatform x:TypeArguments="Thickness">
+                                                        <On Platform="UWP" Value="-5,0,0,1"/>
+                                                        <On Platform="iOS" Value="7,13,0,1"/>
+                                                        <On Platform="Android" Value="14,8,0,1"/>
+                                                    </OnPlatform>
+                                                </Label.Margin>
+                                            </Label>
+                                        </StackLayout>
+                                        <Label HorizontalOptions="StartAndExpand" CharacterSpacing="0.22" VerticalOptions="EndAndExpand"  FontFamily="{StaticResource ARIALMT}" FontSize="14" Grid.Column="1"  Text="{Binding Description}" HorizontalTextAlignment="Start">
+                                            <Label.Margin>
+                                                <OnPlatform x:TypeArguments="Thickness">
+                                                    <On Platform="UWP" Value="-10,2,20,2"/>
+                                                    <On Platform="Android" Value="2,2,0,0"/>
+                                                    <On Platform="iOS" Value="0,6,0,0"/>
+                                                </OnPlatform>
+                                            </Label.Margin>
+                                        </Label>                                        
+                                    </Grid>
+                                    
+                                </DataTemplate>
+                            </CollectionView.ItemTemplate>
+                          
+                        </CollectionView>
+                        
+                     </Grid>
+                    <Grid Margin="0,10,20,0" ColumnSpacing="{OnPlatform Android=40, UWP=60, iOS=40}">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition/>
+                            <ColumnDefinition/>
+                            <ColumnDefinition/>
+                        </Grid.ColumnDefinitions>
+                        <StackLayout Padding="0,0,20,0" Grid.Row="0" Grid.Column="0" Orientation="Vertical">
+                            <StackLayout Spacing="0" Orientation="Horizontal" >
+                                <Label Text="ASSESSMENT DATE" TextColor="{x:Static common:Colors.AssessmentConfigPopupAssessmentTypeColor}" FontSize="12.5" FontFamily="{StaticResource ARIALMT}"></Label>
+                                <Label Text="*" TextColor="Red" VerticalTextAlignment="Start"/>
+                            </StackLayout>
+                            <StackLayout>
+                                <renderer:MyFrame InputTransparent="True" Padding="0" WidthRequest="175" x:Name="AssessmentFrame"  BorderColor="{x:Static common:Colors.BorderColor}" VerticalOptions="Center"   HasShadow="False" CornerRadius="1">
+                                    <StackLayout Margin="0"  BackgroundColor="White" Orientation="Horizontal">
+                                        <Label x:Name="AssessmentDate" FontFamily="{StaticResource ARIALMT}" HorizontalOptions="FillAndExpand" PropertyChanged="AssessmentDate_PropertyChanged" TextColor="{x:Static common:Colors.LightGrayColor}" BindingContext="{x:Reference DatePicker_AssessmentDate}" Text="{Binding SelectedDate,Mode=TwoWay}" FontSize="14">
+                                            <Label.Margin>
+                                                <OnPlatform x:TypeArguments="Thickness">
+                                                    <On Platform="UWP" Value="8,6,0,0"/>
+                                                    <On Platform="Android" Value="8,8,0,0"/>
+                                                    <On Platform="iOS" Value="8,8,0,0"/>
+                                                </OnPlatform>
+                                            </Label.Margin>
+                                        </Label>
+                                        <Frame x:Name="AssessmentImageFrame" CornerRadius="1" HorizontalOptions="EndAndExpand" BackgroundColor="{x:Static common:Colors.FrameBlueColor}" Padding="0" HasShadow="false">
+                                            <Image Source="shape.png" Margin="8,8,8,8">
+                                            </Image>
+                                            <Frame.GestureRecognizers>
+                                                <TapGestureRecognizer Tapped="Assessment_Tapped"></TapGestureRecognizer>
+                                            </Frame.GestureRecognizers>
+                                        </Frame>
+                                    </StackLayout>
+                                    <renderer:MyFrame.GestureRecognizers>
+                                        <TapGestureRecognizer Tapped="Assessment_Tapped"></TapGestureRecognizer>
+                                    </renderer:MyFrame.GestureRecognizers>
+                                </renderer:MyFrame>
+                                <renderer:MyDatePicker x:Name="DatePicker_AssessmentDate" DateSelected="DatePicker_AssessmentDate_DateSelected" Format="MM/dd/yyyy" MaximumDate="{x:Static sys:DateTime.Now}" VerticalOptions="CenterAndExpand" IsVisible="True" WidthRequest="0" HeightRequest="0" IsEnabled="True"></renderer:MyDatePicker>
+                                <StackLayout.GestureRecognizers>
+                                    <TapGestureRecognizer Tapped="Assessment_Tapped"/>
+                                </StackLayout.GestureRecognizers>
+                            </StackLayout>
+                        </StackLayout>
+                        <StackLayout Grid.Row="0" Grid.Column="1"  Orientation="Vertical">
+                            <StackLayout Spacing="0" Orientation="Horizontal">
+                                <Label Text="EXAMINER" TextColor="{x:Static common:Colors.AssessmentConfigPopupAssessmentTypeColor}" FontSize="12.5" FontFamily="{StaticResource ARIALMT}" FontAttributes="None"></Label>
+                                <Label Text="*" TextColor="Red" VerticalTextAlignment="Start"/>
+                            </StackLayout>
+                            <StackLayout>
+                                <StackLayout.Padding>
+                                    <OnPlatform x:TypeArguments="Thickness">
+                                        <On Platform="UWP" Value="0,0,0,0"/>
+                                        <On Platform="Android" Value="0,0,0,0"/>
+                                        <On Platform="iOS" Value="0,0,0,0"/>
+                                    </OnPlatform>
+                                </StackLayout.Padding>
+                                <Grid>
+                                    <renderer:MyFrame InputTransparent="False" BorderColor="{x:Static Common:Colors.BorderColor}" HeightRequest="30" VerticalOptions="Center" Padding="0"  HasShadow="False" CornerRadius="1">
+                                        <Label x:Name="Examiner" VerticalOptions="Center" FontSize="14" TextColor="{x:Static Common:Colors.LightGrayColor}" Text="{Binding Examiner}" IsVisible="True">
+                                            <Label.Margin>
+                                                <OnPlatform x:TypeArguments="Thickness">
+                                                    <On Platform="UWP" Value="8,6,0,0"/>
+                                                    <On Platform="Android" Value="8,8,0,0"/>
+                                                    <On Platform="iOS" Value="8,8,0,0"/>
+                                                </OnPlatform>
+                                            </Label.Margin>
+                                        </Label>
+                                    </renderer:MyFrame>
+                                    <ImageButton HorizontalOptions="End" Margin="0,0,10,0" Padding="4,4,4,2" Clicked="ExaminerPopupButton_Clicked" IsOpaque="False" Source="downArrow.png" HeightRequest="20" WidthRequest="20" CornerRadius="10" BackgroundColor="{x:Static Common:Colors.FrameBlueColor}" VerticalOptions="Center">
+                                        <ImageButton.GestureRecognizers>
+                                            <TapGestureRecognizer  />
+                                        </ImageButton.GestureRecognizers>
+                                    </ImageButton>
+
+                                    <Grid.GestureRecognizers>
+                                        <TapGestureRecognizer Tapped="ExaminerPopupButton_Clicked" />
+                                    </Grid.GestureRecognizers>
+                                </Grid>
+                            </StackLayout>
+                        </StackLayout>
+                        <StackLayout Grid.Row="0" Grid.Column="2"  Orientation="Vertical">
+                            <Label Text="PROGRAM LABEL" TextColor="{x:Static common:Colors.AssessmentConfigPopupAssessmentTypeColor}" FontSize="12.5" FontFamily="{StaticResource ARIALMT}" FontAttributes="None"></Label>
+                            <StackLayout>
+                                <StackLayout.Padding>
+                                    <OnPlatform x:TypeArguments="Thickness">
+                                        <On Platform="UWP" Value="0,0,0,0"/>
+                                        <On Platform="Android" Value="0,0,0,0"/>
+                                        <On Platform="iOS" Value="0,5,0,0"/>
+                                    </OnPlatform>
+                                </StackLayout.Padding>
+                                <Grid>
+                                    <renderer:MyFrame InputTransparent="True" BorderColor="{x:Static Common:Colors.BorderColor}"  HeightRequest="30"  VerticalOptions="Center" Padding="0"  HasShadow="False" CornerRadius="1">
+                                        <Label x:Name="ProgramNote"  VerticalOptions="Center" FontSize="14" TextColor="{x:Static Common:Colors.LightGrayColor}" Text="{Binding ProgramNote}" IsVisible="True" >
+                                            <Label.Margin>
+                                                <OnPlatform x:TypeArguments="Thickness">
+                                                    <On Platform="UWP" Value="8,6,0,0"/>
+                                                    <On Platform="Android" Value="8,8,0,0"/>
+                                                    <On Platform="iOS" Value="8,8,0,0"/>
+                                                </OnPlatform>
+                                            </Label.Margin>
+                                        </Label>
+                                    </renderer:MyFrame>
+                                    <ImageButton HorizontalOptions="End" Margin="0,0,10,0" Padding="4,4,4,2" Clicked="ProgramNotePopupButton_Clicked" IsOpaque="False" Source="downArrow.png" HeightRequest="20" WidthRequest="20" CornerRadius="10" BackgroundColor="{x:Static Common:Colors.FrameBlueColor}" VerticalOptions="Center">
+                                        <ImageButton.GestureRecognizers>
+                                            <TapGestureRecognizer  />
+                                        </ImageButton.GestureRecognizers>
+                                    </ImageButton>
+
+                                    <Grid.GestureRecognizers>
+                                        <TapGestureRecognizer Tapped="ProgramNotePopupButton_Clicked" />
+                                    </Grid.GestureRecognizers>
+                                </Grid>
+                            </StackLayout>
+                        </StackLayout>
+                    </Grid>
+                </StackLayout>
+                <StackLayout Grid.Row="2">
+                    <Label TextColor="Red" FontSize="Micro" IsVisible="{Binding IsAgeRestricted}" HorizontalTextAlignment="Start" VerticalTextAlignment="Center" Text="The BDI-3 assessments are designed to assess children 7 years 11 months and under. If you are receiving this in error, please check your child's date of birth and test date and try again." />
+                </StackLayout>
+                <StackLayout Grid.Row="3" Margin="0,25,0,0">
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="Auto"/>
+                            <ColumnDefinition Width="*" />
+                        </Grid.ColumnDefinitions>
+                        <renderer:CustomButtonUWP x:Name="cancelButton" Command="{Binding CancelClickedCommand}" HeightRequest="50" FontAttributes="Bold"  Text="Cancel" TextColor="{x:Static common:Colors.FrameBlueColor}"
+                            BorderWidth="2" BorderColor="{x:Static common:Colors.FrameBlueColor}" BackgroundColor="White" FontSize="Default" 
+                            Grid.Column="0">
+                        </renderer:CustomButtonUWP>
+                        <ContentView Grid.Column="1">
+                            <ContentView.WidthRequest>
+                                <OnPlatform x:TypeArguments="x:Double">
+                                    <On Platform="Android">350</On>
+                                    <On Platform="iOS">300</On>
+                                    <On Platform="UWP">500</On>
+                                </OnPlatform>
+                            </ContentView.WidthRequest>
+                        </ContentView>
+                        <renderer:CustomButtonUWP x:Name="btnstart" HeightRequest="50" BackgroundColor="Gray" Margin="-120,0,0,0"  FontAttributes="Bold" Text="Start Assessment" TextColor="White" BorderWidth="2" 
+                            Command="{Binding StartAssessmentCommand}" IsEnabled="{Binding IsStartEnabled,Mode=OneWay}" FontSize="Default" Grid.Column="2">
+                            <renderer:CustomButtonUWP.IsVisible> <OnPlatform x:TypeArguments="x:Boolean">
+                                                       <On Platform="iOS">false</On>
+                                                         <On Platform="Android">true</On>
+                                                            <On Platform="UWP">true</On>
+                                                        </OnPlatform> </renderer:CustomButtonUWP.IsVisible>
+                        </renderer:CustomButtonUWP>
+                          <renderer:CustomButton x:Name="btnstartiOS" HeightRequest="50" BackgroundColor="Gray" Margin="-120,0,0,0"  FontAttributes="Bold" Text="Start Assessment" TextColor="White" BorderWidth="2" BorderColor="Gray"
+                            Command="{Binding StartAssessmentCommand}" IsEnabled="{Binding IsStartEnabled,Mode=OneWay}" FontSize="Default" Grid.Column="2">
+                             <Button.IsVisible> <OnPlatform x:TypeArguments="x:Boolean">
+                                                       <On Platform="iOS">true</On>
+                                                         <On Platform="Android">false</On>
+                                                            <On Platform="UWP">false</On>
+                                                        </OnPlatform> </Button.IsVisible>
+                        </renderer:CustomButton>
+                    </Grid>
+                </StackLayout>
+            </Grid>
+        </Frame>
+        <ContentView x:Name="SelectExaminerFrame" AbsoluteLayout.LayoutBounds="0,0,1,1" InputTransparent="False" AbsoluteLayout.LayoutFlags="All" IsVisible="False" >
+            <ContentView.GestureRecognizers>
+                <TapGestureRecognizer Tapped="ClosePopup_Tapped"/>
+            </ContentView.GestureRecognizers>
+         
+            <Frame CornerRadius="20" BackgroundColor="LightGray" HeightRequest="210" WidthRequest="300" Padding=".8" VerticalOptions="Center" HorizontalOptions="Center" IsVisible="{Binding ShowGender}">
+                <Grid HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="50" />
+                    <RowDefinition Height="*" />
+                </Grid.RowDefinitions>
+                <Frame BackgroundColor="{x:Static common:Colors.PrimaryColor}" Grid.RowSpan="2" CornerRadius="20">
+                    <Label Text="SELECT EXAMINER" TextColor="White" FontSize="17" FontAttributes="Bold" HorizontalTextAlignment="Center" />
+                </Frame>
+                <Frame HasShadow="false" BackgroundColor="White" CornerRadius="20" Grid.Row="1" Padding="0" />
+                <ListView SeparatorVisibility="Default" ios:ListView.SeparatorStyle="FullWidth"  x:Name="selectExaminerListView" RowHeight="44" Grid.Row="1" ItemTapped="ExaminerTapped" ItemsSource="{Binding ExaminerList, Mode=TwoWay}" Margin="0,0,0,20">
+                    <ListView.ItemTemplate>
+                        <DataTemplate>
+                            <ViewCell>
+                                <StackLayout Orientation="Horizontal" Padding="10,5" BackgroundColor="White">
+                                        <Label InputTransparent="True"   Text="{Binding text}" TextColor="Black" VerticalOptions="Center" HorizontalOptions="FillAndExpand" />
+                                        <Image HeightRequest="20" WidthRequest="20" VerticalOptions="Center" Source="checkmark.png" IsVisible="{Binding selected}" />
+                                    </StackLayout>
+                            </ViewCell>
+                        </DataTemplate>
+                    </ListView.ItemTemplate>
+                </ListView>
+            </Grid>
+                <!--<Frame.GestureRecognizers>
+                    <TapGestureRecognizer Tapped="ExaminerListTapped"/>
+                </Frame.GestureRecognizers>-->
+        </Frame>
+            
+        </ContentView>
+        <ContentView x:Name="SelectProgrameNoteFrame" AbsoluteLayout.LayoutBounds="0,0,1,1" InputTransparent="False" AbsoluteLayout.LayoutFlags="All" IsVisible="False">
+            <ContentView.GestureRecognizers>
+                <TapGestureRecognizer Tapped="ClosePopup_Tapped"/>
+            </ContentView.GestureRecognizers>
+            <Frame CornerRadius="20" BackgroundColor="LightGray" HeightRequest="210" WidthRequest="300" Padding=".8" VerticalOptions="Center" HorizontalOptions="End" IsVisible="{Binding ShowGender}" Margin="0,0,230,0">
+                <Frame.Margin>
+                    <OnPlatform x:TypeArguments="Thickness">
+                        <On Platform="UWP" Value="0,0,230,0"/>
+                        <On Platform="Android" Value="0,0,200,0"/>
+                        <On Platform="iOS" Value="0,0,130,0"/>
+                    </OnPlatform>
+                </Frame.Margin>
+                <Grid VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="50" />
+                        <RowDefinition Height="*" />
+                    </Grid.RowDefinitions>
+                    <Frame BackgroundColor="{x:Static common:Colors.PrimaryColor}" Grid.RowSpan="2" CornerRadius="20">
+                        <Label Text="SELECT PROGRAM LABEL" TextColor="White" FontSize="17" FontAttributes="Bold" HorizontalTextAlignment="Center" />
+                    </Frame>
+                    <Frame HasShadow="false" BackgroundColor="White" CornerRadius="20" Grid.Row="1" Padding="0" />
+                    <ListView RowHeight="44" Grid.Row="1" x:Name="selectProgramNoteListView" ItemTapped="ProgramLabelTapped" ItemsSource="{Binding ProgramNoteList, Mode=TwoWay}" Margin="0,0,0,20" ios:ListView.SeparatorStyle="FullWidth">
+                        <ListView.ItemTemplate>
+                            <DataTemplate>
+                                <ViewCell>
+                                    <StackLayout Orientation="Horizontal" Padding="10,5" BackgroundColor="White">
+                                        <Label Text="{Binding text}" TextColor="Black" VerticalOptions="Center" HorizontalOptions="FillAndExpand"/>
+                                        <Image HeightRequest="20" WidthRequest="20" VerticalOptions="Center" Source="checkmark.png" IsVisible="{Binding selected}" />
+                                    </StackLayout>
+                                </ViewCell>
+                            </DataTemplate>
+                        </ListView.ItemTemplate>
+                    </ListView>
+                </Grid>
+                <!--<Frame.GestureRecognizers>
+                    <TapGestureRecognizer Tapped="ProgramListTapped"/>
+                </Frame.GestureRecognizers>-->
+            </Frame>
+        </ContentView>
+    </AbsoluteLayout>
+</pages:PopupPage>

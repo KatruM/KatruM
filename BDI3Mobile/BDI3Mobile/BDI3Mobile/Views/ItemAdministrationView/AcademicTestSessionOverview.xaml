@@ -1,0 +1,511 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<pages:PopupPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:pages="clr-namespace:Rg.Plugins.Popup.Pages;assembly=Rg.Plugins.Popup"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+                 xmlns:renderer="clr-namespace:BDI3Mobile.CustomRenderer"
+                 xmlns:Common="clr-namespace:BDI3Mobile.Common"
+                 xmlns:sys="clr-namespace:System;assembly=mscorlib"
+                 xmlns:template="clr-namespace:BDI3Mobile.DataTemplates"
+                 xmlns:Styles="clr-namespace:BDI3Mobile.Styles"
+                 xmlns:converters="clr-namespace:BDI3Mobile.ValueConverter"
+                 xmlns:ia="clr-namespace:IntelliAbb.Xamarin.Controls;assembly=IntelliAbb.Xamarin.Controls"
+                 x:Class="BDI3Mobile.Views.ItemAdministrationView.AcademicTestSessionOverview"
+                 xmlns:local="clr-namespace:BDI3Mobile.Behaviors"
+                 x:Name="Page">
+
+    <pages:PopupPage.Resources>
+        <ResourceDictionary>
+            <converters:ReverseVisibilityConverter x:Key="ReverseVisibilityConverter"/>
+            <converters:StringToBoolConverter x:Key="StringToBoolConverter"/>
+            <ResourceDictionary.MergedDictionaries>
+                <Styles:ListViewResourceDictionary></Styles:ListViewResourceDictionary>
+                <ResourceDictionary>
+                    <converters:TestSessionRecordBackgroundColorConverter x:Key="SessionRecordBackgroundColor"></converters:TestSessionRecordBackgroundColorConverter>
+                </ResourceDictionary>
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+    </pages:PopupPage.Resources>
+
+    <Frame x:Name="ContentFrame"  Margin="50,0,50,0" VerticalOptions="Center" HorizontalOptions="FillAndExpand" Padding="0" BackgroundColor="White" Opacity="1">
+        <StackLayout x:Name="MainStackLayout" Spacing="0" Margin="0,0,0,0">
+            <BoxView HeightRequest="4" Color="{x:Static Common:Colors.FrameBlueColor}" Margin="0,0,0,0" />
+            <StackLayout BackgroundColor="{x:Static Common:Colors.WhiteColor}" Spacing="0" WidthRequest="950" HeightRequest="500">
+                <Grid HeightRequest="70" Margin="0,20,0,0">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"></ColumnDefinition>
+                        <ColumnDefinition Width="Auto"></ColumnDefinition>
+                        <ColumnDefinition Width="Auto"></ColumnDefinition>
+                        <ColumnDefinition Width="Auto"></ColumnDefinition>
+                    </Grid.ColumnDefinitions>
+                    <Label Grid.Column="0" HorizontalTextAlignment="Start" VerticalTextAlignment="Center" Text="{Binding Title}" FontFamily="{StaticResource Arial-Bold}" FontAttributes="Bold" TextColor="{x:Static Common:Colors.TableFieldsColor}" Margin="20,0,0,0"  FontSize="20"/>
+                    <Label Grid.Column="1" HorizontalTextAlignment="End" VerticalTextAlignment="Center" Text="Program Label: "  FontSize="14" TextColor="Black" />
+                    <Label Grid.Column="2" TextColor="{x:Static Common:Colors.FrameBlueColor}" HorizontalTextAlignment="End" VerticalTextAlignment="Center" Margin="0,0,40,0" Text="{Binding ProgramLabel}"  FontSize="14">
+                        <Label.GestureRecognizers>
+                            <TapGestureRecognizer Tapped="ProgramLabel_Tapped"/>
+                        </Label.GestureRecognizers>
+                    </Label>
+                    <Image HorizontalOptions="End" Grid.Column="3" Source="iconclose.png" Margin="0,0,20,0">
+                        <Image.GestureRecognizers>
+                            <TapGestureRecognizer Tapped="TapGestureRecognizer_Tapped"/>
+                        </Image.GestureRecognizers>
+                    </Image>
+                </Grid>
+
+                <renderer:MyFrame Margin="20,10,20,10" BorderColor="#cc1416" IsVisible="{Binding TimerErrorMessage}" HeightRequest="80" Padding="0"  HasShadow="False" CornerRadius="1">
+                    <StackLayout BackgroundColor="#fff1f1">
+                        <Label Text="{Binding TimerErrorText}" FontSize="14" Margin="18,0,0,0" FontAttributes="Bold" TextColor="#ba0e10" HorizontalOptions="StartAndExpand" VerticalOptions="CenterAndExpand"/>
+                    </StackLayout>
+                </renderer:MyFrame>
+                
+                <StackLayout Spacing="0" Margin="20,10,20,0">
+                    <BoxView HeightRequest="1" VerticalOptions="FillAndExpand" BackgroundColor="{x:Static Common:Colors.TableBorderColor}"/>
+
+                    <Grid x:Name="TSOGrid" IsVisible="False" RowSpacing="0"  Margin="0,0,0,0"   BackgroundColor="{x:Static Common:Colors.TableHeaderBackgroundColor}" >
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="*" ></RowDefinition>
+
+                        </Grid.RowDefinitions>
+                        <Grid Grid.Row="0">
+                            <Grid.ColumnDefinitions >
+                                <ColumnDefinition Width="1"></ColumnDefinition>
+                                <ColumnDefinition Width="7.15*"></ColumnDefinition>
+                                <ColumnDefinition Width="1"></ColumnDefinition>
+                                <ColumnDefinition Width="4*"></ColumnDefinition>
+                                <ColumnDefinition Width="1"></ColumnDefinition>
+                                <ColumnDefinition Width="4*"></ColumnDefinition>
+                                <ColumnDefinition Width="1"></ColumnDefinition>
+                                <ColumnDefinition Width="3*"></ColumnDefinition>
+                                <ColumnDefinition Width="1"></ColumnDefinition>
+                                <ColumnDefinition Width="4*"></ColumnDefinition>
+                                <ColumnDefinition Width="1"></ColumnDefinition>
+
+                            </Grid.ColumnDefinitions>
+                            <BoxView Grid.Column="0" HeightRequest="60" BackgroundColor="{x:Static Common:Colors.TableBorderColor}" VerticalOptions="FillAndExpand"></BoxView>
+                            <Label Text="Domain" FontAttributes="Bold" TextColor="{x:Static Common:Colors.TableFieldsColor}"  FontSize="13" Grid.Column="1" FontFamily="{StaticResource Arial-Bold}" HorizontalOptions="Start" VerticalOptions="Center"/>
+                            <BoxView Grid.Column="2"  Margin=".5,0,0,0" BackgroundColor="{x:Static Common:Colors.TableBorderColor}" VerticalOptions="FillAndExpand"></BoxView>
+                            <Label TextColor="{x:Static Common:Colors.TableFieldsColor}" Grid.Column="3" FontFamily="{StaticResource Arial-Bold}" FontAttributes="Bold"  Text="Test Date" Margin="0,0,0,0" HorizontalOptions="Start" VerticalOptions="Center"
+                                                   FontSize="13"></Label>
+                            <BoxView Grid.Column="4"  Margin="0,0,0,0" BackgroundColor="{x:Static Common:Colors.TableBorderColor}" VerticalOptions="FillAndExpand"></BoxView>
+                            <Label TextColor="{x:Static Common:Colors.TableFieldsColor}" Grid.Column="5" Text="Examiner" Margin="0,0,0,0" FontAttributes="Bold" FontFamily="{StaticResource Arial-Bold}" HorizontalOptions="Start" VerticalOptions="Center"
+                                                   FontSize="13"></Label>
+                            <BoxView Grid.Column="6"  Margin="0,0,0,0" BackgroundColor="{x:Static Common:Colors.TableBorderColor}" VerticalOptions="FillAndExpand"></BoxView>
+                            <Label TextColor="{x:Static Common:Colors.TableFieldsColor}" Grid.Column="7" Margin="0,0,0,0" Text="Status" FontAttributes="Bold" FontFamily="{StaticResource Arial-Bold}" HorizontalOptions="Start" VerticalOptions="Center"
+                                                   FontSize="13"></Label>
+                            <BoxView Grid.Column="8"  Margin="0,0,0,0" BackgroundColor="{x:Static Common:Colors.TableBorderColor}" VerticalOptions="FillAndExpand"></BoxView>
+                            <Label  TextColor="{x:Static Common:Colors.TableFieldsColor}" Grid.Column="9" Text="Raw Score" FontAttributes="Bold" FontFamily="{StaticResource Arial-Bold}" HorizontalOptions="Start" VerticalOptions="Center"
+                                                   FontSize="13"></Label>
+                            <BoxView  Grid.Column="10"  Margin="0,0,0,0" BackgroundColor="{x:Static Common:Colors.TableBorderColor}" VerticalOptions="FillAndExpand"></BoxView>
+                        </Grid>
+                    </Grid>
+                    <renderer:MyListView x:Name="TSOList1" IsVisible="True" SeparatorVisibility="None" BackgroundColor="White"  HeightRequest="500" Style="{StaticResource UWPListStyleSelector}" ItemsSource="{Binding AcademicTestSessionRecords}" HorizontalOptions="FillAndExpand" HasUnevenRows="True" Footer="" >
+                        <renderer:MyListView.ItemTemplate>
+                            <DataTemplate x:Name="TSOTemplate" >
+                                <ViewCell x:Name="CustomTSOCell">
+                                    <ViewCell.View>
+                                        <Grid BackgroundColor="{Binding DomainBackgroundColor}" x:Name="Item" >
+                                            <Grid.ColumnDefinitions >
+                                                <ColumnDefinition Width="1"></ColumnDefinition>
+                                                <ColumnDefinition Width="7.15*"></ColumnDefinition>
+                                                <ColumnDefinition Width="1"></ColumnDefinition>
+                                                <ColumnDefinition Width="4*"></ColumnDefinition>
+                                                <ColumnDefinition Width="1"></ColumnDefinition>
+                                                <ColumnDefinition Width="4*"></ColumnDefinition>
+                                                <ColumnDefinition Width="1"></ColumnDefinition>
+                                                <ColumnDefinition Width="3*"></ColumnDefinition>
+                                                <ColumnDefinition Width="1"></ColumnDefinition>
+                                                <ColumnDefinition Width="4*"></ColumnDefinition>
+                                                <ColumnDefinition Width="2"></ColumnDefinition>
+
+                                            </Grid.ColumnDefinitions>
+                                            <BoxView Grid.Column="0" BackgroundColor="{x:Static Common:Colors.TableBorderColor}" VerticalOptions="FillAndExpand" ></BoxView>
+                                            <Label Margin="{Binding DomainMargin}" HorizontalOptions="Start" Grid.Column="1" Text="{Binding Domain}" FontSize="13" TextColor="{Binding DomainColor}" FontAttributes="{Binding DomainFontAttribute}" VerticalOptions="Center">
+                                                <Label.GestureRecognizers>
+                                                    <TapGestureRecognizer BindingContext="{Binding Source={x:Reference TSOList1}, Path=BindingContext}" Command="{Binding LoadDomainBasedQuestionsCommand}"  CommandParameter="{Binding Source={x:Reference Item}, Path=BindingContext}" />
+                                                </Label.GestureRecognizers>
+                                            </Label>
+                                            <BoxView Grid.Column="2"  Margin="0,0,0,0" BackgroundColor="{x:Static Common:Colors.TableBorderColor}"  VerticalOptions="FillAndExpand"></BoxView>
+                                            <Label Grid.Column="3" Text="{Binding TestDate}" Margin="0,0,20,0" HorizontalOptions="Center" TextColor="{x:Static Common:Colors.TableFieldsColor}" VerticalOptions="Center" IsVisible="{Binding DomainVisibility}"></Label>
+                                            <Image x:Name="DOBImageFrame" IsVisible="{Binding DomainVisibility}" Grid.Column="3"  HeightRequest="16" WidthRequest="16" HorizontalOptions="End" Margin="0,6,20,0" Source="icon_calendar.png" VerticalOptions="Center">
+                                                <Image.GestureRecognizers>
+                                                    <TapGestureRecognizer BindingContext="{Binding Source={x:Reference TSOList1}, Path=BindingContext}" Command="{Binding ShowDatePickerCommand}"  CommandParameter="{Binding Source={x:Reference Item}, Path=BindingContext}" />
+                                                </Image.GestureRecognizers>
+                                            </Image>
+                                            <BoxView Grid.Column="4" HorizontalOptions="Center" BackgroundColor="{x:Static Common:Colors.TableBorderColor}" VerticalOptions="FillAndExpand"></BoxView>
+                                            <Label Grid.Column="5" Text="{Binding Examiner}" Margin="0,0,20,0" HorizontalOptions="Center" VerticalOptions="Center" TextColor="{x:Static Common:Colors.TableFieldsColor}" IsVisible="{Binding DomainVisibility}">
+                                            </Label>
+                                            <Image IsVisible="{Binding DomainVisibility}" Grid.Column="5" HeightRequest="16" WidthRequest="16" HorizontalOptions="End" Margin="30,2,20,5" Source="iconPerson.png"  >
+                                                <Image.GestureRecognizers>
+                                                    <TapGestureRecognizer BindingContext="{Binding Source={x:Reference TSOList1}, Path=BindingContext}" Command="{Binding SelectExaminerCommand}"  CommandParameter="{Binding Source={x:Reference Item}, Path=BindingContext}" />
+                                                </Image.GestureRecognizers>
+                                            </Image>
+                                            <BoxView Grid.Column="6" HorizontalOptions="Center" BackgroundColor="{x:Static Common:Colors.TableBorderColor}" VerticalOptions="FillAndExpand"></BoxView>
+                                            <Label Grid.Column="7" HorizontalOptions="Center" Text="{Binding Status}" VerticalOptions="Center" TextColor="{x:Static Common:Colors.TableFieldsColor}" IsVisible="{Binding DomainVisibility}">
+                                            </Label>
+                                            <BoxView Grid.Column="8" HorizontalOptions="Center" BackgroundColor="{x:Static Common:Colors.TableBorderColor}" VerticalOptions="FillAndExpand"></BoxView>
+                                            <StackLayout Grid.Column="9" IsVisible="{Binding IsDateVisible}" Padding="0" Margin="0">
+
+                                                <StackLayout IsVisible="{Binding IsNotFluency}">
+                                                    <Label FontFamily="{StaticResource ARIALMT}" Padding="0,10,0,0" Margin="0"  HorizontalOptions="Center" IsVisible="{Binding EnablerawScore,Converter={StaticResource ReverseVisibilityConverter}}" Text="{Binding RawScore}" VerticalOptions="Center" TextColor="{x:Static Common:Colors.TableFieldsColor}"/>
+                                                </StackLayout>
+
+                                                <StackLayout IsVisible="{Binding IsFluency}" Orientation="Horizontal" Spacing="2" HorizontalOptions="Center" VerticalOptions="Center">
+                                                    <Label FontFamily="{StaticResource ARIALMT}" HeightRequest="25" WidthRequest="30" Margin="0,8,0,0"  HorizontalOptions="Center" VerticalOptions="Center" IsVisible="{Binding EnablerawScore,Converter={StaticResource ReverseVisibilityConverter}}" Text="{Binding RawScore}" TextColor="{x:Static Common:Colors.TableFieldsColor}"/>
+
+                                                    <Label x:Name="timerLabel" IsVisible="{Binding EnablerawScore,Converter={StaticResource ReverseVisibilityConverter}}" FontSize="13" FontFamily="{StaticResource ARIALMT}" Text="Time" Margin="10,0,10,0" HorizontalOptions="Center" VerticalOptions="Center" TextColor="{Binding ShowTimerErrorMessage, Mode=TwoWay, Converter={StaticResource StringToBoolConverter}}" />
+
+                                                    <renderer:MyFrame x:Name="timerFrame" IsVisible="{Binding EnablerawScore,Converter={StaticResource ReverseVisibilityConverter}}" BorderColor="{Binding ShowTimerErrorMessage, Mode=TwoWay, Converter={StaticResource StringToBoolConverter}}" HeightRequest="25" WidthRequest="65" VerticalOptions="Center" HasShadow="false" CornerRadius="1" Padding="0" HorizontalOptions="CenterAndExpand" >
+                                                        <renderer:MyFrame.Margin>
+                                                            <OnPlatform x:TypeArguments="Thickness">
+                                                                <On Platform="Android" Value="0,10,0,0"/>
+                                                                <On Platform="UWP" Value="0,5,0,0"/>
+                                                            </OnPlatform>
+                                                        </renderer:MyFrame.Margin>
+                                                        <renderer:MyFrame.HeightRequest>
+                                                            <OnPlatform x:TypeArguments="x:Double">
+                                                                <On Platform="UWP">25</On>
+                                                                <On Platform="Android">35</On>
+                                                            </OnPlatform>
+                                                        </renderer:MyFrame.HeightRequest>
+                                                        <renderer:BorderlessEntry TextChanged="Timer_TextChanged" Unfocused="Timer_Unfocused" MaxLength="4" Text="{Binding Timer,StringFormat='{0:m\\:ss}'}" x:Name="Timer" FontFamily="{StaticResource ARIALMT}" ClearButtonVisibility="Never" HeightRequest="25" WidthRequest="65" HorizontalTextAlignment="Center" FontSize="14" TextColor="{x:Static Common:Colors.LightGrayColor}" HorizontalOptions="Center" VerticalOptions="Center" VerticalTextAlignment="Center" >
+                                                            <renderer:BorderlessEntry.HeightRequest>
+                                                                <OnPlatform x:TypeArguments="x:Double">
+                                                                    <On Platform="UWP">25</On>
+                                                                    <On Platform="Android">35</On>
+                                                                </OnPlatform>
+                                                            </renderer:BorderlessEntry.HeightRequest>
+
+                                                            <renderer:BorderlessEntry.Behaviors>
+                                                                <local:TimerNumbericValidator/>
+                                                            </renderer:BorderlessEntry.Behaviors>
+                                                            <renderer:BorderlessEntry.Margin>
+                                                                <OnPlatform x:TypeArguments="Thickness">
+                                                                    <On Platform="UWP" Value="0"/>
+                                                                    <On Platform="Android" Value="0"/>
+                                                                </OnPlatform>
+                                                            </renderer:BorderlessEntry.Margin>
+                                                            <renderer:BorderlessEntry.FontSize>
+                                                                <OnPlatform x:TypeArguments="x:Double">
+                                                                    <On Platform="UWP">14</On>
+                                                                    <On Platform="Android">12</On>
+                                                                </OnPlatform>
+                                                            </renderer:BorderlessEntry.FontSize>
+                                                        </renderer:BorderlessEntry>
+                                                    </renderer:MyFrame>
+                                                </StackLayout>
+
+                                                <StackLayout IsVisible="{Binding IsNotFluency}">
+                                                    <renderer:MyFrame Grid.Column="9"  IsVisible="{Binding EnablerawScore}" BorderColor="{x:Static Common:Colors.BorderColor}" HeightRequest="25" WidthRequest="60" VerticalOptions="Center" HasShadow="false" CornerRadius="1" Padding="0" HorizontalOptions="CenterAndExpand" >
+                                                        <renderer:MyFrame.Margin>
+                                                            <OnPlatform x:TypeArguments="Thickness">
+                                                                <On Platform="Android" Value="0,10,0,0"/>
+                                                                <On Platform="UWP" Value="0,5,0,0"/>
+                                                            </OnPlatform>
+                                                        </renderer:MyFrame.Margin>
+                                                        <renderer:MyFrame.HeightRequest>
+                                                            <OnPlatform x:TypeArguments="x:Double">
+                                                                <On Platform="UWP">25</On>
+                                                                <On Platform="Android">35</On>
+                                                            </OnPlatform>
+                                                        </renderer:MyFrame.HeightRequest>
+                                                        <renderer:BorderlessEntry TextChanged="RawScore_TextChanged" x:Name="RawScore" FontFamily="{StaticResource ARIALMT}" MaxLength="2" ClearButtonVisibility="Never" HeightRequest="25" WidthRequest="60" HorizontalTextAlignment="Center" Text="{Binding RawScore}" FontSize="14" TextColor="{x:Static Common:Colors.LightGrayColor}" HorizontalOptions="FillAndExpand" VerticalOptions="StartAndExpand">
+                                                            <renderer:BorderlessEntry.HeightRequest>
+                                                                <OnPlatform x:TypeArguments="x:Double">
+                                                                    <On Platform="UWP">25</On>
+                                                                    <On Platform="Android">35</On>
+                                                                </OnPlatform>
+                                                            </renderer:BorderlessEntry.HeightRequest>
+                                                            <renderer:BorderlessEntry.Margin>
+                                                                <OnPlatform x:TypeArguments="Thickness">
+                                                                    <On Platform="UWP" Value="0,0,0,0"/>
+                                                                    <On Platform="Android" Value="0,0,0,0"/>
+                                                                </OnPlatform>
+                                                            </renderer:BorderlessEntry.Margin>
+                                                            <renderer:BorderlessEntry.FontSize>
+                                                                <OnPlatform x:TypeArguments="x:Double">
+                                                                    <On Platform="UWP">14</On>
+                                                                    <On Platform="Android">12</On>
+                                                                </OnPlatform>
+                                                            </renderer:BorderlessEntry.FontSize>
+                                                            <renderer:BorderlessEntry.Behaviors>
+                                                                <local:NumericValidator/>
+                                                            </renderer:BorderlessEntry.Behaviors>
+                                                        </renderer:BorderlessEntry>
+                                                    </renderer:MyFrame>
+                                                </StackLayout>
+
+                                                <StackLayout  IsVisible="{Binding IsFluency}" Orientation="Horizontal" Spacing="0">
+
+                                                    <renderer:MyFrame  IsVisible="{Binding EnablerawScore}" BorderColor="{x:Static Common:Colors.BorderColor}" HeightRequest="25" WidthRequest="30" VerticalOptions="Center" HasShadow="false" CornerRadius="1" Padding="0" HorizontalOptions="CenterAndExpand" >
+                                                        <renderer:MyFrame.Margin>
+                                                            <OnPlatform x:TypeArguments="Thickness">
+                                                                <On Platform="Android" Value="0,10,0,0"/>
+                                                                <On Platform="UWP" Value="0,5,0,0"/>
+                                                            </OnPlatform>
+                                                        </renderer:MyFrame.Margin>
+                                                        <renderer:MyFrame.HeightRequest>
+                                                            <OnPlatform x:TypeArguments="x:Double">
+                                                                <On Platform="UWP">25</On>
+                                                                <On Platform="Android">35</On>
+                                                            </OnPlatform>
+                                                        </renderer:MyFrame.HeightRequest>
+                                                        <renderer:BorderlessEntry TextChanged="RawScore_TextChanged" x:Name="RawScore1" FontFamily="{StaticResource ARIALMT}" MaxLength="2" ClearButtonVisibility="Never" HeightRequest="25" WidthRequest="60" HorizontalTextAlignment="Start" Text="{Binding RawScore}" FontSize="14" TextColor="{x:Static Common:Colors.LightGrayColor}" HorizontalOptions="Start" VerticalOptions="StartAndExpand">
+                                                            <renderer:BorderlessEntry.HeightRequest>
+                                                                <OnPlatform x:TypeArguments="x:Double">
+                                                                    <On Platform="UWP">25</On>
+                                                                    <On Platform="Android">35</On>
+                                                                </OnPlatform>
+                                                            </renderer:BorderlessEntry.HeightRequest>
+                                                            <renderer:BorderlessEntry.Margin>
+                                                                <OnPlatform x:TypeArguments="Thickness">
+                                                                    <On Platform="UWP" Value="0,0,5,0"/>
+                                                                    <On Platform="Android" Value="0,0,0,0"/>
+                                                                </OnPlatform>
+                                                            </renderer:BorderlessEntry.Margin>
+                                                            <renderer:BorderlessEntry.FontSize>
+                                                                <OnPlatform x:TypeArguments="x:Double">
+                                                                    <On Platform="UWP">14</On>
+                                                                    <On Platform="Android">12</On>
+                                                                </OnPlatform>
+                                                            </renderer:BorderlessEntry.FontSize>
+                                                            <renderer:BorderlessEntry.Behaviors>
+                                                                <local:NumericValidator/>
+                                                            </renderer:BorderlessEntry.Behaviors>
+                                                        </renderer:BorderlessEntry>
+                                                    </renderer:MyFrame>
+
+                                                    <Label x:Name="timerLabel1" IsVisible="{Binding EnablerawScore}" FontSize="13" FontFamily="{StaticResource ARIALMT}" Text="Time" HorizontalOptions="Center" VerticalOptions="Center" TextColor="{Binding ShowTimerErrorMessage, Mode=TwoWay, Converter={StaticResource StringToBoolConverter}}" />
+
+                                                    <renderer:MyFrame x:Name="timerFrame1"  IsVisible="{Binding EnablerawScore}" BorderColor="{Binding ShowTimerErrorMessage, Mode=TwoWay, Converter={StaticResource StringToBoolConverter}}" HeightRequest="25" WidthRequest="65" VerticalOptions="Center" HasShadow="false" CornerRadius="1" Padding="0" HorizontalOptions="CenterAndExpand" >
+                                                        <renderer:MyFrame.Margin>
+                                                            <OnPlatform x:TypeArguments="Thickness">
+                                                                <On Platform="Android" Value="0,10,0,0"/>
+                                                                <On Platform="UWP" Value="0,5,0,0"/>
+                                                            </OnPlatform>
+                                                        </renderer:MyFrame.Margin>
+                                                        <renderer:MyFrame.HeightRequest>
+                                                            <OnPlatform x:TypeArguments="x:Double">
+                                                                <On Platform="UWP">25</On>
+                                                                <On Platform="Android">35</On>
+                                                            </OnPlatform>
+                                                        </renderer:MyFrame.HeightRequest>
+                                                        <renderer:BorderlessEntry  TextChanged="Timer_TextChanged" Unfocused="Timer_Unfocused" MaxLength="4" Text="{Binding Timer,StringFormat='{0:m\\:ss}'}" x:Name="Timer1" FontFamily="{StaticResource ARIALMT}" ClearButtonVisibility="Never" HeightRequest="25" WidthRequest="65" HorizontalTextAlignment="Center" VerticalTextAlignment="Center" FontSize="14" TextColor="{x:Static Common:Colors.LightGrayColor}" HorizontalOptions="Center" VerticalOptions="Center">
+                                                            <renderer:BorderlessEntry.HeightRequest>
+                                                                <OnPlatform x:TypeArguments="x:Double">
+                                                                    <On Platform="UWP">25</On>
+                                                                    <On Platform="Android">35</On>
+                                                                </OnPlatform>
+                                                            </renderer:BorderlessEntry.HeightRequest>
+                                                            <renderer:BorderlessEntry.Behaviors>
+                                                                <local:TimerNumbericValidator/>
+                                                            </renderer:BorderlessEntry.Behaviors>
+                                                            <renderer:BorderlessEntry.Margin>
+                                                                <OnPlatform x:TypeArguments="Thickness">
+                                                                    <On Platform="UWP" Value="0"/>
+                                                                    <On Platform="Android" Value="0"/>
+                                                                </OnPlatform>
+                                                            </renderer:BorderlessEntry.Margin>
+                                                            <renderer:BorderlessEntry.FontSize>
+                                                                <OnPlatform x:TypeArguments="x:Double">
+                                                                    <On Platform="UWP">14</On>
+                                                                    <On Platform="Android">12</On>
+                                                                </OnPlatform>
+                                                            </renderer:BorderlessEntry.FontSize>
+                                                        </renderer:BorderlessEntry>
+                                                    </renderer:MyFrame>
+                                                </StackLayout>
+                                            </StackLayout>
+                                            <BoxView Grid.Column="10" Margin="0" BackgroundColor="{x:Static Common:Colors.TableBorderColor}" VerticalOptions="FillAndExpand" HorizontalOptions="Center" ></BoxView>
+
+                                        </Grid>
+                                    </ViewCell.View>
+                                </ViewCell>
+                            </DataTemplate>
+                        </renderer:MyListView.ItemTemplate>
+                    </renderer:MyListView>
+                    <CollectionView x:Name="TSOList1iOS" IsVisible="True" BackgroundColor="White"  HeightRequest="500" ItemsSource="{Binding AcademicTestSessionRecords}" HorizontalOptions="FillAndExpand">
+                        <CollectionView.ItemTemplate>
+                            <DataTemplate x:Name="TSOTemplateiOS" >
+
+                                <Grid BackgroundColor="{Binding DomainBackgroundColor}" x:Name="Item" >
+                                    <Grid.ColumnDefinitions >
+                                        <ColumnDefinition Width="1"></ColumnDefinition>
+                                        <ColumnDefinition Width="7.15*"></ColumnDefinition>
+                                        <ColumnDefinition Width="1"></ColumnDefinition>
+                                        <ColumnDefinition Width="4*"></ColumnDefinition>
+                                        <ColumnDefinition Width="1"></ColumnDefinition>
+                                        <ColumnDefinition Width="4*"></ColumnDefinition>
+                                        <ColumnDefinition Width="1"></ColumnDefinition>
+                                        <ColumnDefinition Width="3*"></ColumnDefinition>
+                                        <ColumnDefinition Width="1"></ColumnDefinition>
+                                        <ColumnDefinition Width="4*"></ColumnDefinition>
+                                        <ColumnDefinition Width="2"></ColumnDefinition>
+
+                                    </Grid.ColumnDefinitions>
+                                    <BoxView Grid.Column="0" BackgroundColor="{x:Static Common:Colors.TableBorderColor}" VerticalOptions="FillAndExpand" ></BoxView>
+                                    <Label Margin="{Binding DomainMargin}" HorizontalOptions="Start" Grid.Column="1" Text="{Binding Domain}" FontSize="13" TextColor="{Binding DomainColor}" FontAttributes="{Binding DomainFontAttribute}" VerticalOptions="Center">
+                                        <Label.GestureRecognizers>
+                                            <TapGestureRecognizer BindingContext="{Binding Source={x:Reference TSOList1}, Path=BindingContext}" Command="{Binding LoadDomainBasedQuestionsCommand}"  CommandParameter="{Binding Source={x:Reference Item}, Path=BindingContext}" />
+                                        </Label.GestureRecognizers>
+                                    </Label>
+                                    <BoxView Grid.Column="2"  Margin="0,0,0,0" BackgroundColor="{x:Static Common:Colors.TableBorderColor}"  VerticalOptions="FillAndExpand"></BoxView>
+                                    <Label Grid.Column="3" Text="{Binding TestDate}" Margin="0,0,20,0" HorizontalOptions="Center" TextColor="{x:Static Common:Colors.TableFieldsColor}" VerticalOptions="Center" IsVisible="{Binding DomainVisibility}"></Label>
+                                    <Image x:Name="DOBImageFrame" IsVisible="{Binding DomainVisibility}" Grid.Column="3"  HeightRequest="16" WidthRequest="16" HorizontalOptions="End" Margin="0,6,20,0" Source="icon_calendar.png" VerticalOptions="Center">
+                                        <Image.GestureRecognizers>
+                                            <TapGestureRecognizer BindingContext="{Binding Source={x:Reference TSOList1iOS}, Path=BindingContext}" Command="{Binding ShowDatePickerCommand}"  CommandParameter="{Binding Source={x:Reference Item}, Path=BindingContext}" />
+                                        </Image.GestureRecognizers>
+                                    </Image>
+                                    <BoxView Grid.Column="4" HorizontalOptions="Center" BackgroundColor="{x:Static Common:Colors.TableBorderColor}" VerticalOptions="Center"></BoxView>
+                                    <Label Grid.Column="5" Text="{Binding Examiner}" Margin="0,0,20,0" HorizontalOptions="Start" VerticalOptions="Center" TextColor="{x:Static Common:Colors.TableFieldsColor}" IsVisible="{Binding DomainVisibility}">
+                                    </Label>
+                                    <Image IsVisible="{Binding DomainVisibility}" Grid.Column="5" HeightRequest="16" WidthRequest="16" HorizontalOptions="End" Margin="40,2,0,5" Source="iconPerson.png"  >
+                                        <Image.GestureRecognizers>
+                                            <TapGestureRecognizer BindingContext="{Binding Source={x:Reference TSOList1iOS}, Path=BindingContext}" Command="{Binding SelectExaminerCommand}"  CommandParameter="{Binding Source={x:Reference Item}, Path=BindingContext}" />
+                                        </Image.GestureRecognizers>
+                                    </Image>
+                                    <BoxView Grid.Column="6" HorizontalOptions="Center" BackgroundColor="{x:Static Common:Colors.TableBorderColor}" VerticalOptions="Center"></BoxView>
+                                    <Label Grid.Column="7" HorizontalOptions="Center" Text="{Binding Status}" VerticalOptions="Center" TextColor="{x:Static Common:Colors.TableFieldsColor}" IsVisible="{Binding DomainVisibility}">
+                                    </Label>
+                                    <BoxView Grid.Column="8" HorizontalOptions="Center" BackgroundColor="{x:Static Common:Colors.TableBorderColor}" VerticalOptions="Center"></BoxView>
+                                    <StackLayout Grid.Column="9" IsVisible="{Binding IsDateVisible}" Padding="0" Margin="0">
+                                        <StackLayout IsVisible="{Binding IsNotFluency}">
+                                            <Label FontFamily="{StaticResource ARIALMT}" Padding="0,10,0,0" Margin="0"  HorizontalOptions="Center" IsVisible="{Binding EnablerawScore,Converter={StaticResource ReverseVisibilityConverter}}" Text="{Binding RawScore}" VerticalOptions="Center" TextColor="{x:Static Common:Colors.TableFieldsColor}"/>
+                                        </StackLayout>
+                                        <StackLayout IsVisible="{Binding IsFluency}" Orientation="Horizontal" Spacing="2" HorizontalOptions="Center" VerticalOptions="Center">
+                                            <Label FontFamily="{StaticResource ARIALMT}" HeightRequest="25" WidthRequest="30" Margin="0,8,0,0"  HorizontalOptions="Center" VerticalOptions="Center" IsVisible="{Binding EnablerawScore,Converter={StaticResource ReverseVisibilityConverter}}" Text="{Binding RawScore}" TextColor="{x:Static Common:Colors.TableFieldsColor}"/>
+                                            <Label x:Name="timerLabeliOS" IsVisible="{Binding EnablerawScore,Converter={StaticResource ReverseVisibilityConverter}}" FontSize="13" FontFamily="{StaticResource ARIALMT}" Text="Time" Margin="10,0,10,0" HorizontalOptions="Center" VerticalOptions="Center" TextColor="{Binding ShowTimerErrorMessage, Mode=TwoWay, Converter={StaticResource StringToBoolConverter}}" />
+                                            <renderer:MyFrame x:Name="timerFrameiOS" Margin="0,5,0,0" IsVisible="{Binding EnablerawScore,Converter={StaticResource ReverseVisibilityConverter}}" BorderColor="{Binding ShowTimerErrorMessage, Mode=TwoWay, Converter={StaticResource StringToBoolConverter}}" HeightRequest="25" WidthRequest="70" VerticalOptions="Center" HasShadow="false" CornerRadius="1" Padding="0" HorizontalOptions="CenterAndExpand" >
+                                                <renderer:MyFrame.HeightRequest>
+                                                    <OnPlatform x:TypeArguments="x:Double">
+                                                        <On Platform="iOS">35</On>
+                                                    </OnPlatform>
+                                                </renderer:MyFrame.HeightRequest>
+                                                <Entry TextChanged="Timer_TextChanged" Unfocused="Timer_Unfocused" MaxLength="4" Text="{Binding Timer,StringFormat='{0:m\\:ss}'}" x:Name="Timer" FontFamily="{StaticResource ARIALMT}" ClearButtonVisibility="Never" HeightRequest="25" WidthRequest="70" HorizontalTextAlignment="Center" FontSize="14" TextColor="{x:Static Common:Colors.LightGrayColor}" HorizontalOptions="Start" VerticalOptions="StartAndExpand">
+                                                    <Entry.HeightRequest>
+                                                        <OnPlatform x:TypeArguments="x:Double">
+                                                            <On Platform="iOS">35</On>
+                                                        </OnPlatform>
+                                                    </Entry.HeightRequest>
+                                                    <Entry.Behaviors>
+                                                        <local:TimerNumbericValidator/>
+                                                    </Entry.Behaviors>
+                                                    <Entry.Margin>
+                                                        <OnPlatform x:TypeArguments="Thickness">
+                                                            <On Platform="iOS" Value="0,0,0,0"/>
+                                                        </OnPlatform>
+                                                    </Entry.Margin>
+                                                    <Entry.FontSize>
+                                                        <OnPlatform x:TypeArguments="x:Double">
+                                                            <On Platform="iOS">12</On>
+                                                        </OnPlatform>
+                                                    </Entry.FontSize>
+                                                </Entry>
+                                            </renderer:MyFrame>
+                                        </StackLayout>
+                                        <StackLayout IsVisible="{Binding IsNotFluency}">
+                                            <renderer:MyFrame Grid.Column="9" IsVisible="{Binding EnablerawScore}" BorderColor="{x:Static Common:Colors.BorderColor}" HeightRequest="25" WidthRequest="65" VerticalOptions="Center" HasShadow="false" CornerRadius="1" Padding="0" HorizontalOptions="CenterAndExpand" >
+
+                                                <renderer:MyFrame.HeightRequest>
+                                                    <OnPlatform x:TypeArguments="x:Double">
+                                                        <On Platform="iOS">35</On>
+                                                    </OnPlatform>
+                                                </renderer:MyFrame.HeightRequest>
+                                                <Entry TextChanged="RawScore_TextChanged" x:Name="RawScoreiOS" FontFamily="{StaticResource ARIALMT}" MaxLength="2" ClearButtonVisibility="Never" HeightRequest="25" WidthRequest="60" HorizontalTextAlignment="Center" Text="{Binding RawScore}" FontSize="14" TextColor="{x:Static Common:Colors.LightGrayColor}" HorizontalOptions="FillAndExpand" VerticalOptions="StartAndExpand">
+                                                    <Entry.HeightRequest>
+                                                        <OnPlatform x:TypeArguments="x:Double">
+                                                            <On Platform="iOS">35</On>
+                                                        </OnPlatform>
+                                                    </Entry.HeightRequest>
+                                                    <Entry.Margin>
+                                                        <OnPlatform x:TypeArguments="Thickness">
+                                                            <On Platform="iOS" Value="0,0,0,0"/>
+                                                        </OnPlatform>
+                                                    </Entry.Margin>
+                                                    <Entry.FontSize>
+                                                        <OnPlatform x:TypeArguments="x:Double">
+                                                            <On Platform="iOS">12</On>
+                                                        </OnPlatform>
+                                                    </Entry.FontSize>
+                                                    <Entry.Behaviors>
+                                                        <local:TimerNumbericValidator/>
+                                                    </Entry.Behaviors>
+                                                </Entry>
+                                            </renderer:MyFrame>
+                                        </StackLayout>
+                                        <StackLayout IsVisible="{Binding IsFluency}" Orientation="Horizontal" Spacing="0">
+                                            <renderer:MyFrame  IsVisible="{Binding EnablerawScore}"  BorderColor="{x:Static Common:Colors.BorderColor}" HeightRequest="25" WidthRequest="30" VerticalOptions="Center" HasShadow="false" CornerRadius="1" Padding="0" HorizontalOptions="CenterAndExpand" >
+                                                <renderer:MyFrame.HeightRequest>
+                                                    <OnPlatform x:TypeArguments="x:Double">
+                                                        <On Platform="iOS">35</On>
+                                                    </OnPlatform>
+                                                </renderer:MyFrame.HeightRequest>
+                                                <Entry TextChanged="RawScore_TextChanged" x:Name="RawScore1iOS" FontFamily="{StaticResource ARIALMT}" MaxLength="2" ClearButtonVisibility="Never" HeightRequest="25" WidthRequest="60" HorizontalTextAlignment="Start" Text="{Binding RawScore}" FontSize="14" TextColor="{x:Static Common:Colors.LightGrayColor}" HorizontalOptions="Start" VerticalOptions="StartAndExpand">
+                                                    <Entry.HeightRequest>
+                                                        <OnPlatform x:TypeArguments="x:Double">
+                                                            <On Platform="iOS">35</On>
+                                                        </OnPlatform>
+                                                    </Entry.HeightRequest>
+                                                    <Entry.Margin>
+                                                        <OnPlatform x:TypeArguments="Thickness">
+                                                            <On Platform="iOS" Value="0,0,0,0"/>
+                                                        </OnPlatform>
+                                                    </Entry.Margin>
+                                                    <Entry.FontSize>
+                                                        <OnPlatform x:TypeArguments="x:Double">
+                                                            <On Platform="iOS">12</On>
+                                                        </OnPlatform>
+                                                    </Entry.FontSize>
+                                                    <Entry.Behaviors>
+                                                        <local:NumericValidator></local:NumericValidator>
+                                                    </Entry.Behaviors>
+                                                </Entry>
+                                            </renderer:MyFrame>
+                                            <Label x:Name="timerLabel1iOS" IsVisible="{Binding EnablerawScore}" FontSize="13" FontFamily="{StaticResource ARIALMT}" Text="Time" Margin="8,0,8,0" HorizontalOptions="Center" VerticalOptions="Center" TextColor="{Binding ShowTimerErrorMessage, Mode=TwoWay, Converter={StaticResource StringToBoolConverter}}" />
+                                            <renderer:MyFrame x:Name="timerFrame1iOS" Margin="0,5,0,0" IsVisible="{Binding EnablerawScore}" BorderColor="{Binding ShowTimerErrorMessage, Mode=TwoWay, Converter={StaticResource StringToBoolConverter}}" HeightRequest="25" WidthRequest="65" VerticalOptions="Center" HasShadow="false" CornerRadius="1" Padding="0" HorizontalOptions="CenterAndExpand" >
+
+                                                <renderer:MyFrame.HeightRequest>
+                                                    <OnPlatform x:TypeArguments="x:Double">
+                                                        <On Platform="iOS">35</On>
+                                                    </OnPlatform>
+                                                </renderer:MyFrame.HeightRequest>
+                                                <Entry TextChanged="Timer_TextChanged" Unfocused="Timer_Unfocused" MaxLength="4" Text="{Binding Timer,StringFormat='{0:m\\:ss}'}" x:Name="Timer1" FontFamily="{StaticResource ARIALMT}" ClearButtonVisibility="Never" HeightRequest="25" WidthRequest="65" HorizontalTextAlignment="Start" FontSize="14" TextColor="Black" HorizontalOptions="Start" VerticalOptions="StartAndExpand">
+                                                    <Entry.HeightRequest>
+                                                        <OnPlatform x:TypeArguments="x:Double">
+                                                            <On Platform="iOS">35</On>
+                                                        </OnPlatform>
+                                                    </Entry.HeightRequest>
+                                                    <Entry.Behaviors>
+                                                        <local:TimerNumbericValidator/>
+                                                    </Entry.Behaviors>
+                                                    <Entry.Margin>
+                                                        <OnPlatform x:TypeArguments="Thickness">
+                                                            <On Platform="iOS" Value="0,0,0,0"/>
+                                                        </OnPlatform>
+                                                    </Entry.Margin>
+                                                    <Entry.FontSize>
+                                                        <OnPlatform x:TypeArguments="x:Double">
+                                                            <On Platform="iOS">12</On>
+                                                        </OnPlatform>
+                                                    </Entry.FontSize>
+                                                </Entry>
+                                            </renderer:MyFrame>
+                                        </StackLayout>
+                                    </StackLayout>
+                                    <BoxView Grid.Column="10" BackgroundColor="{x:Static Common:Colors.TableBorderColor}" ></BoxView>
+                                </Grid>
+                            </DataTemplate>
+                        </CollectionView.ItemTemplate>
+                    </CollectionView>
+                    <BoxView HeightRequest="1" VerticalOptions="FillAndExpand" BackgroundColor="{x:Static Common:Colors.TableBorderColor}">
+                    </BoxView>
+                </StackLayout>
+            </StackLayout>
+            <Grid x:Name="DatePickerGrid" HeightRequest="0" WidthRequest="0" VerticalOptions="StartAndExpand" Margin="0,70,0,0"  HorizontalOptions="Center">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="50" />
+                    <RowDefinition Height="*" />
+                </Grid.RowDefinitions>
+                <renderer:MyDatePicker x:Name="DOBpicker" DateSelected="DOBpicker_DateSelected" Format="MM/dd/yyyy" Date="{Binding DomainDate, Mode=TwoWay}" VerticalOptions="CenterAndExpand" IsVisible="True" WidthRequest="0" HeightRequest="0" IsEnabled="True"></renderer:MyDatePicker>
+            </Grid>
+        </StackLayout>
+    </Frame>
+</pages:PopupPage>

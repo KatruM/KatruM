@@ -1,0 +1,810 @@
+﻿<?xml version="1.0" encoding="UTF-8" ?>
+<ContentPage
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    x:Class="BDI3Mobile.Views.AssesmentViews.NewAssessmentView"
+    xmlns:Common="clr-namespace:BDI3Mobile.Common"
+    xmlns:Styles="clr-namespace:BDI3Mobile.Styles"
+    xmlns:renderer="clr-namespace:BDI3Mobile.CustomRenderer"
+    xmlns:behaviour="clr-namespace:BDI3Mobile.Behaviors"
+    xmlns:template="clr-namespace:BDI3Mobile.DataTemplates"
+    xmlns:ios="clr-namespace:Xamarin.Forms.PlatformConfiguration.iOSSpecific;assembly=Xamarin.Forms.Core"
+    xmlns:converters="clr-namespace:BDI3Mobile.ValueConverter"
+    x:Name="Page">
+
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <DataTemplate x:Key="zeroLevel">
+                <ViewCell>
+                    <StackLayout Orientation="Horizontal" BackgroundColor="White" Padding="10">
+                       
+                        <Image Source="tickblue1x.png" HeightRequest="20" WidthRequest="20" IsVisible="{Binding IsSelected}" IsEnabled="{Binding IsEnabled}"/>
+                        <Label Text="{Binding LocationName}" FontSize="16" HorizontalOptions="Start" TextColor="{Binding IsEnabled,Mode=TwoWay,Converter={StaticResource TextColorConverter}}" VerticalOptions="Center" VerticalTextAlignment="Center" IsTabStop="{Binding IsTabStop}" IsEnabled="{Binding IsEnabled}"/>
+                        <Label Text="(disabled)" TextColor="{Binding IsEnabled,Mode=TwoWay,Converter={StaticResource TextColorConverter}}" FontSize="16" Margin="2,0,0,0" VerticalOptions="Center" VerticalTextAlignment="Center" IsVisible="{Binding IsVisible}" FontAttributes="Italic" />
+                        <renderer:MyImageButton VerticalOptions="Center" Aspect="AspectFit" Source="{Binding ExpandImage}" IsTabStop="False" IsVisible="{Binding HasSubLocations}" Margin="0,-10,0,-10" HeightRequest="18" WidthRequest="18" Clicked="Level1ImageButton_Clicked" HorizontalOptions="EndAndExpand">
+                            <renderer:MyImageButton.VerticalOptions>
+                                <OnPlatform x:TypeArguments="LayoutOptions">
+                                    <On Platform="iOS" Value="CenterAndExpand" />
+                                    <On Platform="Android" Value="Center"/>
+                                    <On Platform="UWP" Value="Center"/>
+                                </OnPlatform>
+                            </renderer:MyImageButton.VerticalOptions>
+                        </renderer:MyImageButton>
+                    </StackLayout>
+                </ViewCell>
+            </DataTemplate>
+
+            <DataTemplate x:Key="firstLevel">
+                <ViewCell>
+                    <StackLayout Orientation="Horizontal" BackgroundColor="White" Padding="10">
+                       
+                        <Image Source="tickblue1x.png" HeightRequest="20" WidthRequest="20" IsVisible="{Binding IsSelected}" IsEnabled="{Binding IsEnabled}"/>
+                        <Label Margin="10,0,0,0" Text="{Binding LocationName}" FontSize="16" HorizontalOptions="Start" TextColor="{Binding IsEnabled,Mode=TwoWay,Converter={StaticResource TextColorConverter}}" VerticalOptions="Center" VerticalTextAlignment="Center" IsEnabled="{Binding IsEnabled}"/>
+                        <Label Text="(disabled)" Margin="2,0,0,0" FontSize="16" TextColor="{Binding IsEnabled,Mode=TwoWay,Converter={StaticResource TextColorConverter}}" VerticalOptions="Center" VerticalTextAlignment="Center" IsVisible="{Binding IsVisible}" FontAttributes="Italic" />
+                        <renderer:MyImageButton VerticalOptions="Center" Aspect="AspectFit" Source="{Binding ExpandImage}" IsTabStop="False" IsVisible="{Binding HasSubLocations}" Margin="0,-10,15,-10" HeightRequest="18" WidthRequest="18" Clicked="Level1ImageButton_Clicked" HorizontalOptions="EndAndExpand">
+                            <renderer:MyImageButton.VerticalOptions>
+                                <OnPlatform x:TypeArguments="LayoutOptions">
+                                    <On Platform="iOS" Value="Center" />
+                                    <On Platform="Android" Value="Center"/>
+                                    <On Platform="UWP" Value="Center"/>
+                                </OnPlatform>
+                            </renderer:MyImageButton.VerticalOptions>
+                        </renderer:MyImageButton>
+                    </StackLayout>
+                </ViewCell>
+            </DataTemplate>
+
+            <DataTemplate x:Key="secondLevel">
+                <ViewCell>
+                    <StackLayout Orientation="Horizontal" BackgroundColor="White" Padding="10">
+                       
+                        <Image Source="tickblue1x.png" HeightRequest="20" WidthRequest="20" IsVisible="{Binding IsSelected}" IsEnabled="{Binding IsEnabled}"/>
+                        <Label Margin="20,0,0,0" Text="{Binding LocationName}" FontSize="16" HorizontalOptions="Start" TextColor="{Binding IsEnabled,Mode=TwoWay,Converter={StaticResource TextColorConverter}}" VerticalOptions="Center" VerticalTextAlignment="Center" IsEnabled="{Binding IsEnabled}">
+                            <Label.Margin>
+                                <OnPlatform x:TypeArguments="Thickness">
+                                    <On Platform="iOS" Value="30,0,0,0" />
+                                    <On Platform="Android" Value="30,0,0,0" />
+                                    <On Platform="UWP" Value="40,0,0,0" />
+                                </OnPlatform>
+                            </Label.Margin>
+                        </Label>
+                        <Label Margin="2,0,0,0" Text="(disabled)" FontSize="16" TextColor="{Binding IsEnabled,Mode=TwoWay,Converter={StaticResource TextColorConverter}}" VerticalOptions="Center" VerticalTextAlignment="Center" IsVisible="{Binding IsVisible}" FontAttributes="Italic" />
+                        <renderer:MyImageButton VerticalOptions="Center" Aspect="AspectFit" Source="{Binding ExpandImage}" IsTabStop="False" IsVisible="{Binding HasSubLocations}" Margin="0,-10,20,-10" HeightRequest="18" WidthRequest="18" Clicked="Level1ImageButton_Clicked" HorizontalOptions="EndAndExpand">
+                            <renderer:MyImageButton.VerticalOptions>
+                                <OnPlatform x:TypeArguments="LayoutOptions">
+                                    <On Platform="iOS" Value="Center" />
+                                    <On Platform="Android" Value="Center"/>
+                                    <On Platform="UWP" Value="Center"/>
+                                </OnPlatform>
+                            </renderer:MyImageButton.VerticalOptions>
+                        </renderer:MyImageButton>
+                    </StackLayout>
+                </ViewCell>
+            </DataTemplate>
+
+            <DataTemplate x:Key="thirdLevel">
+                <ViewCell>
+                    <StackLayout Orientation="Horizontal" BackgroundColor="White" Padding="10">
+                         
+                        <Image Source="tickblue1x.png" HeightRequest="20" WidthRequest="20" IsVisible="{Binding IsSelected}" IsEnabled="{Binding IsEnabled}"/>
+                        <Label Margin="30,0,0,0" Text="{Binding LocationName}" FontSize="16" HorizontalOptions="Start" TextColor="{Binding IsEnabled,Mode=TwoWay,Converter={StaticResource TextColorConverter}}" VerticalOptions="Center" VerticalTextAlignment="Center" IsEnabled="{Binding IsEnabled}">
+                             <Label.Margin>
+                                <OnPlatform x:TypeArguments="Thickness">
+                                    <On Platform="iOS" Value="50,0,0,0" />
+                                    <On Platform="Android" Value="50,0,0,0" />
+                                    <On Platform="UWP" Value="60,0,0,0" />
+                                </OnPlatform>
+                            </Label.Margin>
+                        </Label>
+                        <Label Margin="2,0,0,0" Text="(disabled)" FontSize="16"  TextColor="{Binding IsEnabled,Mode=TwoWay,Converter={StaticResource TextColorConverter}}" VerticalOptions="Center" VerticalTextAlignment="Center" IsVisible="{Binding IsVisible}" FontAttributes="Italic" />
+                        <renderer:MyImageButton VerticalOptions="Center" Aspect="AspectFit" Source="{Binding ExpandImage}" IsTabStop="False" IsVisible="{Binding HasSubLocations}" Margin="0,-10,25,-10" HeightRequest="18" WidthRequest="18" Clicked="Level1ImageButton_Clicked" HorizontalOptions="EndAndExpand">
+                            <renderer:MyImageButton.VerticalOptions>
+                                <OnPlatform x:TypeArguments="LayoutOptions">
+                                    <On Platform="iOS" Value="Center" />
+                                    <On Platform="Android" Value="Center"/>
+                                    <On Platform="UWP" Value="Center"/>
+                                </OnPlatform>
+                            </renderer:MyImageButton.VerticalOptions>
+                        </renderer:MyImageButton>
+                    </StackLayout>
+                </ViewCell>
+            </DataTemplate>
+
+            <DataTemplate x:Key="fourthLevel">
+                <ViewCell>
+                    <StackLayout Orientation="Horizontal" BackgroundColor="White" Padding="10">
+                       
+                        <Image Source="tickblue1x.png" HeightRequest="20" WidthRequest="20" IsVisible="{Binding IsSelected}" IsEnabled="{Binding IsEnabled}"/>
+                        <Label Margin="40,0,0,0" Text="{Binding LocationName}" FontSize="16" HorizontalOptions="FillAndExpand" TextColor="{Binding IsEnabled,Mode=TwoWay,Converter={StaticResource TextColorConverter}}" VerticalOptions="Center" VerticalTextAlignment="Center" IsEnabled="{Binding IsEnabled}">
+                            <Label.Margin>
+                                <OnPlatform x:TypeArguments="Thickness">
+                                    <On Platform="iOS" Value="70,0,0,0" />
+                                    <On Platform="Android" Value="70,0,0,0" />
+                                    <On Platform="UWP" Value="80,0,0,0" />
+                                </OnPlatform>
+                            </Label.Margin>
+                        </Label>
+                        <Label Margin="2,0,0,0" Text="(disabled)" FontSize="16" TextColor="{Binding IsEnabled,Mode=TwoWay,Converter={StaticResource TextColorConverter}}" VerticalOptions="Center" VerticalTextAlignment="Center" IsVisible="{Binding IsVisible}" FontAttributes="Italic" />
+                        <renderer:MyImageButton VerticalOptions="Center" Aspect="AspectFit" Source="{Binding ExpandImage}" IsTabStop="False" IsVisible="{Binding HasSubLocations}" Margin="0,-10,5,-10" HeightRequest="25" WidthRequest="25" Clicked="Level1ImageButton_Clicked" HorizontalOptions="EndAndExpand">
+                            <renderer:MyImageButton.VerticalOptions>
+                                <OnPlatform x:TypeArguments="LayoutOptions">
+                                    <On Platform="iOS" Value="Center" />
+                                    <On Platform="Android" Value="Center"/>
+                                    <On Platform="UWP" Value="Center"/>
+                                </OnPlatform>
+                            </renderer:MyImageButton.VerticalOptions>
+                        </renderer:MyImageButton>
+                    </StackLayout>
+                </ViewCell>
+            </DataTemplate>
+
+            <template:LocationDataTemplateSelector x:Key="locationDataTemplateSelector"
+                                                       ZeroLevel="{StaticResource zeroLevel}"
+                                                       FirstLevel="{StaticResource firstLevel}"
+                                                       SecondLevel="{StaticResource secondLevel}"
+                                                       ThirdLevel="{StaticResource thirdLevel}"
+                                                       FourthLevel="{StaticResource fourthLevel}"/>
+        </ResourceDictionary>
+        <converters:TextColorConverter x:Key="TextColorConverter"/>
+        <Styles:ListViewResourceDictionary x:Key="UWPListStyleSelector"></Styles:ListViewResourceDictionary>
+    </ContentPage.Resources>
+
+     <Grid x:Name="parentGrid" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand">
+        <Grid BackgroundColor="{x:Static Common:Colors.DarkOrangeColor}" RowSpacing="0">
+            <Grid.Margin>
+                <OnPlatform x:TypeArguments="Thickness">
+                    <On Platform="iOS" Value="0, 20, 0, 0" />
+                </OnPlatform>
+            </Grid.Margin>
+            <Grid.GestureRecognizers>
+                <TapGestureRecognizer></TapGestureRecognizer>
+            </Grid.GestureRecognizers>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="55"></RowDefinition>
+                <RowDefinition Height="*"></RowDefinition>
+            </Grid.RowDefinitions>
+            <Grid Grid.Row="0" BackgroundColor="{x:Static Common:Colors.DarkOrangeColor}" VerticalOptions="End" Padding="0,0,0,5">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="1*"></ColumnDefinition>
+                    <ColumnDefinition Width="3*"></ColumnDefinition>
+                    <ColumnDefinition Width="1*"></ColumnDefinition>
+                </Grid.ColumnDefinitions>
+                <Grid Grid.Column="0" ColumnSpacing="1" Padding="10,0,0,0">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto"></ColumnDefinition>
+                        <ColumnDefinition Width="Auto"></ColumnDefinition>
+                        <ColumnDefinition Width="*"></ColumnDefinition>
+                    </Grid.ColumnDefinitions>
+                    <Image Grid.Column="0" Source="back.png" HeightRequest="30" WidthRequest="20" VerticalOptions="Center">
+                        <Image.GestureRecognizers>
+                            <TapGestureRecognizer Tapped="Dashboard_TappedAsync"></TapGestureRecognizer>
+                        </Image.GestureRecognizers>
+                    </Image>
+                    <Label Grid.Column="1" Text="Dashboard" FontFamily="{StaticResource SFProRegular}" FontSize="17" HorizontalOptions="Center" VerticalOptions="Center" TextColor="White">
+                        <Label.GestureRecognizers>
+                            <TapGestureRecognizer Tapped="Dashboard_TappedAsync"></TapGestureRecognizer>
+                        </Label.GestureRecognizers>
+                    </Label>
+                </Grid>
+
+                <StackLayout Grid.Column="1" HorizontalOptions="Center" VerticalOptions="Center">
+                    <Label Text="START NEW ASSESSMENT" FontFamily="{StaticResource SFProRegular}" FontSize="17" HorizontalOptions="Center" VerticalOptions="Center" TextColor="White"></Label>
+                </StackLayout>
+                <StackLayout Margin="0,0,10,0" Orientation="Horizontal" Grid.Column="2" HorizontalOptions="End" Spacing="20" VerticalOptions="Center">
+                    <Image Source="reload.png" HorizontalOptions="Center" VerticalOptions="Center" HeightRequest="22" WidthRequest="22">
+                        <Image.GestureRecognizers>
+                            <TapGestureRecognizer Tapped="ReloadButtonClicked"></TapGestureRecognizer>
+                        </Image.GestureRecognizers>
+                    </Image>
+                    <Image Source="icon_search_white.png" HorizontalOptions="Center" VerticalOptions="Center" HeightRequest="20" WidthRequest="20">
+                        <Image.GestureRecognizers>
+                            <TapGestureRecognizer Tapped="SearchButtonClicked"></TapGestureRecognizer>
+                        </Image.GestureRecognizers>
+                    </Image>
+                </StackLayout>
+            </Grid>
+            <Grid Grid.Row="1" BackgroundColor="{x:Static Common:Colors.BackgroundColor}" Padding="50,40,50,0" RowSpacing="0">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="4"></RowDefinition>
+                    <RowDefinition Height="*"></RowDefinition>
+                </Grid.RowDefinitions>
+                <BoxView Grid.Row="0" HorizontalOptions="FillAndExpand" BackgroundColor="{x:Static Common:Colors.DarkOrangeColor}"></BoxView>
+                <Grid Grid.Row="1" Padding="5,10,0,0" BackgroundColor="White" RowSpacing="3">
+                    <Grid.RowDefinitions>
+                        <RowDefinition x:Name="NameRow" Height="1.5*"/>
+                        <RowDefinition x:Name="DOBValidationRow" Height="Auto"/>
+                        <RowDefinition x:Name="EnrollmentRow" Height="1.5*"/>
+                        <RowDefinition x:Name="EnrollmentDateValidationRow" Height="Auto"/>
+                        <RowDefinition x:Name="SearchEditRow" Height="0"/>
+                        <RowDefinition x:Name="SeparatorRow" Height="0.5*"/>
+                        <RowDefinition x:Name="TableRow">
+                            <RowDefinition.Height>
+                                <OnPlatform x:TypeArguments="GridLength">
+                                    <On Platform="iOS" Value="6*"></On>
+                                    <On Platform="Android" Value="6*"></On>
+                                    <On Platform="UWP" Value="6*"></On>
+                                </OnPlatform>
+                            </RowDefinition.Height>
+                        </RowDefinition>
+
+                        <RowDefinition x:Name="ShareRow" Height="1*"></RowDefinition>
+                        <RowDefinition Height="0.2*"></RowDefinition>
+                    </Grid.RowDefinitions>
+                    <Grid Grid.Row="0" Padding="10,10,100,0" ColumnSpacing="20">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="3*"></ColumnDefinition>
+                            <ColumnDefinition Width="3*"></ColumnDefinition>
+                            <ColumnDefinition>
+                                <ColumnDefinition.Width>
+                                    <OnPlatform x:TypeArguments="GridLength">
+                                        <On Platform="iOS" Value="2.5*"></On>
+                                        <On Platform="Android" Value="2.5*"></On>
+                                        <On Platform="UWP" Value="2*"></On>
+                                    </OnPlatform>
+                                </ColumnDefinition.Width>
+                            </ColumnDefinition>
+                            <ColumnDefinition>
+                                <ColumnDefinition.Width>
+                                    <OnPlatform x:TypeArguments="GridLength">
+                                        <On Platform="iOS" Value="0"></On>
+                                        <On Platform="Android" Value="0"></On>
+                                        <On Platform="UWP" Value="1*"></On>
+                                    </OnPlatform>
+                                </ColumnDefinition.Width>
+                            </ColumnDefinition>
+                        </Grid.ColumnDefinitions>
+                        <StackLayout Grid.Column="0" Orientation="Vertical">
+                            <Label Text="CHILD FIRST NAME" FontSize="12.5" TextColor="{x:Static Common:Colors.LightGrayColor}" FontFamily="{StaticResource ARIALMT}" FontAttributes="None"></Label>
+                            <renderer:MyFrame BindingContext="{x:Reference DOBFrame}" HeightRequest="{Binding Path=Height}" BorderColor="{x:Static Common:Colors.BorderColor}" VerticalOptions="Center" Padding="0"  HasShadow="False" CornerRadius="1">
+                                <StackLayout Margin="0" Spacing="0" BackgroundColor="White" Padding="0,5,0,0">
+                                    <renderer:BorderlessEntry x:Name="ChildFirstName" FontFamily="{StaticResource ARIALMT}"  TextColor="{x:Static Common:Colors.LightGrayColor}" MaxLength="50" Placeholder="Enter child first name" Text="{Binding MyNewAssessmentViewModel.FirstName, Mode=TwoWay, Source={x:Reference Page}}" FontSize="14" IsTabStop="{Binding IsTabStop}">
+                                        <renderer:BorderlessEntry.VerticalOptions>
+                                            <OnPlatform x:TypeArguments="LayoutOptions">
+                                                <On Platform="iOS" Value="CenterAndExpand"></On>
+                                            </OnPlatform>
+                                        </renderer:BorderlessEntry.VerticalOptions>
+                                    </renderer:BorderlessEntry>
+                                </StackLayout>
+                            </renderer:MyFrame>
+                        </StackLayout>
+                        <StackLayout Grid.Column="1" Orientation="Vertical">
+                            <Label Text="CHILD LAST NAME" FontSize="12.5" TextColor="{x:Static Common:Colors.LightGrayColor}" FontFamily="{StaticResource ARIALMT}" FontAttributes="None"></Label>
+                            <renderer:MyFrame BindingContext="{x:Reference DOBFrame}" HeightRequest="{Binding Path=Height}"  BorderColor="{x:Static Common:Colors.BorderColor}" VerticalOptions="Center" Padding="0"  HasShadow="False" CornerRadius="1">
+                                <StackLayout Margin="0" Spacing="0" BackgroundColor="White" Padding="0,5,0,0">
+                                    <renderer:BorderlessEntry x:Name="ChildLastName" FontFamily="{StaticResource ARIALMT}"  TextColor="{x:Static Common:Colors.LightGrayColor}" MaxLength="50" Placeholder="Enter child last name" Text="{Binding MyNewAssessmentViewModel.LastName, Mode=TwoWay, Source={x:Reference Page}}" FontSize="14" IsTabStop="{Binding IsTabStop}">
+                                        <renderer:BorderlessEntry.VerticalOptions>
+                                            <OnPlatform x:TypeArguments="LayoutOptions">
+                                                <On Platform="iOS" Value="CenterAndExpand"></On>
+                                            </OnPlatform>
+                                        </renderer:BorderlessEntry.VerticalOptions>
+                                    </renderer:BorderlessEntry>
+                                </StackLayout>
+                            </renderer:MyFrame>
+                        </StackLayout>
+                        <StackLayout Grid.Column="2" Orientation="Vertical">
+                            <Label  Text="DATE OF BIRTH" FontSize="12.5" FontFamily="{StaticResource ARIALMT}" TextColor="{x:Static Common:Colors.LightGrayColor}" FontAttributes="None"></Label>
+                            <renderer:MyFrame x:Name="DOBFrame"  BorderColor="{x:Static Common:Colors.BorderColor}" VerticalOptions="Center" Padding="0"  HasShadow="False" CornerRadius="1">
+                                <StackLayout Margin="0" x:Name="DOBStackLayout" BackgroundColor="White" Orientation="Horizontal" HorizontalOptions="FillAndExpand">
+                                    <StackLayout Style="{StaticResource ImageStackLayout}" HorizontalOptions="FillAndExpand">
+                                        <renderer:BorderlessEntry x:Name="DOB" MaxLength="10" FontFamily="{StaticResource ARIALMT}" HorizontalOptions="FillAndExpand" TextColor="{x:Static Common:Colors.LightGrayColor}" Placeholder="mm/dd/yyyy" BindingContext="{x:Reference DatePicker_DOB}" Text="{Binding SelectedDate}" FontSize="14" IsTabStop="{Binding IsTabStop}">
+                                        <renderer:BorderlessEntry.Behaviors>
+                                            <behaviour:DateFormatValidatorBehaviour/>
+                                        </renderer:BorderlessEntry.Behaviors>
+                                    </renderer:BorderlessEntry>
+                                    </StackLayout>
+                                    <Frame x:Name="DOBImageFrame" CornerRadius="1" HorizontalOptions="End" BackgroundColor="{x:Static Common:Colors.FrameBlueColor}" Padding="0" HasShadow="false">
+                                        <Image Source="shape.png"  Margin="8,8,8,8" >
+                                        </Image>
+                                        <Frame.GestureRecognizers>
+                                            <TapGestureRecognizer Tapped="DOB_Tapped"></TapGestureRecognizer>
+                                        </Frame.GestureRecognizers>
+                                    </Frame>
+                                </StackLayout>
+                            </renderer:MyFrame>
+                            <renderer:MyDatePicker2 x:Name="DatePicker_DOB" MinimumDate="{Binding MinimumDate}" Format="MM/dd/yyyy" VerticalOptions="CenterAndExpand" WidthRequest="0" HeightRequest="0" IsEnabled="True"></renderer:MyDatePicker2>
+                        </StackLayout>
+                    </Grid>
+                    <Grid x:Name="DOBErrorText" Grid.Row="1" VerticalOptions="Start" ColumnSpacing="20">
+                        <Grid.Padding>
+                            <OnPlatform x:TypeArguments="Thickness">
+                                <On Platform="iOS" Value="10,-10,240,0" />
+                                <On Platform="Android" Value="10,-10,240,0"/>
+                                <On Platform="UWP" Value="10,-5,100,0"/>
+                            </OnPlatform>
+                        </Grid.Padding>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="3*"></ColumnDefinition>
+                            <ColumnDefinition Width="3*"></ColumnDefinition>
+                            <ColumnDefinition>
+                                <ColumnDefinition.Width>
+                                    <OnPlatform x:TypeArguments="GridLength">
+                                        <On Platform="iOS" Value="2.5*"></On>
+                                        <On Platform="Android" Value="2.5*"></On>
+                                        <On Platform="UWP" Value="2*"></On>
+                                    </OnPlatform>
+                                </ColumnDefinition.Width>
+                            </ColumnDefinition>
+                            <ColumnDefinition>
+                                <ColumnDefinition.Width>
+                                    <OnPlatform x:TypeArguments="GridLength">
+                                        <On Platform="iOS" Value="0"></On>
+                                        <On Platform="Android" Value="0"></On>
+                                        <On Platform="UWP" Value="1*"></On>
+                                    </OnPlatform>
+                                </ColumnDefinition.Width>
+                            </ColumnDefinition>
+                        </Grid.ColumnDefinitions>
+                        <Label VerticalOptions="Start" Text="Please select a valid date format." TextColor="Red" FontSize="Micro" Grid.Column="2" IsVisible="{Binding DOBIsValid}"/>
+                    </Grid>
+                    <Grid  Grid.Row="2" Padding="10,10,100,0" ColumnSpacing="20">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="3*"></ColumnDefinition>
+                            <ColumnDefinition Width="3*"></ColumnDefinition>
+                            <ColumnDefinition>
+                                <ColumnDefinition.Width>
+                                    <OnPlatform x:TypeArguments="GridLength">
+                                        <On Platform="iOS" Value="2.5*"></On>
+                                        <On Platform="Android" Value="2.5*"></On>
+                                        <On Platform="UWP" Value="2*"></On>
+                                    </OnPlatform>
+                                </ColumnDefinition.Width>
+                            </ColumnDefinition>
+                            <ColumnDefinition>
+                                <ColumnDefinition.Width>
+                                    <OnPlatform x:TypeArguments="GridLength">
+                                        <On Platform="iOS" Value="0"></On>
+                                        <On Platform="Android" Value="0"></On>
+                                        <On Platform="UWP" Value="1*"></On>
+                                    </OnPlatform>
+                                </ColumnDefinition.Width>
+                            </ColumnDefinition>
+                        </Grid.ColumnDefinitions>
+                        <StackLayout Grid.Column="0" HeightRequest="300" Orientation="Vertical">
+                            <Label  Text="LOCATION" TextColor="{x:Static Common:Colors.LightGrayColor}" FontSize="12.5" FontFamily="{StaticResource ARIALMT}" FontAttributes="None"></Label>
+                            <Grid>
+                                <renderer:MyFrame InputTransparent="True" BorderColor="{x:Static Common:Colors.BorderColor}" BindingContext="{x:Reference DOBFrame}" HeightRequest="{Binding Path=Height}"  VerticalOptions="Center" Padding="0"  HasShadow="False" CornerRadius="1">
+                                    <renderer:BorderlessEntry x:Name="CountryName" Placeholder="Select location(s)" VerticalOptions="Center" FontSize="14" TextColor="{x:Static Common:Colors.LightGrayColor}" Text="{Binding MyNewAssessmentViewModel.LocationName, Mode=TwoWay, Source={x:Reference Page}}" IsTabStop="{Binding IsTabStop}">
+                                    </renderer:BorderlessEntry>
+                                </renderer:MyFrame>
+                                <ImageButton x:Name="LocationImageBtn" InputTransparent="True" HorizontalOptions="End" Margin="0,0,10,0" Padding="4,4,4,2" Clicked="ImageButton_Clicked" IsOpaque="False" Source="downArrow.png" HeightRequest="20" WidthRequest="20" CornerRadius="10" BackgroundColor="{x:Static Common:Colors.FrameBlueColor}" VerticalOptions="Center" IsTabStop="{Binding IsTabStop}">
+                                    <ImageButton.GestureRecognizers>
+                                        <TapGestureRecognizer  />
+                                    </ImageButton.GestureRecognizers>
+                                </ImageButton>
+
+                                <Grid.GestureRecognizers>
+                                    <TapGestureRecognizer Command="{Binding SelectLocationCommand}" />
+                                </Grid.GestureRecognizers>
+                            </Grid>
+                        </StackLayout>
+                        <StackLayout Grid.Column="1" Orientation="Vertical">
+                            <Label Text="CHILD ID" TextColor="{x:Static Common:Colors.LightGrayColor}" FontSize="12.5" FontFamily="{StaticResource ARIALMT}"></Label>
+                            <renderer:MyFrame BindingContext="{x:Reference DOBFrame}" HeightRequest="{Binding Path=Height}" x:Name="ChildIDFrame"  BorderColor="{x:Static Common:Colors.BorderColor}" VerticalOptions="Center" Padding="0"  HasShadow="False" CornerRadius="1">
+                                <StackLayout Margin="0" Spacing="0" BackgroundColor="White" Padding="0,5,0,0">
+                                    <renderer:BorderlessEntry x:Name="ChildMiddleName" Text="{Binding MyNewAssessmentViewModel.ChildID, Mode=TwoWay, Source={x:Reference Page}}" MaxLength="15" FontFamily="{StaticResource ARIALMT}"  TextColor="{x:Static Common:Colors.LightGrayColor}" Placeholder="Enter child ID" FontSize="14" IsTabStop="{Binding IsTabStop}">
+                                        <renderer:BorderlessEntry.VerticalOptions>
+                                            <OnPlatform x:TypeArguments="LayoutOptions">
+                                                <On Platform="iOS" Value="CenterAndExpand"></On>
+                                            </OnPlatform>
+                                        </renderer:BorderlessEntry.VerticalOptions>
+                                    </renderer:BorderlessEntry>
+                                </StackLayout>
+                            </renderer:MyFrame>
+                        </StackLayout>
+                        <StackLayout Grid.Column="2" Orientation="Vertical">
+                            <Label Text="ENROLLMENT DATE" TextColor="{x:Static Common:Colors.LightGrayColor}" FontSize="12.5" FontFamily="{StaticResource ARIALMT}"></Label>
+                            <renderer:MyFrame x:Name="EnrollmentFrame" BindingContext="{x:Reference DOBFrame}" HeightRequest="{Binding Path=Height}"  BorderColor="{x:Static Common:Colors.BorderColor}" VerticalOptions="Center" Padding="0"  HasShadow="False" CornerRadius="1">
+                                <StackLayout Margin="0" x:Name="EnrollmentDateStackLayout"  BackgroundColor="White" Orientation="Horizontal">
+                                    <StackLayout Style="{StaticResource ImageStackLayout}" HorizontalOptions="FillAndExpand">
+                                        <renderer:BorderlessEntry x:Name="EnrollmentDate" MaxLength="10" FontFamily="{StaticResource ARIALMT}" HorizontalOptions="FillAndExpand"  TextColor="{x:Static Common:Colors.LightGrayColor}" Placeholder="mm/dd/yyyy" BindingContext="{x:Reference DatePicker_EnrollmentDate}" Text="{Binding SelectedDate}" FontSize="14" IsTabStop="{Binding IsTabStop}">
+                                        <renderer:BorderlessEntry.Behaviors>
+                                            <behaviour:DateFormatValidatorBehaviour/>
+                                        </renderer:BorderlessEntry.Behaviors>
+                                    </renderer:BorderlessEntry>
+                                    </StackLayout>
+                                    <Frame x:Name="EnrollmentImageFrame" CornerRadius="1" HorizontalOptions="End" BackgroundColor="{x:Static Common:Colors.FrameBlueColor}" Padding="0" HasShadow="false">
+                                        <Image Source="shape.png" Margin="8,8,8,8">
+                                        </Image>
+                                        <Frame.GestureRecognizers>
+                                            <TapGestureRecognizer Tapped="Enrollment_Tapped"></TapGestureRecognizer>
+                                        </Frame.GestureRecognizers>
+                                    </Frame>
+                                </StackLayout>
+                            </renderer:MyFrame>
+                            <renderer:MyDatePicker2 x:Name="DatePicker_EnrollmentDate" MinimumDate="{Binding MinimumDate}" Format="MM/dd/yyyy" VerticalOptions="CenterAndExpand" IsVisible="True" WidthRequest="0" HeightRequest="0" IsEnabled="True"></renderer:MyDatePicker2>
+                        </StackLayout>
+                    </Grid>
+                    <Grid Grid.Row="3" x:Name="EnrollmentDateErrorText" Padding="10,-5,100,0" ColumnSpacing="20">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="3*"></ColumnDefinition>
+                            <ColumnDefinition Width="3*"></ColumnDefinition>
+                            <ColumnDefinition>
+                                <ColumnDefinition.Width>
+                                    <OnPlatform x:TypeArguments="GridLength">
+                                        <On Platform="iOS" Value="2.5*"></On>
+                                        <On Platform="Android" Value="2.5*"></On>
+                                        <On Platform="UWP" Value="2*"></On>
+                                    </OnPlatform>
+                                </ColumnDefinition.Width>
+                            </ColumnDefinition>
+                            <ColumnDefinition>
+                                <ColumnDefinition.Width>
+                                    <OnPlatform x:TypeArguments="GridLength">
+                                        <On Platform="iOS" Value="0"></On>
+                                        <On Platform="Android" Value="0"></On>
+                                        <On Platform="UWP" Value="1*"></On>
+                                    </OnPlatform>
+                                </ColumnDefinition.Width>
+                            </ColumnDefinition>
+                        </Grid.ColumnDefinitions>
+                        <Label VerticalOptions="Start" Text="Please select a valid date format." TextColor="Red" FontSize="Micro" Grid.Column="2" IsVisible="{Binding EnrollmentDateIsValid}"/>
+                    </Grid>
+                    <Grid x:Name="SearchDeleteChild" Grid.Row="4" Padding="10,0,0,10">
+                    </Grid>
+
+                    <Grid Grid.Row="5" Padding="50,0,50,0">
+                        <BoxView BackgroundColor="{x:Static Common:Colors.BorderColor}" HeightRequest="1.5" VerticalOptions="End" HorizontalOptions="FillAndExpand"></BoxView>
+                    </Grid>
+
+                    <Grid Grid.Row="6" RowSpacing="0" Padding="10,10,10,0" >
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto"></RowDefinition>
+                            <RowDefinition Height="1"></RowDefinition>
+                            <RowDefinition Height="Auto"></RowDefinition>
+                            <RowDefinition Height="*"></RowDefinition>
+                            <RowDefinition Height="1"></RowDefinition>
+                        </Grid.RowDefinitions>
+                        <StackLayout Grid.Column="0" Padding="0,5,0,10">
+                            <Label VerticalOptions="Center" FontSize="14" Text="{Binding SearchResult}" TextColor="{Binding SearchErrorColor}" IsVisible="{Binding SearchErrorVisible}"></Label>
+                        </StackLayout>
+                        <BoxView Grid.Row="1" BackgroundColor="{x:Static Common:Colors.TableBorderColor}" HorizontalOptions="FillAndExpand"></BoxView>
+                        <Grid Grid.Row="2" RowSpacing="0" BackgroundColor="#ededed">
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="*"></RowDefinition>
+                                <RowDefinition Height="1"></RowDefinition>
+                            </Grid.RowDefinitions>
+                            <Grid Grid.Row="0">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="1"></ColumnDefinition>
+                                    <ColumnDefinition Width="4*"></ColumnDefinition>
+                                    <ColumnDefinition Width="1"></ColumnDefinition>
+                                    <ColumnDefinition Width="4*"></ColumnDefinition>
+                                    <ColumnDefinition Width="1"></ColumnDefinition>
+                                    <ColumnDefinition Width="4*"></ColumnDefinition>
+                                    <ColumnDefinition Width="1"></ColumnDefinition>
+                                    <ColumnDefinition Width="3*"></ColumnDefinition>
+                                    <ColumnDefinition Width="1"></ColumnDefinition>
+                                    <ColumnDefinition Width="4*"></ColumnDefinition>
+                                    <ColumnDefinition Width="1"></ColumnDefinition>
+                                    <ColumnDefinition Width="3*"></ColumnDefinition>
+                                    <ColumnDefinition Width="1"></ColumnDefinition>
+                                </Grid.ColumnDefinitions>
+                                <BoxView Grid.Column="0" BackgroundColor="{x:Static Common:Colors.TableBorderColor}" VerticalOptions="FillAndExpand"></BoxView>
+                                <StackLayout Grid.Column="1" Margin="10,0,0,0" HorizontalOptions="StartAndExpand" VerticalOptions="Center" Spacing="7" Orientation="Horizontal">
+                                    <Label FontSize="13" x:Name="NameField" Text="Last Name, First Name" HorizontalOptions="Center" VerticalOptions="Center" FontFamily="{StaticResource Arial-Bold}" FontAttributes="Bold"></Label>
+                                    <StackLayout HeightRequest="30" WidthRequest="15" Spacing="-3" HorizontalOptions="Start" VerticalOptions="End" Orientation="Vertical">
+                                       
+                                       
+                                       
+                                        <Label  IsEnabled="True"   x:Name="specialLabel" Text="&#x25B2;"  FontSize="10"   HeightRequest="13" TextColor="LightGray" VerticalOptions="End">
+                                           
+                                            <Label.GestureRecognizers>
+                                                <TapGestureRecognizer Tapped="TapGestureRecognizer_Tapped"  Command="{Binding AscendingButtonCommand}" CommandParameter="NameAscending"> </TapGestureRecognizer>
+                                            </Label.GestureRecognizers>
+                                        </Label>
+                                     
+                                     
+                                     
+                                        <Label  IsEnabled="True"   x:Name="SpecialTest" Text="&#x25BC;"  HeightRequest="13" FontSize="10" TextColor="Black"  VerticalOptions="Start">
+                                            <Label.GestureRecognizers>
+                                                <TapGestureRecognizer Tapped="TapGestureRecognizer_Tapped_1" Command="{Binding DescendingButtonCommand}" CommandParameter="NameDecending"></TapGestureRecognizer>
+                                            </Label.GestureRecognizers>
+                                        </Label>
+                                        <StackLayout.Padding>
+                                            <OnPlatform x:TypeArguments="Thickness">
+                                                <On Platform="iOS" Value="0,7,0,0" />
+                                                <On Platform="Android" Value="0,7,0,0"></On>
+                                                <On Platform="UWP" Value="0,12,0,0"></On>
+                                            </OnPlatform>
+                                        </StackLayout.Padding>
+                                    </StackLayout>
+                                </StackLayout>
+                                <BoxView Grid.Column="2" BackgroundColor="#d8d8d8" VerticalOptions="FillAndExpand"></BoxView>
+                                <StackLayout Grid.Column="3" Margin="10,0,0,0" HorizontalOptions="StartAndExpand" VerticalOptions="Center" Spacing="7" Orientation="Horizontal">
+                                    <Label FontSize="13"  Text="Child ID" HorizontalOptions="Center" VerticalOptions="Center" FontFamily="{StaticResource Arial-Bold}" FontAttributes="Bold"></Label>
+                                    <StackLayout HeightRequest="30" WidthRequest="15" Spacing="-3" HorizontalOptions="Start" VerticalOptions="End" Orientation="Vertical">
+
+                                        <Label IsEnabled="True"  x:Name="specialLabe"   Text="&#x25B2;" FontSize="10" TextColor="Gray" HeightRequest="13" VerticalOptions="End">
+                                            <Label.GestureRecognizers>
+                                                <TapGestureRecognizer Tapped="TapGestureRecognizer_Tapped_8" Command="{Binding AscendingButtonCommand}" CommandParameter="DOBAscending"></TapGestureRecognizer>
+                                            </Label.GestureRecognizers>
+                                        </Label>
+
+
+                                        <Label IsEnabled="True" x:Name="SpecialTes" Text="&#x25BC;"  HeightRequest="13" FontSize="10" TextColor="Gray" VerticalOptions="Start">
+                                            <Label.GestureRecognizers>
+                                                <TapGestureRecognizer  Tapped="TapGestureRecognizer_Tapped_9"  Command="{Binding DescendingButtonCommand}" CommandParameter="DOBDecending"></TapGestureRecognizer>
+                                            </Label.GestureRecognizers>
+                                        </Label>
+                                        <StackLayout.Padding>
+                                            <OnPlatform x:TypeArguments="Thickness">
+                                                <On Platform="iOS" Value="0,7,0,0" />
+                                                <On Platform="Android" Value="0,7,0,0"></On>
+                                                <On Platform="UWP" Value="0,12,0,0"></On>
+                                            </OnPlatform>
+                                        </StackLayout.Padding>
+                                    </StackLayout>
+                                </StackLayout>
+                                <BoxView Grid.Column="4" BackgroundColor="#d8d8d8" VerticalOptions="FillAndExpand"></BoxView>
+                                <StackLayout Grid.Column="5" HorizontalOptions="StartAndExpand" Margin="10,0,0,0" VerticalOptions="Center" Spacing="7" Orientation="Horizontal">
+                                    <Label FontSize="13"  Text="Date of Birth" HorizontalOptions="Center" VerticalOptions="Center" FontFamily="{StaticResource Arial-Bold}" FontAttributes="Bold"></Label>
+                                    <StackLayout HeightRequest="30" WidthRequest="15" Spacing="-3" HorizontalOptions="Start" VerticalOptions="End" Orientation="Vertical">
+
+                                        <Label IsEnabled="True"  x:Name="special"  Text="&#x25B2;" FontSize="10" TextColor="Gray" HeightRequest="13" VerticalOptions="End">
+                                            <Label.GestureRecognizers>
+                                                <TapGestureRecognizer Tapped="TapGestureRecognizer_Tapped_2"  Command="{Binding AscendingButtonCommand}" CommandParameter="DOBAscending"></TapGestureRecognizer>
+                                            </Label.GestureRecognizers>
+                                        </Label>
+                                       
+                                       
+                                        <Label IsEnabled="True" x:Name="specialLa" Text="&#x25BC;"  HeightRequest="13" FontSize="10" TextColor="Gray" VerticalOptions="Start">
+                                            <Label.GestureRecognizers>
+                                                <TapGestureRecognizer  Tapped="TapGestureRecognizer_Tapped_3" Command="{Binding DescendingButtonCommand}" CommandParameter="DOBDecending"></TapGestureRecognizer>
+                                            </Label.GestureRecognizers>
+                                        </Label>
+                                        <StackLayout.Padding>
+                                            <OnPlatform x:TypeArguments="Thickness">
+                                                <On Platform="iOS" Value="0,7,0,0" />
+                                                <On Platform="Android" Value="0,7,0,0"></On>
+                                                <On Platform="UWP" Value="0,12,0,0"></On>
+                                            </OnPlatform>
+                                        </StackLayout.Padding>
+                                    </StackLayout>
+                                </StackLayout>
+                                <BoxView Grid.Column="6" BackgroundColor="#d8d8d8" VerticalOptions="FillAndExpand"></BoxView>
+                                <StackLayout Grid.Column="7" HorizontalOptions="StartAndExpand" Margin="10,0,0,0" VerticalOptions="Center" Spacing="7" Orientation="Horizontal">
+                                    <Label FontSize="13" Text="Location" HorizontalOptions="Center" VerticalOptions="Center" FontFamily="{StaticResource Arial-Bold}" FontAttributes="Bold"></Label>
+                                    <StackLayout HeightRequest="30" WidthRequest="15" Spacing="-3" HorizontalOptions="Start" VerticalOptions="End" Orientation="Vertical">
+                                        <Label  IsEnabled="True"  x:Name="specia1"  Text="&#x25B2;" FontSize="10" TextColor="Gray" HeightRequest="13" VerticalOptions="End">
+                                            <Label.GestureRecognizers>
+                                                <TapGestureRecognizer  Tapped="TapGestureRecognizer_Tapped_4"  Command="{Binding AscendingButtonCommand}" CommandParameter="LocationAscending"></TapGestureRecognizer>
+                                            </Label.GestureRecognizers>
+                                        </Label>
+                                        <Label IsEnabled="True" x:Name="specialLa2" Text="&#x25BC;" HeightRequest="13" FontSize="10" TextColor="Gray"  VerticalOptions="Start">
+                                            <Label.GestureRecognizers>
+                                                <TapGestureRecognizer Tapped="TapGestureRecognizer_Tapped_5"  Command="{Binding DescendingButtonCommand}" CommandParameter="LocationDecending"></TapGestureRecognizer>
+                                            </Label.GestureRecognizers>
+                                        </Label>
+                                        <StackLayout.Padding>
+                                            <OnPlatform x:TypeArguments="Thickness">
+                                                <On Platform="iOS" Value="0,7,0,0" />
+                                                <On Platform="Android" Value="0,7,0,0"></On>
+                                                <On Platform="UWP" Value="0,12,0,0"></On>
+                                            </OnPlatform>
+                                        </StackLayout.Padding>
+                                    </StackLayout>
+                                </StackLayout>
+                                <BoxView Grid.Column="8" BackgroundColor="#d8d8d8" VerticalOptions="FillAndExpand"></BoxView>
+                                <StackLayout Grid.Column="9" HorizontalOptions="StartAndExpand" Margin="10,0,0,0" VerticalOptions="Center" Spacing="7" Orientation="Horizontal">
+                                    <Label FontSize="13" Text="Enrollment" HorizontalOptions="Center" VerticalOptions="Center" FontFamily="{StaticResource Arial-Bold}" FontAttributes="Bold"></Label>
+                                    <StackLayout HeightRequest="30" WidthRequest="15" Spacing="-3" HorizontalOptions="Start" VerticalOptions="End" Orientation="Vertical">
+                                        <Label  IsEnabled="True"  x:Name="EnrollmentA"  Text="&#x25B2;"   FontSize="10" TextColor="Gray" HeightRequest="13" VerticalOptions="End">
+                                            <Label.GestureRecognizers>
+                                                <TapGestureRecognizer Tapped="TapGestureRecognizer_Tapped_6"  Command="{Binding AscendingButtonCommand}" CommandParameter="EnrollmentAscending"></TapGestureRecognizer>
+                                            </Label.GestureRecognizers>
+                                        </Label>
+                                        <Label  IsEnabled="True" x:Name="Enrollment"  Text="&#x25BC;"  HeightRequest="13" FontSize="10" TextColor="Gray"  VerticalOptions="Start">
+                                            <Label.GestureRecognizers>
+                                                <TapGestureRecognizer Tapped="TapGestureRecognizer_Tapped_7"  Command="{Binding DescendingButtonCommand}" CommandParameter="EnrollmentDecending"></TapGestureRecognizer>
+                                            </Label.GestureRecognizers>
+                                        </Label>
+                                        <StackLayout.Padding>
+                                            <OnPlatform x:TypeArguments="Thickness">
+                                                <On Platform="iOS" Value="0,7,0,0" />
+                                                <On Platform="Android" Value="0,7,0,0"></On>
+                                                <On Platform="UWP" Value="0,12,0,0"></On>
+                                            </OnPlatform>
+                                        </StackLayout.Padding>
+                                    </StackLayout>
+                                </StackLayout>
+                                <BoxView Grid.Column="10" BackgroundColor="#d8d8d8" VerticalOptions="FillAndExpand"></BoxView>
+                                <StackLayout Grid.Column="11" HorizontalOptions="StartAndExpand" Margin="10,0,0,0" VerticalOptions="Center" Spacing="7" Orientation="Horizontal">
+                                    <Label FontSize="13" Text="Actions" HorizontalOptions="Center" VerticalOptions="Center" FontFamily="{StaticResource Arial-Bold}" FontAttributes="Bold"></Label>
+                                     
+                                </StackLayout>
+                                <BoxView Grid.Column="12" BackgroundColor="#d8d8d8" VerticalOptions="FillAndExpand"></BoxView>
+                            </Grid>
+                            <BoxView Grid.Row="1" HeightRequest="1" BackgroundColor="{x:Static Common:Colors.TableBorderColor}"></BoxView>
+                        </Grid>
+                        <StackLayout Grid.Row="3" Spacing="0">
+                            <StackLayout.Resources>
+                                <ResourceDictionary>
+                                    <DataTemplate x:Key="evenTemplate">
+                                        <ViewCell >
+                                            <ViewCell.View >
+                                                <StackLayout Orientation="Vertical" Spacing="0" Height="{Binding RowHeight, Mode=TwoWay}" >
+                                                    <Grid BackgroundColor="{x:Static Common:Colors.WhiteColor}">
+                                                        <Grid.ColumnDefinitions>
+                                                            <ColumnDefinition Width="1"></ColumnDefinition>
+                                                            <ColumnDefinition Width="4*"></ColumnDefinition>
+                                                            <ColumnDefinition Width="1"></ColumnDefinition>
+                                                            <ColumnDefinition Width="4*"></ColumnDefinition>
+                                                            <ColumnDefinition Width="1"></ColumnDefinition>
+                                                            <ColumnDefinition Width="4*"></ColumnDefinition>
+                                                            <ColumnDefinition Width="1"></ColumnDefinition>
+                                                            <ColumnDefinition Width="3*"></ColumnDefinition>
+                                                            <ColumnDefinition Width="1"></ColumnDefinition>
+                                                            <ColumnDefinition Width="4*"></ColumnDefinition>
+                                                            <ColumnDefinition Width="1"></ColumnDefinition>
+                                                            <ColumnDefinition Width="3*"></ColumnDefinition>
+                                                            <ColumnDefinition Width="1"></ColumnDefinition>
+                                                        </Grid.ColumnDefinitions>
+                                                        <BoxView Grid.Column="0" BackgroundColor="{x:Static Common:Colors.TableBorderColor}" VerticalOptions="FillAndExpand"></BoxView>
+                                                        <Label Grid.Column="1" Margin="10,0,0,0" HorizontalOptions="StartAndExpand" VerticalOptions="Center">
+                                                            <Label.FormattedText>
+                                                                <FormattedString>
+                                                                    <Span Text="{Binding LastName}" TextColor="{x:Static Common:Colors.HyperlinkBlueColor}" FontSize="13" FontFamily="{StaticResource ARIALMT}" TextDecorations="Underline"></Span>
+                                                                    <Span Text=", " TextColor="{x:Static Common:Colors.HyperlinkBlueColor}" FontSize="13" TextDecorations="Underline"></Span>
+                                                                    <Span Text="{Binding FirstName}" TextColor="{x:Static Common:Colors.HyperlinkBlueColor}" FontSize="13" FontFamily="{StaticResource ARIALMT}" TextDecorations="Underline"></Span>
+                                                                </FormattedString>
+                                                            </Label.FormattedText>
+                                                            <Label.GestureRecognizers>
+                                                                <TapGestureRecognizer Command="{Binding Path=BindingContext.HyperLinkClickedCommand, Source={x:Reference Page}}" CommandParameter="{Binding ThisObject}" />
+                                                            </Label.GestureRecognizers>
+                                                        </Label>
+
+                                                        <BoxView Grid.Column="2" BackgroundColor="#d8d8d8" VerticalOptions="FillAndExpand"></BoxView>
+                                                        <Label Grid.Column="3" Margin="10,0,0,0" FontSize="13" Text="{Binding ChildID}" TextColor="{x:Static Common:Colors.TableFieldsColor}" FontFamily="{StaticResource ARIALMT}" HorizontalOptions="StartAndExpand" VerticalOptions="Center"></Label>
+                                                        <BoxView Grid.Column="4"  BackgroundColor="#d8d8d8" VerticalOptions="FillAndExpand"></BoxView>
+                                                        <Label Grid.Column="5" Margin="10,0,0,0" FontSize="13" FontFamily="{StaticResource ARIALMT}" Text="{Binding DOB}" TextColor="{x:Static Common:Colors.TableFieldsColor}" HorizontalOptions="StartAndExpand" VerticalOptions="Center"></Label>
+                                                        <BoxView Grid.Column="6" BackgroundColor="#d8d8d8" VerticalOptions="FillAndExpand"></BoxView>
+                                                        <Label Grid.Column="7" Margin="10,0,0,0" FontSize="13" FontFamily="{StaticResource ARIALMT}" Text="{Binding Location}" TextColor="{x:Static Common:Colors.TableFieldsColor}" HorizontalOptions="StartAndExpand"  VerticalOptions="CenterAndExpand" HorizontalTextAlignment="Start"></Label>
+                                                        <BoxView Grid.Column="8" BackgroundColor="#d8d8d8" VerticalOptions="FillAndExpand"></BoxView>
+                                                        <Label Grid.Column="9" Margin="10,0,0,0" FontSize="13" FontFamily="{StaticResource ARIALMT}" Text="{Binding Enrollment}" TextColor="{x:Static Common:Colors.TableFieldsColor}" HorizontalOptions="StartAndExpand" VerticalOptions="Center"></Label>
+                                                        <BoxView Grid.Column="10" BackgroundColor="#d8d8d8" VerticalOptions="FillAndExpand"></BoxView>
+                                                        <StackLayout Orientation="Horizontal" Margin="10,0,0,0" Spacing="30" Grid.Column="11" HorizontalOptions="StartAndExpand" IsVisible="{Binding IsImageVisible}" VerticalOptions="Center">
+                                                            <renderer:MyImage ClassId="Add Record" Source="{Binding AddRfIconImage}" IsEnabled="{Binding IsChildEditEnable}">
+                                                                <renderer:MyImage.GestureRecognizers>
+                                                                    <TapGestureRecognizer Command="{Binding Path=BindingContext.ActionClickedCommand, Source={x:Reference Page}}" CommandParameter="{Binding ThisObject}"/>
+                                                                </renderer:MyImage.GestureRecognizers>
+                                                            </renderer:MyImage>
+                                                        </StackLayout>
+                                                        <BoxView Grid.Column="12" BackgroundColor="{x:Static Common:Colors.TableBorderColor}" VerticalOptions="FillAndExpand"></BoxView>
+                                                    </Grid>
+
+                                                    <BoxView HeightRequest="1" HorizontalOptions="FillAndExpand" IsVisible="{Binding IsTableSepartorVisble, Mode=TwoWay}" BackgroundColor="{x:Static Common:Colors.TableBorderColor}"></BoxView>
+                                                </StackLayout>
+                                            </ViewCell.View>
+                                        </ViewCell>
+                                    </DataTemplate>
+                                    <DataTemplate x:Key="unevenTemplate">
+                                        <ViewCell>
+                                            <ViewCell.View>
+                                                <StackLayout Orientation="Vertical" Spacing="0" Height="{Binding RowHeight, Mode=TwoWay}">
+                                                    <Grid BackgroundColor="{x:Static Common:Colors.TableUnEvenRowColor}">
+                                                    <Grid.ColumnDefinitions>
+                                                        <ColumnDefinition Width="1"></ColumnDefinition>
+                                                        <ColumnDefinition Width="4*"></ColumnDefinition>
+                                                        <ColumnDefinition Width="1"></ColumnDefinition>
+                                                        <ColumnDefinition Width="4*"></ColumnDefinition>
+                                                        <ColumnDefinition Width="1"></ColumnDefinition>
+                                                        <ColumnDefinition Width="4*"></ColumnDefinition>
+                                                        <ColumnDefinition Width="1"></ColumnDefinition>
+                                                        <ColumnDefinition Width="3*"></ColumnDefinition>
+                                                        <ColumnDefinition Width="1"></ColumnDefinition>
+                                                        <ColumnDefinition Width="4*"></ColumnDefinition>
+                                                        <ColumnDefinition Width="1"></ColumnDefinition>
+                                                        <ColumnDefinition Width="3*"></ColumnDefinition>
+                                                        <ColumnDefinition Width="1"></ColumnDefinition>
+                                                        </Grid.ColumnDefinitions>
+                                                        <BoxView Grid.Column="0" BackgroundColor="{x:Static Common:Colors.TableBorderColor}" VerticalOptions="FillAndExpand"></BoxView>
+                                                        <Label Grid.Column="1" HorizontalOptions="StartAndExpand" VerticalOptions="Center" Margin="10,0,0,0">
+                                                            <Label.FormattedText>
+                                                                <FormattedString>
+                                                                    <Span Text="{Binding LastName}" TextColor="{x:Static Common:Colors.HyperlinkBlueColor}" FontSize="13" FontFamily="{StaticResource ARIALMT}" TextDecorations="Underline"></Span>
+                                                                    <Span Text=", " TextColor="{x:Static Common:Colors.HyperlinkBlueColor}" FontSize="13" TextDecorations="Underline"></Span>
+                                                                    <Span Text="{Binding FirstName}" TextColor="{x:Static Common:Colors.HyperlinkBlueColor}" FontSize="13" FontFamily="{StaticResource ARIALMT}" TextDecorations="Underline"></Span>
+                                                                </FormattedString>
+                                                            </Label.FormattedText>
+                                                            <Label.GestureRecognizers>
+                                                                <TapGestureRecognizer Command="{Binding Path=BindingContext.HyperLinkClickedCommand, Source={x:Reference Page}}" CommandParameter="{Binding ThisObject}" />
+                                                            </Label.GestureRecognizers>
+                                                    </Label>
+                                                        <BoxView Grid.Column="2" BackgroundColor="#d8d8d8" VerticalOptions="FillAndExpand"/>
+                                                        <Label Grid.Column="3" Margin="10,0,0,0" FontSize="13" Text="{Binding ChildID}" FontFamily="{StaticResource ARIALMT}" HorizontalOptions="StartAndExpand" VerticalOptions="Center"/>
+                                                        <BoxView Grid.Column="4"  BackgroundColor="#d8d8d8" VerticalOptions="FillAndExpand"/>
+                                                        <Label Grid.Column="5" Margin="10,0,0,0" FontSize="13" FontFamily="{StaticResource ARIALMT}" Text="{Binding DOB}" HorizontalOptions="StartAndExpand" VerticalOptions="Center"/>
+                                                        <BoxView Grid.Column="6" BackgroundColor="#d8d8d8" VerticalOptions="FillAndExpand"/>
+                                                        <Label Grid.Column="7" Margin="10,0,0,0" FontSize="13" FontFamily="{StaticResource ARIALMT}" Text="{Binding Location}" HorizontalOptions="StartAndExpand"  VerticalOptions="CenterAndExpand" HorizontalTextAlignment="Start"/>
+                                                        <BoxView Grid.Column="8" BackgroundColor="#d8d8d8" VerticalOptions="FillAndExpand"/>
+                                                        <Label Grid.Column="9" Margin="10,0,0,0" FontSize="13" FontFamily="{StaticResource ARIALMT}" Text="{Binding Enrollment}" HorizontalOptions="StartAndExpand" VerticalOptions="Center"/>
+                                                        <BoxView Grid.Column="10" BackgroundColor="#d8d8d8" VerticalOptions="FillAndExpand"/>
+                                                        <StackLayout Orientation="Horizontal" Margin="10,0,0,0" Spacing="30" Grid.Column="11" HorizontalOptions="StartAndExpand" IsVisible="{Binding IsImageVisible}" VerticalOptions="Center">
+                                                            <renderer:MyImage ClassId="Add Record" Source="{Binding AddRfIconImage}" IsEnabled="{Binding IsChildEditEnable}">
+                                                                <renderer:MyImage.GestureRecognizers>
+                                                                    <TapGestureRecognizer Command="{Binding Path=BindingContext.ActionClickedCommand, Source={x:Reference Page}}" CommandParameter="{Binding ThisObject}"/>
+                                                                </renderer:MyImage.GestureRecognizers>
+                                                            </renderer:MyImage>
+                                                    </StackLayout>
+                                                        <BoxView Grid.Column="12" BackgroundColor="#d8d8d8" VerticalOptions="FillAndExpand"/>
+                                                </Grid>
+                                                    <BoxView HeightRequest="1" HorizontalOptions="FillAndExpand" IsVisible="{Binding IsTableSepartorVisble, Mode=TwoWay}" BackgroundColor="{x:Static Common:Colors.TableBorderColor}"></BoxView>
+                                                </StackLayout>
+                                            </ViewCell.View>
+                                        </ViewCell>
+                                    </DataTemplate>
+                                    <template:AlternateColorDataTemplateSelector x:Key="alternateColorDataTemplateSelector"
+                                        EvenTemplate="{StaticResource evenTemplate}"
+                                        UnevenTemplate="{StaticResource unevenTemplate}" />
+                                </ResourceDictionary>
+                            </StackLayout.Resources>
+                            <renderer:MyListView x:Name="TestRecordListView" ItemTemplate="{StaticResource alternateColorDataTemplateSelector}" SizeChanged="ChildRecords_SizeChanged" ItemsSource="{Binding ChildTestRecords, Mode=TwoWay}" Style="{StaticResource UWPListStyleSelector}" HorizontalOptions="FillAndExpand" ItemSelected="ChildRecords_ItemSelected" HasUnevenRows="True" Footer="" >
+                            </renderer:MyListView>
+                            <BoxView Grid.Row="4" HeightRequest="1" BackgroundColor="{x:Static Common:Colors.TableBorderColor}" IsVisible="{Binding MyNewAssessmentViewModel.IsTableBottomLineVisible, Mode=TwoWay, Source={x:Reference Page}}"></BoxView>
+                        </StackLayout>
+                    </Grid>
+                    <Grid Grid.Row="7" ColumnSpacing="10" Padding="10,10,100,0"/>
+                </Grid>
+            </Grid>
+        </Grid>
+        <Grid x:Name="SelectCountryName" HeightRequest="350" WidthRequest="400" Padding="20,0,20,0" VerticalOptions="Center" HorizontalOptions="Center" IsVisible="false">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="50" />
+                <RowDefinition Height="*" />
+            </Grid.RowDefinitions>
+            <Frame Grid.RowSpan="2" BackgroundColor="#2673BB" CornerRadius="20">
+            </Frame>
+            <Frame x:Name="SelectCountryFrame" HasShadow="false" Grid.Row="1" BackgroundColor="White" CornerRadius="20" />
+            <ListView x:Name="CountryListView"  RowHeight="44" Grid.Row="1" ItemSelected="CountryList_ItemSelected" ItemsSource="{Binding CountryNames}" IsRefreshing="False" Margin="0,0,0,20" IsTabStop="False">
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <ViewCell>
+                            <ViewCell.View>
+                                <Label Text="{Binding .}" TextColor="Black" IsTabStop="False"></Label>
+                            </ViewCell.View>
+                        </ViewCell>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
+            <Label Text="SELECT LOCATION" TextColor="White" HeightRequest="50" VerticalTextAlignment="Center" HorizontalTextAlignment="Center" VerticalOptions="Center" FontSize="17" FontAttributes="Bold" />
+        </Grid>
+        <Frame Opacity="0.2" IsVisible="{Binding Cover}">
+            <Frame.BackgroundColor>
+                <OnPlatform x:TypeArguments="Color">
+                    <On Platform="iOS" Value="Transparent"/>
+                    <On Platform="UWP" Value="Black"/>
+                    <On Platform="Android" Value="Black"/>
+                </OnPlatform>
+            </Frame.BackgroundColor>
+            <Frame.GestureRecognizers>
+                <TapGestureRecognizer Command="{Binding UnCoverCommand}" />
+            </Frame.GestureRecognizers>
+        </Frame>
+        <Grid HeightRequest="210" WidthRequest="300" VerticalOptions="Center" HorizontalOptions="Center" IsVisible="{Binding ShowLocation}">
+            <Grid.HeightRequest>
+                <OnPlatform x:TypeArguments="x:Double">
+                    <On Platform="iOS">250</On>
+                    <On Platform="UWP">210</On>
+                    <On Platform="Android">210</On>
+                </OnPlatform>
+            </Grid.HeightRequest>
+            <Grid.WidthRequest>
+                <OnPlatform x:TypeArguments="x:Double">
+                    <On Platform="iOS">350</On>
+                    <On Platform="UWP">300</On>
+                    <On Platform="Android">300</On>
+                </OnPlatform>
+            </Grid.WidthRequest>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="50" />
+                <RowDefinition Height="*" />
+            </Grid.RowDefinitions>
+            <Frame BackgroundColor="{x:Static Common:Colors.PrimaryColor}" Grid.RowSpan="2" CornerRadius="20">
+                <Label Text="SELECT LOCATION" TextColor="White" FontSize="17" FontAttributes="Bold" HorizontalTextAlignment="Center" />
+            </Frame>
+            <Frame HasShadow="false" BackgroundColor="White" CornerRadius="20" Grid.Row="1" Padding="0" />
+            <renderer:MyListView x:Name="locationListview" ios:ListView.SeparatorStyle="FullWidth" Footer="" SeparatorVisibility="None" VerticalScrollBarVisibility="Always" HorizontalScrollBarVisibility="Never" ItemTemplate="{StaticResource locationDataTemplateSelector}" ItemsSource="{Binding LocationsObservableCollection}" Grid.Row="1" BackgroundColor="White"/>
+        </Grid>
+    </Grid>
+
+</ContentPage>

@@ -1,0 +1,210 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<pages:PopupPage xmlns="http://xamarin.com/schemas/2014/forms"
+                 xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+                 xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+                 mc:Ignorable="d"
+                 xmlns:pages="clr-namespace:Rg.Plugins.Popup.Pages;assembly=Rg.Plugins.Popup"
+                 xmlns:Common="clr-namespace:BDI3Mobile.Common"
+                 xmlns:renderer="clr-namespace:BDI3Mobile.CustomRenderer"
+                 xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+                 x:Class="BDI3Mobile.Views.ItemAdministrationView.AccomodationsView">
+    <ScrollView>
+        <StackLayout x:Name="MainFrame" HorizontalOptions="Center" VerticalOptions="Center"  BackgroundColor="White">
+            <StackLayout.Margin>
+                <OnPlatform x:TypeArguments="Thickness">
+                    <On Platform="UWP" Value="320,120,320,140"/>
+                    <On Platform="Android" Value="100,0,100,0"/>
+                    <On Platform="iOS" Value="150,0,150,0"/>
+                </OnPlatform>
+            </StackLayout.Margin>
+            <BoxView HeightRequest="4" Color="{x:Static Common:Colors.FrameBlueColor}" Margin="0,0,0,0" />
+            <StackLayout Padding="24,24,24,32" Spacing="10">
+
+                <Label Text="Test Session Observations" Margin="0,0,0,20" Style="{StaticResource BoldLabelMediumFontStyle}"/>
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="16*"/>
+                        <ColumnDefinition Width="2*"/>
+                    </Grid.ColumnDefinitions>
+                    <Label VerticalOptions="Center" Text="Were all test items administered in a standardized manner, according to test instructions?" Grid.Column="0"/>
+                    <Switch  OnColor="{x:Static Common:Colors.SwitchOnColor}" IsToggled="{Binding Question1Toggled, Mode=TwoWay}" Grid.Column="1">
+                        <Switch.Margin>
+                            <OnPlatform x:TypeArguments="Thickness">
+                                <On Platform="UWP" Value="0,0,0,0" />
+                                <On Platform="Android" Value="0,0,30,0" />
+                                <On Platform="iOS" Value="0,0,0,0" />
+                            </OnPlatform>
+                        </Switch.Margin>
+                    </Switch>
+                    <Label  Text="{Binding Question1}" TextColor="Black" FontSize="16" VerticalOptions="Center" VerticalTextAlignment="Center" Grid.Column="1" HorizontalOptions="End">
+                        <Label.Margin>
+                            <OnPlatform x:TypeArguments="Thickness">
+                                <On Platform="UWP" Value="0,0,0,0" />
+                                <On Platform="Android" Value="20,0,0,0" />
+                                <On Platform="iOS" Value="0,0,0,0" />
+                            </OnPlatform>
+                        </Label.Margin>
+                    </Label>
+
+                </Grid>
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="16*"/>
+                        <ColumnDefinition Width="2*"/>
+                    </Grid.ColumnDefinitions>
+                    <Label VerticalOptions="Center" Text="Is the testing session considered a valid representation of the child's current functioning?"/>
+                    <Switch   OnColor="{x:Static Common:Colors.SwitchOnColor}" IsToggled="{Binding Question2Toggled, Mode=TwoWay}" Grid.Column="1">
+                        <Switch.Margin>
+                            <OnPlatform x:TypeArguments="Thickness">
+                                <On Platform="UWP" Value="0,0,0,0" />
+                                <On Platform="Android" Value="0,0,30,0" />
+                                <On Platform="iOS" Value="0,0,0,0" />
+                            </OnPlatform>
+                        </Switch.Margin>
+                    </Switch>
+                    <Label  Text="{Binding Question2}" TextColor="Black" FontSize="16" VerticalOptions="Center" VerticalTextAlignment="Center" Grid.Column="1" HorizontalOptions="End"></Label>
+
+                </Grid>
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="3*"/>
+                        <ColumnDefinition Width="2*"/>
+                        <ColumnDefinition Width="4*"/>
+                        <ColumnDefinition Width="2*"/>
+                    </Grid.ColumnDefinitions>
+                    <Label VerticalOptions="Center" Text="Does the child wear glasses?"/>
+                    <Switch OnColor="{x:Static Common:Colors.SwitchOnColor}" IsToggled="{Binding PrimaryQuestion1Toggled, Mode=TwoWay}" Grid.Column="1">
+                        <Switch.Margin>
+                            <OnPlatform x:TypeArguments="Thickness">
+                                <On Platform="UWP" Value="30,0,0,0" />
+                                <On Platform="Android" Value="0,0,30,0" />
+                                <On Platform="iOS" Value="20,0,0,0" />
+                            </OnPlatform>
+                        </Switch.Margin>
+                    </Switch>
+                    <Label  Text="{Binding PrimaryQuestion1}" TextColor="Black" FontSize="16" VerticalOptions="Center" VerticalTextAlignment="Center" Grid.Column="1" HorizontalOptions="End">
+                        <Label.Margin>
+                            <OnPlatform x:TypeArguments="Thickness">
+                                <On Platform="UWP" Value="0,0,15,0" />
+                                <On Platform="Android" Value="60,0,0,0" />
+                                <On Platform="iOS" Value="0,0,32,0" />
+                            </OnPlatform>
+                        </Label.Margin>
+                    </Label>
+
+                    <Label VerticalOptions="Center" Grid.Column="2" Text="Does the child have a hearing aid?" Margin="20,0,0,0" HorizontalOptions="End"/>
+                    <Switch   OnColor="{x:Static Common:Colors.SwitchOnColor}" IsToggled="{Binding PrimaryQuestion2Toggled, Mode=TwoWay}" Grid.Column="3" HorizontalOptions="Center">
+                        <Switch.Margin>
+                            <OnPlatform x:TypeArguments="Thickness">
+                                <On Platform="UWP" Value="45,0,0,0" />
+                                <On Platform="Android" Value="35,0,0,0" />
+                                <On Platform="iOS" Value="12,0,0,0" />
+                            </OnPlatform>
+                        </Switch.Margin>
+                    </Switch>
+                    <Label  Text="{Binding PrimaryQuestion2}" TextColor="Black" FontSize="16" VerticalOptions="Center" VerticalTextAlignment="Center" Grid.Column="3" HorizontalOptions="End"></Label>
+
+                </Grid>
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="3*"/>
+                        <ColumnDefinition Width="2*"/>
+                        <ColumnDefinition Width="3*"/>
+                        <ColumnDefinition Width="2*"/>
+                    </Grid.ColumnDefinitions>
+                    <Label VerticalOptions="Center" IsVisible="{Binding SecondaryQuestion1Visibility}" Text="Were they used during the test?"/>
+                    <Switch OnColor="{x:Static Common:Colors.SwitchOnColor}" IsVisible="{Binding SecondaryQuestion1Visibility}" IsToggled="{Binding SecondaryQuestion1Toggled, Mode=TwoWay}" Grid.Column="1">
+                        <Switch.Margin>
+                            <OnPlatform x:TypeArguments="Thickness">
+                                <On Platform="UWP" Value="10,0,0,0" />
+                                <On Platform="Android" Value="0,0,65,0" />
+                                <On Platform="iOS" Value="0,0,30,0" />
+                            </OnPlatform>
+                        </Switch.Margin>
+                    </Switch>
+
+                    <Label  Text="{Binding SubQuestion1}" IsVisible="{Binding SecondaryQuestion1Visibility}"  TextColor="Black" FontSize="16" VerticalOptions="Center" VerticalTextAlignment="Center" Grid.Column="1" HorizontalOptions="Center">
+                        <Label.Margin>
+                            <OnPlatform x:TypeArguments="Thickness">
+                                <On Platform="UWP" Value="18,0,0,0" />
+                                <On Platform="Android" Value="65,0,0,0" />
+                                <On Platform="iOS" Value="0,0,0,0" />
+                            </OnPlatform>
+                        </Label.Margin>
+                    </Label>
+                    <Label VerticalOptions="Center" IsVisible="{Binding SecondaryQuestion2Visibility}" Grid.Column="2" Text="Was it used during testing?" HorizontalOptions="Center">
+                        <Label.Margin>
+                            <OnPlatform x:TypeArguments="Thickness">
+                                <On Platform="UWP" Value="-10,0,0,0" />
+                                <On Platform="Android" Value="50,0,0,0" />
+                                <On Platform="iOS" Value="-18,0,0,0" />
+                            </OnPlatform>
+                        </Label.Margin>
+                    </Label>
+                    <Switch  OnColor="{x:Static Common:Colors.SwitchOnColor}" IsVisible="{Binding SecondaryQuestion2Visibility}" IsToggled="{Binding SecondaryQuestion2Toggled, Mode=TwoWay}" Grid.Column="3" HorizontalOptions="Center">
+                        <Switch.Margin>
+                            <OnPlatform x:TypeArguments="Thickness">
+                                <On Platform="UWP" Value="55,0,0,0" />
+                                <On Platform="Android" Value="45,0,0,0" />
+                                <On Platform="iOS" Value="25,0,0,0" />
+                            </OnPlatform>
+                        </Switch.Margin>
+                    </Switch>
+                    <Label  Text="{Binding SubQuestion2}" IsVisible="{Binding SecondaryQuestion2Visibility}"  TextColor="Black" FontSize="16" VerticalOptions="Center" VerticalTextAlignment="Center" Grid.Column="3" HorizontalOptions="End"></Label>
+
+                </Grid>
+                <BoxView Margin="20,10,20,0" HeightRequest="1" BackgroundColor="Gray"/>
+                <Label Text="Test Notes" Style="{StaticResource BoldLabelMediumFontStyle}"/>
+                <!--<Frame CornerRadius="0" Padding="10" BorderColor="{x:Static Common:Colors.MediumGrayColor}" HasShadow="False">
+                    <Editor BackgroundColor="White" Placeholder="Enter additional information here." FontSize="16" HeightRequest="220"/>
+                -->
+                <!--<renderer:BorderlessEntry Text="{Binding AdditionalInformationText}" MaxLength="250" VerticalOptions="Start" Placeholder="Enter additional information here."/>-->
+                <!--
+                </Frame>-->
+                <renderer:MyFrame  BackgroundColor="{x:Static Common:Colors.BorderColor}" VerticalOptions="Center"  HasShadow="False" CornerRadius="1">
+                    <renderer:MyFrame.Padding>
+                        <OnPlatform x:TypeArguments="Thickness">
+                            <On Platform="Android,iOS" Value="1"/>
+                            <On Platform="UWP" Value="0"/>
+                        </OnPlatform>
+                    </renderer:MyFrame.Padding>
+                    <Editor MaxLength="250" Text="{Binding Notes, Mode=TwoWay}" BackgroundColor="White" Placeholder="Enter test record notes here." FontSize="16" HeightRequest="110"/>
+                </renderer:MyFrame>
+
+                <StackLayout Margin="0,20,0,0" Orientation ="Horizontal">
+                    <renderer:CustomButtonUWP Command="{Binding CancelCommand}"
+                            HeightRequest="50"
+                            WidthRequest="100"
+                            FontAttributes="Bold"
+                            Text="Cancel"
+                            TextColor="{x:Static Common:Colors.FrameBlueColor}"
+                            BorderWidth="1.5"
+                            BorderColor="{x:Static Common:Colors.FrameBlueColor}"
+                            BackgroundColor="White"
+                            FontSize="Default" />
+                    <!--<Button HorizontalOptions="EndAndExpand"
+                            HeightRequest="50"
+                            WidthRequest="100"
+                            BackgroundColor="{x:Static Common:Colors.FrameBlueColor}"
+                            FontAttributes="Bold" Text="Save"
+                            TextColor="White" BorderWidth="1.5"
+                            BorderColor="{x:Static Common:Colors.FrameBlueColor}"
+                            Command="{Binding SaveCommand}"
+                            Margin="350,0,0,0"
+                            FontSize="Default">
+                    </Button>-->
+                    <renderer:CustomButtonUWP HorizontalOptions="EndAndExpand"
+                            HeightRequest="50"
+                            WidthRequest="100"
+                            BackgroundColor="{x:Static Common:Colors.FrameBlueColor}"
+                            FontAttributes="Bold" Text="Save"
+                            TextColor="White" BorderWidth="1.5"
+                            BorderColor="{x:Static Common:Colors.FrameBlueColor}"
+                            Command="{Binding SaveCommand}"
+                            FontSize="Default">
+                    </renderer:CustomButtonUWP>
+                </StackLayout>
+            </StackLayout>
+        </StackLayout>
+    </ScrollView>
+</pages:PopupPage>

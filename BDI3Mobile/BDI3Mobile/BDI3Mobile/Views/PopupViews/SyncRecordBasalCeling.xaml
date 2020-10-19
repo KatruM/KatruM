@@ -1,0 +1,32 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<pages:PopupPage  xmlns:pages="clr-namespace:Rg.Plugins.Popup.Pages;assembly=Rg.Plugins.Popup"
+             xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+                  xmlns:customrenderer="clr-namespace:BDI3Mobile.CustomRenderer"
+                  x:Class="BDI3Mobile.Views.PopupViews.SyncRecordBasalCeling">
+
+    <StackLayout Margin="0,0,0,0"  WidthRequest="570" BackgroundColor="White" HorizontalOptions="Center" VerticalOptions="Center">
+        <BoxView HeightRequest="4"  Margin="0,0,0,0"  VerticalOptions="StartAndExpand" BackgroundColor="#CC1416"   />
+        <StackLayout >
+            <Label Text="Sync Record Form(s) - Basal/Celing Not Met"  Margin="20,20,0,0"   TextColor="Black" FontSize="20" FontAttributes="Bold"   VerticalOptions="Start"/>
+            <Label  Text="You have selected to sync one or more record forms."  Margin="20,20,0,0" TextColor="Black" FontSize="14"  VerticalOptions="Start"/>
+            <Label  Text="One ore more of the record forms you selected has one ore more subdomains with"   Margin="20,20,0,0" TextColor="Black" FontSize="14"  VerticalOptions="Start"/>
+            <Label  Text="scores that do not meet basal and ceiling requirements. You will not receive" Margin="20,0,0,0" TextColor="Black" FontSize="14"  VerticalOptions="Start"/>
+            <Label  Text="scores for the subdomains that are not complete" Margin="20,0,0,0"  TextColor="Black" FontSize="14"  VerticalOptions="Start"/>
+            <Label  Text="Are you sure you want to sync/commit your record form(s)? Click Confirm to"   Margin="20,20,0,0" TextColor="Black" FontSize="14"  VerticalOptions="Start"/>
+            <Label  Text="merge the selected record forms or Cancel to exit without making changes."   Margin="20,0,0,0" TextColor="Black" FontSize="14"  VerticalOptions="Start"/>
+        </StackLayout>
+        <Grid Margin="20,30,0,0">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="AUTO"/>
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="AUTO"/>
+                <ColumnDefinition Width="AUTO"/>
+            </Grid.ColumnDefinitions>
+            <customrenderer:CustomButtonUWP  Text="Cancel" BackgroundColor="White"    WidthRequest="130" BorderWidth="2" BorderColor="#147CBD" Margin="0,0,0,20" Grid.Column="0" FontSize="25"   TextColor="#147CBD" Command="{Binding Cancelbuttoncommand}"/>
+            <customrenderer:CustomButtonUWP  Text="Confirm" TextColor="White"    WidthRequest="130" BackgroundColor="#147CBD" FontSize="25" Margin="250,0,0,20" Grid.Column="1" HorizontalOptions="End" Command="{Binding Confirmbuttoncommand}"/>
+        </Grid>
+
+    </StackLayout>
+</pages:PopupPage>

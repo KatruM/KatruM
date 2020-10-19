@@ -1,0 +1,138 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<pages:PopupPage xmlns="http://xamarin.com/schemas/2014/forms"
+                 xmlns:pages="clr-namespace:Rg.Plugins.Popup.Pages;assembly=Rg.Plugins.Popup"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:renderer="clr-namespace:BDI3Mobile.CustomRenderer"
+             x:Class="BDI3Mobile.Views.ItemAdministrationView.RecordToolsPOP">
+    <renderer:MyFrame HasShadow="True" BackgroundColor="#f4f4f4" CornerRadius="6" HorizontalOptions="EndAndExpand" VerticalOptions="Start" HeightRequest="280" WidthRequest="300">
+        <renderer:MyFrame.Padding>
+            <OnPlatform x:TypeArguments="Thickness">
+                <On Platform="Android" Value="2"/>
+                <On Platform="UWP,iOS" Value="0"/>
+            </OnPlatform>
+        </renderer:MyFrame.Padding>
+        <renderer:MyFrame.Margin>
+            <OnPlatform x:TypeArguments="Thickness">
+                <!--<On Platform="UWP" Value="1050,100,20,500"/>-->
+                <On Platform="UWP" Value="0,100,30,0"/>
+                <On Platform="Android" Value="0,100,30,0"/>
+                <On Platform="iOS" Value="0,100,30,0"/>
+            </OnPlatform>
+        </renderer:MyFrame.Margin>
+        
+      <StackLayout Spacing="0">
+        <Grid>
+            <BoxView HeightRequest="4" WidthRequest="10"  VerticalOptions="Start" BackgroundColor="#A8A4A4" CornerRadius="20" Margin="135,10,135,10">
+                 <BoxView.HeightRequest>
+                        <OnPlatform x:TypeArguments="x:Double">
+                            <On Platform="iOS" Value="1"></On>
+                            <On Platform="UWP" Value="4"></On>
+                            <On Platform="Android" Value="4"></On>
+                        </OnPlatform> 
+                       
+                    </BoxView.HeightRequest>
+                </BoxView>
+            <Label Text="Record Tools" FontAttributes="Bold" FontSize="Small" TextColor="#000000" HorizontalOptions="Center" Margin="0,30,0,10">
+                 <Label.FontSize>
+                 <OnPlatform x:TypeArguments="x:Double" iOS="20"/>
+                 </Label.FontSize>
+            </Label>
+            <Label Text="Done"  HorizontalOptions="End" TextColor="#007AE1" FontSize="Small" Margin="0,30,10,0">
+                 <Label.FontSize>
+                 <OnPlatform x:TypeArguments="x:Double" iOS="18"/>
+                 </Label.FontSize>
+            <Label.GestureRecognizers>
+                <TapGestureRecognizer Tapped="Done_TappedAsync"></TapGestureRecognizer>
+            </Label.GestureRecognizers>
+            </Label>
+        </Grid>
+        <Grid BackgroundColor="White">
+            <BoxView   HeightRequest="0.5" WidthRequest="5" BackgroundColor="#A8A4A4"  VerticalOptions="StartAndExpand"/>
+            <Label  Text="Test Session Overview" Margin="20,10,15,10"  TextColor="#000000" HorizontalOptions="Start">
+                 <Label.FontSize>
+                        <OnPlatform x:TypeArguments="x:Double" >
+                            <On Platform="iOS" Value="18"></On>
+                            <On Platform="Android" Value="18"></On>
+                            <On Platform="UWP" Value="18"></On>
+                        </OnPlatform>
+
+                    </Label.FontSize>
+                <Label.GestureRecognizers>
+                    <TapGestureRecognizer Tapped="OpenTestRecordNavigation"/>
+                </Label.GestureRecognizers>
+            </Label>
+                <Image Source="arrow2x.png" HorizontalOptions="End" Margin="0,0,20,0">
+                <Image.GestureRecognizers>
+                    <TapGestureRecognizer Tapped="OpenTestRecordNavigation"/>
+                </Image.GestureRecognizers>
+            </Image>
+            <Grid.GestureRecognizers>
+                <TapGestureRecognizer Tapped="OpenTestRecordNavigation"/>
+            </Grid.GestureRecognizers>
+        </Grid>
+        <Grid BackgroundColor="White">
+           <BoxView HeightRequest="0.5" WidthRequest="5" BackgroundColor="#A8A4A4"  VerticalOptions="StartAndExpand"/>
+            <Label Text="Notes"  FontSize="Small" Margin="20,10,15,10" TextColor="#000000" HorizontalOptions="Start">
+                 <Label.FontSize>
+                        <OnPlatform x:TypeArguments="x:Double" >
+                            <On Platform="iOS" Value="18"></On>
+                            <On Platform="Android" Value="18"></On>
+                            <On Platform="UWP" Value="18"></On>
+                        </OnPlatform>
+                    </Label.FontSize>
+                <Label.GestureRecognizers>
+                    <TapGestureRecognizer Tapped="OpenNotesMenu"/>
+                </Label.GestureRecognizers>
+            </Label>
+                <Image Source="arrow2x.png" HorizontalOptions="End" Margin="0,5,20,0">
+                <Image.GestureRecognizers>
+                    <TapGestureRecognizer Tapped="OpenNotesMenu" />
+                </Image.GestureRecognizers>
+            </Image>
+            <Grid.GestureRecognizers>
+                <TapGestureRecognizer Tapped="OpenNotesMenu" />
+            </Grid.GestureRecognizers>
+        </Grid>
+            <Grid x:Name="AccommodationSection" BackgroundColor="White" IsVisible="False">
+                <BoxView HeightRequest="0.5" WidthRequest="5" BackgroundColor="#A8A4A4"  VerticalOptions="Start"/>
+                <Label Text="Test Session Observations" FontSize="Small" Margin="20,10,15,10" TextColor="#000000" HorizontalOptions="Start">
+                     <Label.FontSize>
+                        <OnPlatform x:TypeArguments="x:Double" >
+                            <On Platform="iOS" Value="18"></On>
+                            <On Platform="Android" Value="18"></On>
+                            <On Platform="UWP" Value="18"></On>
+                        </OnPlatform>
+                    </Label.FontSize>
+                    <Label.GestureRecognizers>
+                        <TapGestureRecognizer Tapped="OpenAccomodationView"/>
+                    </Label.GestureRecognizers>
+                </Label>
+                <Image Source="arrow2x.png" HorizontalOptions="End" Margin="0,5,20,0">
+                    <Image.GestureRecognizers>
+                        <TapGestureRecognizer Tapped="OpenAccomodationView"/>
+                    </Image.GestureRecognizers>
+                </Image>
+                <Grid.GestureRecognizers>
+                    <TapGestureRecognizer Tapped="OpenAccomodationView"/>
+                </Grid.GestureRecognizers>
+            </Grid>
+            <BoxView HeightRequest="0.5" WidthRequest="5" BackgroundColor="#A8A4A4"  VerticalOptions="Start"/>
+        <Grid BackgroundColor="White"  HeightRequest="70" Margin="0,0,0,0">
+            <Label Text="Reset Scores" FontSize="Small" Margin="20,0,15,10" TextColor="#000000" HorizontalOptions="Start" VerticalOptions="End">
+                <Label.FontSize>
+                        <OnPlatform x:TypeArguments="x:Double" >
+                            <On Platform="iOS" Value="18"></On>
+                            <On Platform="Android" Value="18"></On>
+                            <On Platform="UWP" Value="18"></On>
+                        </OnPlatform>
+                    </Label.FontSize>
+             </Label>
+            <Image Source="arrow2x.png" HorizontalOptions="End" VerticalOptions="End" Margin="0,0,20,10" />
+            <Grid.GestureRecognizers>
+                <TapGestureRecognizer Tapped="OpenResetScoresView"/>
+            </Grid.GestureRecognizers>
+        </Grid>
+        <BoxView Margin="0,0,0,10" HeightRequest="0.5" WidthRequest="5" BackgroundColor="#A8A4A4"  VerticalOptions="StartAndExpand"/>
+    </StackLayout>
+    </renderer:MyFrame>
+</pages:PopupPage>

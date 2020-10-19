@@ -1,0 +1,24 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<pages:PopupPage
+             xmlns:pages="clr-namespace:Rg.Plugins.Popup.Pages;assembly=Rg.Plugins.Popup"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:customrenderer="clr-namespace:BDI3Mobile.CustomRenderer"
+    x:Class="BDI3Mobile.Views.PopupViews.FluencyTimerLimitPopUp"
+             Title="FluencyTimerLimitPopUp"
+             CloseWhenBackgroundIsClicked="False">
+    
+    <Frame x:Name="ContentFrame" VerticalOptions="Center" HorizontalOptions="Center" WidthRequest="600" HeightRequest="250  " Padding="0" BackgroundColor="White" Opacity="1">
+        <StackLayout>
+            <BoxView Color="#cc1416" HeightRequest="4" />
+            <StackLayout Padding="24,24,0,0" Spacing="20">
+                <Label x:Name="Header" Text="Time Limit Reached" FontSize="20" FontAttributes="Bold" TextColor="Black" />
+                <Label x:Name="Message" FontSize="14"></Label>
+            </StackLayout>
+            <StackLayout Padding="0,20,0,0"  Spacing="120" HorizontalOptions="FillAndExpand" VerticalOptions="Center" Orientation="Horizontal">
+                <customrenderer:CustomButtonUWP Margin="35,0,0,0" Text="Stay and continue" HorizontalOptions="End" BackgroundColor="#147CBD" WidthRequest="150" HeightRequest="40" TextColor="#FFFFFF" BorderColor="#147cbd" BorderWidth="2" FontAttributes="Bold" Clicked="Button_Clicked" Command="{Binding CancelCommand}"/>
+                <customrenderer:CustomButtonUWP Text="Continue to next test" HorizontalOptions="Start" BackgroundColor="#147CBD" WidthRequest="165" HeightRequest="40" TextColor="#FFFFFF" BorderColor="#147cbd" BorderWidth="2" FontAttributes="Bold" Clicked="Button_Clicked" Command="{Binding ContinueToNextTestCommand}"/>
+            </StackLayout>
+        </StackLayout>
+    </Frame>
+</pages:PopupPage>

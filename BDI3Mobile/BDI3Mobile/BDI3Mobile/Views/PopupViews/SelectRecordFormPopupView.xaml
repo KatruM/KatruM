@@ -1,0 +1,77 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<pages:PopupPage
+    xmlns:pages="clr-namespace:Rg.Plugins.Popup.Pages;assembly=Rg.Plugins.Popup"
+    xmlns:common="clr-namespace:BDI3Mobile.Common"
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    BackgroundColor="Transparent"
+    xmlns:ios="clr-namespace:Xamarin.Forms.PlatformConfiguration.iOSSpecific;assembly=Xamarin.Forms.Core"
+    x:Class="BDI3Mobile.Views.PopupViews.SelectRecordFormPopupView">
+    <Frame x:Name="RecordFormPopupView" HasShadow="False" BackgroundColor="Transparent" HeightRequest="210"  Padding="1" VerticalOptions="Center" HorizontalOptions="Center">
+        <Frame.BorderColor>
+            <OnPlatform x:TypeArguments="Color">
+                <On Platform="UWP,Android,iOS" Value="LightGray"/>
+            </OnPlatform>
+        </Frame.BorderColor>
+        <Frame.CornerRadius>
+            <OnPlatform x:TypeArguments="x:Single">
+                <On Platform="iOS" Value="20"></On>
+                <On Platform="UWP,Android" Value="20"/>
+            </OnPlatform>
+        </Frame.CornerRadius>
+         <Frame.WidthRequest>
+            <OnPlatform x:TypeArguments="x:Double">
+                <On Platform="iOS" Value="450"></On>
+                 <On Platform="Android" Value="400"></On>
+                 <On Platform="UWP" Value="300"></On>
+            </OnPlatform>
+        </Frame.WidthRequest>
+        <Grid VerticalOptions="FillAndExpand" HorizontalOptions="Start">
+             <Grid.WidthRequest>
+            <OnPlatform x:TypeArguments="x:Double">
+                <On Platform="iOS" Value="500"></On>
+                <On Platform="Android" Value="400"></On>
+                 <On Platform="UWP" Value="300"></On>
+            </OnPlatform>
+        </Grid.WidthRequest>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="50" />
+                <RowDefinition Height="*" />
+            </Grid.RowDefinitions>
+            <Frame BackgroundColor="{x:Static common:Colors.PrimaryColor}"  Grid.RowSpan="2" CornerRadius="20" IsTabStop="False" HasShadow="False">
+                <Label Text="SELECT RECORD FORM" TextColor="White" FontSize="17" FontAttributes="Bold" HorizontalTextAlignment="Center" />
+            </Frame>
+            <Frame HasShadow="false" BackgroundColor="White" CornerRadius="20" Grid.Row="1" Padding="0" IsTabStop="False">
+            <ListView  x:Name="recordFormListview" CachingStrategy="RecycleElement" VerticalScrollBarVisibility="Always" ItemsSource="{Binding ChildTestRecords}" HorizontalScrollBarVisibility="Never" Grid.Row="1" BackgroundColor="White" IsTabStop="False" Footer="" ios:ListView.SeparatorStyle="FullWidth">
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <ViewCell>
+                            <StackLayout Orientation="Vertical" Spacing="0" BackgroundColor="White">
+                                <StackLayout Orientation="Horizontal" BackgroundColor="White" Padding="10,5" IsTabStop="False">
+                                    <Label Text="{Binding RecordFormName}" FontSize="16"  TextColor="Black"  IsTabStop="{Binding IsTabStop}" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" >
+                                        <Label.Padding>
+                                            <OnPlatform x:TypeArguments="Thickness">
+                                                <On Platform="Android" Value="0,0,0,0"/>
+                                                 <On Platform="iOS" Value="0, 10, 0, 0" />
+                                            </OnPlatform>
+                                        </Label.Padding>
+                                    </Label>
+                                    <Image HeightRequest="20" WidthRequest="20" Source="checkmark.png" IsVisible="{Binding IsSelect}" VerticalOptions="Center" />
+                                </StackLayout>
+                                <BoxView  Color="{x:Static common:Colors.TableBorderColor}" VerticalOptions="End">
+                                    <BoxView.HeightRequest>
+                                        <OnPlatform x:TypeArguments="x:Double">
+                                            <On Platform="UWP">0.5</On>
+                                            <On Platform="Android">0</On>
+                                        </OnPlatform>
+                                    </BoxView.HeightRequest>
+                                </BoxView>
+                            </StackLayout>
+                        </ViewCell>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
+            </Frame>
+        </Grid>
+    </Frame>
+</pages:PopupPage>

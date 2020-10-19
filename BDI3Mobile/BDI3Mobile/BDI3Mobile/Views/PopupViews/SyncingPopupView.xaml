@@ -1,0 +1,20 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<pages:PopupPage
+                xmlns:pages="clr-namespace:Rg.Plugins.Popup.Pages;assembly=Rg.Plugins.Popup"
+                xmlns="http://xamarin.com/schemas/2014/forms" 
+                xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+                x:Class="BDI3Mobile.Views.PopupViews.SyncingPopupView">
+
+    <Frame x:Name="ContentFrame" VerticalOptions="Center" HorizontalOptions="Center" WidthRequest="450" HeightRequest="180" Padding="0" BackgroundColor="White" Opacity="1">
+        <StackLayout>
+            <BoxView Color="#147cbd" HeightRequest="4" />
+            <StackLayout Padding="24,24,0,0" Spacing="20">
+                <Label x:Name="Header" Text="Pulling Data" FontSize="22" FontAttributes="Bold" TextColor="#3d3f3f" />
+                <Label x:Name="Message" Text="Your data is being pulled down for mobile use." TextColor="#3d3f3f" FontSize="16"></Label>
+            </StackLayout>
+            <StackLayout Padding="0,10,0,0" HorizontalOptions="Center" VerticalOptions="Center">
+                <Label Text="{Binding DownloadProgressMessage}" FontSize="20" TextColor="#3d3f3f" FontAttributes="Bold"></Label>
+            </StackLayout>
+        </StackLayout>
+    </Frame>
+</pages:PopupPage>

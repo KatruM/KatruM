@@ -1,0 +1,722 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<pages:PopupPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:pages="clr-namespace:Rg.Plugins.Popup.Pages;assembly=Rg.Plugins.Popup"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+                 xmlns:renderer="clr-namespace:BDI3Mobile.CustomRenderer"
+                 xmlns:Common="clr-namespace:BDI3Mobile.Common"
+                 xmlns:sys="clr-namespace:System;assembly=mscorlib"
+                 xmlns:template="clr-namespace:BDI3Mobile.DataTemplates"
+                 xmlns:Styles="clr-namespace:BDI3Mobile.Styles"
+                 xmlns:converters="clr-namespace:BDI3Mobile.ValueConverter"
+                 xmlns:ia="clr-namespace:IntelliAbb.Xamarin.Controls;assembly=IntelliAbb.Xamarin.Controls"
+                 xmlns:ffImageLoading="clr-namespace:FFImageLoading.Forms;assembly=FFImageLoading.Forms"
+                 x:Class="BDI3Mobile.Views.FullReport"
+                 xmlns:local="clr-namespace:BDI3Mobile.Behaviors"                 
+                 x:Name="Page">
+    <AbsoluteLayout>
+        <Frame AbsoluteLayout.LayoutBounds="0,0,1,1" AbsoluteLayout.LayoutFlags="All" BackgroundColor="White" x:Name="MainFrame" HorizontalOptions="Center" VerticalOptions="Center" Padding="0,0,0,0">
+            <Frame.Margin>
+                <OnPlatform x:TypeArguments="Thickness">
+                    <On Platform="UWP" Value="50,10,50,0"/>
+                    <On Platform="Android" Value="20,0,20,0"/>
+                    <On Platform="iOS" Value="20,10,20,0"/>
+                </OnPlatform>
+            </Frame.Margin>
+            <StackLayout   BackgroundColor="White" >
+                <BoxView HeightRequest="4" Margin="0,0,0,0" HorizontalOptions="FillAndExpand" VerticalOptions="Start" BackgroundColor="#ab249d" ></BoxView>
+                <StackLayout>
+                    <Label Margin="30,10,20,0" Text="Create a Report" FontSize="18" FontAttributes="Bold" HorizontalOptions="Start"  />
+                    <BoxView HeightRequest="0.5" HorizontalOptions="FillAndExpand" BackgroundColor="#e8eced"></BoxView>
+                    <StackLayout  Orientation="Horizontal" Margin="0,15,0,0">
+                        <Grid Margin="0,0,0,0">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="200"/>
+                                <ColumnDefinition Width="1000*"/>
+                            </Grid.ColumnDefinitions>
+                        <StackLayout Spacing="0" Orientation="Horizontal" Grid.Column="0">
+                            <Label Text="REPORT TYPE" FontSize="15" TextColor="Gray" Margin="30,0,0,0" VerticalOptions="CenterAndExpand"/>
+                            <Label Text="*" Margin="0,0,0,0" FontSize="15" TextColor="Red" VerticalOptions="CenterAndExpand"></Label>
+                        </StackLayout>
+                        <Grid HorizontalOptions="FillAndExpand" Grid.Column="1">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="900*"/>
+                            </Grid.ColumnDefinitions>
+                            <renderer:MyFrame Grid.Column="0" BorderColor="Gray" HeightRequest="25" Margin="0,0,5,0" VerticalOptions="StartAndExpand" HorizontalOptions="FillAndExpand"  HasShadow="false" CornerRadius="1" Padding="0" >
+                                    <renderer:MyFrame.HeightRequest>
+                                        <OnPlatform x:TypeArguments="x:Double">
+                                            <On Platform="UWP">25</On>
+                                            <On Platform="Android">35</On>
+                                             <On Platform="iOS">35</On>
+                                        </OnPlatform>
+                                    </renderer:MyFrame.HeightRequest>
+                                    <renderer:BorderlessEntry x:Name="ReportTypeText" VerticalTextAlignment="Center" IsTabStop="False" InputTransparent="True" TextColor="{x:Static Common:Colors.LightGrayColor}" FontFamily="{StaticResource ARIALMT}" Placeholder="Select a report type"  Text="{Binding SelectedReportTypeName}" FontSize="14"/>
+                            </renderer:MyFrame>
+                                <ImageButton InputTransparent="True" HorizontalOptions="End" Grid.Column="0"  Margin="0,5,20,0" Padding="2,2,2,1"   IsOpaque="False" Source="downArrow.png" HeightRequest="15" WidthRequest="15" CornerRadius="10" BackgroundColor="{x:Static Common:Colors.FrameBlueColor}" VerticalOptions="Start">
+                                     <ImageButton.Margin>
+                                            <OnPlatform x:TypeArguments="Thickness">
+                                                <On Platform="iOS" Value="0,5,20,0"/>
+                                            <On Platform="Android" Value="0,10,20,0"/>
+                                            <On Platform="UWP" Value="0,5,20,0"/>
+                                        </OnPlatform>
+                                        </ImageButton.Margin>
+                                    <ImageButton.Padding>
+                                            <OnPlatform x:TypeArguments="Thickness">
+                                                <On Platform="iOS" Value="4,5,4,2"/>
+                                            <On Platform="Android" Value="2,2,2,1"/>
+                                            <On Platform="UWP" Value="2,2,2,1"/>
+                                        </OnPlatform>
+                                        </ImageButton.Padding>
+                                     <ImageButton.HeightRequest>
+                                        <OnPlatform x:TypeArguments="x:Double">
+                                             <On Platform="iOS">20</On>
+                                            <On Platform="Android">15</On>
+                                            <On Platform="UWP">15</On>
+                                        </OnPlatform>
+                                    </ImageButton.HeightRequest>
+                                    <ImageButton.WidthRequest>
+                                        <OnPlatform x:TypeArguments="x:Double">
+                                             <On Platform="iOS">20</On>
+                                            <On Platform="Android">15</On>
+                                            <On Platform="UWP">15</On>
+                                        </OnPlatform>
+                                    </ImageButton.WidthRequest>
+                                    <ImageButton.GestureRecognizers>
+                                        <TapGestureRecognizer  Command="{Binding OpenRecordTypePopupCommand}" />
+                                </ImageButton.GestureRecognizers>
+                            </ImageButton>
+                            <Grid.GestureRecognizers>
+                                    <TapGestureRecognizer Command="{Binding OpenRecordTypePopupCommand}"/>
+                            </Grid.GestureRecognizers>
+                        </Grid>
+                        </Grid>
+                    </StackLayout>
+                    <StackLayout  Orientation="Horizontal" Margin="0,15,0,0">
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="200"/>
+                                <ColumnDefinition Width="1000*"/>
+                            </Grid.ColumnDefinitions>
+                            <Label Text="PROGRAM LABEL" Grid.Column="0" FontSize="15" TextColor="Gray" Margin="30,0,0,0" VerticalOptions="CenterAndExpand"/>
+                            <Grid HorizontalOptions="FillAndExpand" Grid.Column="1">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="900*"/>
+                                </Grid.ColumnDefinitions>
+                                <renderer:MyFrame Grid.Column="0" BorderColor="Gray" HeightRequest="25" Margin="0,0,5,0" VerticalOptions="CenterAndExpand" HorizontalOptions="FillAndExpand"  HasShadow="false" CornerRadius="1" Padding="0" >
+                                    <renderer:MyFrame.HeightRequest>
+                                        <OnPlatform x:TypeArguments="x:Double">
+                                            <On Platform="UWP">25</On>
+                                            <On Platform="Android">35</On>
+                                             <On Platform="iOS">35</On>
+                                        </OnPlatform>
+                                    </renderer:MyFrame.HeightRequest>
+                                    <renderer:BorderlessEntry x:Name="ProgramLblText" IsTabStop="False" InputTransparent="True" TextColor="{x:Static Common:Colors.LightGrayColor}" FontFamily="{StaticResource ARIALMT}" Placeholder="Select a program label"  Text="{Binding SelectedProgramLabelName}" FontSize="14"/>
+                                </renderer:MyFrame>
+                                <ImageButton InputTransparent="True"  HorizontalOptions="End" Grid.Column="0"  Margin="0,5,20,0" Padding="2,2,2,1"   IsOpaque="False" Source="downArrow.png" HeightRequest="15" WidthRequest="15" CornerRadius="10" BackgroundColor="{x:Static Common:Colors.FrameBlueColor}" VerticalOptions="Start">
+                                     <ImageButton.Margin>
+                                            <OnPlatform x:TypeArguments="Thickness">
+                                                <On Platform="iOS" Value="0,5,20,0"/>
+                                            <On Platform="Android" Value="0,10,20,0"/>
+                                            <On Platform="UWP" Value="0,5,20,0"/>
+                                        </OnPlatform>
+                                        </ImageButton.Margin>
+                                    <ImageButton.Padding>
+                                            <OnPlatform x:TypeArguments="Thickness">
+                                                <On Platform="iOS" Value="4,5,4,2"/>
+                                            <On Platform="Android" Value="2,2,2,1"/>
+                                            <On Platform="UWP" Value="2,2,2,1"/>
+                                        </OnPlatform>
+                                        </ImageButton.Padding>
+                                     <ImageButton.HeightRequest>
+                                        <OnPlatform x:TypeArguments="x:Double">
+                                             <On Platform="iOS">20</On>
+                                            <On Platform="Android">15</On>
+                                            <On Platform="UWP">15</On>
+                                        </OnPlatform>
+                                    </ImageButton.HeightRequest>
+                                    <ImageButton.WidthRequest>
+                                        <OnPlatform x:TypeArguments="x:Double">
+                                             <On Platform="iOS">20</On>
+                                            <On Platform="Android">15</On>
+                                            <On Platform="UWP">15</On>
+                                        </OnPlatform>
+                                    </ImageButton.WidthRequest>
+                                    <ImageButton.GestureRecognizers>
+                                        <TapGestureRecognizer  Command="{Binding OpenProgramLabelCommand}" />
+                                    </ImageButton.GestureRecognizers>
+                                </ImageButton>
+                                <Grid.GestureRecognizers>
+                                    <TapGestureRecognizer Command="{Binding OpenProgramLabelCommand}"/>
+                                </Grid.GestureRecognizers>
+                            </Grid>
+                        </Grid>
+                    </StackLayout>
+                    <StackLayout  Orientation="Horizontal" Margin="0,15,0,0">
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="200"/>
+                                <ColumnDefinition Width="1000*"/>
+                            </Grid.ColumnDefinitions>
+                            <StackLayout Spacing="0" Orientation="Horizontal" Grid.Column="0">
+                                <Label Text="LOCATIONS" FontSize="15" TextColor="Gray" Margin="30,0,0,0" VerticalOptions="CenterAndExpand"/>
+                                <Label Text="*" Margin="0,0,0,0" FontSize="15" TextColor="Red" VerticalOptions="CenterAndExpand"></Label>
+                            </StackLayout>
+                            <Grid HorizontalOptions="FillAndExpand" Grid.Column="1">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="900*"/>
+                                </Grid.ColumnDefinitions>
+                                <renderer:MyFrame Grid.Column="0" BorderColor="Gray" Margin="0,0,5,0" VerticalOptions="CenterAndExpand" HorizontalOptions="FillAndExpand"  HasShadow="false" CornerRadius="1" Padding="0" >
+                                    <renderer:MyFrame.HeightRequest>
+                                        <OnPlatform x:TypeArguments="x:Double">
+                                            <On Platform="UWP">25</On>
+                                            <On Platform="Android">35</On>
+                                             <On Platform="iOS">35</On>
+                                        </OnPlatform>
+                                    </renderer:MyFrame.HeightRequest>
+                                    <renderer:BorderlessEntry x:Name="LocationText" IsTabStop="False" InputTransparent="True" TextColor="{x:Static Common:Colors.LightGrayColor}" FontFamily="{StaticResource ARIALMT}" Placeholder="Select location(s)"  Text="{Binding LocationsSelected}" FontSize="14"/>
+                                </renderer:MyFrame>
+                                <ImageButton InputTransparent="True" HorizontalOptions="End" Grid.Column="0"  Margin="0,5,20,0" Padding="2,2,2,1"   IsOpaque="False" Source="downArrow.png" HeightRequest="15" WidthRequest="15" CornerRadius="10" BackgroundColor="{x:Static Common:Colors.FrameBlueColor}" VerticalOptions="Start">
+                                     <ImageButton.Margin>
+                                            <OnPlatform x:TypeArguments="Thickness">
+                                                <On Platform="iOS" Value="0,5,20,0"/>
+                                            <On Platform="Android" Value="0,10,20,0"/>
+                                            <On Platform="UWP" Value="0,5,20,0"/>
+                                        </OnPlatform>
+                                        </ImageButton.Margin>
+                                    <ImageButton.Padding>
+                                            <OnPlatform x:TypeArguments="Thickness">
+                                                <On Platform="iOS" Value="4,5,4,2"/>
+                                            <On Platform="Android" Value="2,2,2,1"/>
+                                            <On Platform="UWP" Value="2,2,2,1"/>
+                                        </OnPlatform>
+                                        </ImageButton.Padding>
+                                     <ImageButton.HeightRequest>
+                                        <OnPlatform x:TypeArguments="x:Double">
+                                             <On Platform="iOS">20</On>
+                                            <On Platform="Android">15</On>
+                                            <On Platform="UWP">15</On>
+                                        </OnPlatform>
+                                    </ImageButton.HeightRequest>
+                                    <ImageButton.WidthRequest>
+                                        <OnPlatform x:TypeArguments="x:Double">
+                                             <On Platform="iOS">20</On>
+                                            <On Platform="Android">15</On>
+                                            <On Platform="UWP">15</On>
+                                        </OnPlatform>
+                                    </ImageButton.WidthRequest>
+                                    <ImageButton.GestureRecognizers>
+                                        <TapGestureRecognizer  Command="{Binding OpenLocationPopupCommand}" />
+                                    </ImageButton.GestureRecognizers>
+                                </ImageButton>
+                                <Grid.GestureRecognizers>
+                                    <TapGestureRecognizer Command="{Binding OpenLocationPopupCommand}"/>
+                                </Grid.GestureRecognizers>
+                            </Grid>
+                        </Grid>
+                    </StackLayout>
+                    <StackLayout  Orientation="Horizontal" Margin="0,15,0,0">
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="200"/>
+                                <ColumnDefinition Width="1000*"/>
+                            </Grid.ColumnDefinitions>
+                            <StackLayout Spacing="0" Orientation="Horizontal" Grid.Column="0">
+                                <Label Text="CHILD" FontSize="15" TextColor="Gray" Margin="30,0,0,0" MinimumWidthRequest="100" VerticalOptions="CenterAndExpand" />
+                                <Label Text="*" Margin="0,0,0,0" FontSize="15" TextColor="Red" VerticalOptions="CenterAndExpand"></Label>
+                            </StackLayout>
+                            <Grid HorizontalOptions="FillAndExpand"  Grid.Column="1" IsEnabled="{Binding IsChildPopUpEnabled}" >
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="900*"/>
+                                </Grid.ColumnDefinitions>
+                                <renderer:MyFrame Grid.Column="0" BorderColor="Gray" HeightRequest="25"  Margin="0,0,5,0"  HorizontalOptions="FillAndExpand" VerticalOptions="StartAndExpand" HasShadow="false" CornerRadius="1" Padding="0" >
+                                    <renderer:MyFrame.HeightRequest>
+                                        <OnPlatform x:TypeArguments="x:Double">
+                                            <On Platform="UWP">25</On>
+                                            <On Platform="Android">35</On>
+                                             <On Platform="iOS">35</On>
+                                        </OnPlatform>
+                                    </renderer:MyFrame.HeightRequest>
+                                    <renderer:BorderlessEntry x:Name="childText"  InputTransparent="True" IsTabStop="False"   FontFamily="{StaticResource ARIALMT}" Placeholder="Select a child" Text="{Binding SelectedChildName}" FontSize="14"  TextColor="{x:Static Common:Colors.LightGrayColor}"/>
+                                </renderer:MyFrame>
+                                <ImageButton InputTransparent="True" Command="{Binding OpenChildRecordPopupCommand}" IsEnabled="{Binding IsChildPopUpEnabled}"  HorizontalOptions="End" Grid.Column="0"  Margin="0,5,20,0" Padding="2,2,2,1"   IsOpaque="False" Source="downArrow.png" HeightRequest="15" WidthRequest="15" CornerRadius="10" BackgroundColor="{x:Static Common:Colors.FrameBlueColor}" VerticalOptions="Start" >
+                                     <ImageButton.Margin>
+                                            <OnPlatform x:TypeArguments="Thickness">
+                                                <On Platform="iOS" Value="0,5,20,0"/>
+                                            <On Platform="Android" Value="0,10,20,0"/>
+                                            <On Platform="UWP" Value="0,5,20,0"/>
+                                        </OnPlatform>
+                                        </ImageButton.Margin>
+                                    <ImageButton.Padding>
+                                            <OnPlatform x:TypeArguments="Thickness">
+                                                <On Platform="iOS" Value="4,5,4,2"/>
+                                            <On Platform="Android" Value="2,2,2,1"/>
+                                            <On Platform="UWP" Value="2,2,2,1"/>
+                                        </OnPlatform>
+                                        </ImageButton.Padding>
+                                     <ImageButton.HeightRequest>
+                                        <OnPlatform x:TypeArguments="x:Double">
+                                             <On Platform="iOS">20</On>
+                                            <On Platform="Android">15</On>
+                                            <On Platform="UWP">15</On>
+                                        </OnPlatform>
+                                    </ImageButton.HeightRequest>
+                                    <ImageButton.WidthRequest>
+                                        <OnPlatform x:TypeArguments="x:Double">
+                                             <On Platform="iOS">20</On>
+                                            <On Platform="Android">15</On>
+                                            <On Platform="UWP">15</On>
+                                        </OnPlatform>
+                                    </ImageButton.WidthRequest>
+                                </ImageButton>
+                                <Grid.GestureRecognizers>
+                                    <TapGestureRecognizer Command="{Binding OpenChildRecordPopupCommand}"/>
+                                </Grid.GestureRecognizers>
+                            </Grid>
+                        </Grid>
+                    </StackLayout>
+                    <StackLayout  Orientation="Horizontal" Margin="0,15,0,0">
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="200"/>
+                                <ColumnDefinition Width="1000*"/>
+                            </Grid.ColumnDefinitions>
+                            <StackLayout Spacing="0" Orientation="Horizontal" Grid.Column="0">
+                                <Label Text="BATTERY TYPE" FontSize="15" TextColor="Gray" Margin="30,0,0,0" VerticalOptions="CenterAndExpand"/>
+                                <Label Text="*" Margin="0,0,0,0" FontSize="15" TextColor="Red" VerticalOptions="CenterAndExpand"></Label>
+                            </StackLayout>
+                            <Grid HorizontalOptions="FillAndExpand" Grid.Column="1" IsEnabled="{Binding IsBatteryTypePopupEnabled}" >
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="900*"/>
+                                </Grid.ColumnDefinitions>
+                                <renderer:MyFrame Grid.Column="0" BorderColor="Gray" HeightRequest="25"  Margin="0,0,5,0"  HorizontalOptions="FillAndExpand"  HasShadow="false" CornerRadius="1" Padding="0" >
+                                    <renderer:MyFrame.HeightRequest>
+                                        <OnPlatform x:TypeArguments="x:Double">
+                                            <On Platform="UWP">25</On>
+                                            <On Platform="Android">35</On>
+                                             <On Platform="iOS">35</On>
+                                        </OnPlatform>
+                                    </renderer:MyFrame.HeightRequest>
+                                    <renderer:BorderlessEntry x:Name="batteryTypeText" InputTransparent="True" IsTabStop="False" FontFamily="{StaticResource ARIALMT}" Placeholder="Select battery type" FontSize="14"  TextColor="{x:Static Common:Colors.LightGrayColor}" Text="{Binding SelectedAssessmentType}"/>
+                                </renderer:MyFrame>
+                                <ImageButton InputTransparent="True" Command="{Binding OpenBatteryTypeRecordPopupCommand}" IsEnabled="{Binding IsBatteryTypePopupEnabled}"  HorizontalOptions="End" Grid.Column="0"  Margin="0,5,20,0" Padding="2,2,2,1"   IsOpaque="False" Source="downArrow.png" HeightRequest="15" WidthRequest="15" CornerRadius="10" BackgroundColor="{x:Static Common:Colors.FrameBlueColor}" VerticalOptions="Start" >
+                                     <ImageButton.Margin>
+                                            <OnPlatform x:TypeArguments="Thickness">
+                                                <On Platform="iOS" Value="0,5,20,0"/>
+                                            <On Platform="Android" Value="0,10,20,0"/>
+                                            <On Platform="UWP" Value="0,5,20,0"/>
+                                        </OnPlatform>
+                                        </ImageButton.Margin>
+                                    <ImageButton.Padding>
+                                            <OnPlatform x:TypeArguments="Thickness">
+                                                <On Platform="iOS" Value="4,5,4,2"/>
+                                            <On Platform="Android" Value="2,2,2,1"/>
+                                            <On Platform="UWP" Value="2,2,2,1"/>
+                                        </OnPlatform>
+                                        </ImageButton.Padding>
+                                     <ImageButton.HeightRequest>
+                                        <OnPlatform x:TypeArguments="x:Double">
+                                             <On Platform="iOS">20</On>
+                                            <On Platform="Android">15</On>
+                                            <On Platform="UWP">15</On>
+                                        </OnPlatform>
+                                    </ImageButton.HeightRequest>
+                                    <ImageButton.WidthRequest>
+                                        <OnPlatform x:TypeArguments="x:Double">
+                                             <On Platform="iOS">20</On>
+                                            <On Platform="Android">15</On>
+                                            <On Platform="UWP">15</On>
+                                        </OnPlatform>
+                                    </ImageButton.WidthRequest>
+                                </ImageButton>
+                                <Grid.GestureRecognizers>
+                                    <TapGestureRecognizer Command="{Binding OpenBatteryTypeRecordPopupCommand}"/>
+                                </Grid.GestureRecognizers>
+                            </Grid>
+                        </Grid>
+                    </StackLayout>
+                    <StackLayout  Orientation="Horizontal" Margin="0,15,0,0">
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="200"/>
+                                <ColumnDefinition Width="1000*"/>
+                            </Grid.ColumnDefinitions>
+                            <StackLayout Spacing="0" Orientation="Horizontal" Grid.Column="0">
+                                <Label Text="RECORD FORM(S)" FontSize="15" TextColor="Gray" Margin="30,0,0,0" MinimumWidthRequest="100" VerticalOptions="CenterAndExpand"/>
+                                <Label Text="*" Margin="0,0,0,0" FontSize="15" TextColor="Red" VerticalOptions="CenterAndExpand"></Label>
+                            </StackLayout>
+                            <Grid HorizontalOptions="FillAndExpand" Grid.Column="1" IsEnabled="{Binding IsRecordFormButtonEnabled}">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="900*"/>
+                                </Grid.ColumnDefinitions>
+                                <renderer:MyFrame Grid.Column="0" BorderColor="Gray" HeightRequest="25" Margin="0,0,5,0"  HorizontalOptions="FillAndExpand"  HasShadow="false" CornerRadius="1" Padding="0" >
+                                    <renderer:MyFrame.HeightRequest>
+                                        <OnPlatform x:TypeArguments="x:Double">
+                                            <On Platform="UWP">25</On>
+                                            <On Platform="Android">35</On>
+                                             <On Platform="iOS">35</On>
+                                        </OnPlatform>
+                                    </renderer:MyFrame.HeightRequest>
+                                    <renderer:BorderlessEntry x:Name="recordFormText" InputTransparent="True" IsTabStop="False" Text="{Binding SelectedRecordForm}" FontFamily="{StaticResource ARIALMT}" Placeholder="Select record form"  FontSize="14"  TextColor="{x:Static Common:Colors.LightGrayColor}"/>
+                                </renderer:MyFrame>
+                                <ImageButton InputTransparent="True" Command="{Binding OpenRecordFormsPopupCommand}" IsEnabled="{Binding IsRecordFormButtonEnabled}" HorizontalOptions="End" Grid.Column="0"  Margin="0,5,20,0" Padding="2,2,2,1"   IsOpaque="False" Source="downArrow.png" HeightRequest="15" WidthRequest="15" CornerRadius="10" BackgroundColor="{x:Static Common:Colors.FrameBlueColor}"  VerticalOptions="Start" >
+                                     <ImageButton.Margin>
+                                            <OnPlatform x:TypeArguments="Thickness">
+                                                <On Platform="iOS" Value="0,5,20,0"/>
+                                            <On Platform="Android" Value="0,10,20,0"/>
+                                            <On Platform="UWP" Value="0,5,20,0"/>
+                                        </OnPlatform>
+                                        </ImageButton.Margin>
+                                    <ImageButton.Padding>
+                                            <OnPlatform x:TypeArguments="Thickness">
+                                                <On Platform="iOS" Value="4,5,4,2"/>
+                                            <On Platform="Android" Value="2,2,2,1"/>
+                                            <On Platform="UWP" Value="2,2,2,1"/>
+                                        </OnPlatform>
+                                        </ImageButton.Padding>
+                                     <ImageButton.HeightRequest>
+                                        <OnPlatform x:TypeArguments="x:Double">
+                                             <On Platform="iOS">20</On>
+                                            <On Platform="Android">15</On>
+                                            <On Platform="UWP">15</On>
+                                        </OnPlatform>
+                                    </ImageButton.HeightRequest>
+                                    <ImageButton.WidthRequest>
+                                        <OnPlatform x:TypeArguments="x:Double">
+                                             <On Platform="iOS">20</On>
+                                            <On Platform="Android">15</On>
+                                            <On Platform="UWP">15</On>
+                                        </OnPlatform>
+                                    </ImageButton.WidthRequest>
+                                </ImageButton>
+                                <Grid.GestureRecognizers>
+                                    <TapGestureRecognizer Command="{Binding OpenRecordFormsPopupCommand}"/>
+                                </Grid.GestureRecognizers>
+                            </Grid>
+                        </Grid>
+                    </StackLayout>
+                    <StackLayout x:Name="ScoresLayout" IsVisible ="{Binding IsScoringLayoutVisible} " >
+                        <StackLayout Orientation="Horizontal" Margin="0,10,0,0">
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="200"/>
+                                <ColumnDefinition Width="1000*"/>
+                            </Grid.ColumnDefinitions>
+                            <StackLayout Spacing="0" Orientation="Horizontal" Grid.Column="0">
+                                <Label Text="SCORES" FontSize="15" TextColor="Gray" Margin="30,0,0,0" MinimumWidthRequest="100" VerticalOptions="CenterAndExpand"/>
+                                <Label Text="*" Margin="0,0,0,0" FontSize="15" TextColor="Red" VerticalOptions="CenterAndExpand"></Label>
+                            </StackLayout>
+                                <Grid HorizontalOptions="FillAndExpand" Grid.Column="1" IsEnabled="{Binding IsScoresPopUpEnabled }">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="900*"/>
+                                </Grid.ColumnDefinitions>
+                                <renderer:MyFrame Grid.Column="0" BorderColor="Gray" HeightRequest="25" Margin="0,0,5,0"  HorizontalOptions="FillAndExpand"  HasShadow="false" CornerRadius="1" Padding="0" >
+                                        <renderer:MyFrame.HeightRequest>
+                                            <OnPlatform x:TypeArguments="x:Double">
+                                                <On Platform="UWP">25</On>
+                                                <On Platform="Android">35</On>
+                                                 <On Platform="iOS">35</On>
+                                            </OnPlatform>
+                                        </renderer:MyFrame.HeightRequest>
+                                        <renderer:BorderlessEntry InputTransparent="True" VerticalTextAlignment="Center" IsTabStop="False"  FontFamily="{StaticResource ARIALMT}" Placeholder="4 selected" Text="{Binding ScoreSelected}" FontSize="14"  TextColor="{x:Static Common:Colors.LightGrayColor}"/>
+                                </renderer:MyFrame>
+                                    <ImageButton InputTransparent="True" Command="{Binding OpenScorePopupCommand}" IsEnabled="{Binding IsScoresPopUpEnabled}" HorizontalOptions="End" Grid.Column="0"  Margin="0,5,20,0" Padding="2,2,2,1"   IsOpaque="False" Source="downArrow.png" HeightRequest="15" WidthRequest="15" CornerRadius="10" BackgroundColor="{x:Static Common:Colors.FrameBlueColor}"  VerticalOptions="Start" >
+                                         <ImageButton.Margin>
+                                            <OnPlatform x:TypeArguments="Thickness">
+                                                <On Platform="iOS" Value="0,5,20,0"/>
+                                            <On Platform="Android" Value="0,10,20,0"/>
+                                            <On Platform="UWP" Value="0,5,20,0"/>
+                                        </OnPlatform>
+                                        </ImageButton.Margin>
+                                        <ImageButton.Padding>
+                                            <OnPlatform x:TypeArguments="Thickness">
+                                                <On Platform="iOS" Value="4,5,4,2"/>
+                                                <On Platform="Android" Value="2,2,2,1"/>
+                                                <On Platform="UWP" Value="2,2,2,1"/>
+                                            </OnPlatform>
+                                        </ImageButton.Padding>
+                                     <ImageButton.HeightRequest>
+                                        <OnPlatform x:TypeArguments="x:Double">
+                                             <On Platform="iOS">20</On>
+                                                <On Platform="Android">15</On>
+                                                <On Platform="UWP">15</On>
+                                            </OnPlatform>
+                                    </ImageButton.HeightRequest>
+                                    <ImageButton.WidthRequest>
+                                        <OnPlatform x:TypeArguments="x:Double">
+                                             <On Platform="iOS">20</On>
+                                                <On Platform="Android">15</On>
+                                                <On Platform="UWP">15</On>
+                                            </OnPlatform>
+                                    </ImageButton.WidthRequest>
+                                    </ImageButton>
+                                <Grid.GestureRecognizers>
+                                    <TapGestureRecognizer Command="{Binding OpenScorePopupCommand}"/>
+                                </Grid.GestureRecognizers>
+                            </Grid>
+                        </Grid>                    
+                    </StackLayout>
+                        <StackLayout Orientation="Vertical" Margin="205,10,0,0">
+                        <StackLayout  HorizontalOptions="StartAndExpand" Padding="0" Margin="0" Orientation="Horizontal" Spacing="2" Grid.Column="0">
+                                <renderer:MyCheckBox x:Name="DomainCheckbox" FillColor="#147cbd" OutlineWidth="2" Shape="Rectangle"
+                                          IsChecked="{Binding IsDomainCheckboxCheckedChanged}" />
+                            <Label FontFamily="{StaticResource ARIALMT}" Text="Include domain, subdomain, and area descriptors" TextColor="{x:Static Common:Colors.TitleColor}" VerticalOptions="Center" FontSize="14"/>
+                        </StackLayout>
+                        <StackLayout  HorizontalOptions="StartAndExpand" Padding="0" Margin="0" Orientation="Horizontal" Spacing="2" Grid.Column="0">
+                                <renderer:MyCheckBox Shape="Rectangle" OutlineWidth="2"  x:Name="ScoresCheckbox" FillColor="#147cbd" 
+                                          IsChecked="{Binding IsScoresCheckboxCheckedChanged}" />
+                            <Label FontFamily="{StaticResource ARIALMT}" Text="Item Scores" TextColor="{x:Static Common:Colors.TitleColor}" VerticalOptions="Center" FontSize="14"/>
+                        </StackLayout>
+                        <StackLayout HorizontalOptions="StartAndExpand" Padding="0" Margin="0" Orientation="Horizontal" Spacing="2" Grid.Column="0">
+                                <renderer:MyCheckBox x:Name="ActivitiesCheckbox" FillColor="#147cbd" OutlineWidth="2" Shape="Rectangle"
+                                          IsChecked="{Binding IsActivitiesCheckboxCheckedChanged}" />
+                            <Label FontFamily="{StaticResource ARIALMT}" Text="Suggested activities" TextColor="{x:Static Common:Colors.TitleColor}" VerticalOptions="Center" FontSize="14"/>
+                        </StackLayout>
+                    </StackLayout>
+                    </StackLayout>
+                    <StackLayout x:Name="StandardDeviationLayout" IsVisible ="{Binding IsStandardDeviationLayoutVisible} " >
+                        <StackLayout Orientation="Horizontal" Margin="0,20,0,0">
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="200"/>
+                                    <ColumnDefinition Width="1000*"/>
+                                </Grid.ColumnDefinitions>
+                                <StackLayout Spacing="0" Orientation="Horizontal" Grid.Column="0">
+                                    <Label Text="STANDARD DEVIATION" FontSize="15" TextColor="Gray" Margin="30,0,0,0" MinimumWidthRequest="100" VerticalOptions="CenterAndExpand"/>
+                                    <Label Text="*" Margin="0,0,0,0" FontSize="15" TextColor="Red" VerticalOptions="CenterAndExpand"></Label>
+                                </StackLayout>
+                                <Grid HorizontalOptions="FillAndExpand" Grid.Column="1" IsEnabled="{Binding }">
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="900*"/>
+                                    </Grid.ColumnDefinitions>
+                                    <renderer:MyFrame Grid.Column="0" BorderColor="Gray" HeightRequest="25" Margin="0,0,5,0"  HorizontalOptions="FillAndExpand"  HasShadow="false" CornerRadius="1" Padding="0" >
+                                        <renderer:MyFrame.HeightRequest>
+                                            <OnPlatform x:TypeArguments="x:Double">
+                                                <On Platform="iOS">25</On>
+                                                <On Platform="Android">35</On>
+                                                <On Platform="UWP">25</On>
+                                            </OnPlatform>
+                                        </renderer:MyFrame.HeightRequest>
+                                        <renderer:BorderlessEntry InputTransparent="True" IsTabStop="False" Text="{Binding StandardDeviationValue}" FontFamily="{StaticResource ARIALMT}" Placeholder="Select standard deviation"  FontSize="14"  TextColor="{x:Static Common:Colors.LightGrayColor}"/>
+                                    </renderer:MyFrame>
+                                    <ImageButton InputTransparent="True" Command="{Binding OpenStandardDeviationCommand}" IsEnabled="{Binding }" HorizontalOptions="End" Grid.Column="0"  Margin="0,5,20,0" Padding="2,2,2,1"   IsOpaque="False" Source="downArrow.png" HeightRequest="15" WidthRequest="15" CornerRadius="10" BackgroundColor="{x:Static Common:Colors.FrameBlueColor}"  VerticalOptions="Start" >
+                                         <ImageButton.Margin>
+                                            <OnPlatform x:TypeArguments="Thickness">
+                                                <On Platform="iOS" Value="0,5,20,0"/>
+                                            <On Platform="Android" Value="0,10,20,0"/>
+                                            <On Platform="UWP" Value="0,5,20,0"/>
+                                        </OnPlatform>
+                                        </ImageButton.Margin>
+                                        <ImageButton.Padding>
+                                            <OnPlatform x:TypeArguments="Thickness">
+                                                <On Platform="iOS" Value="4,5,4,2"/>
+                                                <On Platform="Android" Value="2,2,2,1"/>
+                                                <On Platform="UWP" Value="2,2,2,1"/>
+                                            </OnPlatform>
+                                        </ImageButton.Padding>
+                                     <ImageButton.HeightRequest>
+                                        <OnPlatform x:TypeArguments="x:Double">
+                                             <On Platform="iOS">20</On>
+                                                <On Platform="Android">15</On>
+                                                <On Platform="UWP">15</On>
+                                            </OnPlatform>
+                                    </ImageButton.HeightRequest>
+                                    <ImageButton.WidthRequest>
+                                        <OnPlatform x:TypeArguments="x:Double">
+                                             <On Platform="iOS">20</On>
+                                                <On Platform="Android">15</On>
+                                                <On Platform="UWP">15</On>
+                                            </OnPlatform>
+                                    </ImageButton.WidthRequest>
+                                    </ImageButton>
+                                    <Grid.GestureRecognizers>
+                                        <TapGestureRecognizer Command="{Binding OpenStandardDeviationCommand}"/>
+                                    </Grid.GestureRecognizers>
+                                </Grid>
+                            </Grid>
+                        </StackLayout>
+                        <StackLayout Orientation="Vertical" Margin="205,5,0,0">
+                            <StackLayout  HorizontalOptions="StartAndExpand" Padding="0" Margin="0" Orientation="Horizontal" Spacing="5" Grid.Column="0">
+                                <renderer:MyCheckBox x:Name="SDDomainCheckbox" FillColor="#147cbd"  OutlineWidth="2" Shape="Rectangle"
+                                          IsChecked="{Binding IsDomainCheckboxCheckedChanged}" />
+                                <Label FontFamily="{StaticResource ARIALMT}" Text="Include domain, subdomain, and area descriptors" TextColor="{x:Static Common:Colors.TitleColor}" VerticalOptions="Center" FontSize="14"/>
+                            </StackLayout>
+                            <StackLayout  HorizontalOptions="StartAndExpand" Padding="0" Margin="0" Orientation="Horizontal" Spacing="5" Grid.Column="0">
+                                <renderer:MyCheckBox  x:Name="SDScoresCheckbox" FillColor="#147cbd"  OutlineWidth="2" Shape="Rectangle"
+                                          IsChecked="{Binding IsSDScoresCheckboxCheckedChanged}" />
+                                <Label FontFamily="{StaticResource ARIALMT}" Text="Item Scores" TextColor="{x:Static Common:Colors.TitleColor}" VerticalOptions="Center" FontSize="14"/>
+                            </StackLayout>                            
+                        </StackLayout>
+
+                    </StackLayout>
+                    <StackLayout x:Name="DomainLayout" IsVisible ="{Binding IsBAESLayoutVisible} " >
+                        <StackLayout Orientation="Vertical" Margin="205,10,0,0">
+                            <StackLayout  HorizontalOptions="StartAndExpand" Padding="0" Margin="0" Orientation="Horizontal" Spacing="5" Grid.Column="0">
+                                <renderer:MyCheckBox x:Name="BAESDomainCheckbox" FillColor="#147cbd"  OutlineWidth="2" Shape="Rectangle"
+                                          IsChecked="{Binding IsDomainCheckboxCheckedChanged}" />
+                                <Label FontFamily="{StaticResource ARIALMT}" Text="Include domain, subdomain, and area descriptors" TextColor="{x:Static Common:Colors.TitleColor}" VerticalOptions="Center" FontSize="14"/>
+                            </StackLayout>                           
+                        </StackLayout>
+                    </StackLayout>
+
+                    <StackLayout  Orientation="Horizontal" Margin="0,15,0,0">
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="200"/>
+                                <ColumnDefinition Width="1000*"/>
+                            </Grid.ColumnDefinitions>
+                            <StackLayout Spacing="0" Orientation="Horizontal" Grid.Column="0">
+                                <Label Text="NOTES" FontSize="15" TextColor="Gray" Margin="30,0,0,0" MinimumWidthRequest="100" VerticalOptions="CenterAndExpand"/>
+                            </StackLayout>
+                            <Grid HorizontalOptions="FillAndExpand" Grid.Column="1" IsEnabled="{Binding }">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="900*"/>
+                                </Grid.ColumnDefinitions>
+                                <renderer:MyFrame Grid.Column="0" BorderColor="Gray" HeightRequest="25" Margin="0,0,5,0"  HorizontalOptions="FillAndExpand"  HasShadow="false" CornerRadius="1" Padding="0" >
+                                    <renderer:MyFrame.HeightRequest>
+                                        <OnPlatform x:TypeArguments="x:Double">
+                                            <On Platform="UWP">25</On>
+                                            <On Platform="Android">35</On>
+                                             <On Platform="iOS">35</On>
+                                        </OnPlatform>
+                                    </renderer:MyFrame.HeightRequest>
+                                    <renderer:BorderlessEntry InputTransparent="True" IsTabStop="False" FontFamily="{StaticResource ARIALMT}" Placeholder="Select notes"  FontSize="14"  TextColor="{x:Static Common:Colors.LightGrayColor}" Text="{Binding NoteSelected}"/>
+                                </renderer:MyFrame>
+                                <ImageButton InputTransparent="True" Command="{Binding OpenNotesPopupCommand}" IsEnabled="{Binding }" HorizontalOptions="End" Grid.Column="0"  Margin="0,5,20,0" Padding="2,2,2,1"   IsOpaque="False" Source="downArrow.png" HeightRequest="15" WidthRequest="15" CornerRadius="10" BackgroundColor="{x:Static Common:Colors.FrameBlueColor}"  VerticalOptions="Start" >
+                                     <ImageButton.Margin>
+                                            <OnPlatform x:TypeArguments="Thickness">
+                                                <On Platform="iOS" Value="0,5,20,0"/>
+                                            <On Platform="Android" Value="0,10,20,0"/>
+                                            <On Platform="UWP" Value="0,5,20,0"/>
+                                        </OnPlatform>
+                                        </ImageButton.Margin>
+                                    <ImageButton.Padding>
+                                            <OnPlatform x:TypeArguments="Thickness">
+                                                <On Platform="iOS" Value="4,5,4,2"/>
+                                            <On Platform="Android" Value="2,2,2,1"/>
+                                            <On Platform="UWP" Value="2,2,2,1"/>
+                                        </OnPlatform>
+                                        </ImageButton.Padding>
+                                     <ImageButton.HeightRequest>
+                                        <OnPlatform x:TypeArguments="x:Double">
+                                             <On Platform="iOS">20</On>
+                                            <On Platform="Android">15</On>
+                                            <On Platform="UWP">15</On>
+                                        </OnPlatform>
+                                    </ImageButton.HeightRequest>
+                                    <ImageButton.WidthRequest>
+                                        <OnPlatform x:TypeArguments="x:Double">
+                                             <On Platform="iOS">20</On>
+                                            <On Platform="Android">15</On>
+                                            <On Platform="UWP">15</On>
+                                        </OnPlatform>
+                                    </ImageButton.WidthRequest>
+                                </ImageButton>
+                                <Grid.GestureRecognizers>
+                                    <TapGestureRecognizer Command="{Binding OpenNotesPopupCommand}"/>
+                                </Grid.GestureRecognizers>
+                            </Grid>
+                        </Grid>
+                    </StackLayout>
+                    <StackLayout  Orientation="Horizontal" Margin="0,15,0,0">
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="200"/>
+                                <ColumnDefinition Width="1000*"/>
+                            </Grid.ColumnDefinitions>
+                            <StackLayout Spacing="0" Orientation="Horizontal" Grid.Column="0">
+                                <Label Text="OUTPUT FORMAT" FontSize="15" TextColor="Gray" Margin="30,0,0,0" MinimumWidthRequest="100" VerticalOptions="CenterAndExpand"/>
+                                <Label Text="*" Margin="0,0,0,0" FontSize="15" TextColor="Red" VerticalOptions="CenterAndExpand"></Label>
+                            </StackLayout>
+                            <Grid HorizontalOptions="FillAndExpand" Grid.Column="1" IsEnabled="{Binding }">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="900*"/>
+                                </Grid.ColumnDefinitions>
+                                <renderer:MyFrame Grid.Column="0" BorderColor="Gray" HeightRequest="25" Margin="0,0,5,0"  HorizontalOptions="FillAndExpand"  HasShadow="false" CornerRadius="1" Padding="0" >
+                                    <renderer:MyFrame.HeightRequest>
+                                        <OnPlatform x:TypeArguments="x:Double">
+                                            <On Platform="UWP">25</On>
+                                            <On Platform="Android">35</On>
+                                             <On Platform="iOS">35</On>
+                                        </OnPlatform>
+                                    </renderer:MyFrame.HeightRequest>
+                                    <renderer:BorderlessEntry InputTransparent="True" IsTabStop="False" Text="{Binding SelectedOutputFormatType}" FontFamily="{StaticResource ARIALMT}" Placeholder="Select output format"  FontSize="14"  TextColor="{x:Static Common:Colors.LightGrayColor}"/>
+                                </renderer:MyFrame>
+                                <ImageButton InputTransparent="True" Command="{Binding OpenOutputFormatTypeCommand}" IsEnabled="{Binding }" HorizontalOptions="End" Grid.Column="0"  Margin="0,5,20,0" Padding="2,2,2,1"   IsOpaque="False" Source="downArrow.png" HeightRequest="15" WidthRequest="15" CornerRadius="10" BackgroundColor="{x:Static Common:Colors.FrameBlueColor}"  VerticalOptions="Start" >
+                                     <ImageButton.Margin>
+                                            <OnPlatform x:TypeArguments="Thickness">
+                                                <On Platform="iOS" Value="0,5,20,0"/>
+                                            <On Platform="Android" Value="0,10,20,0"/>
+                                            <On Platform="UWP" Value="0,5,20,0"/>
+                                        </OnPlatform>
+                                        </ImageButton.Margin>
+                                    <ImageButton.Padding>
+                                            <OnPlatform x:TypeArguments="Thickness">
+                                                <On Platform="iOS" Value="4,5,4,2"/>
+                                            <On Platform="Android" Value="2,2,2,1"/>
+                                            <On Platform="UWP" Value="2,2,2,1"/>
+                                        </OnPlatform>
+                                        </ImageButton.Padding>
+                                     <ImageButton.HeightRequest>
+                                        <OnPlatform x:TypeArguments="x:Double">
+                                             <On Platform="iOS">20</On>
+                                            <On Platform="Android">15</On>
+                                            <On Platform="UWP">15</On>
+                                        </OnPlatform>
+                                    </ImageButton.HeightRequest>
+                                    <ImageButton.WidthRequest>
+                                        <OnPlatform x:TypeArguments="x:Double">
+                                             <On Platform="iOS">20</On>
+                                            <On Platform="Android">15</On>
+                                            <On Platform="UWP">15</On>
+                                        </OnPlatform>
+                                    </ImageButton.WidthRequest>
+                                </ImageButton>
+                                <Grid.GestureRecognizers>
+                                    <TapGestureRecognizer Command="{Binding OpenOutputFormatTypeCommand}"/>
+                                </Grid.GestureRecognizers>
+                            </Grid>
+                        </Grid>
+                    </StackLayout>
+                    <Grid Margin="0,5,0,0">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="400*"/>
+                            <ColumnDefinition Width="400*"/>
+                        </Grid.ColumnDefinitions>
+                        <renderer:CustomButtonUWP  Text="Cancel" Clicked="OnCancelClick" BorderWidth="2" BorderColor="#147CBD" Margin="30,0,0,20" VerticalOptions="End" FontSize="15" WidthRequest="150" HorizontalOptions="Start" BackgroundColor="White" HeightRequest="50" Grid.Column="0" FontFamily="{StaticResource Arial-Bold}" TextColor="{x:Static Common:Colors.PrimaryColor}"  />
+
+                        <renderer:CustomButtonUWP x:Name="RunReportButton" PropertyChanged="FullReport_PropertyChanged" IsEnabled="{Binding RunReport}"  Text="Run Report" Command="{Binding RunReportCommand}"  TextColor="White" Margin="0,0,60,20" VerticalOptions="End" WidthRequest="150" FontSize="15" HorizontalOptions="End" Grid.Column="1"   BackgroundColor="{x:Static Common:Colors.PrimaryColor}" FontFamily="{StaticResource Arial-Bold}"  HeightRequest="50" >
+                            <renderer:CustomButtonUWP.Margin>
+                                <OnPlatform x:TypeArguments="Thickness">
+                                    <On Platform="iOS" Value="0,0,10,20"/>
+                                     <On Platform="Android" Value="0,0,40,20"/>
+                                     <On Platform="UWP" Value="0,0,60,20"/>
+
+                                </OnPlatform>
+                             </renderer:CustomButtonUWP.Margin>
+                            <renderer:CustomButtonUWP.IsVisible> <OnPlatform x:TypeArguments="x:Boolean">
+                                                       <On Platform="iOS">false</On>
+                                                         <On Platform="Android">true</On>
+                                                            <On Platform="UWP">true</On>
+                                                        </OnPlatform> </renderer:CustomButtonUWP.IsVisible>
+                       </renderer:CustomButtonUWP>
+
+                         <renderer:CustomButton x:Name="RunReportButtoniOS" PropertyChanged="FullReport_PropertyChanged" IsEnabled="{Binding RunReport}"  Text="Run Report" Command="{Binding RunReportCommand}"  TextColor="White" Margin="0,0,60,20" VerticalOptions="End" WidthRequest="150" FontSize="15" HorizontalOptions="End" Grid.Column="1"   BackgroundColor="{x:Static Common:Colors.PrimaryColor}" FontFamily="{StaticResource Arial-Bold}"  HeightRequest="50" >
+                            <renderer:CustomButton.Margin>
+                                <OnPlatform x:TypeArguments="Thickness">
+                                    <On Platform="iOS" Value="0,0,5,20"/>
+                                     <On Platform="Android" Value="0,0,40,20"/>
+                                     <On Platform="UWP" Value="0,0,60,20"/>
+
+                                </OnPlatform>
+                             </renderer:CustomButton.Margin>
+                            <renderer:CustomButton.IsVisible> <OnPlatform x:TypeArguments="x:Boolean">
+                                                       <On Platform="iOS">true</On>
+                                                         <On Platform="Android">false</On>
+                                                            <On Platform="UWP">false</On>
+                                                        </OnPlatform> </renderer:CustomButton.IsVisible>
+                       </renderer:CustomButton>
+                    </Grid>
+                </StackLayout>
+            </StackLayout>
+        </Frame>
+    </AbsoluteLayout>
+</pages:PopupPage>

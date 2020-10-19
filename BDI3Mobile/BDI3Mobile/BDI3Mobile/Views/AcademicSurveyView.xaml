@@ -1,0 +1,290 @@
+﻿<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:Common="clr-namespace:BDI3Mobile.Common"
+             xmlns:renderer="clr-namespace:BDI3Mobile.CustomRenderer"
+             xmlns:Styles="clr-namespace:BDI3Mobile.Styles"
+             xmlns:sys="clr-namespace:System;assembly=mscorlib"
+             x:Class="BDI3Mobile.Views.AcademicSurveyView">
+
+
+    <ContentPage.Content>
+        <Grid>
+            <Grid BackgroundColor="#F4F4F4" RowSpacing="0">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="52"/>
+                            <RowDefinition Height="40"/>
+                            <RowDefinition Height="*"/>
+                            <RowDefinition Height="60*"/>
+                            <RowDefinition Height="50"/>
+
+                        </Grid.RowDefinitions>
+                        <AbsoluteLayout Grid.Row="0" BackgroundColor="#BFD730" Padding="12.5, 10.5, 0, 2">
+                            <StackLayout Orientation="Horizontal" AbsoluteLayout.LayoutBounds="0,1,-1,-1" AbsoluteLayout.LayoutFlags="YProportional">
+                                <Image Source="back.png"  HeightRequest="30" WidthRequest="20" VerticalOptions="End"/>
+                                <Label Text="Dashboard" TextColor="White" VerticalTextAlignment="Center" FontSize="17" />
+                                <StackLayout.GestureRecognizers>
+                                    <TapGestureRecognizer Command="{Binding BackCommand}"/>
+                                </StackLayout.GestureRecognizers>
+                            </StackLayout>
+                            <Grid RowSpacing="0">
+                                <Grid.RowDefinitions>
+                                    <RowDefinition/>
+                                    <RowDefinition/>
+                                </Grid.RowDefinitions>
+                                <Label Grid.Row="0" Text="BATTELLE EARLY ACADEMIC SURVEY" FontSize="14" TextColor="Black" HorizontalOptions="CenterAndExpand"
+                               Margin="400,0,0,0"/>
+                                <Label Grid.Row="1" Text="LITERACY FLUENCY (FLU)" FontSize="14"  TextColor="Black" HorizontalOptions="CenterAndExpand"
+                              Margin="400,0,0,0"/>
+                            </Grid>
+                            <Label Text="{Binding AdministrationHeader}" AbsoluteLayout.LayoutBounds="0.5,1,-1,-1" AbsoluteLayout.LayoutFlags="PositionProportional" FontSize="17" TextColor="White" />
+
+                            <StackLayout Spacing="8" Orientation="Horizontal" AbsoluteLayout.LayoutBounds="1,1,-1,-1" AbsoluteLayout.LayoutFlags="PositionProportional" Margin="0,0,24,0">
+                                <Image Source="iconSynca.png" HeightRequest="22" WidthRequest="22" VerticalOptions="End" Margin="0,0,0,3">
+                                    <Image.GestureRecognizers>
+                                        <TapGestureRecognizer Command="{Binding SaveCommand}" />
+                                    </Image.GestureRecognizers>
+                                </Image>
+                                <Image Source="iconReportb.png" HeightRequest="25" WidthRequest="25" VerticalOptions="End" Margin="0,0,0,3">
+                                    <Image.GestureRecognizers>
+                                        <TapGestureRecognizer Command="{Binding ReloadCommand}" />
+                                    </Image.GestureRecognizers>
+                                </Image>
+                                <Image Source="iconRecordNotec.png" HeightRequest="25" WidthRequest="25" VerticalOptions="End" Margin="0,0,0,3">
+                                    <Image.GestureRecognizers>
+                                        <TapGestureRecognizer Command="{Binding ReloadCommand}" />
+                                    </Image.GestureRecognizers>
+                                </Image>
+                                <Image Source="iconNavbard.png" HeightRequest="22" WidthRequest="22" VerticalOptions="End" Margin="0,0,0,3">
+                                    <Image.GestureRecognizers>
+                                        <TapGestureRecognizer Command="{Binding ItemNavigationCommand}" />
+                                    </Image.GestureRecognizers>
+                                </Image>
+                            </StackLayout>
+                        </AbsoluteLayout>
+                        <Grid Grid.Row="1" BackgroundColor="White" Padding="40,0,20,0">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="4*"/>
+                                <ColumnDefinition Width="0.5*"/>
+                                <ColumnDefinition Width="2*"/>
+                            </Grid.ColumnDefinitions>
+                            <StackLayout x:Name="PropStack" Grid.Column="0" VerticalOptions="Center" Orientation="Horizontal" Spacing="15">
+                                <StackLayout x:Name="ChildColumn" Spacing="2" Orientation="{Binding HeaderColoumnLayout, Mode=TwoWay}">
+                                    <Label x:Name="childNameHeader" Text="Child: "/>
+                                    <Label x:Name="childName"/>
+                                </StackLayout>
+                                <StackLayout x:Name="DOBColumn" Spacing="2" Orientation="{Binding HeaderColoumnLayout, Mode=TwoWay}">
+                                    <Label x:Name="dobHeader" Text="DOB: "/>
+                                    <Label x:Name="dob" />
+                                </StackLayout>
+                                <StackLayout x:Name="AgeColumn" Spacing="2" Orientation="{Binding HeaderColoumnLayout, Mode=TwoWay}">
+                                    <Label x:Name="ageHeader" Text="Age: "/>
+                                    <Label x:Name="age"/>
+                                </StackLayout>
+                                <StackLayout x:Name="TestDateColumn" Spacing="2" Orientation="{Binding HeaderColoumnLayout, Mode=TwoWay}">
+                                    <Label x:Name="testDateHeader" Text="Test Date: "/>
+                                    <Label x:Name="testDate" BindingContext="{x:Reference DatePicker_DOB}" Text="{Binding SelectedDate}" TextColor="{x:Static Common:Colors.HyperlinkTextColor}" >
+
+                                    </Label>
+                                </StackLayout>
+                            </StackLayout>
+                            <StackLayout Grid.Column="1"></StackLayout>
+                    <StackLayout Grid.Column="2" Orientation="Horizontal" HorizontalOptions="End" Margin="0,0,10,0" VerticalOptions="Center" Spacing="25">
+                        <StackLayout Orientation="Horizontal" Spacing="7">
+                            <Image Source="{Binding BasalImage, FallbackValue=completed_TickMark.png}"  HeightRequest="22" WidthRequest="22"/>
+                            <Label x:Name="basal" Text="Basal Obtained" VerticalOptions="Center"/>
+                        </StackLayout>
+                        <StackLayout Orientation="Horizontal" Spacing="7">
+                            <Image Source="{Binding CeilingImage, FallbackValue=notStarted.png}" HeightRequest="22" WidthRequest="22"/>
+                            <Label x:Name="ceiling" Text="Ceiling Obtained" VerticalOptions="Center"/>
+                        </StackLayout>
+                    </StackLayout>
+
+                </Grid>
+                        <StackLayout Grid.Row="2">
+                            <BoxView  BackgroundColor="#898D8D" HorizontalOptions="FillAndExpand" HeightRequest="2" />
+                        </StackLayout >
+
+                <Grid Grid.Row="3" Margin="15,15,15,15" ColumnSpacing="30">
+                            <Grid.ColumnDefinitions >
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="*"/>
+                            </Grid.ColumnDefinitions>
+                    
+                    
+                    <StackLayout Grid.Column="0">
+                               <Label   Text="Sample" BackgroundColor="#008299" 
+                             TextColor="White" FontSize="18"  HeightRequest="50"/>
+                                <Label Margin="0,20,0,0" Text="Say, Look at these pictures. They show a cow (point to the cow), a spoon (point to the spoon), a shoe (point to the shoe), a tree (point to the tree), and an apple (point to an apple). Now you say the names of these pictures as fast as you can. If the child incorrectly names a picture, stop him or her, tell the child the correct name of the picture, and then have him or her start the row again. If the child still incorrectly names any pictures or does not respond, discontinue testing." 
+                                   BackgroundColor="White" HeightRequest="250" TextColor="Black"/>
+                                <Label Margin="0,20,0,0" BackgroundColor="LightGreen" HeightRequest="300"/>
+                    </StackLayout>
+                 <StackLayout  Grid.Column="1"  HeightRequest="20"  >
+                  <Grid ColumnSpacing="0" RowSpacing="0" HeightRequest="90" BackgroundColor="White">
+                           <Grid.ColumnDefinitions  >
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="2"/>
+                                <ColumnDefinition Width="*"/>
+                           </Grid.ColumnDefinitions >
+                            <Grid.RowDefinitions >
+                                <RowDefinition Height="AUTO"/>
+                                <RowDefinition Height="Auto"/>
+
+                            </Grid.RowDefinitions>
+                            <StackLayout Spacing="0">
+                                <Label BackgroundColor="White" Margin="40,20,0,0" FontSize="18" TextColor="Black" Grid.Column="0" Grid.Row="0" FontAttributes="Bold" Text="Materials" />
+                                <Label BackgroundColor="White" Margin="40,10,0,0" Grid.Column="0" Grid.Row="1" Text="Timing device"/>
+                            </StackLayout>
+                            <StackLayout Grid.Column="1" HeightRequest="20">
+                                <BoxView  BackgroundColor="#898D8D" Margin="0,15,0,0" HeightRequest="70" HorizontalOptions="Center" VerticalOptions="Center"   WidthRequest="2"   />
+                            </StackLayout>
+
+                            <Label BackgroundColor="White" Grid.Column="2" FontAttributes="Bold" FontSize="30" TextColor="Black" Text="00:00" Margin="10,30,0,0"/>
+                            <StackLayout Grid.Column="2">
+                                <Button Margin="110,30,70,0" Grid.Column="2" Text="Start" TextColor="White"  Clicked="Button_Clicked"/>
+                            </StackLayout>
+                            <Image Source="iconrefreshgray.png" HorizontalOptions="End" Grid.Column="2" Margin="10,30,20,10">
+                                <Image.GestureRecognizers>
+                                    <TapGestureRecognizer Tapped="TapGestureRecognizer_Tapped"/>
+                                </Image.GestureRecognizers>
+                            </Image>
+
+                  </Grid>
+                   <StackLayout Margin="0,20,0,0" BackgroundColor="White">
+                     <BoxView  BackgroundColor="#008299" HorizontalOptions="FillAndExpand" HeightRequest="4" />
+
+                      <Label Text="Row 1" FontSize="16" TextColor="Black" FontAttributes="Bold" 
+                       Margin="40,10,0,0" HorizontalOptions="Start"/>
+
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="AUTO"/>
+                                    <ColumnDefinition Width="AUTO"/>
+                                    <ColumnDefinition Width="AUTO"/>
+                                    <ColumnDefinition Width="AUTO"/>
+
+
+                                </Grid.ColumnDefinitions>
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="60"/>
+                                    <RowDefinition Height="60"/>
+                                </Grid.RowDefinitions>
+                                <Label Text="ROW" Margin="40,0,0,0" HorizontalOptions="Start" TextColor="Black" FontSize="14" FontAttributes="Bold"
+                                                    Grid.Column="0"/>
+                                <Label Text="Item" Margin="60,0,0,0" HorizontalOptions="StartAndExpand" TextColor="Black" FontSize="14" FontAttributes="Bold"
+                                                    Grid.Column="1"/>
+                                <Label Text="CorrectResponse" Margin="60,0,0,0" HorizontalOptions="StartAndExpand" TextColor="Black" FontSize="14" FontAttributes="Bold"
+                                                    Grid.Column="2"/>
+                                <Label Text="Point" Margin="60,0,0,0" TextColor="Black" FontSize="14" HorizontalOptions="End" FontAttributes="Bold"
+                                                    Grid.Column="3"/>
+                                <BoxView    BackgroundColor="#008299" HorizontalOptions="FillAndExpand" HeightRequest="4" />
+                            </Grid>
+
+                            <renderer:MyListView x:Name="ListView"  ItemTapped="ListView_ItemTapped_1"  ItemsSource="{Binding AcadmecSurveyRecords}" HorizontalOptions="FillAndExpand" HasUnevenRows="True">
+                            <!--  <renderer:MyListView.HeaderTemplate>
+                                    <DataTemplate>
+                                        <ViewCell>
+                                          <ViewCell.View>
+
+                                            <Grid>
+                                                    <Grid.ColumnDefinitions>
+                                                        <ColumnDefinition Width="AUTO"/>
+                                                        <ColumnDefinition Width="AUTO"/>
+                                                        <ColumnDefinition Width="AUTO"/>
+                                                        <ColumnDefinition Width="AUTO"/>
+
+
+                                                    </Grid.ColumnDefinitions>
+                                                    <Grid.RowDefinitions>
+                                                        <RowDefinition Height="60"/>
+                                                    </Grid.RowDefinitions>
+                                                    <Label Text="ROW" Margin="40,0,0,0" HorizontalOptions="Start" TextColor="Black" FontSize="14" FontAttributes="Bold"
+                                                    Grid.Column="0"/>
+                                                    <Label Text="Item" Margin="60,0,0,0" HorizontalOptions="StartAndExpand" TextColor="Black" FontSize="14" FontAttributes="Bold"
+                                                    Grid.Column="1"/>
+                                                    <Label Text="CorrectResponse" Margin="60,0,0,0" HorizontalOptions="StartAndExpand" TextColor="Black" FontSize="14" FontAttributes="Bold"
+                                                    Grid.Column="2"/>
+                                                    <Label Text="Point" Margin="60,0,0,0" TextColor="Black" FontSize="14" HorizontalOptions="End" FontAttributes="Bold"
+                                                    Grid.Column="3"/>
+
+                                            </Grid>
+                                          </ViewCell.View>
+                                        </ViewCell>
+                                    </DataTemplate>
+                                </renderer:MyListView.HeaderTemplate>-->
+                       <renderer:MyListView.ItemTemplate>
+                         <DataTemplate>
+                           <ViewCell>
+                             
+
+                              <Grid x:Name="ListView">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="AUTO"/>
+                                    <ColumnDefinition Width="AUTO"/>
+                                    <ColumnDefinition Width="AUTO"/>
+                                    <ColumnDefinition Width="AUTO"/>
+                                  
+                                    
+                                </Grid.ColumnDefinitions>
+                                <Grid.RowDefinitions>
+                                                        <RowDefinition Height="100"/>
+                                                    </Grid.RowDefinitions>
+                                <Label Text="{Binding ROW}" Margin="40,0,0,0" HorizontalOptions="Start" TextColor="Black" FontSize="14" FontAttributes="Bold"
+                                       Grid.Column="0"/>
+                                <Label Text="{Binding Item}" Margin="60,0,0,0" HorizontalOptions="StartAndExpand" TextColor="Black" FontSize="14" FontAttributes="Bold"
+                                       Grid.Column="1"/>
+                                <Label Text="{Binding CorrectResponse}" Margin="60,0,0,0" HorizontalOptions="StartAndExpand" TextColor="Black" FontSize="14" FontAttributes="Bold"
+                                       Grid.Column="2"/>
+                                <Label Text="{Binding Point}" Margin="60,0,0,0" TextColor="Black" FontSize="14" HorizontalOptions="End" FontAttributes="Bold"
+                                       Grid.Column="3"/>
+
+                              </Grid>
+
+                             
+                           </ViewCell>
+                        </DataTemplate>
+                       </renderer:MyListView.ItemTemplate>
+                     </renderer:MyListView>
+
+                   </StackLayout>
+
+                 </StackLayout>
+                     
+                </Grid>
+
+            </Grid>
+
+                    <Grid>
+
+                        <AbsoluteLayout x:Name="footer" Grid.Row="4" Margin="0,90,0,0" BackgroundColor="#BFD730">
+
+                            <StackLayout Orientation="Horizontal" AbsoluteLayout.LayoutBounds="0,1,-1,-1" AbsoluteLayout.LayoutFlags="YProportional">
+                                <Image Source="back.png" HeightRequest="30" WidthRequest="20" VerticalOptions="End"/>
+                                <Label Text="Previous Item" TextColor="White" VerticalTextAlignment="Center" FontSize="17" />
+                            </StackLayout>
+
+                            <StackLayout Orientation="Horizontal" AbsoluteLayout.LayoutBounds="1,1,-1,-1" AbsoluteLayout.LayoutFlags="PositionProportional" Margin="0,0,24,0">
+                                <Label Text="Next Item" TextColor="White" VerticalTextAlignment="Center" FontSize="17" />
+                                <Image Source="next.png" HeightRequest="30" WidthRequest="20" VerticalOptions="End"/>
+                            </StackLayout>
+                        </AbsoluteLayout>
+
+
+                        <Grid x:Name="DatePickerGrid" HeightRequest="210" WidthRequest="300" VerticalOptions="StartAndExpand" Margin="0,70,0,0"  HorizontalOptions="Center">
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="50" />
+                                <RowDefinition Height="*" />
+                            </Grid.RowDefinitions>
+
+                            <renderer:MyDatePicker x:Name="DatePicker_DOB" Format="MM/dd/yyyy" MaximumDate="{x:Static sys:DateTime.Now}" VerticalOptions="CenterAndExpand" WidthRequest="0" HeightRequest="0" IsEnabled="True"/>
+                        </Grid>
+
+
+                    </Grid>
+
+        </Grid>
+
+            
+        
+    </ContentPage.Content>
+
+</ContentPage>

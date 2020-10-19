@@ -1,0 +1,24 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<pages:PopupPage
+             xmlns:pages="clr-namespace:Rg.Plugins.Popup.Pages;assembly=Rg.Plugins.Popup"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:customrenderer="clr-namespace:BDI3Mobile.CustomRenderer"
+    x:Class="BDI3Mobile.Views.PopupViews.FormNoBasalCeiling">
+    
+    <Frame x:Name="ContentFrame" VerticalOptions="Center" HorizontalOptions="Center" WidthRequest="500" HeightRequest="350" Padding="0" BackgroundColor="White" Opacity="1">
+        <StackLayout>
+            <BoxView Color="Green" HeightRequest="4" />
+            <StackLayout Padding="24,24,24,0" Spacing="20">
+                <Label Text="Basal and/or Ceiling Not Obtained" FontSize="20" FontAttributes="Bold" TextColor="Black" />
+                <Label x:Name="message" FontSize="14"></Label>
+                <Label Text="Once you commit, your testing date will be locked in order to provide reporting. All reporting will be available upon committing the record form. You will have 90 days to make changes or edits to your test data." FontSize="14"></Label>
+                <Label Text="Do you still want to commit this record form?" FontAttributes="Bold" FontSize="14"></Label>
+            </StackLayout>
+            <StackLayout Padding="0,20,0,0" HorizontalOptions="Center" VerticalOptions="Center" Orientation="Horizontal">
+                <customrenderer:CustomButtonUWP Text="Cancel" BackgroundColor="#147CBD" WidthRequest="122" HeightRequest="40" TextColor="#FFFFFF" BorderColor="#147cbd" BorderWidth="2" FontAttributes="Bold" Command="{Binding CancelCommand}"/>
+                <customrenderer:CustomButtonUWP Text="Commit" BackgroundColor="#147CBD" WidthRequest="122" HeightRequest="40" TextColor="#FFFFFF" BorderColor="#147cbd" BorderWidth="2" FontAttributes="Bold" Command="{Binding CommitContinue}"/>
+            </StackLayout>
+        </StackLayout>
+    </Frame>
+</pages:PopupPage>

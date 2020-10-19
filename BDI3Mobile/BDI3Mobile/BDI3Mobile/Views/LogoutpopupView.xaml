@@ -1,0 +1,34 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<pages:PopupPage
+    xmlns:pages="clr-namespace:Rg.Plugins.Popup.Pages;assembly=Rg.Plugins.Popup"
+     xmlns="http://xamarin.com/schemas/2014/forms" 
+      xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:customrenderer="clr-namespace:BDI3Mobile.CustomRenderer"
+    x:Class="BDI3Mobile.Views.LogoutpopupView">
+
+
+        <StackLayout Margin="0,0,0,0"  WidthRequest="430" BackgroundColor="White" HorizontalOptions="Center" VerticalOptions="Center">
+          <BoxView HeightRequest="3" CornerRadius="4" WidthRequest="4" Margin="0,0,0,0"  VerticalOptions="StartAndExpand" BackgroundColor="#CC1416"   />
+            <StackLayout >
+                <Label Text="Log Out"  Margin="20,15,0,0"   TextColor="Black" FontSize="22" FontAttributes="Bold"   VerticalOptions="Start"/>
+                <Label  Text="Are you sure you want to log out?"   Margin="20,15,0,0" TextColor="Black" FontSize="14"  VerticalOptions="Start"/>
+            </StackLayout>
+          <Grid Margin="20,30,0,0">
+                <Grid.RowDefinitions>
+                <RowDefinition Height="AUTO"/>
+               </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="AUTO"/>
+                    <ColumnDefinition Width="AUTO"/>
+                </Grid.ColumnDefinitions>
+            <customrenderer:CustomButtonUWP Text="Cancel" BackgroundColor="White" BorderWidth="2" HeightRequest="0"  WidthRequest="130" BorderColor="#147CBD" Margin="0,0,0,20" Grid.Column="0" FontSize="16"   TextColor="#147CBD" Clicked="Button_Clicked"/>
+            <customrenderer:CustomButtonUWP Text="Continue" TextColor="White" HeightRequest="0" FontAttributes="Bold" WidthRequest="130" BackgroundColor="#147CBD" FontSize="16" Margin="120,0,0,20" Grid.Column="1" HorizontalOptions="End" Clicked="Button_Clicked_1"/>
+            <Label Text="" Grid.Row="0" Margin="20,50,0,0"/>
+
+          </Grid>
+
+        </StackLayout>
+
+
+   
+</pages:PopupPage>

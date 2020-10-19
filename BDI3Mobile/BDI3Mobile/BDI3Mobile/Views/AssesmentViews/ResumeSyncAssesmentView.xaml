@@ -1,0 +1,569 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:Common="clr-namespace:BDI3Mobile.Common"
+             x:Class="BDI3Mobile.Views.AssesmentViews.ResumeSyncAssesmentView"
+             xmlns:renderer="clr-namespace:BDI3Mobile.CustomRenderer"
+             xmlns:ia="clr-namespace:IntelliAbb.Xamarin.Controls;assembly=IntelliAbb.Xamarin.Controls"
+             xmlns:Styles="clr-namespace:BDI3Mobile.Styles"
+             x:Name="Page"
+             xmlns:Behaviors="clr-namespace:BDI3Mobile.Behaviors"
+             xmlns:sys="clr-namespace:System;assembly=mscorlib"
+             xmlns:template="clr-namespace:BDI3Mobile.DataTemplates">
+
+    <ContentPage.Resources>
+        <Styles:ListViewResourceDictionary></Styles:ListViewResourceDictionary>
+    </ContentPage.Resources>
+
+    <Grid x:Name="MainGrid" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand">
+        <Grid BackgroundColor="{x:Static Common:Colors.DarkOrangeColor}" RowSpacing="0">
+            <Grid.Margin>
+                <OnPlatform x:TypeArguments="Thickness">
+                    <On Platform="iOS" Value="0, 20, 0, 0" />
+                </OnPlatform>
+            </Grid.Margin>
+            <Grid.GestureRecognizers>
+                <TapGestureRecognizer Tapped="OuterGrid_Tapped"></TapGestureRecognizer>
+            </Grid.GestureRecognizers>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="55"></RowDefinition>
+                <RowDefinition Height="*"></RowDefinition>
+            </Grid.RowDefinitions>
+            <Grid Grid.Row="0" BackgroundColor="{x:Static Common:Colors.DarkOrangeColor}" VerticalOptions="End" Padding="0,0,0,5">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="1*"></ColumnDefinition>
+                    <ColumnDefinition Width="3*"></ColumnDefinition>
+                    <ColumnDefinition Width="1*"></ColumnDefinition>
+                </Grid.ColumnDefinitions>
+                <Grid Grid.Column="0" ColumnSpacing="1" Padding="10,0,0,0">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto"></ColumnDefinition>
+                        <ColumnDefinition Width="Auto"></ColumnDefinition>
+                        <ColumnDefinition Width="*"></ColumnDefinition>
+                    </Grid.ColumnDefinitions>
+                    <Image Grid.Column="0" Source="back.png" HeightRequest="30" WidthRequest="20" VerticalOptions="Center">
+                        <Image.GestureRecognizers>
+                            <TapGestureRecognizer Tapped="Dashboard_TappedAsync"></TapGestureRecognizer>
+                        </Image.GestureRecognizers>
+                    </Image>
+                    <Label Grid.Column="1" Text="Dashboard" FontFamily="{StaticResource SFProRegular}" FontSize="17" HorizontalOptions="Center" VerticalOptions="Center" TextColor="White">
+                        <Label.GestureRecognizers>
+                            <TapGestureRecognizer Tapped="Dashboard_TappedAsync"></TapGestureRecognizer>
+                        </Label.GestureRecognizers>
+                    </Label>
+                </Grid>
+
+                <StackLayout Grid.Column="1" HorizontalOptions="Center" VerticalOptions="Center">
+                    <Label Text="RESUME/COMMIT ASSESSMENTS" FontFamily="{StaticResource SFProRegular}" FontSize="17" HorizontalOptions="Center" VerticalOptions="Center" TextColor="White"></Label>
+                </StackLayout>
+                <StackLayout Margin="0,0,10,0" Orientation="Horizontal" Grid.Column="2" HorizontalOptions="End" Spacing="20" VerticalOptions="Center">
+                    <Image Source="reload.png" HorizontalOptions="Center" VerticalOptions="Center" HeightRequest="22" WidthRequest="22">
+                        <Image.GestureRecognizers>
+                            <TapGestureRecognizer Tapped="ReloadButtonClicked"></TapGestureRecognizer>
+                        </Image.GestureRecognizers>
+                    </Image>
+                    <Image Source="icon_search_white.png" HorizontalOptions="Center" VerticalOptions="Center" HeightRequest="20" WidthRequest="20">
+                        <Image.GestureRecognizers>
+                            <TapGestureRecognizer Tapped="SearchButtonClicked"></TapGestureRecognizer>
+                        </Image.GestureRecognizers>
+                    </Image>
+                </StackLayout>
+            </Grid>
+            <Grid Grid.Row="1" BackgroundColor="{x:Static Common:Colors.BackgroundColor}" Padding="50,40,50,0" RowSpacing="0">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="4"></RowDefinition>
+                    <RowDefinition Height="*"></RowDefinition>
+                </Grid.RowDefinitions>
+                <BoxView Grid.Row="0" HorizontalOptions="FillAndExpand" BackgroundColor="{x:Static Common:Colors.DarkOrangeColor}"></BoxView>
+                <Grid Grid.Row="1" Padding="5,10,0,0" BackgroundColor="{x:Static Common:Colors.WhiteColor}" RowSpacing="3">
+                    <Grid.RowDefinitions>
+                        <RowDefinition x:Name="NameRow" Height="1.5*"></RowDefinition>
+                        <RowDefinition x:Name="EnrollmentRow" Height="1.5*"></RowDefinition>
+                        <RowDefinition x:Name="DateErrorValidtionRow" Height="Auto"/>
+                        <RowDefinition x:Name="SearchEditRow" Height="0"></RowDefinition>
+                        <RowDefinition x:Name="SeparatorRow" Height="0.5*"></RowDefinition>
+                        <RowDefinition x:Name="TableRow">
+                            <RowDefinition.Height>
+                                <OnPlatform x:TypeArguments="GridLength">
+                                    <On Platform="iOS" Value="6*"></On>
+                                    <On Platform="Android" Value="6*"></On>
+                                    <On Platform="UWP" Value="6*"></On>
+                                </OnPlatform>
+                            </RowDefinition.Height>
+                        </RowDefinition>
+                        <RowDefinition x:Name="commitanddeleteButtonRow" Height="40"></RowDefinition>
+                        <RowDefinition Height="0.2*"></RowDefinition>
+                    </Grid.RowDefinitions>
+                    <Grid Grid.Row="0" Padding="10,10,100,0" ColumnSpacing="30">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="3*"></ColumnDefinition>
+                            <ColumnDefinition Width="3*"></ColumnDefinition>
+                            <ColumnDefinition Width="3*"></ColumnDefinition>
+                        </Grid.ColumnDefinitions>
+                        <StackLayout Grid.Column="0" Orientation="Vertical">
+                            <Label Text="TEST NAME" FontSize="12.5" TextColor="{x:Static Common:Colors.LightGrayColor}" FontFamily="{StaticResource ARIALMT}" FontAttributes="None"></Label>
+                            <renderer:MyFrame BindingContext="{x:Reference TestDateFrame}" HeightRequest="{Binding Path=Height}" BorderColor="{x:Static Common:Colors.BorderColor}" VerticalOptions="Center" Padding="0"  HasShadow="False" CornerRadius="1">
+                                <StackLayout Margin="0" Spacing="0" BackgroundColor="White" Padding="0,5,0,0">
+                                    <renderer:BorderlessEntry x:Name="TestName" FontFamily="{StaticResource ARIALMT}"   TextColor="{x:Static Common:Colors.LightGrayColor}" MaxLength="50" Placeholder="Enter test name"  Text="{Binding MyResumeSyncViewModel.TestName, Mode=TwoWay, Source={x:Reference Page}}" FontSize="14">
+                                        <renderer:BorderlessEntry.VerticalOptions>
+                                            <OnPlatform x:TypeArguments="LayoutOptions">
+                                                <On Platform="iOS" Value="CenterAndExpand"></On>
+                                            </OnPlatform>
+                                        </renderer:BorderlessEntry.VerticalOptions>
+                                    </renderer:BorderlessEntry>
+                                </StackLayout>
+                            </renderer:MyFrame>
+                        </StackLayout>
+                        <StackLayout Grid.Column="1" Orientation="Vertical">
+                            <Label  Text="CHILD FIRST NAME" FontSize="12.5" FontFamily="{StaticResource ARIALMT}" TextColor="{x:Static Common:Colors.LightGrayColor}" FontAttributes="None"></Label>
+                            <renderer:MyFrame BindingContext="{x:Reference TestDateFrame}" HeightRequest="{Binding Path=Height}" BorderColor="{x:Static Common:Colors.BorderColor}" VerticalOptions="Center" Padding="0"  HasShadow="False" CornerRadius="1">
+                                <StackLayout Margin="0" Spacing="0" BackgroundColor="White" Padding="0,5,0,0">
+                                    <renderer:BorderlessEntry x:Name="ChildFirstName" FontFamily="{StaticResource ARIALMT}"  TextColor="{x:Static Common:Colors.LightGrayColor}" MaxLength="50" Placeholder="Enter child first name"  Text="{Binding MyResumeSyncViewModel.FirstName, Mode=TwoWay, Source={x:Reference Page}}" FontSize="14">
+                                        <renderer:BorderlessEntry.VerticalOptions>
+                                            <OnPlatform x:TypeArguments="LayoutOptions">
+                                                <On Platform="iOS" Value="CenterAndExpand"></On>
+                                            </OnPlatform>
+                                        </renderer:BorderlessEntry.VerticalOptions>
+                                    </renderer:BorderlessEntry>
+                                </StackLayout>
+                            </renderer:MyFrame>
+                        </StackLayout>
+                        <StackLayout Grid.Column="2" Orientation="Vertical">
+                            <Label Text="CHILD LAST NAME" FontSize="12.5" TextColor="{x:Static Common:Colors.LightGrayColor}" FontFamily="{StaticResource ARIALMT}" FontAttributes="None"></Label>
+                            <renderer:MyFrame BindingContext="{x:Reference TestDateFrame}" HeightRequest="{Binding Path=Height}"  BorderColor="{x:Static Common:Colors.BorderColor}" VerticalOptions="Center" Padding="0"  HasShadow="False" CornerRadius="1">
+                                <StackLayout Margin="0" Spacing="0" BackgroundColor="White" Padding="0,5,0,0">
+                                    <renderer:BorderlessEntry x:Name="ChildLastName" FontFamily="{StaticResource ARIALMT}"  TextColor="{x:Static Common:Colors.LightGrayColor}" MaxLength="50" Placeholder="Enter child last name"  Text="{Binding MyResumeSyncViewModel.LastName, Mode=TwoWay, Source={x:Reference Page}}" FontSize="14">
+                                        <renderer:BorderlessEntry.VerticalOptions>
+                                            <OnPlatform x:TypeArguments="LayoutOptions">
+                                                <On Platform="iOS" Value="CenterAndExpand"></On>
+                                            </OnPlatform>
+                                        </renderer:BorderlessEntry.VerticalOptions>
+                                    </renderer:BorderlessEntry>
+                                </StackLayout>
+                            </renderer:MyFrame>
+                        </StackLayout>
+                    </Grid>
+                    <Grid Grid.Row="1" Padding="10,10,100,0" ColumnSpacing="30">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="3*"></ColumnDefinition>
+                            <ColumnDefinition Width="3*"></ColumnDefinition>
+                            <ColumnDefinition Width="3*"></ColumnDefinition>
+                        </Grid.ColumnDefinitions>
+                        <StackLayout Grid.Column="0" HeightRequest="300" Orientation="Vertical">
+                            <Label  Text="STATUS" TextColor="{x:Static Common:Colors.LightGrayColor}" FontSize="12.5" FontFamily="{StaticResource ARIALMT}" FontAttributes="None"></Label>
+                            <renderer:MyFrame BindingContext="{x:Reference TestDateFrame}" HeightRequest="{Binding Path=Height}" BorderColor="{x:Static Common:Colors.BorderColor}" VerticalOptions="Center" Padding="0"  HasShadow="False" CornerRadius="1">
+                                <StackLayout Margin="0" Padding="0,5,0,0" BackgroundColor="White" Orientation="Horizontal">
+                                    <renderer:BorderlessEntry x:Name="CountryName" MaxLength="30"  InputTransparent="True" FontFamily="{StaticResource ARIALMT}" HorizontalOptions="FillAndExpand"  TextColor="{x:Static Common:Colors.LightGrayColor}" Placeholder="Select test status"  Text="{Binding MyResumeSyncViewModel.Status, Mode=TwoWay, Source={x:Reference Page}}" FontSize="14">
+                                    </renderer:BorderlessEntry>
+                                    <ImageButton InputTransparent="True" Margin="0,0,10,0" Padding="4,4,4,2" Clicked="SelectStatusTapped" IsOpaque="False" Source="downArrow.png" HeightRequest="20" WidthRequest="20" CornerRadius="10" BackgroundColor="{x:Static Common:Colors.FrameBlueColor}" VerticalOptions="Center">
+                                    </ImageButton>
+                                    <StackLayout.GestureRecognizers>
+                                        <TapGestureRecognizer Tapped="SelectStatusTapped"></TapGestureRecognizer>
+                                    </StackLayout.GestureRecognizers>
+                                </StackLayout>
+                            </renderer:MyFrame>
+                        </StackLayout>
+                        <StackLayout Grid.Column="1" Orientation="Vertical">
+                            <Label Text="TEST DATE" TextColor="{x:Static Common:Colors.LightGrayColor}" FontSize="12.5" FontFamily="{StaticResource ARIALMT}"></Label>
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="3*"></ColumnDefinition>
+                                    <ColumnDefinition Width="1.5*"></ColumnDefinition>
+                                </Grid.ColumnDefinitions>
+                                <renderer:MyFrame Grid.Column="0" x:Name="TestDateFrame" WidthRequest="175" BorderColor="{x:Static Common:Colors.BorderColor}" VerticalOptions="Center" Padding="0"  HasShadow="False" CornerRadius="1">
+                                    <StackLayout Margin="0" x:Name="TestDateStackLayout" BackgroundColor="White" Orientation="Horizontal">
+                                        <StackLayout Style="{StaticResource ImageStackLayout}" HorizontalOptions="FillAndExpand">
+                                            <renderer:BorderlessEntry x:Name="TestDate" MaxLength="10" FontFamily="{StaticResource ARIALMT}" HorizontalOptions="FillAndExpand"  TextColor="{x:Static Common:Colors.LightGrayColor}" Placeholder="mm/dd/yyyy"  BindingContext="{x:Reference DOB_Picker}" Text="{Binding SelectedDate}" FontSize="14">
+                                            <renderer:BorderlessEntry.Behaviors>
+                                                <Behaviors:DateFormatValidatorBehaviour/>
+                                            </renderer:BorderlessEntry.Behaviors>
+                                        </renderer:BorderlessEntry>
+                                        </StackLayout>
+                                        <Frame x:Name="TestDateImageFrame" CornerRadius="1" HorizontalOptions="End" BackgroundColor="{x:Static Common:Colors.FrameBlueColor}" Padding="0" HasShadow="false">
+                                            <Image Source="shape.png" Margin="8,8,8,8"/>
+                                            <Frame.GestureRecognizers>
+                                                <TapGestureRecognizer Tapped="TestDate_Tapped"></TapGestureRecognizer>
+                                            </Frame.GestureRecognizers>
+                                        </Frame>
+                                    </StackLayout>
+                                </renderer:MyFrame>
+                            </Grid>
+                            <renderer:MyDatePicker x:Name="DOB_Picker" Format="MM/dd/yyyy" HorizontalOptions="End" MaximumDate="{x:Static sys:DateTime.Now}" VerticalOptions="CenterAndExpand" IsVisible="True" WidthRequest="0" HeightRequest="0" IsEnabled="True"></renderer:MyDatePicker>
+                        </StackLayout>
+                    </Grid>
+
+                    <Grid x:Name="TestDateErrorText" RowSpacing="0" ColumnSpacing="30" Grid.Row="2">
+                         <Grid.Padding>
+                            <OnPlatform x:TypeArguments="Thickness">
+                                <On Platform="iOS" Value="10,-13,100,0" />
+                                <On Platform="UWP" Value="10,0,100,0"/>
+                            </OnPlatform>
+                        </Grid.Padding>
+                         <Grid.ColumnDefinitions>
+                             <ColumnDefinition Width="3*"></ColumnDefinition>
+                            <ColumnDefinition Width="3*"></ColumnDefinition>
+                            <ColumnDefinition Width="3*"></ColumnDefinition>
+                        </Grid.ColumnDefinitions>
+                        <Label VerticalOptions="Start" Text="Please select a valid date format." TextColor="Red" FontSize="Micro" Grid.Column="1" IsVisible="{Binding TestDateIsValid}"/>
+                    </Grid>
+
+                    <Grid x:Name="SearchDeleteChild" Grid.Row="3" Padding="10,0,0,10">
+                    </Grid>
+                    <Grid Grid.Row="4" Padding="50,0,50,0">
+                        <BoxView BackgroundColor="{x:Static Common:Colors.TableBorderColor}" HeightRequest="1.5" VerticalOptions="End" HorizontalOptions="FillAndExpand"></BoxView>
+                    </Grid>
+                    <Grid Grid.Row="5" RowSpacing="0" Padding="10,10,10,0" >
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto"></RowDefinition>
+                            <RowDefinition Height="1"></RowDefinition>
+                            <RowDefinition Height="Auto"></RowDefinition>
+                            <RowDefinition Height="*"></RowDefinition>
+                            <RowDefinition Height="1"></RowDefinition>
+                        </Grid.RowDefinitions>
+                        <StackLayout Grid.Column="0" Padding="0,5,0,10">
+                            <Label VerticalOptions="Center" FontSize="14" Text="{Binding SearchResult}" TextColor="{Binding SearchErrorColor}" IsVisible="{Binding SearchErrorVisible}"></Label>
+                        </StackLayout>
+                        <BoxView Grid.Row="1" BackgroundColor="{x:Static Common:Colors.TableBorderColor}" HorizontalOptions="FillAndExpand"></BoxView>
+                        <Grid Grid.Row="2" RowSpacing="0" BackgroundColor="{x:Static Common:Colors.TableHeaderBackgroundColor}">
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="*"></RowDefinition>
+                                <RowDefinition Height="1"></RowDefinition>
+                            </Grid.RowDefinitions>
+                            <Grid Grid.Row="0">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="1"></ColumnDefinition>
+                                    <ColumnDefinition Width="3*"></ColumnDefinition>
+                                    <ColumnDefinition Width="1"></ColumnDefinition>
+                                    <ColumnDefinition Width="4*"></ColumnDefinition>
+                                    <ColumnDefinition Width="1"></ColumnDefinition>
+                                    <ColumnDefinition Width="2*"></ColumnDefinition>
+                                    <ColumnDefinition Width="1"></ColumnDefinition>
+                                    <ColumnDefinition Width="3*"></ColumnDefinition>
+                                    <ColumnDefinition Width="1"></ColumnDefinition>
+                                    <ColumnDefinition Width="3*"></ColumnDefinition>
+                                    <ColumnDefinition Width="1"></ColumnDefinition>
+                                    <ColumnDefinition Width="2*"></ColumnDefinition>
+                                    <ColumnDefinition Width="1"></ColumnDefinition>
+                                    <ColumnDefinition Width="2*"></ColumnDefinition>
+                                    <ColumnDefinition Width="1"></ColumnDefinition>
+                                </Grid.ColumnDefinitions>
+                                <BoxView Grid.Column="0" BackgroundColor="{x:Static Common:Colors.TableBorderColor}" VerticalOptions="FillAndExpand"></BoxView>
+                                <StackLayout HorizontalOptions="Center" Grid.Column="1" Orientation="Horizontal" Spacing="8">
+                                    <ia:Checkbox OutlineWidth="2"  x:Name="AwesomeCheckbox" Shape="Rectangle" IsChecked="{Binding SelectAll}"/>
+                                    <Label Text="Select All" FontSize="13" FontFamily="{StaticResource Arial-Bold}" FontAttributes="Bold" HorizontalOptions="Center" VerticalOptions="Center"></Label>
+                                </StackLayout>
+                                <BoxView Grid.Column="2" BackgroundColor="{x:Static Common:Colors.TableHeaderBackgroundColor}" VerticalOptions="FillAndExpand"></BoxView>
+                                <StackLayout Grid.Column="3" HorizontalOptions="Start" VerticalOptions="Center" Spacing="7" Orientation="Horizontal">
+                                    <Label FontSize="13" Text="Test Name" HorizontalOptions="Center" VerticalOptions="Center" FontFamily="{StaticResource Arial-Bold}" FontAttributes="Bold"></Label>
+                                    <Label Text="&#x25B2;" FontSize="10" HeightRequest="13" VerticalOptions="Center" HorizontalOptions="Center">
+                                        <Label.Margin>
+                                            <OnPlatform x:TypeArguments="Thickness">
+                                                <On Platform="iOS" Value="0,0,0,0" />
+                                                <On Platform="Android" Value="0,0,0,0"></On>
+                                                <On Platform="UWP" Value="0,5,0,0"></On>
+                                            </OnPlatform>
+                                        </Label.Margin>
+                                    </Label>
+                                </StackLayout>
+                                <BoxView Grid.Column="4" BackgroundColor="{x:Static Common:Colors.TableHeaderBackgroundColor}" VerticalOptions="FillAndExpand"></BoxView>
+                                <StackLayout Grid.Column="5" HorizontalOptions="Start" VerticalOptions="Center" Spacing="7" Orientation="Horizontal">
+                                    <Label FontSize="13" Text="Test Date" HorizontalOptions="Center" VerticalOptions="Center" FontFamily="{StaticResource Arial-Bold}" FontAttributes="Bold"></Label>
+                                    <StackLayout HeightRequest="30" WidthRequest="15" Spacing="-3" HorizontalOptions="Start" VerticalOptions="End" Orientation="Vertical">
+                                        <Label Text="&#x25B2;" FontSize="10" TextColor="{x:Static Common:Colors.TableBorderColor}" HeightRequest="13" VerticalOptions="End"></Label>
+                                        <Label Text="&#x25BC;" HeightRequest="13" FontSize="10" TextColor="{x:Static Common:Colors.TableBorderColor}"  VerticalOptions="Start"></Label>
+                                        <StackLayout.Padding>
+                                            <OnPlatform x:TypeArguments="Thickness">
+                                                <On Platform="iOS" Value="0,7,0,0" />
+                                                <On Platform="Android" Value="0,7,0,0"></On>
+                                                <On Platform="UWP" Value="0,12,0,0"></On>
+                                            </OnPlatform>
+                                        </StackLayout.Padding>
+                                    </StackLayout>
+                                </StackLayout>
+                                <BoxView Grid.Column="6" BackgroundColor="{x:Static Common:Colors.TableHeaderBackgroundColor}" VerticalOptions="FillAndExpand"></BoxView>
+                                <StackLayout Grid.Column="7" HorizontalOptions="Start" VerticalOptions="Center" Spacing="7" Orientation="Horizontal">
+                                    <Label FontSize="13" Text="Child Last Name" HorizontalOptions="Center" VerticalOptions="Center" FontFamily="{StaticResource Arial-Bold}" FontAttributes="Bold"></Label>
+                                    <StackLayout HeightRequest="30" WidthRequest="15" Spacing="-3" HorizontalOptions="Start" VerticalOptions="End" Orientation="Vertical">
+                                        <Label Text="&#x25B2;" FontSize="10" TextColor="{x:Static Common:Colors.TableBorderColor}" HeightRequest="13" VerticalOptions="End"></Label>
+                                        <Label Text="&#x25BC;" HeightRequest="13" FontSize="10" TextColor="{x:Static Common:Colors.TableBorderColor}" VerticalOptions="Start"></Label>
+                                        <StackLayout.Padding>
+                                            <OnPlatform x:TypeArguments="Thickness">
+                                                <On Platform="iOS" Value="0,7,0,0" />
+                                                <On Platform="Android" Value="0,7,0,0"></On>
+                                                <On Platform="UWP" Value="0,12,0,0"></On>
+                                            </OnPlatform>
+                                        </StackLayout.Padding>
+                                    </StackLayout>
+                                </StackLayout>
+                                <BoxView Grid.Column="8" BackgroundColor="{x:Static Common:Colors.TableHeaderBackgroundColor}" VerticalOptions="FillAndExpand"></BoxView>
+                                <StackLayout Grid.Column="9" HorizontalOptions="Start" VerticalOptions="Center" Spacing="7" Orientation="Horizontal">
+                                    <Label FontSize="13" Text="Child First Name" HorizontalOptions="Center" VerticalOptions="Center" FontFamily="{StaticResource Arial-Bold}" FontAttributes="Bold"></Label>
+                                    <StackLayout HeightRequest="30" WidthRequest="15" Spacing="-3" HorizontalOptions="Start" VerticalOptions="End" Orientation="Vertical">
+                                        <Label Text="&#x25B2;" FontSize="10" TextColor="{x:Static Common:Colors.TableBorderColor}" HeightRequest="13" VerticalOptions="End"></Label>
+                                        <Label Text="&#x25BC;" HeightRequest="13" FontSize="10" TextColor="{x:Static Common:Colors.TableBorderColor}"  VerticalOptions="Start"></Label>
+                                        <StackLayout.Padding>
+                                            <OnPlatform x:TypeArguments="Thickness">
+                                                <On Platform="iOS" Value="0,7,0,0" />
+                                                <On Platform="Android" Value="0,7,0,0"></On>
+                                                <On Platform="UWP" Value="0,12,0,0"></On>
+                                            </OnPlatform>
+                                        </StackLayout.Padding>
+                                    </StackLayout>
+                                </StackLayout>
+                                <BoxView Grid.Column="10" BackgroundColor="{x:Static Common:Colors.TableHeaderBackgroundColor}" VerticalOptions="FillAndExpand"></BoxView>
+                                <StackLayout Grid.Column="11" HorizontalOptions="Start" VerticalOptions="Center" Spacing="7" Orientation="Horizontal">
+                                    <Label FontSize="13" Text="Status" HorizontalOptions="Center" VerticalOptions="Center" FontFamily="{StaticResource Arial-Bold}" FontAttributes="Bold"></Label>
+                                    <StackLayout HeightRequest="30" WidthRequest="15" Spacing="-3" HorizontalOptions="Start" VerticalOptions="End" Orientation="Vertical">
+                                        <Label Text="&#x25B2;" FontSize="10" TextColor="{x:Static Common:Colors.TableBorderColor}" HeightRequest="13" VerticalOptions="End"></Label>
+                                        <Label Text="&#x25BC;" HeightRequest="13" FontSize="10" TextColor="{x:Static Common:Colors.TableBorderColor}"  VerticalOptions="Start"></Label>
+                                        <StackLayout.Padding>
+                                            <OnPlatform x:TypeArguments="Thickness">
+                                                <On Platform="iOS" Value="0,7,0,0" />
+                                                <On Platform="Android" Value="0,7,0,0"></On>
+                                                <On Platform="UWP" Value="0,12,0,0"></On>
+                                            </OnPlatform>
+                                        </StackLayout.Padding>
+                                    </StackLayout>
+                                </StackLayout>
+                                <BoxView Grid.Column="12" BackgroundColor="{x:Static Common:Colors.TableHeaderBackgroundColor}" VerticalOptions="FillAndExpand"></BoxView>
+                                <StackLayout Grid.Column="13" HorizontalOptions="Center" VerticalOptions="Center" Spacing="7" Orientation="Horizontal">
+                                    <Label FontSize="13" Text="Sync Status" HorizontalOptions="Center" VerticalOptions="Center" FontFamily="{StaticResource Arial-Bold}" FontAttributes="Bold"></Label>
+                                    <StackLayout HeightRequest="30" WidthRequest="15" Spacing="-3" HorizontalOptions="Start" VerticalOptions="End" Orientation="Vertical">
+                                        <Label Text="&#x25B2;" FontSize="10" TextColor="{x:Static Common:Colors.TableBorderColor}" HeightRequest="13" VerticalOptions="End"></Label>
+                                        <Label Text="&#x25BC;" HeightRequest="13" FontSize="10" TextColor="{x:Static Common:Colors.TableBorderColor}"  VerticalOptions="Start"></Label>
+                                        <StackLayout.Padding>
+                                            <OnPlatform x:TypeArguments="Thickness">
+                                                <On Platform="iOS" Value="0,7,0,0" />
+                                                <On Platform="Android" Value="0,7,0,0"></On>
+                                                <On Platform="UWP" Value="0,12,0,0"></On>
+                                            </OnPlatform>
+                                        </StackLayout.Padding>
+                                    </StackLayout>
+                                </StackLayout>
+                                <BoxView Grid.Column="14" BackgroundColor="{x:Static Common:Colors.TableBorderColor}" VerticalOptions="FillAndExpand"></BoxView>
+                            </Grid>
+                            <BoxView Grid.Row="1" HeightRequest="1" BackgroundColor="{x:Static Common:Colors.TableBorderColor}"></BoxView>
+                        </Grid>
+                        <StackLayout Grid.Row="3" Spacing="0">
+                            <StackLayout.Resources>
+                                <ResourceDictionary>
+                                    <DataTemplate x:Key="evenTemplate">
+                                        <ViewCell>
+                                            <ViewCell.View>
+                                                <StackLayout Orientation="Vertical" Spacing="0" Height="{Binding RowHeight, Mode=TwoWay}">
+
+                                                    <Grid BackgroundColor="{x:Static Common:Colors.WhiteColor}">
+                                                        <Grid.ColumnDefinitions>
+                                                            <ColumnDefinition Width="1"></ColumnDefinition>
+                                                            <ColumnDefinition Width="3*"></ColumnDefinition>
+                                                            <ColumnDefinition Width="1"></ColumnDefinition>
+                                                            <ColumnDefinition Width="4*"></ColumnDefinition>
+                                                            <ColumnDefinition Width="1"></ColumnDefinition>
+                                                            <ColumnDefinition Width="2*"></ColumnDefinition>
+                                                            <ColumnDefinition Width="1"></ColumnDefinition>
+                                                            <ColumnDefinition Width="3*"></ColumnDefinition>
+                                                            <ColumnDefinition Width="1"></ColumnDefinition>
+                                                            <ColumnDefinition Width="3*"></ColumnDefinition>
+                                                            <ColumnDefinition Width="1"></ColumnDefinition>
+                                                            <ColumnDefinition Width="2*"></ColumnDefinition>
+                                                            <ColumnDefinition Width="1"></ColumnDefinition>
+                                                            <ColumnDefinition Width="2*"></ColumnDefinition>
+                                                            <ColumnDefinition Width="1"></ColumnDefinition>
+                                                        </Grid.ColumnDefinitions>
+                                                        <BoxView Grid.Column="0" BackgroundColor="{x:Static Common:Colors.TableBorderColor}" VerticalOptions="FillAndExpand"></BoxView>
+                                                        <ia:Checkbox OutlineWidth="2"  FillColor="{Binding FillColor, Mode=TwoWay}" IsVisible="{Binding IsCheckboxVisible}" OutlineColor="{Binding OutlineColor, Mode=TwoWay}" Grid.Column="1" Shape="Rectangle" IsChecked="{Binding IsSelected, Mode=TwoWay}" IsCheckedChanged="Checkbox_IsCheckedChanged"/>
+                                                        <BoxView Grid.Column="2" BackgroundColor="White" VerticalOptions="FillAndExpand"></BoxView>
+                                                        <Label Grid.Column="3" HorizontalOptions="Start" VerticalOptions="Center">
+                                                            <Label.FormattedText>
+                                                                <FormattedString>
+                                                                    <Span Text="{Binding AssessmentName}" TextColor="{x:Static Common:Colors.HyperlinkTextColor}" FontSize="13" FontFamily="{StaticResource ARIALMT}" TextDecorations="Underline"></Span>
+                                                                </FormattedString>
+                                                            </Label.FormattedText>
+                                                            <Label.GestureRecognizers>
+                                                                <TapGestureRecognizer Command="{Binding Path=BindingContext.TestRecordNavigCommand, Source={x:Reference Page}}" CommandParameter="{Binding .}" />
+                                                            </Label.GestureRecognizers>
+                                                        </Label>
+                                                        <BoxView Grid.Column="4" BackgroundColor="White" VerticalOptions="FillAndExpand"></BoxView>
+                                                        <Label Grid.Column="5" FontSize="13" Text="{Binding TestDate}" TextColor="{x:Static Common:Colors.TableFieldsColor}" FontFamily="{StaticResource ARIALMT}" HorizontalOptions="Start" VerticalOptions="Center"></Label>
+                                                        <BoxView Grid.Column="6"  BackgroundColor="White" VerticalOptions="FillAndExpand"></BoxView>
+                                                        <Label Grid.Column="7" FontSize="13" FontFamily="{StaticResource ARIALMT}" Text="{Binding ChildLastName}" TextColor="{x:Static Common:Colors.TableFieldsColor}" HorizontalOptions="Start" VerticalOptions="Center"></Label>
+                                                        <BoxView Grid.Column="8" BackgroundColor="White" VerticalOptions="FillAndExpand"></BoxView>
+                                                        <Label Grid.Column="9" FontSize="13" FontFamily="{StaticResource ARIALMT}" Text="{Binding ChildFirstName}" TextColor="{x:Static Common:Colors.TableFieldsColor}" HorizontalOptions="Start" VerticalOptions="Center"></Label>
+                                                        <BoxView Grid.Column="10" BackgroundColor="White" VerticalOptions="FillAndExpand"></BoxView>
+                                                        <Label Grid.Column="11" FontSize="13" FontFamily="{StaticResource ARIALMT}" Text="{Binding Status}" TextColor="{x:Static Common:Colors.TableFieldsColor}" HorizontalOptions="Start" VerticalOptions="Center"></Label>
+                                                        <BoxView Grid.Column="12" BackgroundColor="White" VerticalOptions="FillAndExpand"></BoxView>
+                                                        <Label Grid.Column="13" HorizontalOptions="Start" VerticalOptions="Center">
+                                                            <Label.FormattedText>
+                                                                <FormattedString>
+                                                                    <Span Text="{Binding SyncStatus}" TextColor="{x:Static Common:Colors.HyperlinkTextColor}" FontSize="13" FontFamily="{StaticResource ARIALMT}" TextDecorations="Underline"></Span>
+                                                                </FormattedString>
+                                                            </Label.FormattedText>
+                                                            <Label.GestureRecognizers>
+                                                                <TapGestureRecognizer Tapped="TapGestureRecognizer_Tapped" />
+                                                            </Label.GestureRecognizers>
+                                                        </Label>
+                                                        <BoxView Grid.Column="14" BackgroundColor="{x:Static Common:Colors.TableBorderColor}" VerticalOptions="FillAndExpand"></BoxView>
+                                                    </Grid>
+                                                    <BoxView HeightRequest="1" HorizontalOptions="FillAndExpand" IsVisible="{Binding IsTableSepartorVisble, Mode=TwoWay}" BackgroundColor="{x:Static Common:Colors.TableBorderColor}"></BoxView>
+                                                    
+                                                </StackLayout>
+                                            </ViewCell.View>
+                                        </ViewCell>
+                                    </DataTemplate>
+                                    <DataTemplate x:Key="unevenTemplate">
+                                        <ViewCell>
+                                            <ViewCell.View>
+                                                <StackLayout Orientation="Vertical" Spacing="0" Height="{Binding RowHeight, Mode=TwoWay}">
+                                                    <Grid BackgroundColor="{x:Static Common:Colors.TableUnEvenRowColor}">
+                                                        <Grid.ColumnDefinitions>
+                                                            <ColumnDefinition Width="1"></ColumnDefinition>
+                                                            <ColumnDefinition Width="3*"></ColumnDefinition>
+                                                            <ColumnDefinition Width="1"></ColumnDefinition>
+                                                            <ColumnDefinition Width="4*"></ColumnDefinition>
+                                                            <ColumnDefinition Width="1"></ColumnDefinition>
+                                                            <ColumnDefinition Width="2*"></ColumnDefinition>
+                                                            <ColumnDefinition Width="1"></ColumnDefinition>
+                                                            <ColumnDefinition Width="3*"></ColumnDefinition>
+                                                            <ColumnDefinition Width="1"></ColumnDefinition>
+                                                            <ColumnDefinition Width="3*"></ColumnDefinition>
+                                                            <ColumnDefinition Width="1"></ColumnDefinition>
+                                                            <ColumnDefinition Width="2*"></ColumnDefinition>
+                                                            <ColumnDefinition Width="1"></ColumnDefinition>
+                                                            <ColumnDefinition Width="2*"></ColumnDefinition>
+                                                            <ColumnDefinition Width="1"></ColumnDefinition>
+                                                        </Grid.ColumnDefinitions>
+                                                        <BoxView Grid.Column="0" BackgroundColor="{x:Static Common:Colors.TableBorderColor}" VerticalOptions="FillAndExpand"></BoxView>
+                                                        <ia:Checkbox OutlineWidth="2" FillColor="{Binding FillColor, Mode=TwoWay}" IsVisible="{Binding IsCheckboxVisible}" OutlineColor="{Binding OutlineColor, Mode=TwoWay}" Grid.Column="1" Shape="Rectangle" IsCheckedChanged="Checkbox_IsCheckedChanged"
+                                                                 IsChecked="{Binding IsSelected, Mode=TwoWay}"/>
+                                                        <BoxView Grid.Column="2" BackgroundColor="{x:Static Common:Colors.TableUnEvenRowColor}" VerticalOptions="FillAndExpand"></BoxView>
+                                                        <Label Grid.Column="3" HorizontalOptions="Start" VerticalOptions="Center">
+                                                            <Label.FormattedText>
+                                                                <FormattedString>
+                                                                    <Span Text="{Binding AssessmentName}" TextColor="{x:Static Common:Colors.HyperlinkTextColor}" FontSize="13" FontFamily="{StaticResource ARIALMT}" TextDecorations="Underline"></Span>
+                                                                </FormattedString>
+                                                            </Label.FormattedText>
+                                                            <Label.GestureRecognizers>
+                                                                <TapGestureRecognizer  Command="{Binding Path=BindingContext.TestRecordNavigCommand, Source={x:Reference Page}}" CommandParameter="{Binding .}" />
+                                                            </Label.GestureRecognizers>
+                                                        </Label>
+                                                        <BoxView Grid.Column="4" BackgroundColor="{x:Static Common:Colors.TableUnEvenRowColor}" VerticalOptions="FillAndExpand"></BoxView>
+                                                        <Label Grid.Column="5" FontSize="13" Text="{Binding TestDate}" FontFamily="{StaticResource ARIALMT}" HorizontalOptions="Start" VerticalOptions="Center"></Label>
+                                                        <BoxView Grid.Column="6"  BackgroundColor="{x:Static Common:Colors.TableUnEvenRowColor}" VerticalOptions="FillAndExpand"></BoxView>
+                                                        <Label Grid.Column="7" FontSize="13" FontFamily="{StaticResource ARIALMT}" Text="{Binding ChildLastName}" HorizontalOptions="Start" VerticalOptions="Center"></Label>
+                                                        <BoxView Grid.Column="8" BackgroundColor="{x:Static Common:Colors.TableUnEvenRowColor}" VerticalOptions="FillAndExpand"></BoxView>
+                                                        <Label Grid.Column="9" FontSize="13" FontFamily="{StaticResource ARIALMT}" Text="{Binding ChildFirstName}" HorizontalOptions="Start" VerticalOptions="Center"></Label>
+                                                        <BoxView Grid.Column="10" BackgroundColor="{x:Static Common:Colors.TableUnEvenRowColor}" VerticalOptions="FillAndExpand"></BoxView>
+                                                        <Label Grid.Column="11" FontSize="13" FontFamily="{StaticResource ARIALMT}" Text="{Binding Status}" HorizontalOptions="Start" VerticalOptions="Center"></Label>
+                                                        <BoxView Grid.Column="12" BackgroundColor="{x:Static Common:Colors.TableUnEvenRowColor}" VerticalOptions="FillAndExpand"></BoxView>
+                                                        <Label Grid.Column="13" HorizontalOptions="Start" VerticalOptions="Center">
+                                                            <Label.FormattedText>
+                                                                <FormattedString>
+                                                                    <Span Text="{Binding SyncStatus}" TextColor="{x:Static Common:Colors.HyperlinkTextColor}" FontSize="13" FontFamily="{StaticResource ARIALMT}" TextDecorations="Underline"></Span>
+                                                                </FormattedString>
+                                                            </Label.FormattedText>
+                                                            <Label.GestureRecognizers>
+                                                                <TapGestureRecognizer Tapped="TapGestureRecognizer_Tapped" />
+                                                            </Label.GestureRecognizers>
+                                                        </Label>
+                                                        <BoxView Grid.Column="14" BackgroundColor="{x:Static Common:Colors.TableBorderColor}" VerticalOptions="FillAndExpand"></BoxView>
+                                                    </Grid>
+                                                    <BoxView HeightRequest="1" HorizontalOptions="FillAndExpand" IsVisible="{Binding IsTableSepartorVisble, Mode=TwoWay}" BackgroundColor="{x:Static Common:Colors.TableBorderColor}"></BoxView>
+                                                </StackLayout>
+                                            </ViewCell.View>
+                                        </ViewCell>
+                                    </DataTemplate>
+                                    <template:AlternateColorDataTemplateSelector x:Key="alternateColorDataTemplateSelector"
+                                        EvenTemplate="{StaticResource evenTemplate}"
+                                        UnevenTemplate="{StaticResource unevenTemplate}" />
+                                </ResourceDictionary>
+                            </StackLayout.Resources>
+                            <renderer:MyListView x:Name="TestRecordListView" ItemTemplate="{StaticResource alternateColorDataTemplateSelector}" ItemsSource="{Binding ChildAssessmentRecords, Mode=TwoWay}" Style="{StaticResource UWPListStyleSelector}" HorizontalOptions="FillAndExpand" ItemSelected="ChildRecords_ItemSelected" HasUnevenRows="True" SizeChanged="Records_SizeChanged">
+                            </renderer:MyListView>
+                            <BoxView Grid.Row="4" HeightRequest="1" BackgroundColor="{x:Static Common:Colors.TableBorderColor}" IsVisible="{Binding MyResumeSyncViewModel.IsTableBottomLineVisible, Mode=TwoWay, Source={x:Reference Page}}"></BoxView>
+                        </StackLayout>
+                    </Grid>
+
+                    <FlexLayout Grid.Row="6">
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="Auto"/>
+                                <ColumnDefinition Width="Auto"/>
+                            </Grid.ColumnDefinitions>
+                            <renderer:CustomButtonUWP x:Name="btnCommit" Command="{Binding SyncCommand}" PropertyChanged="btnCommit_PropertyChanged"  BorderColor="Transparent" Margin="0,0,0,0" WidthRequest="100" BorderWidth="2" Text="Commit" FontSize="14" TextColor="White"  Grid.Column="0" HorizontalOptions="Start" CornerRadius="3"  FontAttributes="Bold" IsEnabled="{Binding EnableSync,Mode=TwoWay}">
+                                <renderer:CustomButtonUWP.IsVisible>
+                                    <OnPlatform x:TypeArguments="x:Boolean">
+                                        <On Platform="iOS">false</On>
+                                        <On Platform="Android">true</On>
+                                        <On Platform="UWP">true</On>
+                                    </OnPlatform>
+                                </renderer:CustomButtonUWP.IsVisible>
+                            </renderer:CustomButtonUWP>
+                            <renderer:CustomButton x:Name="btnCommitiOS" Command="{Binding SyncCommand}" BorderColor="Transparent" Margin="0,0,0,0" WidthRequest="100" BorderWidth="2" Text="Commit" FontSize="14" TextColor="White"  Grid.Column="0" HorizontalOptions="Start" CornerRadius="3"  FontAttributes="Bold" IsEnabled="{Binding EnableSync,Mode=TwoWay}">
+                                <renderer:CustomButton.IsVisible>
+                                    <OnPlatform x:TypeArguments="x:Boolean">
+                                        <On Platform="iOS">true</On>
+                                        <On Platform="Android">false</On>
+                                        <On Platform="UWP">false</On>
+                                    </OnPlatform>
+                                </renderer:CustomButton.IsVisible>
+                            </renderer:CustomButton>
+                            <renderer:CustomButtonUWP  x:Name="btnDelete" Command="{Binding DeleteCommand}" PropertyChanged="btnDelete_PropertyChanged" BorderColor="Transparent" Margin="0,0,0,0" WidthRequest="100" BorderWidth="2" Text="Delete" FontSize="14" TextColor="White" Grid.Column="1" HorizontalOptions="Start" CornerRadius="3" FontAttributes="Bold" IsEnabled="{Binding EnableSync,Mode=TwoWay}">
+                                <renderer:CustomButtonUWP.IsVisible>
+                                    <OnPlatform x:TypeArguments="x:Boolean">
+                                        <On Platform="iOS">false</On>
+                                        <On Platform="Android">true</On>
+                                        <On Platform="UWP">true</On>
+                                    </OnPlatform>
+                                </renderer:CustomButtonUWP.IsVisible>
+                            </renderer:CustomButtonUWP>
+                            <renderer:CustomButton  x:Name="btnDeleteiOS" Command="{Binding DeleteCommand}" BorderColor="Transparent" Margin="0,0,0,0" WidthRequest="100" BorderWidth="2" Text="Delete" FontSize="14" TextColor="White" Grid.Column="1" HorizontalOptions="Start" CornerRadius="3" FontAttributes="Bold" IsEnabled="{Binding EnableSync,Mode=TwoWay}">
+                                <renderer:CustomButton.IsVisible>
+                                    <OnPlatform x:TypeArguments="x:Boolean">
+                                        <On Platform="iOS">true</On>
+                                        <On Platform="Android">false</On>
+                                        <On Platform="UWP">false</On>
+                                    </OnPlatform>
+                                </renderer:CustomButton.IsVisible>
+                            </renderer:CustomButton>
+                        </Grid>
+                    </FlexLayout>
+
+                </Grid>
+                
+            </Grid>
+        </Grid>
+
+        <Frame Opacity="0.2" IsVisible="{Binding Cover}" BackgroundColor="Black">
+            <Frame.GestureRecognizers>
+                <TapGestureRecognizer Command="{Binding UnCoverCommand}" />
+            </Frame.GestureRecognizers>
+        </Frame>
+
+        <Grid HeightRequest="170" WidthRequest="300" Padding="20,0,20,0" VerticalOptions="Center" HorizontalOptions="Center" IsVisible="{Binding ShowTestSelection}">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="50" />
+                <RowDefinition Height="*" />
+            </Grid.RowDefinitions>
+            <Frame Grid.RowSpan="2" BackgroundColor="#2673BB" CornerRadius="20">
+            </Frame>
+            <Frame HasShadow="false" Grid.Row="1" BackgroundColor="White" CornerRadius="20" />
+            <renderer:MyListView x:Name="teststatus" RowHeight="44" Grid.Row="1" ItemsSource="{Binding TestRecordStatusList}" ItemTapped="TestStatus_Selected" IsRefreshing="False" Margin="0,0,0,20">
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <ViewCell>
+                            <ViewCell.View>
+                                <StackLayout Orientation="Horizontal" Padding="10,5" BackgroundColor="White">
+                                    <Label Text="{Binding StatusText}" VerticalOptions="Center" HorizontalOptions="FillAndExpand" TextColor="Black"></Label>
+                                    <Image HeightRequest="20" WidthRequest="20" VerticalOptions="Center" Source="checkmark.png" IsVisible="{Binding Selected}" />
+                                </StackLayout>
+                            </ViewCell.View>
+                        </ViewCell>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </renderer:MyListView>
+            <Label Text="SELECT TEST STATUS" TextColor="White" HeightRequest="50" VerticalTextAlignment="Center" HorizontalTextAlignment="Center" VerticalOptions="Center" FontSize="17" FontAttributes="Bold" />
+        </Grid>
+        
+    </Grid>
+
+</ContentPage>

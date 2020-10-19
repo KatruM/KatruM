@@ -1,0 +1,139 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<pages:PopupPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:pages="clr-namespace:Rg.Plugins.Popup.Pages;assembly=Rg.Plugins.Popup"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+                 xmlns:renderer="clr-namespace:BDI3Mobile.CustomRenderer"
+                 xmlns:Common="clr-namespace:BDI3Mobile.Common"
+                 xmlns:sys="clr-namespace:System;assembly=mscorlib"
+                 xmlns:template="clr-namespace:BDI3Mobile.DataTemplates"
+                 xmlns:Styles="clr-namespace:BDI3Mobile.Styles"
+                 xmlns:converters="clr-namespace:BDI3Mobile.ValueConverter"
+                 xmlns:ia="clr-namespace:IntelliAbb.Xamarin.Controls;assembly=IntelliAbb.Xamarin.Controls"
+                 xmlns:ffImageLoading="clr-namespace:FFImageLoading.Forms;assembly=FFImageLoading.Forms"
+                 x:Class="BDI3Mobile.Views.BasicReport"
+                 xmlns:local="clr-namespace:BDI3Mobile.Behaviors"
+                 x:Name="Page">
+    <AbsoluteLayout>
+        <Frame AbsoluteLayout.LayoutBounds="0,0,1,1" AbsoluteLayout.LayoutFlags="All" BackgroundColor="White" x:Name="MainFrame" HorizontalOptions="Center" VerticalOptions="Center" Padding="0,4,0,0">
+            <Frame.Margin>
+                <OnPlatform x:TypeArguments="Thickness">
+                    <On Platform="UWP" Value="100,50,100,50"/>
+                    <On Platform="Android" Value="90,50,90,50"/>
+                      <On Platform="iOS" Value="20,10,20,0"/>
+                </OnPlatform>
+            </Frame.Margin>
+            <StackLayout Margin="10,10,10,10"   BackgroundColor="White" >
+                <StackLayout>
+                    <Label Margin="30,30,50,0" Text="Basic Report" FontSize="Medium" FontAttributes="Bold" HorizontalOptions="Start"  />
+                    <StackLayout  Orientation="Horizontal" Margin="0,30,0,0">
+                        <Label Text="LOCATION" FontSize="15" TextColor="Gray" Margin="30,0,0,0" MinimumWidthRequest="100" VerticalOptions="CenterAndExpand">
+                        </Label>
+                        <Grid HorizontalOptions="FillAndExpand">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="500*"/>
+                            </Grid.ColumnDefinitions>
+                            <renderer:MyFrame Grid.Column="0" BorderColor="Gray" HeightRequest="35" Margin="120,0,10,0" VerticalOptions="CenterAndExpand" HorizontalOptions="FillAndExpand"  HasShadow="false" CornerRadius="1" Padding="0" >
+                                <renderer:BorderlessEntry x:Name="LocationText" IsTabStop="False" InputTransparent="True" TextColor="{x:Static Common:Colors.LightGrayColor}" FontFamily="{StaticResource ARIALMT}" Placeholder="Select location"  Text="{Binding LocationsSelected}" FontSize="14" TextChanged="TextChanged"/>
+                            </renderer:MyFrame>
+                            <ImageButton InputTransparent="True"  HorizontalOptions="End" Grid.Column="0"  Margin="0,5,20,0" Padding="4,4,4,2"   IsOpaque="False" Source="downArrow.png" HeightRequest="20" WidthRequest="20" CornerRadius="10" BackgroundColor="{x:Static Common:Colors.FrameBlueColor}" VerticalOptions="Start">
+                                <ImageButton.GestureRecognizers>
+                                    <TapGestureRecognizer  Command="{Binding OpenLocationPopupCommand}" />
+                                </ImageButton.GestureRecognizers>                                
+                            </ImageButton>
+                            <Grid.GestureRecognizers>
+                                <TapGestureRecognizer Command="{Binding OpenLocationPopupCommand}"/>
+                            </Grid.GestureRecognizers>
+                        </Grid>
+                    </StackLayout>
+                    <StackLayout  Orientation="Horizontal" Margin="0,20,0,0">
+                        <StackLayout Spacing="0" Orientation="Horizontal">
+                            <Label Text="CHILD" FontSize="15" TextColor="Gray" Margin="30,30,0,0" MinimumWidthRequest="100" VerticalOptions="CenterAndExpand" />
+                            <Label Text="*" Margin="0,30,0,0" FontSize="15" TextColor="Red" VerticalOptions="CenterAndExpand"></Label>
+                        </StackLayout>
+                        <Grid HorizontalOptions="FillAndExpand" IsEnabled="{Binding IsChildRecordButtonEnabled}" >
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="500*"/>
+                            </Grid.ColumnDefinitions>
+                            <renderer:MyFrame Grid.Column="0" BorderColor="Gray" HeightRequest="35"  Margin="140,30,10,0"  HorizontalOptions="FillAndExpand"  HasShadow="false" CornerRadius="1" Padding="0" >
+                                <renderer:BorderlessEntry  InputTransparent="True" IsTabStop="False"   FontFamily="{StaticResource ARIALMT}" Placeholder="Select child" Text="{Binding SelectedChild}" FontSize="14"  TextColor="{x:Static Common:Colors.LightGrayColor}"/>
+                            </renderer:MyFrame>
+                            <ImageButton InputTransparent="True" Command="{Binding OpenChildRecordPopupCommand}" IsEnabled="{Binding IsChildRecordButtonEnabled}"  HorizontalOptions="End" Grid.Column="0"  Margin="0,25,20,0" Padding="4,4,4,2"   IsOpaque="False" Source="downArrow.png" HeightRequest="20" WidthRequest="20" CornerRadius="10" BackgroundColor="{x:Static Common:Colors.FrameBlueColor}" VerticalOptions="Center" >
+                            </ImageButton>
+                            <Grid.GestureRecognizers>
+                                <TapGestureRecognizer Command="{Binding OpenChildRecordPopupCommand}"/>
+                            </Grid.GestureRecognizers>
+                        </Grid>
+                    </StackLayout>
+                    <StackLayout  Orientation="Horizontal" Margin="0,20,0,0">
+                        <StackLayout Spacing="0" Orientation="Horizontal">
+                            <Label Text="BATTERY TYPE" FontSize="15" TextColor="Gray" Margin="30,30,0,0" MinimumWidthRequest="100" VerticalOptions="CenterAndExpand"/>
+                            <Label Text="*" Margin="0,30,0,0" FontSize="15" TextColor="Red" VerticalOptions="CenterAndExpand"></Label>
+                        </StackLayout>
+                        <Grid HorizontalOptions="FillAndExpand" IsEnabled="{Binding IsBatteryTypeButtonEnabled}" >
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="500*"/>
+                            </Grid.ColumnDefinitions>
+                            <renderer:MyFrame Grid.Column="0" BorderColor="Gray" HeightRequest="35"  Margin="85,30,10,0"  HorizontalOptions="FillAndExpand"  HasShadow="false" CornerRadius="1" Padding="0" >
+                                <renderer:MyFrame.Margin>
+                                    <OnPlatform x:TypeArguments="Thickness">
+                                        <On Platform="UWP" Value="85,30,10,0"/>
+                                        <On Platform="Android" Value="80,30,10,0"/>
+                                         <On Platform="iOS" Value="78,30,10,0"/>
+                                    </OnPlatform>
+                                </renderer:MyFrame.Margin>
+                                <renderer:BorderlessEntry InputTransparent="True" IsTabStop="False" FontFamily="{StaticResource ARIALMT}" Placeholder="Select battery type" FontSize="14"  TextColor="{x:Static Common:Colors.LightGrayColor}" Text="{Binding SelectedAssessmentType}"/>
+                            </renderer:MyFrame>
+                            <ImageButton InputTransparent="True" Command="{Binding OpenBatteryTypeRecordPopupCommand}" IsEnabled="{Binding IsBatteryTypeButtonEnabled}"  HorizontalOptions="End" Grid.Column="0"  Margin="0,25,20,0" Padding="4,4,4,2"   IsOpaque="False" Source="downArrow.png" HeightRequest="20" WidthRequest="20" CornerRadius="10" BackgroundColor="{x:Static Common:Colors.FrameBlueColor}" VerticalOptions="Center" >
+                            </ImageButton>
+                            <Grid.GestureRecognizers>
+                                <TapGestureRecognizer Command="{Binding OpenBatteryTypeRecordPopupCommand}"/>
+                            </Grid.GestureRecognizers>
+                        </Grid>
+                    </StackLayout>
+                    <StackLayout  Orientation="Horizontal" Margin="0,20,0,0">
+                        <StackLayout Spacing="0" Orientation="Horizontal">
+                            <Label Text="RECORD FORM" FontSize="15" TextColor="Gray" Margin="30,30,0,0" MinimumWidthRequest="100" VerticalOptions="CenterAndExpand"/>
+                            <Label Text="*" Margin="0,30,0,0" FontSize="15" TextColor="Red" VerticalOptions="CenterAndExpand"></Label>
+                        </StackLayout>
+                        <Grid HorizontalOptions="FillAndExpand" IsEnabled="{Binding IsRecordFormButtonEnabled}">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="500*"/>
+                            </Grid.ColumnDefinitions>
+                            <renderer:MyFrame Grid.Column="0" BorderColor="Gray" HeightRequest="35" Margin="78,30,10,0"  HorizontalOptions="FillAndExpand"  HasShadow="false" CornerRadius="1" Padding="0" >
+                                <renderer:BorderlessEntry InputTransparent="True" IsTabStop="False" Text="{Binding SelectedRecordForm}" FontFamily="{StaticResource ARIALMT}" Placeholder="Select record form"  FontSize="14"  TextColor="{x:Static Common:Colors.LightGrayColor}"/>
+                            </renderer:MyFrame>
+                            <ImageButton InputTransparent="True" Command="{Binding OpenRecordFormsPopupCommand}" IsEnabled="{Binding IsRecordFormButtonEnabled}" HorizontalOptions="End" Grid.Column="0"  Margin="0,25,20,0" Padding="4,4,4,2"   IsOpaque="False" Source="downArrow.png" HeightRequest="20" WidthRequest="20" CornerRadius="10" BackgroundColor="{x:Static Common:Colors.FrameBlueColor}"  VerticalOptions="Center" >
+                            </ImageButton>
+                            <Grid.GestureRecognizers>
+                                <TapGestureRecognizer Command="{Binding OpenRecordFormsPopupCommand}"/>
+                            </Grid.GestureRecognizers>
+                        </Grid>
+                    </StackLayout>
+                    <Grid Margin="0,20,0,0">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="400*"/>
+                            <ColumnDefinition Width="400*"/>
+                        </Grid.ColumnDefinitions>
+                        <renderer:CustomButtonUWP  Text="Cancel" Clicked="OnCancelClick" Margin="30,0,0,20" VerticalOptions="End" FontSize="15" WidthRequest="150" HorizontalOptions="Start" BorderColor="{x:Static Common:Colors.PrimaryColor}" BorderWidth="2" BackgroundColor="White" HeightRequest="50" Grid.Column="0" FontFamily="{StaticResource Arial-Bold}" TextColor="{x:Static Common:Colors.PrimaryColor}" />
+                        <renderer:CustomButtonUWP x:Name="RunReportButton" PropertyChanged="BasicReport_PropertyChanged"
+                                     IsEnabled="{Binding RunReport, Mode=OneWay}"  Text="Run Report" Command="{Binding RunReportCommand}" TextColor="White" Margin="0,0,10,20" VerticalOptions="End" WidthRequest="150" FontSize="15" HorizontalOptions="End" Grid.Column="1"   BackgroundColor="{x:Static Common:Colors.PrimaryColor}" FontFamily="{StaticResource Arial-Bold}"  HeightRequest="50" >
+                            <renderer:CustomButtonUWP.IsVisible> <OnPlatform x:TypeArguments="x:Boolean">
+                                                       <On Platform="iOS">false</On>
+                                                         <On Platform="Android">true</On>
+                                                          <On Platform="UWP">true</On>
+                                                        </OnPlatform> </renderer:CustomButtonUWP.IsVisible>
+                            </renderer:CustomButtonUWP>
+                        <renderer:CustomButton x:Name="RunReportButtoniOS" PropertyChanged="BasicReport_PropertyChanged"
+                                     IsEnabled="{Binding RunReport, Mode=OneWay}"  Text="Run Report" Command="{Binding RunReportCommand}" TextColor="White" Margin="0,0,10,20" VerticalOptions="End" WidthRequest="150" FontSize="15" HorizontalOptions="End" Grid.Column="1"   BackgroundColor="{x:Static Common:Colors.PrimaryColor}" FontFamily="{StaticResource Arial-Bold}"  HeightRequest="50" >
+                        <renderer:CustomButton.IsVisible> <OnPlatform x:TypeArguments="x:Boolean">
+                                                       <On Platform="iOS">true</On>
+                                                         <On Platform="Android">false</On>
+                                                         <On Platform="UWP">false</On>
+                                                       </OnPlatform> </renderer:CustomButton.IsVisible>
+                            </renderer:CustomButton>
+                    </Grid>
+                </StackLayout>                
+            </StackLayout>
+        </Frame>
+    </AbsoluteLayout>
+</pages:PopupPage>

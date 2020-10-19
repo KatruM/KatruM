@@ -1,0 +1,270 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<pages:PopupPage xmlns="http://xamarin.com/schemas/2014/forms"
+                 xmlns:pages="clr-namespace:Rg.Plugins.Popup.Pages;assembly=Rg.Plugins.Popup"
+                 xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+                 xmlns:renderer="clr-namespace:BDI3Mobile.CustomRenderer"
+                 xmlns:Common="clr-namespace:BDI3Mobile.Common"
+                 BackgroundClicked="BackgroundClicked_Popup"
+                 x:Class="BDI3Mobile.Views.ItemAdministrationView.ResetScoresView">
+
+    <renderer:MyFrame HasShadow="True" BackgroundColor="#f7f7f8" CornerRadius="6" HorizontalOptions="EndAndExpand" VerticalOptions="Start"  WidthRequest="300">
+        <renderer:MyFrame.Padding>
+            <OnPlatform x:TypeArguments="Thickness">
+                <On Platform="UWP" Value="0"/>
+                <On Platform="Android" Value="2"/>
+                <On Platform="iOS" Value="2"/>
+            </OnPlatform>
+        </renderer:MyFrame.Padding>
+        <renderer:MyFrame.Margin>
+            <OnPlatform x:TypeArguments="Thickness">
+                <On Platform="UWP" Value="0,100,30,50"/>
+                <On Platform="Android" Value="0,100,30,50"/>
+                <On Platform="iOS" Value="0,100,30,50"/>
+            </OnPlatform>
+        </renderer:MyFrame.Margin>
+      <Grid Padding="0" Margin="0">
+        <Grid Grid.Row="0" RowSpacing="0" ColumnSpacing="0"  BackgroundColor="#f7f7f8">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="55"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="65"/>
+            </Grid.RowDefinitions>
+            <BoxView Margin="0,10,0,0" Grid.Row="0" WidthRequest="30" HorizontalOptions="CenterAndExpand"  VerticalOptions="Center" BackgroundColor="#A8A4A4" CornerRadius="20">
+                <BoxView.HeightRequest>
+                 <OnPlatform x:TypeArguments="x:Double" >
+                     <On Platform="iOS">1</On>
+                     <On Platform="Android">4</On>
+                    <On Platform="UWP">4</On>
+                     </OnPlatform>
+                 </BoxView.HeightRequest>
+                </BoxView>
+            <Grid Grid.Row="1" Margin="0,5,0,0">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="70" />
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+                <StackLayout Orientation="Horizontal" HorizontalOptions="Center" Grid.Column="0">
+                        <Image Source="arrowBlue_1x.png" HorizontalOptions="Start" VerticalOptions="Center" WidthRequest="12">
+                            <Image.HeightRequest>
+                                 <OnPlatform x:TypeArguments="x:Double" >
+                                 <On Platform="iOS">15</On>
+                                 <On Platform="Android">20.5</On>
+                                <On Platform="UWP">20.5</On>
+                                 </OnPlatform>
+                             </Image.HeightRequest>
+                            </Image>
+                    <Label Text="Back" FontSize="Small" TextColor="#0091ff" VerticalOptions="Center"/>
+                    <StackLayout.GestureRecognizers>
+                        <TapGestureRecognizer Tapped="BackToRecordFormTool"/>
+                    </StackLayout.GestureRecognizers>
+                </StackLayout>
+                <Label Grid.Column="1" VerticalOptions="Center" Text="Reset Scores" FontAttributes="Bold" FontSize="Small" TextColor="#000000" >
+                     <Label.FontSize>
+                    <OnPlatform x:TypeArguments="x:Double" iOS="18"/>
+                 </Label.FontSize>
+                    <Label.Margin>
+                        <OnPlatform x:TypeArguments="Thickness">
+                            <On Platform="UWP" Value="20,0,0,0"/>
+                            <On Platform="Android" Value="30,0,0,0"/>
+                            <On Platform="iOS" Value="30,0,0,0"/>
+                        </OnPlatform>
+                    </Label.Margin>
+                </Label>
+            </Grid>
+            <StackLayout Grid.Row="2" Padding="0">
+                <BoxView Color="Silver"  Margin="0" HeightRequest="1"  />
+            </StackLayout>
+                <Label Grid.Row="3" Margin="15,10,10,0" VerticalOptions="Center" Text="{Binding ResetText,Mode=TwoWay}" FontSize="13" TextColor="{x:Static Common:Colors.TitleColor}"/>
+                <ListView IsVisible="{Binding IsCompleteForm,Mode=TwoWay}" SeparatorVisibility="None" Grid.Row="4" ItemsSource="{Binding ResetScoreListGroup}"
+                IsGroupingEnabled="true" ItemTapped="OnDomainListViewTapped">
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <ViewCell>
+                            <Grid RowSpacing="0" BackgroundColor="White">
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="Auto"/>
+                                    <RowDefinition Height="0.5"/>
+                                </Grid.RowDefinitions>
+                                <StackLayout Grid.Row="0" BackgroundColor="White" Orientation="Horizontal" Padding="20,10,10,10">
+                                    <Label Text="{Binding SubDomainName}" FontFamily="{StaticResource SFProRegular}" TextColor="Black" VerticalOptions="Center" HorizontalOptions="FillAndExpand" />
+                                    <Image HeightRequest="18" WidthRequest="18" VerticalOptions="Center" Source="checkmark.png" IsVisible="{Binding IsSelected}" />
+                                </StackLayout>
+                                <BoxView Grid.Row="1" HeightRequest="0.5" BackgroundColor="Silver"/>
+                            </Grid>
+                        </ViewCell>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+                <ListView.GroupHeaderTemplate>
+                    <DataTemplate>
+                        <ViewCell>
+                            <Label Text="{Binding Name}"
+                               TextColor="{x:Static Common:Colors.TitleColor}"
+                               FontSize="13">
+                                <Label.Padding>
+                                    <OnPlatform x:TypeArguments="Thickness">
+                                        <On Platform="UWP" Value="15,30,0,5"/>
+                                        <On Platform="Android" Value="15,20,0,5"/>
+                                        <On Platform="iOS" Value="15,30,0,5"/>
+                                    </OnPlatform>
+                                </Label.Padding>
+                            </Label>
+                        </ViewCell>
+                    </DataTemplate>
+               </ListView.GroupHeaderTemplate>
+                <ListView.HasUnevenRows>
+                    <OnPlatform x:TypeArguments="x:Boolean">
+                        <On Platform="UWP" Value="False"/>
+                        <On Platform="Android" Value="True"/>
+                        <On Platform="iOS" Value="True"/>
+                    </OnPlatform>
+                </ListView.HasUnevenRows>
+            </ListView>
+                <ListView IsVisible="{Binding IsScreenerForm,Mode=TwoWay}" SeparatorVisibility="None" Grid.Row="4" ItemsSource="{Binding ResetScores}"
+                ItemTapped="ListView_ItemTapped">
+                    <ListView.ItemTemplate>
+                        <DataTemplate>
+                            <ViewCell>
+                                <Grid RowSpacing="0" BackgroundColor="White">
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition Height="Auto"/>
+                                        <RowDefinition Height="0.5"/>
+                                    </Grid.RowDefinitions>
+                                    <StackLayout Grid.Row="0" BackgroundColor="White" Orientation="Horizontal" Padding="20,10,10,10">
+                                        <Label Text="{Binding DomainName}" FontFamily="{StaticResource SFProRegular}" TextColor="Black" VerticalOptions="Center" HorizontalOptions="FillAndExpand" />
+                                        <Image HeightRequest="18" WidthRequest="18" VerticalOptions="Center" Source="checkmark.png" IsVisible="{Binding IsSelected}" />
+                                    </StackLayout>
+                                    <BoxView Grid.Row="1" HeightRequest="0.5" BackgroundColor="Silver"/>
+                                </Grid>
+                            </ViewCell>
+                        </DataTemplate>
+                    </ListView.ItemTemplate>
+                    <ListView.HasUnevenRows>
+                        <OnPlatform x:TypeArguments="x:Boolean">
+                            <On Platform="UWP" Value="False"/>
+                            <On Platform="Android" Value="True"/>
+                            <On Platform="iOS" Value="True"/>
+                        </OnPlatform>
+                    </ListView.HasUnevenRows>
+                </ListView>
+                <ListView IsVisible="{Binding IsAcademicForm,Mode=TwoWay}" SeparatorVisibility="None" Grid.Row="4" ItemsSource="{Binding AcademicResetScoreList}"
+                IsGroupingEnabled="true" ItemTapped="OnDomainListViewTapped">
+                    <ListView.ItemTemplate>
+                        <DataTemplate>
+                            <ViewCell>
+                                <Grid RowSpacing="0" BackgroundColor="White">
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition Height="Auto"/>
+                                        <RowDefinition Height="0.5"/>
+                                        <RowDefinition Height="Auto"/>
+                                    </Grid.RowDefinitions>
+                                    <StackLayout Grid.Row="0" BackgroundColor="White" Orientation="Horizontal" Padding="20,10,10,10">
+                                        <Label Text="{Binding SubDomainName}" FontFamily="{StaticResource SFProRegular}" TextColor="Black" VerticalOptions="Center" HorizontalOptions="FillAndExpand" />
+                                        <Image HeightRequest="18" WidthRequest="18" VerticalOptions="Center" Source="checkmark.png" IsVisible="{Binding IsSelected}" />
+                                    </StackLayout>
+                                    <BoxView Grid.Row="1" HeightRequest="0.5" BackgroundColor="Silver"/>
+                                    <StackLayout Grid.Row="2" >
+                                        <ListView x:Name="AreaList" HeightRequest="{Binding Height}" IsVisible="{Binding IsAreaListVisible}" SeparatorVisibility="None" ItemsSource="{Binding ResetScoresAreaList}"
+                                    ItemTapped="OnAreaListViewTapped" HasUnevenRows="True">
+                                            <ListView.ItemTemplate>
+                                                <DataTemplate>
+                                                    <ViewCell>
+                                                        <Grid RowSpacing="0" BackgroundColor="White">
+                                                            <Grid.RowDefinitions>
+                                                                <RowDefinition Height="Auto"/>
+                                                                <RowDefinition Height="0.5"/>
+                                                            </Grid.RowDefinitions>
+                                                            <StackLayout Grid.Row="0" BackgroundColor="White" Orientation="Horizontal" Padding="20,10,10,10">
+                                                                <Label Text="{Binding DomainName}" FontFamily="{StaticResource SFProRegular}" TextColor="Black" VerticalOptions="Center" HorizontalOptions="FillAndExpand" Margin="20,0,0,0"/>
+                                                                <Image  HeightRequest="18" WidthRequest="18" VerticalOptions="Center" Source="checkmark.png"  IsVisible="{Binding IsSelected}"/>
+                                                            </StackLayout>
+                                                            <BoxView Grid.Row="1" HeightRequest="0.5" BackgroundColor="Silver"/>
+                                                        </Grid>
+                                                    </ViewCell>
+                                                </DataTemplate>
+                                            </ListView.ItemTemplate>
+                                            <ListView.HasUnevenRows>
+                                                <OnPlatform x:TypeArguments="x:Boolean">
+                                                    <On Platform="UWP" Value="False"/>
+                                                    <On Platform="Android" Value="True"/>
+                                                    <On Platform="iOS" Value="True"/>
+                                                </OnPlatform>
+                                            </ListView.HasUnevenRows>
+                                        </ListView>
+                                    </StackLayout>
+                                </Grid>
+                            </ViewCell>
+                        </DataTemplate>
+                    </ListView.ItemTemplate>
+                    <ListView.GroupHeaderTemplate>
+                        <DataTemplate >
+                            <ViewCell >
+                                <StackLayout>
+                                <Label Text="{Binding Name}" 
+                                       TextColor="{x:Static Common:Colors.TitleColor}"
+                               FontSize="13" >
+                                    <Label.Padding>
+                                        <OnPlatform x:TypeArguments="Thickness">
+                                            <On Platform="UWP" Value="15,30,0,5"/>
+                                            <On Platform="Android" Value="15,20,0,5"/>
+                                            <On Platform="iOS" Value="15,30,0,5"/>
+                                        </OnPlatform>
+                                    </Label.Padding>
+                                </Label>
+                                </StackLayout>
+                            </ViewCell>
+                        </DataTemplate>
+                    </ListView.GroupHeaderTemplate>
+                    <ListView.HasUnevenRows>
+                        <OnPlatform x:TypeArguments="x:Boolean">
+                            <On Platform="UWP" Value="False"/>
+                            <On Platform="Android" Value="True"/>
+                            <On Platform="iOS" Value="True"/>
+                        </OnPlatform>
+                    </ListView.HasUnevenRows>
+                </ListView>
+
+                <Label BackgroundColor="White" VerticalTextAlignment="Center" HorizontalTextAlignment="Center" Margin="0,0,0,30" Grid.Row="5" Text="Reset Scores" FontFamily="{StaticResource SFProRegular}" TextColor="{x:Static Common:Colors.FrameBlueColor}" >
+                <Label.GestureRecognizers>
+                    <TapGestureRecognizer Command="{Binding ResetScoresClickCommand}"/>
+                </Label.GestureRecognizers>
+            </Label>
+        </Grid>
+        <StackLayout  VerticalOptions="Fill" BackgroundColor="#50000000"  Padding="10" IsVisible="{Binding ShowResetAlertMessagePopup}" Grid.Row="0">
+          <Frame BackgroundColor="White" VerticalOptions="EndAndExpand" CornerRadius="10">
+            <StackLayout Margin="0,0,0,30" Orientation="Vertical">
+                <Label TextColor="#262626" FontAttributes="Bold" FontSize="18" Text="Are you sure you want to reset the selected scores?" HorizontalTextAlignment="Center" VerticalTextAlignment="Center"/>
+                <Label TextColor="#262626" Text="You may not be able to undo this action and you may lose data once you reset the score(s)" HorizontalTextAlignment="Center" FontSize="14" VerticalTextAlignment="Center"/>
+            </StackLayout>
+            </Frame>
+                <renderer:CustomButtonUWP Command="{Binding ResetScoresInAlertClickCommand}" TextColor="#007aff" Text="Reset Scores" FontAttributes="Bold" CornerRadius="10" BackgroundColor="White">
+                    <renderer:CustomButtonUWP.HeightRequest>
+                    <OnPlatform x:TypeArguments="x:Double">
+                        <On Platform="UWP" Value="40"/>
+                        <On Platform="Android" Value="45"/>
+                        <On Platform="iOS" Value="45"/>
+                    </OnPlatform>
+                </renderer:CustomButtonUWP.HeightRequest>
+            </renderer:CustomButtonUWP>
+                <renderer:CustomButtonUWP Command="{Binding CancelButtonInAlertClickCommand}" TextColor="#007aff" Text="Cancel" FontAttributes="Bold" CornerRadius="10" BackgroundColor="White">
+                    <renderer:CustomButtonUWP.HeightRequest>
+                    <OnPlatform x:TypeArguments="x:Double">
+                        <On Platform="UWP" Value="40"/>
+                        <On Platform="Android" Value="45"/>
+                        <On Platform="iOS" Value="45"/>
+                    </OnPlatform>
+                </renderer:CustomButtonUWP.HeightRequest>
+            </renderer:CustomButtonUWP>
+          <StackLayout.Margin>
+            <OnPlatform x:TypeArguments="Thickness">
+                <On Platform="UWP" Value="0"/>
+                <On Platform="Android" Value="-2"/>
+                <On Platform="iOS" Value="0"/>
+            </OnPlatform>
+          </StackLayout.Margin>
+       </StackLayout>
+      </Grid>
+  </renderer:MyFrame>
+</pages:PopupPage>

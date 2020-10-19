@@ -1,0 +1,396 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns:Common="clr-namespace:BDI3Mobile.Common" 
+             xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:renderer="clr-namespace:BDI3Mobile.CustomRenderer"
+             xmlns:Styles="clr-namespace:BDI3Mobile.Styles"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:ia="clr-namespace:IntelliAbb.Xamarin.Controls;assembly=IntelliAbb.Xamarin.Controls"
+             x:Class="BDI3Mobile.Views.ChildInformationpageView"
+             xmlns:template="clr-namespace:BDI3Mobile.DataTemplates"
+             xmlns:converters="clr-namespace:BDI3Mobile.ValueConverter"
+             x:Name="Page">
+
+    <ContentPage.Resources>
+        <ResourceDictionary>
+        <ResourceDictionary.MergedDictionaries>
+            <Styles:ListViewResourceDictionary></Styles:ListViewResourceDictionary>
+                <ResourceDictionary>
+                    <converters:CheckboxFillColorConverter x:Key="CheckboxFillColorConverter"/>
+                    <converters:CheckboxOutlineColorConverter x:Key="CheckboxOutlineColorConverter"/>
+                    <converters:DeleteImageConverter x:Key="DeleteImageConverter"/>
+                    <converters:SyncImageConverter x:Key="SyncImageConverter"/>
+                </ResourceDictionary>
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+    </ContentPage.Resources>
+    
+    <Grid x:Name="MainGrid">
+        <StackLayout BackgroundColor="{x:Static Common:Colors.BackgroundColor}" >
+            <StackLayout BackgroundColor="{x:Static Common:Colors.DarkGreenColor}" HeightRequest="60" Orientation="Horizontal" Spacing="0">
+                <Image Margin="0,20,0,0"  Source="back.png"  HorizontalOptions="Start" VerticalOptions="Center" Grid.Column="0">
+                    <Image.GestureRecognizers>
+                        <TapGestureRecognizer Tapped="TapGestureRecognizer_Tapped_1">
+                        </TapGestureRecognizer>
+                    </Image.GestureRecognizers>
+                </Image>
+                <Label Text="Dashboard" Margin="0,20,0,0" TextColor="White" FontSize="17"  HorizontalOptions="Start" VerticalOptions="Center"  Grid.Column="0">
+                    <Label.GestureRecognizers>
+                        <TapGestureRecognizer Tapped="TapGestureRecognizer_Tapped_1">
+                        </TapGestureRecognizer>
+                    </Label.GestureRecognizers>
+                </Label>
+                <Label Text="CHILD INFORMATION" Margin="0,20,0,0" TextColor="White" FontSize="17"  HorizontalOptions="CenterAndExpand" VerticalOptions="Center" Grid.Column="1"/>
+                <Image Source="{Binding EditIconImage}" IsEnabled="{Binding Isenablepermission,Mode=TwoWay}"  Margin="20,20,20,20" HorizontalOptions="End">
+                    <Image.GestureRecognizers>
+                        <TapGestureRecognizer Command="{Binding EditCommand}"/>
+                    </Image.GestureRecognizers>
+                </Image>
+                <Image Source="{Binding PlusIconImage}" IsEnabled="{Binding Isenablepermission,Mode=TwoWay}" Margin="20,20,20,20" HorizontalOptions="End">
+                    <Image.GestureRecognizers>
+                        <TapGestureRecognizer Command="{Binding AddNewRecordCommand}"/>
+                    </Image.GestureRecognizers>
+                </Image>
+            </StackLayout>
+            <Grid  BackgroundColor="{x:Static Common:Colors.BackgroundColor}">
+                <FlexLayout>
+                    <ContentView BackgroundColor="{x:Static Common:Colors.BackgroundColor}" VerticalOptions="FillAndExpand"  >
+                        <StackLayout>
+                            <StackLayout>
+                                <Label HeightRequest="70" Padding="30,15,30,0"  BackgroundColor="{x:Static Common:Colors.DarkGreenColor}" Text="{Binding Name}" Margin="0,5,0,0" FontSize="21" 
+                                    VerticalOptions="Start" HorizontalOptions="Start" TextColor="White" />
+                            </StackLayout>
+                            <StackLayout HeightRequest="110" Margin="45,10,45,20" BackgroundColor="White" >
+
+                                <BoxView HorizontalOptions="FillAndExpand" HeightRequest="4" WidthRequest="4" Color="{x:Static Common:Colors.LightGreenColor}" Margin="0,0,0,0" />
+                                <Grid Padding="0,5,0,0" RowSpacing="0">
+                                    <Grid.ColumnDefinitions >
+                                        <ColumnDefinition  />
+                                        <ColumnDefinition  />
+                                        <ColumnDefinition />
+                                        <ColumnDefinition  />
+                                        <ColumnDefinition />
+                                        <ColumnDefinition  />
+                                        <ColumnDefinition  />
+                                    </Grid.ColumnDefinitions>
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition/>
+                                    </Grid.RowDefinitions>
+                                    <Grid Grid.Column="0" HorizontalOptions="Center">
+                                        <Grid.RowDefinitions>
+                                            <RowDefinition Height="auto"/>
+                                            <RowDefinition Height="auto"/>
+                                        </Grid.RowDefinitions>
+                                        
+                                        <Label  HorizontalOptions="Start" Margin="0,0,40,0" Text="ID:" TextColor="{x:Static Common:Colors.LightGrayColor}" 
+                                               FontSize="12" Grid.Row="0"/>
+                                        <Label  HorizontalOptions="Start" Margin="0,0,0,0" Text="{Binding Number}" TextColor="{x:Static Common:Colors.TableFieldsColor}"
+                                               FontSize="12" Grid.Row="1"/>
+                                    </Grid>
+
+                                    <BoxView WidthRequest="2" Margin="0,0,0,0" VerticalOptions="FillAndExpand"  HorizontalOptions="Center" BackgroundColor="{x:Static Common:Colors.BorderColor}" Grid.Column="1"/>
+
+                                    <Grid Grid.Column="2">
+                                        <Grid.RowDefinitions>
+                                            <RowDefinition Height="auto"/>
+                                            <RowDefinition Height="auto"/>
+                                        </Grid.RowDefinitions>
+                                        <Label HorizontalOptions="Start" Text="Date of Birth:" TextColor="{x:Static Common:Colors.LightGrayColor}" 
+                                                FontSize="12"  Grid.Row="0" />
+                                        <Label HorizontalOptions="Start" Text="{Binding DateofBirth}" TextColor="{x:Static Common:Colors.TableFieldsColor}" 
+                                               FontSize="12" Grid.Row="1"/>
+                                    </Grid>
+
+                                    <BoxView WidthRequest="2" Margin="0,0,0,0" VerticalOptions="FillAndExpand"  HorizontalOptions="Center"   BackgroundColor="{x:Static Common:Colors.BorderColor}" Grid.Column="3"/>
+
+                                    <Grid Grid.Column="4">
+                                        <Grid.RowDefinitions>
+                                            <RowDefinition Height="auto"/>
+                                            <RowDefinition Height="auto"/>
+                                        </Grid.RowDefinitions>
+                                        <Label  HorizontalOptions="Start" Text="Gender:" TextColor="{x:Static Common:Colors.LightGrayColor}" 
+                                               FontSize="12" Grid.Row="0"/>
+                                        <Label    HorizontalOptions="Start" Text="{Binding Gender}" TextColor="{x:Static Common:Colors.TableFieldsColor}" 
+                                               FontSize="12" Grid.Row="1"/>
+                                    </Grid>
+
+                                    <BoxView WidthRequest="2" Margin="0,0,0,0" VerticalOptions="FillAndExpand"  HorizontalOptions="Center"   BackgroundColor="{x:Static Common:Colors.BorderColor}" Grid.Column="5"/>
+                                    
+                                    <Grid Grid.Column="6" >
+                                        <Grid.RowDefinitions>
+                                            <RowDefinition Height="auto"/>
+                                            <RowDefinition Height="auto"/>
+                                        </Grid.RowDefinitions>
+
+                                        <Label Margin="0,0,40,0" HorizontalOptions="Start" Text="Location:"  TextColor="{x:Static Common:Colors.LightGrayColor}" 
+                                                FontSize="12" Grid.Row="0"/>
+                                        <Label HorizontalOptions="Start" Text="{Binding viewModel.Location,Mode=TwoWay, Source={x:Reference Page}}" TextColor="{x:Static Common:Colors.TableFieldsColor}" 
+                                               FontSize="12" Grid.Row="1"/>
+                                    </Grid>
+
+                                </Grid>
+
+
+                            </StackLayout>
+                        </StackLayout>
+                    </ContentView>
+                </FlexLayout>
+            </Grid>
+            <Grid  BackgroundColor="{x:Static Common:Colors.BackgroundColor}" WidthRequest="300" HeightRequest="600" Margin="45,0,45,0">
+                <StackLayout BackgroundColor="White"  HeightRequest="900">
+                    <BoxView HeightRequest="4" WidthRequest="4" Color="{x:Static Common:Colors.GreenColor}" Margin="0,10,0,10" />
+                    <Grid BackgroundColor="White">
+                        <StackLayout Margin="20,0,10,0">
+                            <Label Text="Record Forms"  FontAttributes="Bold" FontSize="18" HorizontalOptions="Start" />
+                        </StackLayout>
+                    </Grid>
+                    <StackLayout Spacing="0" Margin="20,20,20,20" VerticalOptions="Start">
+                        <BoxView HeightRequest="1" VerticalOptions="FillAndExpand" BackgroundColor="{x:Static Common:Colors.TableBorderColor}">
+                        </BoxView>
+                        <Grid RowSpacing="0" BackgroundColor="{x:Static Common:Colors.TableHeaderBackgroundColor}">
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto"></RowDefinition>
+                                <RowDefinition Height="1"></RowDefinition>
+                            </Grid.RowDefinitions>
+                            <Grid Grid.Row="0" >
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="1" ></ColumnDefinition>
+                                    <ColumnDefinition Width="1*"></ColumnDefinition>
+                                    <ColumnDefinition Width="1"></ColumnDefinition>
+                                    <ColumnDefinition Width="1*"></ColumnDefinition>
+                                    <ColumnDefinition Width="1"></ColumnDefinition>
+                                    <ColumnDefinition Width="3*"></ColumnDefinition>
+                                    <ColumnDefinition Width="1"></ColumnDefinition>
+                                    <ColumnDefinition Width="2*"></ColumnDefinition>
+                                    <ColumnDefinition Width="1"></ColumnDefinition>
+                                    <ColumnDefinition Width="1*"></ColumnDefinition>
+                                    <ColumnDefinition Width="1"></ColumnDefinition>
+                                    <ColumnDefinition Width="1*"></ColumnDefinition>
+                                    <ColumnDefinition Width="1"></ColumnDefinition>
+                                </Grid.ColumnDefinitions>
+                                <BoxView Grid.Column="0"  BackgroundColor="{x:Static Common:Colors.TableBorderColor}" VerticalOptions="FillAndExpand"></BoxView>
+                                <StackLayout  Grid.Column="1" Orientation="Horizontal" Spacing="5" HorizontalOptions="StartAndExpand">
+                                    <ia:Checkbox x:Name="AwesomeCheckbox" OutlineWidth="2" Shape="Rectangle" IsChecked="{Binding IsSelectAll}" IsCheckedChanged="Checkbox_IsCheckedChanged" OutlineColor="{x:Static Common:Colors.PrimaryColor}" FillColor="{x:Static Common:Colors.PrimaryColor}"/>
+                                    <!--<controls:CheckBox Checked="{Binding SelectAll}" HeightRequest="20" WidthRequest="20" Margin="0,3,0,0"></controls:CheckBox>-->
+                                    <Label Text="Select All" FontSize="13" FontFamily="{StaticResource Arial-Bold}" FontAttributes="Bold" HorizontalOptions="Center" VerticalOptions="Center"></Label>
+                                </StackLayout>
+                                <BoxView Grid.Column="2" BackgroundColor="#d8d8d8" VerticalOptions="FillAndExpand"></BoxView>
+                                <Label Grid.Column="3" Text="Test Date"  HorizontalOptions="Start" VerticalOptions="Center"
+                                                   TextColor="Black" FontSize="13" FontAttributes="Bold" Margin="10,0,0,0"></Label>
+                                <BoxView Grid.Column="4" BackgroundColor="#d8d8d8" VerticalOptions="FillAndExpand"></BoxView>
+                                <Label Grid.Column="5" Text="Record Form" FontAttributes="Bold" HorizontalOptions="Start" VerticalOptions="Center"
+                                                   TextColor="Black" FontSize="13" Margin="10,0,0,0"></Label>
+                                <BoxView Grid.Column="6" BackgroundColor="#d8d8d8" VerticalOptions="FillAndExpand"></BoxView>
+                                <Label Grid.Column="7" Margin="10,0,0,0" Text="Status" FontAttributes="Bold" HorizontalOptions="Start" VerticalOptions="Center"
+                                                   TextColor="Black" FontSize="13" ></Label>
+                                <BoxView Grid.Column="8" BackgroundColor="#d8d8d8" VerticalOptions="FillAndExpand"></BoxView>
+                                <Label Grid.Column="9" Margin="10,0,0,0" Text="Sync Status" FontAttributes="Bold" HorizontalOptions="Start" VerticalOptions="Center"
+                                                   TextColor="Black" FontSize="13" ></Label>
+                                <BoxView Grid.Column="10" BackgroundColor="#d8d8d8" VerticalOptions="FillAndExpand"></BoxView>
+
+                                <Label Grid.Column="11" Margin="10,0,0,0" Text="Actions" FontAttributes="Bold" HorizontalOptions="Start" VerticalOptions="Center"
+                                                   TextColor="Black" FontSize="13"></Label>
+                                <BoxView Grid.Column="12" BackgroundColor="{x:Static Common:Colors.TableBorderColor}" VerticalOptions="FillAndExpand"></BoxView>
+                            </Grid>
+                            <BoxView Grid.Row="1" HeightRequest="1" BackgroundColor="{x:Static Common:Colors.TableBorderColor}"></BoxView>
+                        </Grid>
+                        <StackLayout Spacing="0" Orientation="Vertical">
+                            <StackLayout.Resources>
+                                <ResourceDictionary>
+                                    <DataTemplate x:Key="evenTemplate">
+                                        <ViewCell>
+                                            <ViewCell.View>
+                                                <Grid x:Name="ListView" BackgroundColor="{x:Static Common:Colors.WhiteColor}" VerticalOptions="FillAndExpand">
+                                                    <Grid.ColumnDefinitions >
+                                                        <ColumnDefinition Width="1" ></ColumnDefinition>
+                                                        <ColumnDefinition Width="1*"></ColumnDefinition>
+                                                        <ColumnDefinition Width="1"></ColumnDefinition>
+                                                        <ColumnDefinition Width="1*"></ColumnDefinition>
+                                                        <ColumnDefinition Width="1"></ColumnDefinition>
+                                                        <ColumnDefinition Width="3*"></ColumnDefinition>
+                                                        <ColumnDefinition Width="1"></ColumnDefinition>
+                                                        <ColumnDefinition Width="2*"></ColumnDefinition>
+                                                        <ColumnDefinition Width="1"></ColumnDefinition>
+                                                        <ColumnDefinition Width="1*"></ColumnDefinition>
+                                                        <ColumnDefinition Width="1"></ColumnDefinition>
+                                                        <ColumnDefinition Width="1*"></ColumnDefinition>
+                                                        <ColumnDefinition Width="1"></ColumnDefinition>
+
+
+                                                    </Grid.ColumnDefinitions>
+                                                    <BoxView Grid.Column="0" BackgroundColor="{x:Static Common:Colors.TableBorderColor}" VerticalOptions="FillAndExpand"></BoxView>
+                                                    <ia:Checkbox OutlineWidth="2" IsChecked="{Binding IsSelect}" OutlineColor="{Binding EnableRow,Converter={StaticResource CheckboxOutlineColorConverter}}" Shape="Rectangle" FillColor="{Binding EnableRow,Converter={StaticResource CheckboxFillColorConverter}}" IsCheckedChanged="CheckBox_CheckedChanged" Grid.Column="1"  HorizontalOptions="Center"   VerticalOptions="CenterAndExpand" IsEnabled="{Binding EnableRow}"></ia:Checkbox>
+                                                    <BoxView Grid.Column="2" BackgroundColor="#d8d8d8" VerticalOptions="Start" ></BoxView>
+                                                    <Label Grid.Column="3" Margin="10,0,0,0" Text="{Binding InitialTestDate}" TextColor="{x:Static Common:Colors.TableFieldsColor}" VerticalOptions="CenterAndExpand"></Label>
+                                                    <BoxView Grid.Column="4" BackgroundColor="#d8d8d8" VerticalOptions="FillAndExpand"></BoxView>
+                                                    <Label Grid.Column="5" Text="{Binding RecordForm}" VerticalOptions="CenterAndExpand" TextColor="{x:Static Common:Colors.TableFieldsColor}" Margin="10,0,0,0">
+                                                        <Label.FormattedText>
+                                                            <FormattedString>
+                                                                <Span Text="{Binding RecordForm}" TextColor="{x:Static Common:Colors.HyperlinkBlueColor}" FontSize="13" FontFamily="{StaticResource ARIALMT}" TextDecorations="Underline">
+                                                                </Span>
+                                                            </FormattedString>
+                                                        </Label.FormattedText>
+                                                        <Label.GestureRecognizers>
+                                                            <TapGestureRecognizer Command="{Binding Path=BindingContext.HyperLinkClickedCommand, Source={x:Reference Page}}" CommandParameter="{Binding ThisObject}" />
+                                                        </Label.GestureRecognizers>
+                                                    </Label>
+                                                    <BoxView Grid.Column="6" BackgroundColor="#d8d8d8" VerticalOptions="FillAndExpand"></BoxView>
+                                                    <Label Grid.Column="7" Margin="10,0,0,0" Text="{Binding Status}" TextColor="{x:Static Common:Colors.TableFieldsColor}" VerticalOptions="CenterAndExpand" IsEnabled="{Binding EnableRow}"></Label>
+                                                    <BoxView Grid.Column="8" BackgroundColor="#d8d8d8" VerticalOptions="FillAndExpand"></BoxView>
+                                                    <!--<Label Grid.Column="9" Margin="10,0,0,0"  TextColor="{x:Static Common:Colors.HyperlinkTextColor}" VerticalOptions="CenterAndExpand" Text="{Binding SyncStatus}"  IsEnabled="{Binding EnableRow}" TextDecorations="Underline"></Label>-->
+                                                    <Label Grid.Column="9" HorizontalOptions="Start" VerticalOptions="Center" IsEnabled="{Binding EnableRow}">
+                                                        <Label.FormattedText>
+                                                            <FormattedString>
+                                                                <Span Text="{Binding SyncStatus}" TextColor="{x:Static Common:Colors.HyperlinkTextColor}" FontSize="13" FontFamily="{StaticResource ARIALMT}" TextDecorations="Underline"></Span>
+                                                            </FormattedString>
+                                                        </Label.FormattedText>
+                                                        <Label.GestureRecognizers>
+                                                            <TapGestureRecognizer Tapped="TapGestureRecognizer_Tapped" />
+                                                        </Label.GestureRecognizers>
+                                                    </Label>
+                                                    <BoxView Grid.Column="10" BackgroundColor="#d8d8d8" VerticalOptions="FillAndExpand"></BoxView>
+                                                    <StackLayout Grid.Column="11" Orientation="Horizontal"  Spacing="30" Margin="10,0,0,0" >
+                                                        <Image  Source="icondeletesa.png">
+                                                            <Image.GestureRecognizers>
+                                                                <TapGestureRecognizer Command="{Binding ItemDeleteCommand}"/>
+                                                            </Image.GestureRecognizers>
+                                                        </Image>
+                                                        <Image Source="{Binding EnableRow,Mode=TwoWay, Converter={StaticResource SyncImageConverter}}" HeightRequest="20" WidthRequest="20"  IsEnabled="{Binding EnableRow}">
+                                                            <Image.GestureRecognizers>
+                                                                <TapGestureRecognizer Command="{Binding ItemSyncCommand}"/>
+                                                            </Image.GestureRecognizers>
+                                                        </Image>
+                                                    </StackLayout>
+                                                    <BoxView Grid.Column="12" BackgroundColor="{x:Static Common:Colors.TableBorderColor}" VerticalOptions="FillAndExpand"></BoxView>
+                                                </Grid>
+                                            </ViewCell.View>
+                                        </ViewCell>
+                                    </DataTemplate>
+                                    <DataTemplate x:Key="unevenTemplate">
+                                        <ViewCell>
+                                            <ViewCell.View>
+                                                <Grid x:Name="ListView" BackgroundColor="{x:Static Common:Colors.TableUnEvenRowColor}" VerticalOptions="FillAndExpand">
+                                                    <Grid.ColumnDefinitions >
+                                                        <ColumnDefinition Width="1" ></ColumnDefinition>
+                                                        <ColumnDefinition Width="1*"></ColumnDefinition>
+                                                        <ColumnDefinition Width="1"></ColumnDefinition>
+                                                        <ColumnDefinition Width="1*"></ColumnDefinition>
+                                                        <ColumnDefinition Width="1"></ColumnDefinition>
+                                                        <ColumnDefinition Width="3*"></ColumnDefinition>
+                                                        <ColumnDefinition Width="1"></ColumnDefinition>
+                                                        <ColumnDefinition Width="2*"></ColumnDefinition>
+                                                        <ColumnDefinition Width="1"></ColumnDefinition>
+                                                        <ColumnDefinition Width="1*"></ColumnDefinition>
+                                                        <ColumnDefinition Width="1"></ColumnDefinition>
+                                                        <ColumnDefinition Width="1*"></ColumnDefinition>
+                                                        <ColumnDefinition Width="1"></ColumnDefinition>
+                                                    </Grid.ColumnDefinitions>
+                                                    <BoxView Grid.Column="0" BackgroundColor="{x:Static Common:Colors.TableBorderColor}" VerticalOptions="FillAndExpand"></BoxView>
+                                                    <ia:Checkbox OutlineWidth="2" IsChecked="{Binding IsSelect}"  Shape="Rectangle" OutlineColor="{Binding EnableRow,Mode=TwoWay,Converter={StaticResource CheckboxOutlineColorConverter}}" IsCheckedChanged="CheckBox_CheckedChanged" Grid.Column="1"  HorizontalOptions="Center"   VerticalOptions="CenterAndExpand" IsEnabled="{Binding EnableRow}" FillColor="{Binding EnableRow,Mode=TwoWay,Converter={StaticResource CheckboxFillColorConverter}}"></ia:Checkbox>
+                                                    <BoxView Grid.Column="2" BackgroundColor="#d8d8d8" VerticalOptions="CenterAndExpand"></BoxView>
+                                                    <Label Margin="10,0,0,0" Grid.Column="3" Text="{Binding InitialTestDate}"  TextColor="{x:Static Common:Colors.TableFieldsColor}" VerticalOptions="CenterAndExpand"></Label>
+                                                    <BoxView Grid.Column="4" BackgroundColor="#d8d8d8" VerticalOptions="CenterAndExpand"></BoxView>
+                                                    <Label Margin="10,0,0,0" Grid.Column="5" Text="{Binding RecordForm}" VerticalOptions="CenterAndExpand" TextColor="{x:Static Common:Colors.TableFieldsColor}" >
+                                                        <Label.FormattedText>
+
+                                                            <FormattedString>
+                                                                <Span Text="{Binding RecordForm}" TextColor="{x:Static Common:Colors.HyperlinkBlueColor}" FontSize="13" FontFamily="{StaticResource ARIALMT}" TextDecorations="Underline">
+                                                                </Span>
+                                                            </FormattedString>
+                                                        </Label.FormattedText>
+                                                        <Label.GestureRecognizers>
+                                                            <TapGestureRecognizer Command="{Binding Path=BindingContext.HyperLinkClickedCommand, Source={x:Reference Page}}" CommandParameter="{Binding ThisObject}" />
+                                                        </Label.GestureRecognizers>
+                                                    </Label>
+                                                    <BoxView Grid.Column="6" BackgroundColor="#d8d8d8" VerticalOptions="CenterAndExpand"></BoxView>
+                                                    <Label Grid.Column="7" Margin="10,0,0,0" Text="{Binding Status}" TextColor="{x:Static Common:Colors.TableFieldsColor}" VerticalOptions="CenterAndExpand"></Label>
+                                                    <BoxView Grid.Column="8" BackgroundColor="#d8d8d8" VerticalOptions="CenterAndExpand"></BoxView>
+                                                    <Label Grid.Column="9" HorizontalOptions="Start" VerticalOptions="Center" IsEnabled="{Binding EnableRow}">
+                                                        <Label.FormattedText>
+                                                            <FormattedString>
+                                                                <Span Text="{Binding SyncStatus}" TextColor="{x:Static Common:Colors.HyperlinkTextColor}" FontSize="13" FontFamily="{StaticResource ARIALMT}" TextDecorations="Underline"></Span>
+                                                            </FormattedString>
+                                                        </Label.FormattedText>
+                                                        <Label.GestureRecognizers>
+                                                            <TapGestureRecognizer Tapped="TapGestureRecognizer_Tapped" />
+                                                        </Label.GestureRecognizers>
+                                                    </Label>
+                                                    <BoxView Grid.Column="10" BackgroundColor="#d8d8d8" VerticalOptions="CenterAndExpand"></BoxView>
+                                                    <StackLayout Grid.Column="11" Orientation="Horizontal"  Spacing="30" Margin="10,0,0,0" >
+                                                        <Image  Source="icondeletesa.png">
+                                                            <Image.GestureRecognizers>
+                                                                <TapGestureRecognizer Command="{Binding ItemDeleteCommand}"/>
+                                                            </Image.GestureRecognizers>
+                                                        </Image>
+                                                        <Image Source="{Binding EnableRow,Mode=TwoWay, Converter={StaticResource SyncImageConverter}}" HeightRequest="20" WidthRequest="20" IsEnabled="{Binding EnableRow}">
+                                                            <Image.GestureRecognizers>
+                                                                <TapGestureRecognizer Command="{Binding ItemSyncCommand}"/>
+                                                            </Image.GestureRecognizers>
+                                                        </Image>
+                                                    </StackLayout>
+                                                    <BoxView Grid.Column="12" BackgroundColor="{x:Static Common:Colors.TableBorderColor}" VerticalOptions="FillAndExpand"></BoxView>
+                                                </Grid>
+                                            </ViewCell.View>
+                                        </ViewCell>
+                                    </DataTemplate>
+                                    <template:AlternateColorDataTemplateSelector x:Key="alternateColorDataTemplateSelector"
+                                        EvenTemplate="{StaticResource evenTemplate}"
+                                        UnevenTemplate="{StaticResource unevenTemplate}"/>
+                                </ResourceDictionary>
+                            </StackLayout.Resources>
+                            <StackLayout Spacing="0">
+                                <renderer:MyListView x:Name="ListView"  ItemTapped="ListView_ItemTapped" Style="{StaticResource UWPListStyleSelector}" ItemsSource="{Binding ChildInformationRecords, Mode=TwoWay}" HorizontalOptions="FillAndExpand" HasUnevenRows="True" ItemTemplate="{StaticResource alternateColorDataTemplateSelector}" SeparatorVisibility="Default" SeparatorColor="{x:Static Common:Colors.TableBorderColor}" HeightRequest="{Binding Height}"/>
+                                <BoxView IsVisible="{Binding IsTableBottomLineVisible}"
+                                HeightRequest="1"  HorizontalOptions="FillAndExpand" BackgroundColor="{x:Static Common:Colors.TableBorderColor}">
+                                </BoxView>
+                            </StackLayout>
+                        </StackLayout>
+                    </StackLayout>
+                    <FlexLayout Padding="20,0,0,20">
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="Auto"/>
+                                <ColumnDefinition Width="Auto"/>
+                            </Grid.ColumnDefinitions>
+                            <renderer:CustomButtonUWP x:Name="SyncButton" Command="{Binding SyncCommand}" PropertyChanged="btnSync_PropertyChanged"  BorderColor="Transparent" Margin="0,0,0,0" WidthRequest="100" BorderWidth="2" Text="Commit" FontSize="14" TextColor="White"  Grid.Column="0" HorizontalOptions="Start" CornerRadius="3"  FontAttributes="Bold" IsEnabled="{Binding EnableSync,Mode=TwoWay}">
+                                <renderer:CustomButtonUWP.IsVisible>
+                                    <OnPlatform x:TypeArguments="x:Boolean">
+                                        <On Platform="iOS">false</On>
+                                        <On Platform="Android">true</On>
+                                        <On Platform="UWP">true</On>
+                                    </OnPlatform>
+                                </renderer:CustomButtonUWP.IsVisible>
+                            </renderer:CustomButtonUWP>
+                            <renderer:CustomButton x:Name="SyncButtoniOS" Command="{Binding SyncCommand}" BorderColor="Transparent" Margin="0,0,0,0" WidthRequest="100" BorderWidth="2" Text="Commit" FontSize="14" TextColor="White"  Grid.Column="0" HorizontalOptions="Start" CornerRadius="3"  FontAttributes="Bold" IsEnabled="{Binding EnableSync,Mode=TwoWay}">
+                                <renderer:CustomButton.IsVisible>
+                                    <OnPlatform x:TypeArguments="x:Boolean">
+                                        <On Platform="iOS">true</On>
+                                        <On Platform="Android">false</On>
+                                        <On Platform="UWP">false</On>
+                                    </OnPlatform>
+                                </renderer:CustomButton.IsVisible>
+                            </renderer:CustomButton>
+                            <renderer:CustomButtonUWP  x:Name="DeleteButton" Command="{Binding DeleteCommand}" PropertyChanged="btnDelete_PropertyChanged" BorderColor="Transparent" Margin="0,0,0,0" WidthRequest="100" BorderWidth="2" Text="Delete" FontSize="14" TextColor="White" Grid.Column="1" HorizontalOptions="Start" CornerRadius="3" FontAttributes="Bold" IsEnabled="{Binding EnableSync,Mode=TwoWay}">
+                                <renderer:CustomButtonUWP.IsVisible>
+                                    <OnPlatform x:TypeArguments="x:Boolean">
+                                        <On Platform="iOS">false</On>
+                                        <On Platform="Android">true</On>
+                                        <On Platform="UWP">true</On>
+                                    </OnPlatform>
+                                </renderer:CustomButtonUWP.IsVisible>
+                            </renderer:CustomButtonUWP>
+                            <renderer:CustomButton  x:Name="DeleteButtoniOS" Command="{Binding DeleteCommand}" BorderColor="Transparent" Margin="0,0,0,0" WidthRequest="100" BorderWidth="2" Text="Delete" FontSize="14" TextColor="White" Grid.Column="1" HorizontalOptions="Start" CornerRadius="3" FontAttributes="Bold" IsEnabled="{Binding EnableSync,Mode=TwoWay}">
+                                <renderer:CustomButton.IsVisible>
+                                    <OnPlatform x:TypeArguments="x:Boolean">
+                                        <On Platform="iOS">true</On>
+                                        <On Platform="Android">false</On>
+                                        <On Platform="UWP">false</On>
+                                    </OnPlatform>
+                                </renderer:CustomButton.IsVisible>
+                            </renderer:CustomButton>
+                        </Grid>
+                    </FlexLayout>
+                </StackLayout>
+            </Grid>
+        </StackLayout>
+    </Grid>
+</ContentPage>

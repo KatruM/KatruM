@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ContentView xmlns:Common="clr-namespace:BDI3Mobile.Common" 
+             xmlns="http://xamarin.com/schemas/2014/forms" 
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" xmlns:customrenderer="clr-namespace:BDI3Mobile.CustomRenderer"
+             x:Class="BDI3Mobile.Views.DashboardView">
+    <ScrollView>
+        <Grid ColumnSpacing="30" BackgroundColor="{x:Static Common:Colors.BackgroundColor}">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+            <Grid Grid.Column="0">
+                <StackLayout BackgroundColor="White" Margin="0,50,0,0" Spacing="30" Padding="20">
+                    <Label x:Name="ChildInfoLabel"  Margin="0,100,0,0" Text="Child Information" HorizontalOptions="Center" TextColor="{x:Static Common:Colors.GreenColor}" FontSize="24" HorizontalTextAlignment="Center" FontFamily="{StaticResource Arial-Bold}" FontAttributes="Bold"/>
+                    <BoxView Color="Silver" HeightRequest="2"/>
+                    <Label HeightRequest="75" Text="Search or browse for a specific child's record or add a new child. " FontFamily="{StaticResource ARIALMT}"/>
+                    <customrenderer:CustomButtonUWP  Command="{Binding BrowseUpdateRecordCommand}" WidthRequest="250" Padding="0,10,0,10" CornerRadius="5" VerticalOptions="Center" HorizontalOptions="Center" Text="Browse/Update Record" TextColor="White" FontAttributes="Bold" FontFamily="{StaticResource Arial-Bold}" BackgroundColor="{x:Static Common:Colors.PrimaryColor}"/>
+                    <customrenderer:CustomButtonUWP Command="{Binding AddNewRecordCommand}" WidthRequest="250" Padding="0,10,0,10" CornerRadius="5" VerticalOptions="Center" HorizontalOptions="Center" Text="Add New Child Record" TextColor="White" FontAttributes="Bold" FontFamily="{StaticResource Arial-Bold}" BackgroundColor="{x:Static Common:Colors.PrimaryColor}"/>
+                </StackLayout>
+                <Image WidthRequest="140" HeightRequest="160" HorizontalOptions="Center" Source="DgroupCcopy.png" VerticalOptions="Start"/>
+            </Grid>
+            <Grid Grid.Column="1">
+                <StackLayout BackgroundColor="White" Margin="0,50,0,0" Spacing="30" Padding="20">
+                    <Label x:Name="AssesmentsLabel" Margin="0,100,0,0" Text="Assessments" TextColor="{x:Static Common:Colors.OrangeColor}" FontSize="24" HorizontalTextAlignment="Center" FontFamily="{StaticResource Arial-Bold}" FontAttributes="Bold"/>
+                    <BoxView Color="Silver" HeightRequest="2"/>
+                    <Label HeightRequest="75" Text="Start an assessment or screener, or resume an assessment already in progress." FontFamily="{StaticResource ARIALMT}"/>
+                    <customrenderer:CustomButtonUWP Command="{Binding NewAssessmentCommand}" WidthRequest="250" Padding="0,10,0,10" Text="New Assessment" VerticalOptions="Center" HorizontalOptions="Center"  CornerRadius="5" FontAttributes="Bold" TextColor="White" BackgroundColor="{x:Static Common:Colors.PrimaryColor}" FontFamily="{StaticResource Arial-Bold}">
+                        
+                    </customrenderer:CustomButtonUWP>
+                    <customrenderer:CustomButtonUWP Command="{Binding ResumeAssessmentCommand}" WidthRequest="250" Padding="0,10,0,10" Text="Resume/Commit Assessment" VerticalOptions="Center" HorizontalOptions="Center" FontAttributes="Bold" TextColor="White" CornerRadius="5" BackgroundColor="{x:Static Common:Colors.PrimaryColor}" FontFamily="{StaticResource Arial-Bold}"/>
+                </StackLayout>
+                <Image WidthRequest="140" HeightRequest="160" HorizontalOptions="Center" Source="DgroupAcopy.png" VerticalOptions="Start"/>
+            </Grid>
+            <Grid Grid.Column="2">
+                    <StackLayout BackgroundColor="White" Margin="0,50,0,0" Spacing="30" Padding="20">
+                        <Label x:Name="ReportsLabel" Margin="0,100,0,0" Text="Reports" TextColor="{x:Static Common:Colors.PurpleColor}" FontSize="24" HorizontalTextAlignment="Center" FontFamily="{StaticResource Arial-Bold}" FontAttributes="Bold"/>
+                        <BoxView Color="Silver" HeightRequest="2"/>
+                    <Label HeightRequest="75" Text="Create family reports and score views, sync up with BDI-3 Online for more robust reporting options." FontFamily="{StaticResource ARIALMT}"/>
+                    <customrenderer:CustomButtonUWP Command="{Binding ReportToFamilyCommand}" WidthRequest="250" CornerRadius="5" Padding="0,10,0,10" VerticalOptions="Center" HorizontalOptions="Center" Text="Basic Reports" FontAttributes="Bold" TextColor="White" FontFamily="{StaticResource Arial-Bold}" BackgroundColor="{x:Static Common:Colors.PrimaryColor}"/>
+                    <customrenderer:CustomButtonUWP x:Name="FullReport" PropertyChanged="FullReport_PropertyChanged" Command="{Binding OpenFullReportCommand}" IsEnabled="{Binding IsInternetAvailable}" WidthRequest="250" CornerRadius="5" Padding="0,10,0,10" VerticalOptions="Center" HorizontalOptions="Center" Text="Full Reports" FontAttributes="Bold" TextColor="White" FontFamily="{StaticResource Arial-Bold}">
+                         <Button.IsVisible> <OnPlatform x:TypeArguments="x:Boolean">
+                                                       <On Platform="iOS">false</On>
+                                                         <On Platform="Android">true</On>
+                                                            <On Platform="UWP">true</On>
+                                                        </OnPlatform> </Button.IsVisible>
+                    </customrenderer:CustomButtonUWP>
+                         <customrenderer:CustomButton x:Name="FullReportiOS" PropertyChanged="FullReport_PropertyChanged" Command="{Binding OpenFullReportCommand}" IsEnabled="{Binding IsInternetAvailable}" WidthRequest="250" CornerRadius="5" Padding="0,10,0,10" VerticalOptions="Center" HorizontalOptions="Center" Text="Full Reports" FontAttributes="Bold" TextColor="White" FontFamily="{StaticResource Arial-Bold}">
+                         <customrenderer:CustomButton.IsVisible> <OnPlatform x:TypeArguments="x:Boolean">
+                                                       <On Platform="iOS">true</On>
+                                                         <On Platform="Android">false</On>
+                                                            <On Platform="UWP">false</On>
+                                                        </OnPlatform> </customrenderer:CustomButton.IsVisible>
+                    </customrenderer:CustomButton>
+                    </StackLayout>
+                    <Image WidthRequest="140" HeightRequest="160" HorizontalOptions="Center" Source="DgroupRcopy.png" VerticalOptions="Start"/>
+            </Grid>
+            
+        </Grid>
+    </ScrollView>
+</ContentView>

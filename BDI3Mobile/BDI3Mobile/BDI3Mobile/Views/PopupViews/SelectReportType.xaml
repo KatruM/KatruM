@@ -1,0 +1,86 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<pages:PopupPage
+    xmlns:pages="clr-namespace:Rg.Plugins.Popup.Pages;assembly=Rg.Plugins.Popup"
+    xmlns:common="clr-namespace:BDI3Mobile.Common"
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:ios="clr-namespace:Xamarin.Forms.PlatformConfiguration.iOSSpecific;assembly=Xamarin.Forms.Core"
+    BackgroundColor="Transparent"
+             x:Class="BDI3Mobile.Views.PopupViews.SelectReportType">
+    <Frame x:Name="ReportTypePopUp" HasShadow="False" BackgroundColor="Transparent" HeightRequest="210" WidthRequest="300" Padding="1" VerticalOptions="Center" HorizontalOptions="Center">
+        <Frame.BorderColor>
+            <OnPlatform x:TypeArguments="Color">
+                <On Platform="UWP,Android,iOS" Value="LightGray"/>
+            </OnPlatform>
+        </Frame.BorderColor>
+        <Frame.CornerRadius>
+            <OnPlatform x:TypeArguments="x:Single">
+                <On Platform="iOS" Value="20"/>
+                <On Platform="UWP,Android" Value="20"/>
+            </OnPlatform>
+        </Frame.CornerRadius>
+        <Grid  VerticalOptions="FillAndExpand" HorizontalOptions="Start">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="50" />
+                <RowDefinition Height="*" />
+            </Grid.RowDefinitions>
+            <Frame BackgroundColor="{x:Static common:Colors.PrimaryColor}"  Grid.RowSpan="2" CornerRadius="20" IsTabStop="False" HasShadow="False">
+                <Label Text="SELECT REPORT TYPE" TextColor="White" FontSize="17" FontAttributes="Bold" HorizontalTextAlignment="Center" />
+            </Frame>
+            <Frame x:Name="Frame1" HasShadow="False" BackgroundColor="White" CornerRadius="20" Grid.Row="1" Padding="0" IsTabStop="False">
+            <ListView  x:Name="ReportTypeListview" CachingStrategy="RecycleElement" VerticalScrollBarVisibility="Always" VerticalOptions="Start" ItemsSource="{Binding ReportTypeList}" HorizontalScrollBarVisibility="Never" Grid.Row="1" BackgroundColor="White" IsTabStop="False" Footer="" ios:ListView.SeparatorStyle="FullWidth">
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <ViewCell>
+                            <StackLayout Orientation="Vertical" Spacing="0" BackgroundColor="White" >
+                                <StackLayout Orientation="Horizontal" BackgroundColor="White" Padding="10,5" IsTabStop="False" >
+                                    <Label Text="{Binding ReportTypeName}" FontSize="16"  TextColor="Black" VerticalOptions="Center"  IsTabStop="{Binding IsTabStop}" HorizontalOptions="FillAndExpand"/>
+                                    <Image HeightRequest="20" WidthRequest="20" Source="checkmark.png" IsVisible="{Binding IsSelected}" VerticalOptions="Center" />
+                                </StackLayout>
+                                <BoxView  Color="{x:Static common:Colors.TableBorderColor}" VerticalOptions="End">
+                                    <BoxView.HeightRequest>
+                                        <OnPlatform x:TypeArguments="x:Double">
+                                            <On Platform="UWP">0.5</On>
+                                            <On Platform="Android">0</On>
+                                        </OnPlatform>
+                                    </BoxView.HeightRequest>
+                                </BoxView>
+                            </StackLayout>
+                        </ViewCell>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
+            </Frame>
+
+            <Frame x:Name="AndroidFrame" HasShadow="False" BackgroundColor="White" CornerRadius="20" Grid.Row="1" Padding="0" IsTabStop="False">
+            <CollectionView  x:Name="ReportTypeCollectionView"   VerticalOptions="Start" ItemsSource="{Binding ReportTypeList}" Grid.Row="1" BackgroundColor="White" IsTabStop="False">
+                <CollectionView.ItemTemplate>
+                    <DataTemplate>
+                            <StackLayout Orientation="Vertical" Spacing="0" BackgroundColor="White" >
+                                <StackLayout Orientation="Horizontal" BackgroundColor="White" Padding="10,5" IsTabStop="False" >
+                                    <Label Text="{Binding ReportTypeName}" FontSize="16"  TextColor="Black" VerticalOptions="Center"  IsTabStop="{Binding IsTabStop}" HorizontalOptions="FillAndExpand"/>
+                                    <Image HeightRequest="20" WidthRequest="20" Source="checkmark.png" IsVisible="{Binding IsSelected}" VerticalOptions="Center" />
+                                    <StackLayout.GestureRecognizers>
+                                       <TapGestureRecognizer
+                                    Tapped="TapGestureRecognizer_Tapped"
+                                    NumberOfTapsRequired="1" />
+                                </StackLayout.GestureRecognizers>
+                                </StackLayout>
+                                <BoxView  Color="{x:Static common:Colors.TableBorderColor}" VerticalOptions="End">
+                                    <BoxView.HeightRequest>
+                                        <OnPlatform x:TypeArguments="x:Double">
+                                            <On Platform="UWP">0.5</On>
+                                            <On Platform="Android">0.3</On>
+                                        </OnPlatform>
+                                    </BoxView.HeightRequest>
+                                </BoxView>
+                            </StackLayout>
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+            </CollectionView>
+            </Frame>
+
+        </Grid>
+    </Frame>
+
+</pages:PopupPage>

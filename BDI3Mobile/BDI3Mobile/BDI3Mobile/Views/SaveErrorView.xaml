@@ -1,0 +1,27 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<pages:PopupPage   xmlns:pages="clr-namespace:Rg.Plugins.Popup.Pages;assembly=Rg.Plugins.Popup"
+     xmlns="http://xamarin.com/schemas/2014/forms" 
+      xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+                   xmlns:renderer="clr-namespace:BDI3Mobile.CustomRenderer"
+                   x:Class="BDI3Mobile.Views.SaveErrorView">
+
+    <StackLayout Margin="0,0,0,0"  WidthRequest="450" BackgroundColor="White" HorizontalOptions="Center" VerticalOptions="Center">
+        <BoxView HeightRequest="4" WidthRequest="4" Margin="0,0,0,0"  VerticalOptions="StartAndExpand" BackgroundColor="#CC1416"   />
+        <StackLayout >
+            <Label Text="Save Error"  Margin="20,20,0,0"   TextColor="Black" FontSize="26" FontAttributes="Bold"   VerticalOptions="Start"/>
+            <Label  Text="Data has not been saved. Are you sure you want to navigate"   Margin="20,20,0,0" TextColor="Black" FontSize="14"  VerticalOptions="Start"/>
+            <Label  Text="away from the page?"   Margin="20,0,0,0" TextColor="Black" FontSize="14"  VerticalOptions="Start"/>
+        </StackLayout>
+        <Grid Margin="20,30,0,0">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="AUTO"/>
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="AUTO"/>
+                <ColumnDefinition Width="AUTO"/>
+            </Grid.ColumnDefinitions>
+            <renderer:CustomButtonUWP  Text="Yes" BackgroundColor="White" HeightRequest="5"  WidthRequest="100" BorderWidth="2" BorderColor="#147CBD" Margin="0,0,0,20" Grid.Column="0" FontSize="14"   TextColor="#147CBD" Command="{Binding Yesbuttoncommand}"/>
+            <renderer:CustomButtonUWP  Text="No" TextColor="White" FontAttributes="Bold" WidthRequest="100" BackgroundColor="#147CBD" FontSize="14" Margin="190,0,0,20" Grid.Column="1" HorizontalOptions="End" Command="{Binding Nobuttoncommand}"/>
+        </Grid>
+    </StackLayout>
+</pages:PopupPage>

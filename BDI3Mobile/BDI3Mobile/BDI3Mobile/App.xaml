@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Application xmlns="http://xamarin.com/schemas/2014/forms" xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:Common="clr-namespace:BDI3Mobile.Common"
+             xmlns:renderer="clr-namespace:BDI3Mobile.CustomRenderer"
+             x:Class="BDI3Mobile.App" >
+    <Application.Resources>
+        <ResourceDictionary>
+
+            <OnPlatform x:TypeArguments="x:String" 
+                x:Key="FontAwesomeBrands">
+                <On Platform="Windows" Value="/Assets/FontAwesome5Free-Regular-400.ttf#Font Awesome 5 Free" />
+            </OnPlatform>
+
+
+            <OnPlatform x:TypeArguments="x:String" x:Key="Arial-Bold">
+                <On Platform="Android" Value="arialbd.ttf#arialbd" />
+                <On Platform="Windows" Value="Assets/Fonts/arialbd.ttf#arialbd"/>
+                <On Platform="UWP" Value="Assets/Fonts/arialbd.ttf#arialbd" />
+                <On Platform="iOS" Value="arialbd" />
+            </OnPlatform>
+            <OnPlatform x:TypeArguments="x:String" x:Key="ARIALMT">
+                <On Platform="Android" Value="ARIALMT.ttf#ARIALMT" />
+                <On Platform="Windows" Value="Assets/Fonts/ARIALMT.ttf#ARIALMT"/>
+                <On Platform="UWP" Value="Assets/Fonts/ARIALMT.ttf#ARIALMT" />
+                <On Platform="iOS" Value="ARIALMT" />
+            </OnPlatform>
+            <OnPlatform x:TypeArguments="x:String" x:Key="Arial-BoldMT">
+                <On Platform="Android" Value="Arial-BoldMT.otf#Arial-BoldMT" />
+                <On Platform="Windows" Value="Assets/Fonts/Arial-BoldMT.otf#Arial-BoldMT"/>
+                <On Platform="UWP" Value="Assets/Fonts/Arial-BoldMT.otf#Arial-BoldMT" />
+                <On Platform="iOS" Value="Arial-BoldMT.otf" />
+            </OnPlatform>
+            <OnPlatform x:TypeArguments="x:String" x:Key="SFProRegular">
+                <On Platform="Android" Value="SFProTextRegular.ttf#SFProTextRegular" />
+                <On Platform="Windows" Value="Assets/Fonts/SFProTextRegular.ttf#SFProTextRegular" />
+                <On Platform="UWP" Value="Assets/Fonts/SFProTextRegular.ttf#SFProTextRegular"/>
+                <On Platform="iOS" Value="SFProTextRegular"/>
+            </OnPlatform>
+            <OnPlatform x:TypeArguments="Thickness" x:Key="SelectionArrowPadding">
+                <On Platform="UWP" Value="4,4,4,4" />
+                <On Platform="Android" Value="4,4,4,2"/>
+                <On Platform="iOS" Value="4,4,4,4"/>
+            </OnPlatform>
+            <OnPlatform x:TypeArguments="Thickness" x:Key="BorderlessEntryMargin">
+                <On Platform="iOS" Value="10,0,0,0"/>
+            </OnPlatform>
+            <OnPlatform x:TypeArguments="Thickness" x:Key="ImageStackLayoutMargin">
+                <On Platform="iOS" Value="0,10,0,0"/>
+                <On Platform="UWP" Value="0,5,0,0"/>
+                <On Platform="Android" Value="0,5,0,0"/>
+            </OnPlatform>
+        </ResourceDictionary>
+        <Style TargetType="Label">
+            <Setter Property="FontFamily" Value="ArialMT" />
+            <Setter Property="TextColor" Value="Black" />
+        </Style>
+        <Style TargetType="Entry">
+<!--            <Setter Property="HeightRequest" Value="32"/>-->
+            <Setter Property="FontFamily" Value="ArialMT"/>
+        </Style>
+        <Style x:Key="SelectionArrowButton" TargetType="ImageButton">
+            <Setter Property="Padding" Value="{StaticResource SelectionArrowPadding}"/>
+            <Setter Property="Source" Value="iconarrow3.png"/>
+            <Setter Property="IsOpaque" Value="True"/>
+            <Setter Property="BackgroundColor" Value="{x:Static Common:Colors.FrameBlueColor}"/>
+        </Style>
+        <Style TargetType="renderer:BorderlessEntry">
+            <Setter Property="Margin" Value="{StaticResource BorderlessEntryMargin}"/>
+        </Style>
+        <Style TargetType="StackLayout" x:Key="ImageStackLayout">
+            <Setter Property="Margin" Value="{StaticResource ImageStackLayoutMargin}"></Setter>
+        </Style>
+        <Style x:Key="BoldLabelMediumFontStyle" TargetType="Label">
+            <Setter Property="FontFamily" Value="Arial-Bold"/>
+            <Setter Property="FontAttributes" Value="Bold"/>
+            <Setter Property="TextColor" Value="{x:Static Common:Colors.BlackColor}"/>
+            <Setter Property="FontSize" Value="18"/>
+        </Style>
+       
+    </Application.Resources>
+</Application>

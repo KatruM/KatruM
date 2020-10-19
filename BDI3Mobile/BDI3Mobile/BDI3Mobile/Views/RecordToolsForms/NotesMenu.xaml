@@ -1,0 +1,191 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<pages:PopupPage xmlns="http://xamarin.com/schemas/2014/forms"
+                 xmlns:pages="clr-namespace:Rg.Plugins.Popup.Pages;assembly=Rg.Plugins.Popup"
+                 xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+                 xmlns:renderer="clr-namespace:BDI3Mobile.CustomRenderer"
+                 x:Class="BDI3Mobile.Views.RecordToolsForms.NotesMenu">
+
+    <renderer:MyFrame HasShadow="True" BackgroundColor="#f4f4f4" CornerRadius="6" HorizontalOptions="EndAndExpand" VerticalOptions="Start" HeightRequest="250" WidthRequest="300">
+        <renderer:MyFrame.Padding>
+            <OnPlatform x:TypeArguments="Thickness">
+                <On Platform="Android" Value="2"/>
+                <On Platform="UWP,iOS" Value="0"/>
+            </OnPlatform>
+        </renderer:MyFrame.Padding>
+        <renderer:MyFrame.Margin>
+            <OnPlatform x:TypeArguments="Thickness">
+                <!--<On Platform="UWP" Value="1050,100,20,500"/>-->
+                <On Platform="UWP" Value="0,100,30,0"/>
+                <On Platform="Android" Value="0,100,30,0"/>
+                <On Platform="iOS" Value="0,100,30,0"/>
+            </OnPlatform>
+        </renderer:MyFrame.Margin>
+
+        <Grid RowSpacing="0"  BackgroundColor="#f4f4f4">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="55"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="45"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition x:Name="SDgrid"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="45"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="30"/>
+            </Grid.RowDefinitions>
+            <BoxView Margin="0,10,0,0" Grid.Row="0" HeightRequest="4" WidthRequest="30" HorizontalOptions="CenterAndExpand"  VerticalOptions="Center" BackgroundColor="#A8A4A4" CornerRadius="20">
+                 <BoxView.HeightRequest>
+                 <OnPlatform x:TypeArguments="x:Double" >
+                     <On Platform="iOS">1</On>
+                     <On Platform="Android">4</On>
+                    <On Platform="UWP">4</On>
+                     </OnPlatform>
+                 </BoxView.HeightRequest>
+                </BoxView>
+
+            <Grid Grid.Row="1" Margin="0,5,0,0">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="70" />
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+                <StackLayout Orientation="Horizontal" HorizontalOptions="Center" Grid.Column="0">
+                    <Image Source="arrowBlue_1x.png" HorizontalOptions="Start" VerticalOptions="Center"  HeightRequest="16.5" WidthRequest="9.7" >
+                         <!--<Image.HeightRequest>
+                         <OnPlatform x:TypeArguments="x:Double" >
+                             <On Platform="iOS">15</On>
+                             <On Platform="Android">20.5</On>
+                            <On Platform="UWP">20.5</On>
+                             </OnPlatform>
+                 </Image.HeightRequest>-->
+                        </Image>
+                    <Label Text="Back" FontSize="Small" TextColor="#0091ff" VerticalOptions="Center"/>
+                    <StackLayout.GestureRecognizers>
+                        <TapGestureRecognizer Tapped="BackToRecordFormTool"/>
+                    </StackLayout.GestureRecognizers>
+                </StackLayout>
+                <Label Grid.Column="1" VerticalOptions="Center" Text="Notes" FontAttributes="Bold"  TextColor="#000000" >
+                    <Label.FontSize>
+                            <OnPlatform x:TypeArguments="x:Double">
+                                <On Platform="iOS" Value="18"></On>
+                                <On Platform="Android" Value="18"></On>
+                                <On Platform="UWP" Value="18"></On>
+                            </OnPlatform>
+                        </Label.FontSize>
+                    <Label.Margin>
+                        <OnPlatform x:TypeArguments="Thickness">
+                            <On Platform="UWP" Value="50,0,0,0"/>
+                            <On Platform="Android" Value="55,0,0,0"/>
+                            <On Platform="iOS" Value="55,0,0,0"/>
+                        </OnPlatform>
+                    </Label.Margin>
+                </Label>
+            </Grid>
+
+            <StackLayout Grid.Row="2" Padding="0">
+                <BoxView Color="Silver"  Margin="0" HeightRequest="1"  />
+            </StackLayout>
+
+            <Grid BackgroundColor="#ffffff" Grid.Row="3">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition/>
+                    <ColumnDefinition Width=".2*"/>
+                </Grid.ColumnDefinitions>
+
+                <Label Grid.Column="0" Margin="35,0,0,0" VerticalOptions="Center" Text="Item Level Note" FontSize="Small" TextColor="#000000">
+                    <Label.FontSize>
+                        <OnPlatform x:TypeArguments="x:Double" >
+                            <On Platform="iOS" Value="18"></On>
+                            <On Platform="Android" Value="18"></On>
+                            <On Platform="UWP" Value="18"></On>
+                        </OnPlatform>
+                    </Label.FontSize>
+                    <Label.GestureRecognizers>
+                        <TapGestureRecognizer Tapped="OpenItemLevelNote"/>
+                    </Label.GestureRecognizers>
+                </Label>
+                <Image Grid.Column="1" HorizontalOptions="Center" VerticalOptions="Center" Source="arrow2x.png" >
+                    <Image.GestureRecognizers>
+                        <TapGestureRecognizer Tapped="OpenItemLevelNote"/>
+                    </Image.GestureRecognizers>
+                </Image>
+
+                <Grid.GestureRecognizers>
+                    <TapGestureRecognizer Tapped="OpenItemLevelNote"/>
+                </Grid.GestureRecognizers>
+
+            </Grid>
+
+            <StackLayout Grid.Row="4" Padding="0" >
+                <BoxView Color="Silver"  Margin="0" HeightRequest="1"  />
+            </StackLayout>
+
+            <Grid BackgroundColor="#ffffff" Grid.Row="5">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition/>
+                    <ColumnDefinition Width=".2*"/>
+                </Grid.ColumnDefinitions>
+
+                <Label Grid.Column="0" Margin="35,0,0,0" VerticalOptions="Center" Text="Subdomain Note" FontSize="Small" TextColor="#000000">
+                    <Label.FontSize>
+                        <OnPlatform x:TypeArguments="x:Double" >
+                            <On Platform="iOS" Value="18"></On>
+                            <On Platform="Android" Value="18"></On>
+                            <On Platform="UWP" Value="18"></On>
+                        </OnPlatform>
+                    </Label.FontSize>
+                    <Label.GestureRecognizers>
+                        <TapGestureRecognizer Tapped="OpenSubdomainNote"/>
+                    </Label.GestureRecognizers>
+                </Label>
+                <Image Grid.Column="1" HorizontalOptions="Center" VerticalOptions="Center" Source="arrow2x.png" >
+                    <Image.GestureRecognizers>
+                        <TapGestureRecognizer Tapped="OpenSubdomainNote"/>
+                    </Image.GestureRecognizers>
+                </Image>
+                
+                <Grid.GestureRecognizers>
+                    <TapGestureRecognizer Tapped="OpenSubdomainNote"/>
+                </Grid.GestureRecognizers>
+
+            </Grid>
+
+            <StackLayout Grid.Row="6" Padding="0" >
+                <BoxView Color="Silver"  Margin="0" HeightRequest="1"  />
+            </StackLayout>
+
+            <Grid BackgroundColor="#ffffff" Grid.Row="7">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition/>
+                    <ColumnDefinition Width=".2*"/>
+                </Grid.ColumnDefinitions>
+
+                <Label Grid.Column="0" Margin="35,0,0,0" VerticalOptions="Center" Text="Record Form Note" FontSize="Small" TextColor="#000000">
+                    <Label.FontSize>
+                        <OnPlatform x:TypeArguments="x:Double" >
+                            <On Platform="iOS" Value="18"></On>
+                            <On Platform="Android" Value="18"></On>
+                            <On Platform="UWP" Value="18"></On>
+                        </OnPlatform>
+                    </Label.FontSize>
+                    <Label.GestureRecognizers>
+                        <TapGestureRecognizer Tapped="OpenRecordFormNote"/>
+                    </Label.GestureRecognizers>
+                </Label>
+                <Image Grid.Column="1" HorizontalOptions="Center" VerticalOptions="Center" Source="arrow2x.png" >
+                    <Image.GestureRecognizers
+                        >
+                        <TapGestureRecognizer Tapped="OpenRecordFormNote"/>
+                    </Image.GestureRecognizers>
+                </Image>
+                
+                <Grid.GestureRecognizers>
+                    <TapGestureRecognizer Tapped="OpenRecordFormNote"/>
+                </Grid.GestureRecognizers>
+            </Grid>
+            <StackLayout Grid.Row="8" Padding="0" >
+                <BoxView Color="Silver"  Margin="0" HeightRequest="1"  />
+            </StackLayout>
+        </Grid>
+        </renderer:MyFrame>
+</pages:PopupPage>

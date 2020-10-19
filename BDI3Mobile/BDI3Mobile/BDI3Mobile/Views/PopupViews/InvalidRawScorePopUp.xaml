@@ -1,0 +1,19 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<pages:PopupPage
+    xmlns:pages="clr-namespace:Rg.Plugins.Popup.Pages;assembly=Rg.Plugins.Popup"
+    xmlns="http://xamarin.com/schemas/2014/forms" xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:customrenderer="clr-namespace:BDI3Mobile.CustomRenderer"
+    x:Class="BDI3Mobile.Views.PopupViews.InvalidRawScorePopUp">
+
+    <Frame x:Name="ContentFrame" VerticalOptions="Center" HorizontalOptions="Center" WidthRequest="450" HeightRequest="150" Padding="0" BackgroundColor="White" Opacity="1">
+        <StackLayout>
+            <BoxView Color="Red" HeightRequest="4" />
+            <StackLayout Padding="0,25,0,0" HorizontalOptions="Center">
+                <Label x:Name="Message" FontSize="14"></Label>
+            </StackLayout>
+            <StackLayout Padding="0,30,0,0" HorizontalOptions="Center" VerticalOptions="Center">
+                <customrenderer:CustomButtonUWP Text="Continue" BackgroundColor="#147CBD" WidthRequest="85" HeightRequest="40" TextColor="#FFFFFF" BorderColor="#147cbd" BorderWidth="2" FontAttributes="Bold" Pressed="OnContinueClicked"/>
+            </StackLayout>
+        </StackLayout>
+    </Frame>
+</pages:PopupPage>

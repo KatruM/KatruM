@@ -1,0 +1,550 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<ContentPage
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:Datavalidator="clr-namespace:BDI3Mobile.Behaviors"
+    xmlns:Common="clr-namespace:BDI3Mobile.Common"
+    xmlns:Controls="clr-namespace:BDI3Mobile.CustomRenderer"
+    xmlns:converters="clr-namespace:BDI3Mobile.ValueConverter"
+    xmlns:sys="clr-namespace:System;assembly=mscorlib"
+    xmlns:ios="clr-namespace:Xamarin.Forms.PlatformConfiguration.iOSSpecific;assembly=Xamarin.Forms.Core"
+    x:Class="BDI3Mobile.Views.AddChildViews.AddDemographicView">
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <Style TargetType="Entry">
+                <Setter Property="MaxLength" Value="51" />
+            </Style>
+            <converters:ColorConverter x:Key="ColorConverter"/>
+        </ResourceDictionary>
+    </ContentPage.Resources>
+    <Grid x:Name="MainGrid">
+        <StackLayout BackgroundColor="{x:Static Common:Colors.BackgroundColor}">
+            <AbsoluteLayout HeightRequest="51" BackgroundColor="{x:Static Common:Colors.DarkGreenColor}" Padding="12.5, 10.5">
+                <StackLayout Orientation="Horizontal" AbsoluteLayout.LayoutBounds="0,1,-1,-1" AbsoluteLayout.LayoutFlags="YProportional">
+                    <Image Source="back.png" HeightRequest="30" WidthRequest="20" VerticalOptions="End">
+                        <Image.GestureRecognizers>
+                            <TapGestureRecognizer Command="{Binding BackCommand}" />
+                        </Image.GestureRecognizers>
+                    </Image>
+                    <Label Text="Dashboard" TextColor="White" VerticalTextAlignment="Center" FontSize="17" >
+                        <Label.GestureRecognizers>
+                            <TapGestureRecognizer Command="{Binding BackCommand}"></TapGestureRecognizer>
+                        </Label.GestureRecognizers>
+                    </Label>
+                </StackLayout>
+                <Label x:Name="lblTitle" Text="ADD CHILD INFORMATION" AbsoluteLayout.LayoutBounds="0.5,1,-1,-1" AbsoluteLayout.LayoutFlags="PositionProportional" FontSize="17" TextColor="White" />
+                <StackLayout Spacing="24" Orientation="Horizontal" AbsoluteLayout.LayoutBounds="1,1,-1,-1" AbsoluteLayout.LayoutFlags="PositionProportional" Margin="0,0,24,0">
+                    <Grid HeightRequest="30" WidthRequest="30">
+                        <Image Source="reload.png" HeightRequest="21" WidthRequest="21" VerticalOptions="End">
+                            <Image.GestureRecognizers>
+                                <TapGestureRecognizer Command="{Binding ReloadCommand}" />
+                            </Image.GestureRecognizers>
+                        </Image>
+                    </Grid>
+                    <Grid HeightRequest="31" WidthRequest="31">
+                        <Image Source="save.png" HeightRequest="21" WidthRequest="21" VerticalOptions="End">
+                            <Image.GestureRecognizers>
+                                <TapGestureRecognizer Tapped="SaveChildTapped" />
+                            </Image.GestureRecognizers>
+                        </Image>
+                    </Grid>
+                </StackLayout>
+            </AbsoluteLayout>
+
+            <ScrollView Margin="40.5" BackgroundColor="White" VerticalOptions="FillAndExpand">
+                <StackLayout>
+                    <BoxView Color="{Static Common:Colors.GreenColor}" HeightRequest="4" />
+                    <Label Margin="20" Text="Demographics" FontFamily="ArialMT" TextColor="Black" FontAttributes="Bold" FontSize="20" />
+                    <Grid Padding="20,0" ColumnSpacing="30">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*" />
+                            <ColumnDefinition Width="*" />
+                            <ColumnDefinition Width="*" />
+                            <ColumnDefinition Width="50" />
+                        </Grid.ColumnDefinitions>
+                        <Label Text="PRIMARY LANGUAGE" TextColor="{x:Static Common:Colors.LightGrayColor}" FontSize="12.5" />
+                        <Label Text="RACE" TextColor="{x:Static Common:Colors.LightGrayColor}" Grid.Column="1" FontSize="12.5" />
+                        <Grid HeightRequest="20" WidthRequest="20" HorizontalOptions="End" Grid.Column="1">
+                            <BoxView Color="{x:Static Common:Colors.PrimaryColor}" />
+                            <Label Text="{Binding RaceCount}" TextColor="White" HorizontalTextAlignment="Center" FontSize="Micro" VerticalOptions="Center" VerticalTextAlignment="Center" />
+                        </Grid>
+                        <Label Text="ETHNICITY" TextColor="{x:Static Common:Colors.LightGrayColor}" FontSize="12.5" Grid.Column="2" />
+                    </Grid>
+                    <Grid Padding="20,0" ColumnSpacing="30">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*" />
+                            <ColumnDefinition Width="*" />
+                            <ColumnDefinition Width="*" />
+                            <ColumnDefinition Width="50" />
+                        </Grid.ColumnDefinitions>
+
+
+                        <Controls:MyFrame BorderColor="{x:Static Common:Colors.BorderColor}" HeightRequest="40" VerticalOptions="Center" Padding="0"  HasShadow="False" CornerRadius="1">
+                            <StackLayout Orientation="Horizontal">
+                                <Controls:BorderlessEntry Placeholder="Select primary language" VerticalOptions="Center" HorizontalOptions="FillAndExpand" Text="{Binding Language, Mode=TwoWay}" InputTransparent="true" IsTabStop="False" FontSize="14" TextColor="{x:Static Common:Colors.LightGrayColor}"/>
+                                <ImageButton InputTransparent="True" HorizontalOptions="End" Margin="0,0,10,0" Padding="4,4,4,2" IsOpaque="False" Source="downArrow.png" HeightRequest="20" WidthRequest="20" CornerRadius="10" BackgroundColor="{x:Static Common:Colors.FrameBlueColor}" VerticalOptions="Center">
+                                    <ImageButton.GestureRecognizers>
+                                        <TapGestureRecognizer Command="{Binding ShowLanguagesCommand}" />
+                                    </ImageButton.GestureRecognizers>
+                                </ImageButton>
+
+                                <StackLayout.GestureRecognizers>
+                                    <TapGestureRecognizer Command="{Binding ShowLanguagesCommand}" />
+                                </StackLayout.GestureRecognizers>
+                            </StackLayout>
+                        </Controls:MyFrame>
+
+                        <Controls:MyFrame Grid.Column="1" BorderColor="{x:Static Common:Colors.BorderColor}" HeightRequest="40" VerticalOptions="Center" Padding="0"  HasShadow="False" CornerRadius="1">
+                            <StackLayout Orientation="Horizontal">
+                                <Controls:BorderlessEntry IsTabStop="False" Placeholder="Select child race" VerticalOptions="Center" HorizontalOptions="FillAndExpand" InputTransparent="true" Text="{Binding DisplayRace, Mode=TwoWay}" FontSize="14" TextColor="{x:Static Common:Colors.LightGrayColor}"/>
+
+                                <ImageButton InputTransparent="True" HorizontalOptions="End" Margin="0,0,10,0" Padding="4,4,4,2" IsOpaque="False" Source="downArrow.png" HeightRequest="20" WidthRequest="20" CornerRadius="10" BackgroundColor="{x:Static Common:Colors.FrameBlueColor}" VerticalOptions="Center" IsTabStop="{Binding IsTabStop}">
+                                    <ImageButton.GestureRecognizers>
+                                        <TapGestureRecognizer Command="{Binding ShowRaceCommand}" />
+                                    </ImageButton.GestureRecognizers>
+                                </ImageButton>
+                                <StackLayout.GestureRecognizers>
+                                    <TapGestureRecognizer Command="{Binding ShowRaceCommand}" />
+                                </StackLayout.GestureRecognizers>
+                            </StackLayout>
+                        </Controls:MyFrame>
+
+
+                        <Controls:MyFrame Grid.Column="2" BorderColor="{x:Static Common:Colors.BorderColor}" HeightRequest="40" VerticalOptions="Center" Padding="0"  HasShadow="False" CornerRadius="1">
+                            <StackLayout Orientation="Horizontal">
+                                <Controls:BorderlessEntry  VerticalOptions="Center" HorizontalOptions="FillAndExpand" InputTransparent="true" Text="{Binding EthencityStr, Mode=TwoWay}" Placeholder="Select child ethnicity" IsTabStop="False" FontSize="14" TextColor="{x:Static Common:Colors.LightGrayColor}" />
+
+                                <ImageButton InputTransparent="True" HorizontalOptions="End" Margin="0,0,10,0" Padding="4,4,4,2" IsOpaque="False" Source="downArrow.png" HeightRequest="20" WidthRequest="20" CornerRadius="10" BackgroundColor="{x:Static Common:Colors.FrameBlueColor}" VerticalOptions="Center" IsTabStop="{Binding IsTabStop}">
+                                    <ImageButton.GestureRecognizers>
+                                        <TapGestureRecognizer Command="{Binding ShowEthencityCommand}" />
+                                    </ImageButton.GestureRecognizers>
+                                </ImageButton>
+                                <StackLayout.GestureRecognizers>
+                                    <TapGestureRecognizer Command="{Binding ShowEthencityCommand}" />
+                                </StackLayout.GestureRecognizers>
+                            </StackLayout>
+                        </Controls:MyFrame>
+
+
+                    </Grid>
+                    <BoxView Color="{x:Static Common:Colors.TableBorderColor}" Margin="40,20" HeightRequest="2" />
+                    <Grid Padding="32,0" ColumnSpacing="30">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="2*" />
+                            <ColumnDefinition Width="2" />
+                            <ColumnDefinition Width="*" />
+                            <ColumnDefinition Width="0.1*" />
+                        </Grid.ColumnDefinitions>
+                        <!--IFSP/IEP LAYOUT-->
+                        <StackLayout BackgroundColor="White">
+                            <Label Text="IFSP/IEP" FontSize="16" FontAttributes="Bold" />
+                            <Grid ColumnSpacing="30">
+                                <StackLayout Orientation="Horizontal" Margin="0,10,0,0">
+                                    <Label Text="IFSP" TextColor="Black" FontSize="16" VerticalOptions="Center" VerticalTextAlignment="Center" />
+                                    <Switch IsTabStop="{Binding IsTabStop}"  IsToggled="{Binding IFSPSelected}" OnColor="{x:Static Common:Colors.SwitchOnColor}" x:Name="IFSPSwitch" />
+                                    <Label x:Name="IFSPSwitchText"   Text="{Binding IFSPSwitchText}" TextColor="Black" FontSize="16" VerticalOptions="Center" VerticalTextAlignment="Center">
+                                        <Label.Margin>
+                                            <OnPlatform x:TypeArguments="Thickness">
+                                                <On Platform="UWP" Value="-100,0,0,0"/>
+                                            </OnPlatform>
+                                        </Label.Margin>
+
+                                    </Label>
+                                </StackLayout>
+                                <StackLayout Orientation="Horizontal" Grid.Column="1" Margin="0,10,0,0">
+                                    <Label Text="IEP" TextColor="Black" FontSize="16" VerticalOptions="Center" VerticalTextAlignment="Center" />
+                                    <Switch IsTabStop="{Binding IsTabStop}"  IsToggled="{Binding IEPSelected}" OnColor="{x:Static Common:Colors.SwitchOnColor}" x:Name="IEPSwitch" />
+                                    <Label x:Name="IEPSwitchText" Text="{Binding IEPSwitchText}" TextColor="Black" FontSize="16" VerticalOptions="Center" VerticalTextAlignment="Center">
+                                        <Label.Margin>
+                                            <OnPlatform x:TypeArguments="Thickness">
+                                                <On Platform="UWP" Value="-100,0,0,0"/>
+                                            </OnPlatform>
+                                        </Label.Margin>
+                                    </Label>
+                                </StackLayout>
+                            </Grid>
+                            <Grid ColumnSpacing="30">
+                                <StackLayout Grid.Column="0">
+                                    <StackLayout Opacity="{Binding IFSPSelected}">
+
+                                        <Label Text="INITIAL DATE OF ELIGIBILITY" Margin="0,20,0,0" FontSize="12.5" TextColor="{x:Static Common:Colors.LightGrayColor}" />
+                                        <Controls:MyFrame x:Name="IFSPInitialDateFrame" HeightRequest="{Binding Path=Height}" HorizontalOptions="FillAndExpand" BindingContext="{x:Reference PrimaryDiagnosis}" BorderColor="{x:Static Common:Colors.BorderColor}" VerticalOptions="Center" Padding="0"  HasShadow="False" CornerRadius="1">
+                                            <StackLayout Orientation="Horizontal" x:Name="IFSPInitialDateEntryStackLayout" BackgroundColor="White">
+                                                <Grid  HorizontalOptions="FillAndExpand" Style="{StaticResource ImageStackLayout}">
+                                                    <Grid.Margin>
+                                                        <OnPlatform x:TypeArguments="Thickness">
+                                                            <On Platform="UWP" Value="5"/>
+                                                            <On Platform="Android" Value="2"/>
+                                                             <On Platform="iOS" Value="0,0,-6,0"/>
+                                                        </OnPlatform>
+                                                    </Grid.Margin>
+                                                    <Controls:BorderlessEntry IsTabStop="{Binding IsTabStop}" x:Name="IFSPInitialDateEntry" MaxLength="10" TextChanged="TextChanged" FontFamily="{StaticResource ARIALMT}" HorizontalOptions="FillAndExpand"  Placeholder="mm/dd/yyyy" BindingContext="{x:Reference EligibilityIFS}" Text="{Binding SelectedDate,Mode=TwoWay}" FontSize="14">
+                                                        <Controls:BorderlessEntry.Behaviors>
+                                                            <Datavalidator:NumbericDateValidator/>
+                                                        </Controls:BorderlessEntry.Behaviors>
+                                                    </Controls:BorderlessEntry>
+                                                </Grid>
+                                                <Frame x:Name="IFSPInitialDateImageFrame" HorizontalOptions="End" CornerRadius="1" VerticalOptions="FillAndExpand" BackgroundColor="{x:Static Common:Colors.FrameBlueColor}" Padding="0" HasShadow="false">
+                                                    <Image Source="shape.png" Margin="8,8,8,8"/>
+                                                    <Frame.GestureRecognizers>
+                                                        <TapGestureRecognizer Tapped="OpenEligibilityDP"></TapGestureRecognizer>
+                                                    </Frame.GestureRecognizers>
+                                                </Frame>
+                                            </StackLayout>
+                                        </Controls:MyFrame>
+                                        <Controls:MyDatePicker x:Name="EligibilityIFS" MinimumDate="{Binding MinimumDate}" Format="MM/dd/yyyy" MaximumDate="{x:Static sys:DateTime.Now}" Date="{Binding IFSPinitialdateofEligibility}" VerticalOptions="CenterAndExpand" IsVisible="True" WidthRequest="0" HeightRequest="0" IsEnabled="True"/>
+
+                                        <Label Text="Please select a valid date format." TextColor="Red" FontSize="Micro" IsVisible="{Binding IFSPInitialDateIsValid}"/>
+                                        <Label Text="EXIT DATE" Margin="0,20,0,0" FontSize="12.5" TextColor="{x:Static Common:Colors.LightGrayColor}" />
+                                        <Controls:MyFrame x:Name="IFSPExitDateFrame" BindingContext="{x:Reference PrimaryDiagnosis}"  HeightRequest="{Binding Path=Height}" HorizontalOptions="FillAndExpand" BorderColor="{x:Static Common:Colors.BorderColor}" VerticalOptions="Center" Padding="0"  HasShadow="False" CornerRadius="1">
+                                            <StackLayout x:Name="IFSPExitDateEntryStackLayout" Orientation="Horizontal" BackgroundColor="White">
+                                                <Grid HorizontalOptions="FillAndExpand" Style="{StaticResource ImageStackLayout}">
+                                                    <Grid.Margin>
+                                                        <OnPlatform x:TypeArguments="Thickness">
+                                                             <On Platform="iOS" Value="0,0,-6,0"/>
+                                                        </OnPlatform>
+                                                    </Grid.Margin>
+                                                    <Controls:BorderlessEntry IsTabStop="{Binding IsTabStop}" x:Name="IFSPExitDateEntry" MaxLength="10" FontFamily="{StaticResource ARIALMT}" HorizontalOptions="FillAndExpand"  TextColor="{x:Static Common:Colors.LightGrayColor}" Placeholder="mm/dd/yyyy" BindingContext="{x:Reference IFSPExitDP}" Text="{Binding SelectedDate,Mode=TwoWay}" FontSize="14" >
+                                                        <Controls:BorderlessEntry.Behaviors>
+                                                            <Datavalidator:NumbericDateValidator/>
+                                                        </Controls:BorderlessEntry.Behaviors>
+                                                    </Controls:BorderlessEntry>
+                                                </Grid>
+                                                <Frame x:Name="IFSPExitDateImageFrame" HorizontalOptions="End" VerticalOptions="FillAndExpand" CornerRadius="1" BackgroundColor="{x:Static Common:Colors.FrameBlueColor}" Padding="0" HasShadow="false">
+                                                    <Image Source="shape.png" Margin="8,8,8,8"/>
+                                                    <Frame.GestureRecognizers>
+                                                        <TapGestureRecognizer Tapped="OpenIFSCExitDP"></TapGestureRecognizer>
+                                                    </Frame.GestureRecognizers>
+                                                </Frame>
+                                            </StackLayout>
+                                        </Controls:MyFrame>
+
+                                        <Controls:MyDatePicker2 x:Name="IFSPExitDP" MinimumDate="{Binding MinimumDate}" Format="MM/dd/yyyy" Date="{Binding IFSPExitdate}" VerticalOptions="CenterAndExpand" IsVisible="True" WidthRequest="0" HeightRequest="0" IsEnabled="True"></Controls:MyDatePicker2>
+                                        <Label Text="Please select a valid date format." TextColor="Red" FontSize="Micro" IsVisible="{Binding IFSPExitDateIsValid}"/>
+                                    </StackLayout>
+                                    <Label IsVisible="{Binding ShowDiagnoses}"  Text="PRIMARY DIAGNOSIS" Margin="0,20,0,0" FontSize="12.5" TextColor="{x:Static Common:Colors.LightGrayColor}" />
+                                    <Frame IsVisible="{Binding ShowDiagnoses}"   x:Name="PrimaryDiagnosis"  HeightRequest="40" VerticalOptions="Center" BackgroundColor="White" HasShadow="false" BorderColor="{x:Static Common:Colors.BorderColor}" CornerRadius="3" Padding="0" >
+                                        <StackLayout Orientation="Horizontal">
+                                            <Controls:BorderlessEntry x:Name="PrimatryDiagnosisEntry" HorizontalOptions="FillAndExpand" Placeholder="Select primary diagnosis" VerticalOptions="Center"  InputTransparent="true" IsTabStop="False" Text="{Binding PrimaryDiagnoses}" FontSize="14" TextColor="{x:Static Common:Colors.LightGrayColor}" />
+
+                                            <ImageButton InputTransparent="True" HorizontalOptions="End" Margin="0,0,10,0" Padding="4,4,4,2" IsOpaque="False" Source="downArrow.png" HeightRequest="20" WidthRequest="20" CornerRadius="10" BackgroundColor="{x:Static Common:Colors.FrameBlueColor}" VerticalOptions="Center" IsTabStop="{Binding IsTabStop}">
+                                                <ImageButton.GestureRecognizers>
+                                                    <TapGestureRecognizer Command="{Binding ShowPrimaryDiagnosesCommand}" />
+                                                </ImageButton.GestureRecognizers>
+                                            </ImageButton>
+                                            <StackLayout.GestureRecognizers>
+                                                <TapGestureRecognizer Command="{Binding ShowPrimaryDiagnosesCommand}" />
+                                            </StackLayout.GestureRecognizers>
+                                        </StackLayout>
+                                    </Frame>
+                                </StackLayout>
+                                <StackLayout Grid.Column="1">
+                                    <StackLayout Opacity="{Binding IEPSelected}" >
+                                        <Label Text="INITIAL DATE OF ELIGIBILITY" Margin="0,20,0,0" FontSize="12.5" TextColor="{x:Static Common:Colors.LightGrayColor}" />
+
+                                        <Controls:MyFrame x:Name="IEPInitialDateFrame" BindingContext="{x:Reference PrimaryDiagnosis}" HeightRequest="{Binding Path=Height}" HorizontalOptions="FillAndExpand" BorderColor="{x:Static Common:Colors.BorderColor}" VerticalOptions="Center" Padding="0"  HasShadow="False" CornerRadius="1">
+                                            <StackLayout Orientation="Horizontal" x:Name="IEPInitialDateEntryStackLayout"  BackgroundColor="White">
+                                                <Grid Margin="5" VerticalOptions="Center" HorizontalOptions="FillAndExpand" Style="{StaticResource ImageStackLayout}">
+                                                    <Grid.Margin>
+                                                        <OnPlatform x:TypeArguments="Thickness">
+                                                            <On Platform="UWP" Value="5"/>
+                                                            <On Platform="Android" Value="2"/>
+                                                             <On Platform="iOS" Value="0,0,-6,0"/>
+                                                        </OnPlatform>
+                                                    </Grid.Margin>
+                                                    <Controls:BorderlessEntry IsTabStop="{Binding IsTabStop}" x:Name="IEPInitialDateEntry" MaxLength="10" FontFamily="{StaticResource ARIALMT}" HorizontalOptions="FillAndExpand"  TextColor="{x:Static Common:Colors.LightGrayColor}" Placeholder="mm/dd/yyyy" BindingContext="{x:Reference EligiblityIEP}" Text="{Binding SelectedDate}" FontSize="14">
+                                                        <Controls:BorderlessEntry.Behaviors>
+                                                            <Datavalidator:NumbericDateValidator/>
+                                                        </Controls:BorderlessEntry.Behaviors>
+                                                    </Controls:BorderlessEntry>
+                                                </Grid>
+                                                <Frame Grid.Column="1" x:Name="IEPInitialDateImageFrame" HorizontalOptions="End" CornerRadius="1" BackgroundColor="{x:Static Common:Colors.FrameBlueColor}" Padding="0" HasShadow="false">
+                                                    <Image Source="shape.png" Margin="8,8,8,8"/>
+                                                    <Frame.GestureRecognizers>
+                                                        <TapGestureRecognizer Tapped="OpenEligilityIEPDP"></TapGestureRecognizer>
+                                                    </Frame.GestureRecognizers>
+                                                </Frame>
+                                            </StackLayout>
+                                        </Controls:MyFrame>
+                                        <Controls:MyDatePicker x:Name="EligiblityIEP" MinimumDate="{Binding MinimumDate}" Format="MM/dd/yyyy" MaximumDate="{x:Static sys:DateTime.Now}" Date="{Binding IEPinitialdateofEligibility}" VerticalOptions="CenterAndExpand" IsVisible="True" WidthRequest="0" HeightRequest="0" IsEnabled="True"></Controls:MyDatePicker>
+
+                                        <Label Text="Please select a valid date format." TextColor="Red" FontSize="Micro" IsVisible="{Binding IEPInitialDateIsValid}"/>
+                                        <Label Text="EXIT DATE" Margin="0,20,0,0" FontSize="12.5" TextColor="{x:Static Common:Colors.LightGrayColor}" />
+
+                                        <Controls:MyFrame x:Name="IEPExitDateFrame" BindingContext="{x:Reference PrimaryDiagnosis}" HeightRequest="{Binding Path=Height}" HorizontalOptions="FillAndExpand" BorderColor="{x:Static Common:Colors.BorderColor}" VerticalOptions="Center" Padding="0"  HasShadow="False" CornerRadius="1">
+                                            <StackLayout Orientation="Horizontal" x:Name="IEPExitDateEntryStackLayout" BackgroundColor="White">
+                                                <Grid Margin="5" VerticalOptions="Center" HorizontalOptions="FillAndExpand" Style="{StaticResource ImageStackLayout}">
+                                                    <Grid.Margin>
+                                                        <OnPlatform x:TypeArguments="Thickness">
+                                                            <On Platform="UWP" Value="5"/>
+                                                            <On Platform="Android" Value="2"/>
+                                                             <On Platform="iOS" Value="0,0,-6,0"/>
+                                                        </OnPlatform>
+                                                    </Grid.Margin>
+                                                    <Controls:BorderlessEntry IsTabStop="{Binding IsTabStop}" x:Name="IEPExitDateEntry" MaxLength="10" FontFamily="{StaticResource ARIALMT}" HorizontalOptions="FillAndExpand"  TextColor="{x:Static Common:Colors.LightGrayColor}" Placeholder="mm/dd/yyyy" BindingContext="{x:Reference IEPExitDP}" Text="{Binding SelectedDate}" FontSize="14">
+                                                        <Controls:BorderlessEntry.Behaviors>
+                                                            <Datavalidator:NumbericDateValidator/>
+                                                        </Controls:BorderlessEntry.Behaviors>
+                                                    </Controls:BorderlessEntry>
+                                                </Grid>
+                                                <Frame Grid.Column="1" x:Name="IEPExitDateImageFrame" CornerRadius="1" HorizontalOptions="End" BackgroundColor="{x:Static Common:Colors.FrameBlueColor}" Padding="0" HasShadow="false">
+                                                    <Image Source="shape.png" Margin="8,8,8,8"/>
+                                                    <Frame.GestureRecognizers>
+                                                        <TapGestureRecognizer Tapped="OpenIEPExitDP"></TapGestureRecognizer>
+                                                    </Frame.GestureRecognizers>
+                                                </Frame>
+                                            </StackLayout>
+                                        </Controls:MyFrame>
+                                        <Controls:MyDatePicker2 x:Name="IEPExitDP" MinimumDate="{Binding MinimumDate}" Format="MM/dd/yyyy" Date="{Binding IEPExitdate}" VerticalOptions="CenterAndExpand" IsVisible="True" WidthRequest="0" HeightRequest="0" IsEnabled="True"></Controls:MyDatePicker2>
+
+                                        <Label Text="Please select a valid date format." TextColor="Red" FontSize="Micro" IsVisible="{Binding IEPExitDateIsValid}"/>
+                                    </StackLayout>
+                                    <Label IsVisible="{Binding ShowDiagnoses}" Text="SECONDARY DIAGNOSIS" Margin="0,20,0,0" FontSize="12.5" TextColor="{x:Static Common:Colors.LightGrayColor}" />
+                                    <Frame IsVisible="{Binding ShowDiagnoses}" HeightRequest="40" VerticalOptions="Center" BackgroundColor="White" HasShadow="false" BorderColor="{x:Static Common:Colors.BorderColor}" CornerRadius="3" Padding="0" >
+                                        <StackLayout Orientation="Horizontal">
+                                            <Controls:BorderlessEntry x:Name="SecondaryDiagnosisEntry" HorizontalOptions="FillAndExpand" Placeholder="Select secondary diagnosis" TextColor="{x:Static Common:Colors.LightGrayColor}" VerticalOptions="Center" InputTransparent="true" IsTabStop="False" Text="{Binding SecondaryDiagnoses}" FontSize="14"/>
+
+                                            <ImageButton InputTransparent="True" HorizontalOptions="End" Margin="0,0,10,0" Padding="4,4,4,2" IsOpaque="False" Source="downArrow.png" HeightRequest="20" WidthRequest="20" CornerRadius="10" BackgroundColor="{x:Static Common:Colors.FrameBlueColor}" VerticalOptions="Center">
+                                                <ImageButton.GestureRecognizers>
+                                                    <TapGestureRecognizer Command="{Binding ShowSecondaryDiagnosesCommand}" />
+                                                </ImageButton.GestureRecognizers>
+                                            </ImageButton>
+                                            <StackLayout.GestureRecognizers>
+                                                <TapGestureRecognizer Command="{Binding ShowSecondaryDiagnosesCommand}" />
+                                            </StackLayout.GestureRecognizers>
+                                        </StackLayout>
+                                    </Frame>
+                                </StackLayout>
+                            </Grid>
+                        </StackLayout>
+
+                        <!--BOXVIEW AS SEPERATOR-->
+                        <BoxView Color="Silver" Margin="0,5,0,190" Grid.Column="1" />
+
+                        <!--FUNDING SOURCES LAYOUT-->
+                        <StackLayout Grid.Column="2" Margin="0,0,0,0">
+                            <Label Text="Funding Sources" FontSize="16" FontAttributes="Bold" />
+                            <StackLayout Orientation="Horizontal" Margin="0,10,0,0">
+                                <Label Text="FUNDING SOURCES" FontSize="12.5" TextColor="{x:Static Common:Colors.LightGrayColor}" VerticalOptions="Center" HorizontalOptions="FillAndExpand" />
+                                <Grid HorizontalOptions="End" HeightRequest="20" WidthRequest="20">
+                                    <BoxView Color="{x:Static Common:Colors.PrimaryColor}" />
+                                    <Label Text="{Binding SourceCount}" TextColor="White" HorizontalTextAlignment="Center" VerticalOptions="Center" FontSize="Micro" />
+                                </Grid>
+                            </StackLayout>
+                            <Grid>
+                                <Controls:MyFrame BorderColor="{x:Static Common:Colors.BorderColor}" HeightRequest="40" VerticalOptions="Center" Padding="0"  HasShadow="False" CornerRadius="1">
+                                    <Controls:BorderlessEntry Placeholder="Select funding sources" TextColor="{x:Static Common:Colors.LightGrayColor}" VerticalOptions="Center" Text="{Binding DisplaySource}" InputTransparent="true" IsTabStop="False" FontSize="14"/>
+                                </Controls:MyFrame>
+                                <ImageButton InputTransparent="True" HorizontalOptions="End" Margin="0,0,10,0" Padding="4,4,4,2" IsOpaque="False" Source="downArrow.png" HeightRequest="20" WidthRequest="20" CornerRadius="10" BackgroundColor="{x:Static Common:Colors.FrameBlueColor}" VerticalOptions="Center" IsTabStop="{Binding IsTabStop}">
+                                    <ImageButton.GestureRecognizers>
+                                        <TapGestureRecognizer Command="{Binding ShowSourcesCommand}" />
+                                    </ImageButton.GestureRecognizers>
+                                </ImageButton>
+                                <Grid.GestureRecognizers>
+                                    <TapGestureRecognizer Command="{Binding ShowSourcesCommand}" />
+                                </Grid.GestureRecognizers>
+                            </Grid>
+                            <StackLayout Margin="0,20,-20,0" Orientation="Horizontal" HorizontalOptions="FillAndExpand">
+                                <Label VerticalTextAlignment="Center" Text="FREE/REDUCED LUNCH" FontSize="14" TextColor="Black" VerticalOptions="Center" />
+                                <Switch VerticalOptions="End" OnColor="{x:Static Common:Colors.SwitchOnColor}" IsToggled="{Binding IsFreeReducedLunch, Mode=TwoWay}" IsTabStop="{Binding IsTabStop}" />
+                                <Label  Text="{Binding FreeReducedLunchText}" TextColor="Black" FontSize="16" VerticalOptions="Center" VerticalTextAlignment="Center">
+                                    <Label.Margin>
+                                        <OnPlatform x:TypeArguments="Thickness">
+                                            <On Platform="UWP" Value="-100,0,0,0"/>
+                                        </OnPlatform>
+                                    </Label.Margin>
+                                </Label>
+                            </StackLayout>
+                        </StackLayout>
+                    </Grid>
+                </StackLayout>
+            </ScrollView>
+        </StackLayout>
+        <Frame Opacity="0.2" IsVisible="{Binding Cover}">
+            <Frame.BackgroundColor>
+                <OnPlatform x:TypeArguments="Color">
+                    <On Platform="iOS" Value="Transparent"/>
+                    <On Platform="UWP" Value="Black"/>
+                    <On Platform="Android" Value="Black"/>
+                </OnPlatform>
+            </Frame.BackgroundColor>
+            <Frame.GestureRecognizers>
+                <TapGestureRecognizer Command="{Binding UnCoverCommand}" />
+            </Frame.GestureRecognizers>
+        </Frame>
+        <Grid HeightRequest="350" WidthRequest="400" VerticalOptions="Center" HorizontalOptions="Center" IsVisible="{Binding ShowRaces}">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="50" />
+                <RowDefinition Height="*" />
+            </Grid.RowDefinitions>
+            <Frame HeightRequest="40" WidthRequest="60" Grid.RowSpan="2" BackgroundColor="{x:Static Common:Colors.PrimaryColor}" CornerRadius="20">
+            </Frame>
+            <Frame HasShadow="false" Grid.Row="1" BackgroundColor="White" CornerRadius="20" />
+            <ListView RowHeight="44" Grid.Row="1" ItemsSource="{Binding Races}" ItemTapped="RaceItemTapped" Margin="0,0,0,20" ios:ListView.SeparatorStyle="FullWidth" Footer="">
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <ViewCell>
+                            <StackLayout Orientation="Horizontal" Padding="10,5" BackgroundColor="White">
+                                <Label Text="{Binding text}" TextColor="Black" VerticalOptions="Center" HorizontalOptions="FillAndExpand" />
+                                <Image HeightRequest="20" WidthRequest="20" Source="checkmark.png" IsVisible="{Binding selected}">
+                                <Image.VerticalOptions>
+                                <OnPlatform x:TypeArguments="LayoutOptions">
+                                      <On Platform="UWP" Value="Center" />
+                                      <On Platform="Android" Value="Center" />
+                                      </OnPlatform>
+                              </Image.VerticalOptions>
+                             </Image>
+                            </StackLayout>
+                        </ViewCell>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
+            <Label Text="SELECT RACE(S)" TextColor="White" HeightRequest="50" VerticalTextAlignment="Center" HorizontalTextAlignment="Center" VerticalOptions="Center" FontSize="17" FontAttributes="Bold" />
+        </Grid>
+        <Grid HeightRequest="350" WidthRequest="400" VerticalOptions="Center" HorizontalOptions="Center" IsVisible="{Binding ShowFundingSources}">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="50" />
+                <RowDefinition Height="*" />
+            </Grid.RowDefinitions>
+            <Frame HeightRequest="40" WidthRequest="60" Grid.RowSpan="2" BackgroundColor="{x:Static Common:Colors.PrimaryColor}" CornerRadius="20">
+            </Frame>
+            <Frame HasShadow="false" Grid.Row="1" BackgroundColor="White" CornerRadius="20" />
+            <ListView RowHeight="44" Grid.Row="1" ItemsSource="{Binding FundingSources}" ItemTapped="FundingSourceTapped" Margin="0,0,0,20" ios:ListView.SeparatorStyle="FullWidth" Footer="">
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <ViewCell>
+                            <StackLayout Orientation="Horizontal" Padding="10,5" BackgroundColor="White">
+                                <Label Text="{Binding text}" TextColor="Black" VerticalOptions="Center" HorizontalOptions="FillAndExpand" />
+                                <Image HeightRequest="20" WidthRequest="20" Source="checkmark.png" IsVisible="{Binding selected}">
+                                   <Image.VerticalOptions>
+                                    <OnPlatform x:TypeArguments="LayoutOptions">
+                                      <On Platform="UWP" Value="Center" />
+                                      <On Platform="Android" Value="Center" />
+                                      </OnPlatform>
+                              </Image.VerticalOptions>
+                             </Image>
+                            </StackLayout>
+                        </ViewCell>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
+            <Label Text="SELECT FUNDING SOURCE(S)" TextColor="White" HeightRequest="50" VerticalTextAlignment="Center" HorizontalTextAlignment="Center" VerticalOptions="Center" FontSize="17" FontAttributes="Bold" />
+        </Grid>
+        <Grid HeightRequest="350" WidthRequest="400" VerticalOptions="Center" HorizontalOptions="Center" IsVisible="{Binding ShowLanguages}">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="50" />
+                <RowDefinition Height="*" />
+            </Grid.RowDefinitions>
+            <Frame HeightRequest="40" WidthRequest="60" Grid.RowSpan="2" BackgroundColor="{x:Static Common:Colors.PrimaryColor}" CornerRadius="20">
+            </Frame>
+            <Frame HasShadow="false" Grid.Row="1" BackgroundColor="White" CornerRadius="20" />
+            <ListView ios:ListView.SeparatorStyle="FullWidth" Footer="" RowHeight="44" Grid.Row="1" ItemsSource="{Binding Languages}" ItemTapped="LanguageTapped" Margin="0,0,0,20" SelectionMode="None">
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <ViewCell>
+                            <StackLayout Orientation="Horizontal" Padding="10,5" BackgroundColor="White">
+                                <Label Text="{Binding text}" TextColor="Black" VerticalOptions="Center" HorizontalOptions="FillAndExpand" />
+                                <Image HeightRequest="20" WidthRequest="20" Source="checkmark.png" IsVisible="{Binding selected}">
+                                 <Image.VerticalOptions>
+                                    <OnPlatform x:TypeArguments="LayoutOptions">
+                                      <On Platform="UWP" Value="Center" />
+                                      <On Platform="Android" Value="Center" />
+                                      </OnPlatform>
+                                    </Image.VerticalOptions>
+                                </Image>
+                            </StackLayout>
+                        </ViewCell>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
+            <Label Text="SELECT PRIMARY LANGUAGE" TextColor="White" HeightRequest="50" VerticalTextAlignment="Center" HorizontalTextAlignment="Center" VerticalOptions="Center" FontSize="17" FontAttributes="Bold" />
+        </Grid>
+        <Grid HeightRequest="350" WidthRequest="400" VerticalOptions="Center" HorizontalOptions="Center" IsVisible="{Binding ShowPrimaryDiagnoses}">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="50" />
+                <RowDefinition Height="*" />
+            </Grid.RowDefinitions>
+            <Frame HeightRequest="40" WidthRequest="60" Grid.RowSpan="2" BackgroundColor="{x:Static Common:Colors.PrimaryColor}" CornerRadius="20">
+            </Frame>
+            <Frame HasShadow="false" Grid.Row="1" BackgroundColor="White" CornerRadius="20" />
+            <ListView RowHeight="44" Grid.Row="1" ItemsSource="{Binding PrimaryDiagnostics}" ItemTapped="PrimaryDiagnosesTapped" Margin="0,0,0,20" ios:ListView.SeparatorStyle="FullWidth" Footer="" SelectionMode="None">
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <ViewCell>
+                            <StackLayout Orientation="Horizontal" Padding="10,5"  BackgroundColor="White">
+                                <Label Text="{Binding text,Mode=TwoWay}" TextColor="Black" VerticalOptions="Center" HorizontalOptions="FillAndExpand" />
+                                <Image HeightRequest="20" WidthRequest="20" Source="checkmark.png" IsVisible="{Binding selected}" >
+                                    <Image.VerticalOptions>
+                                    <OnPlatform x:TypeArguments="LayoutOptions">
+                                      <On Platform="UWP" Value="Center" />
+                                      <On Platform="Android" Value="Center" />
+                                      </OnPlatform>
+                                    </Image.VerticalOptions>
+                                </Image>
+                            </StackLayout>
+                        </ViewCell>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
+            <Label Text="SELECT PRIMARY DIAGNOSIS" TextColor="White" HeightRequest="50" VerticalTextAlignment="Center" HorizontalTextAlignment="Center" VerticalOptions="Center" FontSize="17" FontAttributes="Bold" />
+        </Grid>
+        <Grid HeightRequest="350" WidthRequest="400" VerticalOptions="Center" HorizontalOptions="Center" IsVisible="{Binding ShowSecondaryDiagnoses}">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="50" />
+                <RowDefinition Height="*" />
+            </Grid.RowDefinitions>
+            <Frame Grid.RowSpan="2" BackgroundColor="{x:Static Common:Colors.PrimaryColor}" CornerRadius="20">
+            </Frame>
+            <Frame HasShadow="false" Grid.Row="1" BackgroundColor="White" CornerRadius="20" />
+            <ListView RowHeight="44" Grid.Row="1" ItemsSource="{Binding SecondaryDiagnostics}" ItemTapped="SecondaryDiagnosesTapped" Margin="0,0,0,20" ios:ListView.SeparatorStyle="FullWidth" Footer="" SelectionMode="None">
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <ViewCell>
+                            <StackLayout Orientation="Horizontal" Padding="10,5"  BackgroundColor="White">
+                                <Label Text="{Binding text,Mode=TwoWay}" TextColor="Black" VerticalOptions="Center" HorizontalOptions="FillAndExpand" />
+                                <Image HeightRequest="20" WidthRequest="20" VerticalOptions="Center" Source="checkmark.png" IsVisible="{Binding selected}" >
+                                    <Image.VerticalOptions>
+                                    <OnPlatform x:TypeArguments="LayoutOptions">
+                                      <On Platform="UWP" Value="Center" />
+                                      <On Platform="Android" Value="Center" />
+                                      </OnPlatform>
+                                    </Image.VerticalOptions>
+                                </Image>
+                            </StackLayout>
+                        </ViewCell>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
+            <Label Text="SELECT SECONDARY DIAGNOSIS" TextColor="White" HeightRequest="50" VerticalTextAlignment="Center" HorizontalTextAlignment="Center" VerticalOptions="Center" FontSize="17" FontAttributes="Bold" />
+        </Grid>
+        <Grid HeightRequest="350" WidthRequest="400" VerticalOptions="Center" HorizontalOptions="Center" IsVisible="{Binding ShowEthencity}">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="50" />
+                <RowDefinition Height="*" />
+            </Grid.RowDefinitions>
+            <Frame Grid.RowSpan="2" BackgroundColor="{x:Static Common:Colors.PrimaryColor}" CornerRadius="20">
+            </Frame>
+            <Frame HasShadow="false" Grid.Row="1" BackgroundColor="White" CornerRadius="20" />
+            <ListView RowHeight="44" Grid.Row="1" ItemsSource="{Binding Ethencities}" ItemTapped="EthencityTapped" Margin="0,0,0,20" ios:ListView.SeparatorStyle="FullWidth" Footer="" SelectionMode="None">
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <ViewCell>
+                            <StackLayout Orientation="Horizontal" Padding="10,5"  BackgroundColor="White">
+                                <Label Text="{Binding text,Mode=TwoWay}" TextColor="Black" VerticalOptions="Center" HorizontalOptions="FillAndExpand" />
+                                <Image HeightRequest="20" WidthRequest="20" VerticalOptions="Center" Source="checkmark.png" IsVisible="{Binding selected}" >
+                                    <Image.VerticalOptions>
+                                    <OnPlatform x:TypeArguments="LayoutOptions">
+                                      <On Platform="UWP" Value="Center" />
+                                      <On Platform="Android" Value="Center" />
+                                      </OnPlatform>
+                                    </Image.VerticalOptions>
+                                </Image>
+                            </StackLayout>
+                        </ViewCell>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
+            <Label Text="SELECT ETHNICITY" TextColor="White" HeightRequest="50" VerticalTextAlignment="Center" HorizontalTextAlignment="Center" VerticalOptions="Center" FontSize="17" FontAttributes="Bold" />
+        </Grid>
+    </Grid>
+</ContentPage>

@@ -1,0 +1,131 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<pages:PopupPage
+    xmlns:pages="clr-namespace:Rg.Plugins.Popup.Pages;assembly=Rg.Plugins.Popup"
+    xmlns:common="clr-namespace:BDI3Mobile.Common"
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:renderer="clr-namespace:BDI3Mobile.CustomRenderer"
+    xmlns:template="clr-namespace:BDI3Mobile.DataTemplates"
+    xmlns:converters="clr-namespace:BDI3Mobile.ValueConverter"
+    BackgroundColor="Transparent"
+    xmlns:ios="clr-namespace:Xamarin.Forms.PlatformConfiguration.iOSSpecific;assembly=Xamarin.Forms.Core"
+    x:Class="BDI3Mobile.Views.PopupViews.SelectLocationPopupView">
+    
+    <pages:PopupPage.Resources>
+        <ResourceDictionary>
+            <DataTemplate x:Key="zeroLevel">
+                <ViewCell>
+                    <StackLayout Orientation="Horizontal" BackgroundColor="White" Padding="10" IsTabStop="False">
+                        
+                        <Image Source="tickblue1x.png" HeightRequest="20" WidthRequest="20" IsVisible="{Binding IsSelected}" IsEnabled="{Binding IsEnabled}"/>
+                        <Label Text="{Binding LocationName}" FontSize="16" HorizontalOptions="Start" TextColor="{Binding IsEnabled,Mode=TwoWay,Converter={StaticResource TextColorConverter}}" VerticalOptions="Center" VerticalTextAlignment="Center" IsTabStop="{Binding IsTabStop}" IsEnabled="{Binding IsEnabled}"/>
+                        <Label Text="(disabled)" TextColor="{Binding IsEnabled,Mode=TwoWay,Converter={StaticResource TextColorConverter}}" FontSize="16" Margin="2,0,0,0" VerticalOptions="Center" VerticalTextAlignment="Center" IsVisible="{Binding IsVisible}" FontAttributes="Italic" />
+                        <renderer:MyImageButton Aspect="AspectFit" VerticalOptions="Center" Source="{Binding ExpandImage}" IsTabStop="False" IsVisible="{Binding HasSubLocations}" Margin="0,-10,0,-10" HeightRequest="18" WidthRequest="18"  HorizontalOptions="EndAndExpand" Clicked="Level1ImageButton_Clicked"/>
+                    </StackLayout>
+                </ViewCell>
+            </DataTemplate>
+
+            <DataTemplate x:Key="firstLevel">
+                <ViewCell>
+                    <StackLayout Orientation="Horizontal" BackgroundColor="White" Padding="10" IsTabStop="False">
+                        <Image Source="tickblue1x.png" HeightRequest="20" WidthRequest="20" IsVisible="{Binding IsSelected}" IsEnabled="{Binding IsEnabled}"/>
+                        <Label Margin="10,0,0,0" Text="{Binding LocationName}" FontSize="16" HorizontalOptions="Start" TextColor="{Binding IsEnabled,Mode=TwoWay,Converter={StaticResource TextColorConverter}}" VerticalOptions="Center" VerticalTextAlignment="Center" IsEnabled="{Binding IsEnabled}"/>
+                        <Label Text="(disabled)" Margin="2,0,0,0" FontSize="16" TextColor="{Binding IsEnabled,Mode=TwoWay,Converter={StaticResource TextColorConverter}}" VerticalOptions="Center" VerticalTextAlignment="Center" IsVisible="{Binding IsVisible}" FontAttributes="Italic" />
+                        <renderer:MyImageButton VerticalOptions="Center" Aspect="AspectFit" Source="{Binding ExpandImage}" IsTabStop="False" IsVisible="{Binding HasSubLocations}" Margin="0,-10,15,-10" HeightRequest="18" WidthRequest="18"  HorizontalOptions="EndAndExpand" Clicked="Level1ImageButton_Clicked"/>
+                    </StackLayout>
+                </ViewCell>
+            </DataTemplate>
+
+            <DataTemplate x:Key="secondLevel">
+                <ViewCell>
+                    <StackLayout Orientation="Horizontal" BackgroundColor="White" Padding="10" IsTabStop="False">
+                        <Image Source="tickblue1x.png" HeightRequest="20" WidthRequest="20" IsVisible="{Binding IsSelected}" IsEnabled="{Binding IsEnabled}"/>
+                        <Label Text="{Binding LocationName}" FontSize="16" HorizontalOptions="Start" TextColor="{Binding IsEnabled,Mode=TwoWay,Converter={StaticResource TextColorConverter}}" VerticalOptions="Center" VerticalTextAlignment="Center" IsEnabled="{Binding IsEnabled}">
+                            <Label.Margin>
+                            <OnPlatform x:TypeArguments="Thickness">
+                                <On Platform="iOS" Value="30,0,0,0" />
+                                <On Platform="UWP" Value="30,0,0,0" />
+                                <On Platform="Android" Value="30,0,0,0" />
+                                </OnPlatform>
+                        </Label.Margin>
+                            </Label>
+                        <Label Margin="2,0,0,0" Text="(disabled)" FontSize="16" TextColor="{Binding IsEnabled,Mode=TwoWay,Converter={StaticResource TextColorConverter}}" VerticalOptions="Center" VerticalTextAlignment="Center" IsVisible="{Binding IsVisible}" FontAttributes="Italic" />
+                        <renderer:MyImageButton VerticalOptions="Center" Aspect="AspectFit" Source="{Binding ExpandImage}" IsTabStop="False" IsVisible="{Binding HasSubLocations}" Margin="0,-10,20,-10" HeightRequest="18" WidthRequest="18" HorizontalOptions="EndAndExpand" Clicked="Level1ImageButton_Clicked"/>
+                    </StackLayout>
+                </ViewCell>
+            </DataTemplate>
+
+            <DataTemplate x:Key="thirdLevel">
+                <ViewCell>
+                    <StackLayout Orientation="Horizontal" BackgroundColor="White" Padding="10" IsTabStop="False">
+                        <Image Source="tickblue1x.png" HeightRequest="20" WidthRequest="20" IsVisible="{Binding IsSelected}" IsEnabled="{Binding IsEnabled}"/>
+                        <Label  Text="{Binding LocationName}" FontSize="16" HorizontalOptions="Start" TextColor="{Binding IsEnabled,Mode=TwoWay,Converter={StaticResource TextColorConverter}}" VerticalOptions="Center" VerticalTextAlignment="Center" IsEnabled="{Binding IsEnabled}">
+                             <Label.Margin>
+                            <OnPlatform x:TypeArguments="Thickness">
+                                <On Platform="iOS" Value="50,0,0,0" />
+                                    <On Platform="UWP" Value="40,0,0,0" />
+                                    <On Platform="Android" Value="40,0,0,0" />
+                                </OnPlatform>
+                        </Label.Margin>
+                        </Label>
+                        <Label Margin="2,0,0,0" Text="(disabled)" FontSize="16"  TextColor="{Binding IsEnabled,Mode=TwoWay,Converter={StaticResource TextColorConverter}}" VerticalOptions="Center" VerticalTextAlignment="Center" IsVisible="{Binding IsVisible}" FontAttributes="Italic" />
+                        <renderer:MyImageButton VerticalOptions="Center" Aspect="AspectFit" Source="{Binding ExpandImage}" IsTabStop="False" IsVisible="{Binding HasSubLocations}" Margin="0,-10,25,-10" HeightRequest="18" WidthRequest="18"  HorizontalOptions="EndAndExpand" Clicked="Level1ImageButton_Clicked"/>
+                    </StackLayout>
+                </ViewCell>
+            </DataTemplate>
+
+            <DataTemplate x:Key="fourthLevel">
+                <ViewCell>
+                    <StackLayout Orientation="Horizontal" BackgroundColor="White" Padding="10" IsTabStop="False">
+                        <Image Source="tickblue1x.png" HeightRequest="20" WidthRequest="20" IsVisible="{Binding IsSelected}" IsEnabled="{Binding IsEnabled}"/>
+                        <Label Margin="40,0,0,0" Text="{Binding LocationName}" FontSize="16" HorizontalOptions="FillAndExpand" TextColor="{Binding IsEnabled,Mode=TwoWay,Converter={StaticResource TextColorConverter}}" VerticalOptions="Center" VerticalTextAlignment="Center" IsEnabled="{Binding IsEnabled}">
+                               <Label.Margin>
+                            <OnPlatform x:TypeArguments="Thickness">
+                                <On Platform="iOS" Value="70,0,0,0" />
+                                    <On Platform="UWP" Value="50,0,0,0" />
+                                    <On Platform="Android" Value="50,0,0,0" />
+                                </OnPlatform>
+                        </Label.Margin>
+                        </Label>
+                        <Label Margin="2,0,0,0" Text="(disabled)" FontSize="16" TextColor="{Binding IsEnabled,Mode=TwoWay,Converter={StaticResource TextColorConverter}}" VerticalOptions="Center" VerticalTextAlignment="Center" IsVisible="{Binding IsVisible}" FontAttributes="Italic" />
+                        <renderer:MyImageButton VerticalOptions="Center" Aspect="AspectFit" Source="{Binding ExpandImage}" IsTabStop="False" IsVisible="{Binding HasSubLocations}" Margin="0,-10,5,-10" HeightRequest="25" WidthRequest="25"  HorizontalOptions="EndAndExpand" Clicked="Level1ImageButton_Clicked"/>
+                    </StackLayout>
+                </ViewCell>
+            </DataTemplate>
+
+            <template:LocationDataTemplateSelector x:Key="locationDataTemplateSelector"
+                                                       ZeroLevel="{StaticResource zeroLevel}"
+                                                       FirstLevel="{StaticResource firstLevel}"
+                                                       SecondLevel="{StaticResource secondLevel}"
+                                                       ThirdLevel="{StaticResource thirdLevel}"
+                                                       FourthLevel="{StaticResource fourthLevel}"/>
+            <converters:TextColorConverter x:Key="TextColorConverter"/>
+        </ResourceDictionary>
+    </pages:PopupPage.Resources>
+
+    <Frame x:Name="LocationPopupView" HasShadow="False" Margin="330,0,0,0" BackgroundColor="Transparent" HeightRequest="210" WidthRequest="300" Padding="1" VerticalOptions="Center" HorizontalOptions="Start" IsVisible="{Binding ShowGender}">
+        <Frame.BorderColor>
+            <OnPlatform x:TypeArguments="Color">
+                <On Platform="UWP,Android,iOS" Value="LightGray"/>
+            </OnPlatform>
+        </Frame.BorderColor>
+        <Frame.CornerRadius>
+            <OnPlatform x:TypeArguments="x:Single">
+                <On Platform="iOS" Value="20"></On>
+                <On Platform="UWP,Android" Value="20"/>
+            </OnPlatform>
+        </Frame.CornerRadius>
+        <Grid VerticalOptions="FillAndExpand" HorizontalOptions="Start">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="50" />
+                <RowDefinition Height="*" />
+            </Grid.RowDefinitions>
+            <Frame BackgroundColor="{x:Static common:Colors.PrimaryColor}"  Grid.RowSpan="2" CornerRadius="20" IsTabStop="False" HasShadow="False">
+                <Label Text="SELECT LOCATION" TextColor="White" FontSize="17" FontAttributes="Bold" HorizontalTextAlignment="Center" />
+            </Frame>
+            <Frame HasShadow="False" BackgroundColor="White" BorderColor="Transparent" CornerRadius="20" Grid.Row="1" Padding="0" IsTabStop="False">
+                <renderer:MyListView x:Name="locationListview"  ios:ListView.SeparatorStyle="FullWidth" Footer="" VerticalScrollBarVisibility="Always" HorizontalScrollBarVisibility="Never" ItemTemplate="{StaticResource locationDataTemplateSelector}" ItemsSource="{Binding LocationsObservableCollection}" ItemSelected="LocationListview_ItemSelected" Grid.Row="1" BackgroundColor="White" IsTabStop="False" SeparatorVisibility="None"/>
+            </Frame>
+        </Grid>
+    </Frame>
+</pages:PopupPage>

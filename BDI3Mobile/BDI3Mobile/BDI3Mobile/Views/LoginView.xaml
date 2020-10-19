@@ -1,0 +1,155 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:Common="clr-namespace:BDI3Mobile.Common"
+             x:Class="BDI3Mobile.View.LoginView" BackgroundColor="{x:Static Common:Colors.BackgroundColor}"
+             xmlns:renderer="clr-namespace:BDI3Mobile.CustomRenderer">
+    <ContentPage.Content>
+        <ScrollView>
+            <Grid x:Name="MainGridView">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="Auto"/>
+                </Grid.RowDefinitions>
+                <Grid Grid.Row="0" Margin="0" Padding="0" RowSpacing="0" ColumnSpacing="0" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                    </Grid.RowDefinitions>
+                    <StackLayout Margin="0,35,0,35">
+                        <Image   Grid.Row="0" Source="MDSLogo.png" HorizontalOptions="Center" VerticalOptions="Center" HeightRequest="100"/>
+                    </StackLayout>
+                    <Grid RowSpacing="0" Grid.Row="1" Margin="0" Padding="0" VerticalOptions="StartAndExpand" HorizontalOptions="Center">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                        </Grid.RowDefinitions>
+                        <BoxView Grid.Row="0" BackgroundColor="{x:Static Common:Colors.FrameBlueColor}" Margin="2,0,2,0"  HorizontalOptions="FillAndExpand" HeightRequest="4"  CornerRadius="5"/>
+                        <Frame BackgroundColor="White" Grid.Row="1" VerticalOptions="StartAndExpand"  Margin="0" Padding="0,2,0,0" BorderColor="Silver" HasShadow="False" HorizontalOptions="Center" CornerRadius="2">
+                            <Grid RowSpacing="0" Padding="0" Margin="25">
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="Auto"/>
+                                    <RowDefinition Height="Auto"/>
+                                    <RowDefinition Height="Auto"/>
+                                    <RowDefinition Height="Auto"/>
+                                    <RowDefinition Height="Auto"/>
+                                    <RowDefinition Height="Auto"/>
+                                    <RowDefinition Height="Auto"/>
+                                    <RowDefinition Height="Auto"/>
+                                    <RowDefinition Height="Auto"/>
+                                </Grid.RowDefinitions>
+                                <Label FontFamily="{StaticResource Arial-Bold}" HorizontalOptions="Center" VerticalOptions="Center" Text="Riverside Insights Clinical Platform" Grid.Row="0" FontAttributes="Bold" TextColor="{x:Static Common:Colors.TitleColor}" FontSize="24" Margin="10"/>
+                                <Label FontFamily="{StaticResource ARIALMT}" Margin="0,10,0,0" Grid.Row="1" Text="USERNAME" FontSize="13" TextColor="{x:Static Common:Colors.LightGrayColor}" />
+                                <renderer:MyFrame BorderColor="{Binding UserNameBorderColor}"  VerticalOptions="Center" Grid.Row="2" Padding="0" Margin="0,2,0,0" HasShadow="False" CornerRadius="1">
+                                    <StackLayout Margin="0" Spacing="0" BackgroundColor="White" Padding="5,3,5,3">
+                                        <renderer:BorderlessEntry   FontFamily="{StaticResource ARIALMT}" Margin="0,5,0,0"  TextColor="{x:Static Common:Colors.TableFieldsColor}" Completed="EnterEvent" Placeholder="Username" x:Name="Username" PlaceholderColor="{Binding UserNamePlaceHolderColor}" Text="{Binding UserID}" FontSize="14"/>
+                                    </StackLayout>
+                                </renderer:MyFrame>
+                                <Label FontFamily="{StaticResource ARIALMT}" Grid.Row="3" VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand" Margin="0,10,0,0" Text="{Binding UserNameErrorText}" FontSize="13" TextColor="{x:Static Common:Colors.RedColor}" />
+                                <Label FontFamily="{StaticResource ARIALMT}" Grid.Row="4" VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand" Margin="0,20,0,0" Text="PASSWORD" FontSize="13" TextColor="{x:Static Common:Colors.LightGrayColor}" />
+                                <renderer:MyFrame BorderColor="{Binding PasswordBorderColor}" VerticalOptions="Center" Grid.Row="5" Padding="0" Margin="0,2,0,0" HasShadow="False" CornerRadius="1">
+                                    <StackLayout Margin="0" Spacing="0" BackgroundColor="White" Padding="5,3,5,3">
+                                        <renderer:BorderlessEntry  FontFamily="{StaticResource ARIALMT}" Margin="0,5,0,0" TextColor="{x:Static Common:Colors.TableFieldsColor}" Placeholder="Password" Completed="EnterEvent" x:Name="Password" PlaceholderColor="{Binding PasswordPlaceHolderColor}" Text="{Binding PassID}" IsPassword="True" FontSize="14"/>
+                                    </StackLayout>
+                                </renderer:MyFrame>
+                                <Label FontFamily="{StaticResource ARIALMT}" Grid.Row="6" VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand" Margin="0,10,0,0" Text="{Binding PasswordErrorText}" FontSize="13" TextColor="{x:Static Common:Colors.RedColor}" />
+                                <renderer:CustomButtonUWP FontFamily="{StaticResource Arial-Bold}" Padding="0" HeightRequest="50" Margin="0,15,0,0" Grid.Row="7" VerticalOptions="FillAndExpand" x:Name="btSignIn"  HorizontalOptions="FillAndExpand" Text="Sign In" TextColor="White" BackgroundColor="{x:Static Common:Colors.FrameBlueColor}" FontSize="18" Command="{Binding LoginUserCommand}" />
+                                <Grid Padding="0" Margin="0,30,0,10" Grid.Row="8" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" ColumnSpacing="10">
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="*" />
+                                        <ColumnDefinition Width="Auto" />
+                                        <ColumnDefinition Width="*" />
+                                    </Grid.ColumnDefinitions>
+                                    <StackLayout VerticalOptions="Center" HorizontalOptions="Center" Padding="0" Margin="0" Orientation="Horizontal" Spacing="10" Grid.Column="0">
+                                        <renderer:MyCheckBox x:Name="AwesomeCheckbox" Shape="Rectangle" OutlineWidth="2"
+                                          IsChecked="{Binding IsCheckedChanged}" />
+
+                                        <Label FontFamily="{StaticResource ARIALMT}" Text="Remember Me" TextColor="{x:Static Common:Colors.TitleColor}" VerticalOptions="Center" FontSize="14"/>
+
+                                    </StackLayout>
+                                    <BoxView WidthRequest="2" HeightRequest="30" Color="{x:Static Common:Colors.Silver}" Grid.Column="1" />
+                                    <Label FontFamily="{StaticResource ARIALMT}" Text="Forgot my password" HorizontalOptions="Center" VerticalOptions="Center" TextColor="{x:Static Common:Colors.HyperlinkBlueColor}" FontSize="14" Grid.Column="2">
+                                        <Label.GestureRecognizers>
+                                            <TapGestureRecognizer NumberOfTapsRequired="1" Command="{Binding forgot}">
+                                            </TapGestureRecognizer>
+                                        </Label.GestureRecognizers>
+                                    </Label>
+                                </Grid>
+                            </Grid>
+                        </Frame>
+                    </Grid>
+                    <StackLayout Grid.Row="3" Padding="0" Margin="0,10,0,0" HorizontalOptions="Center" VerticalOptions="StartAndExpand" Orientation="Horizontal">
+                        <!-- <Label FontFamily="{StaticResource ARIALMT}" Text="For Help accessing the Online Scoring and Reporting system" TextColor="{x:Static Common:Colors.HyperlinkBlueColor}" HorizontalOptions="Center" FontSize="14"/> -->
+                        <Label FontFamily="{StaticResource ARIALMT}" HorizontalOptions="Center" TextColor="{x:Static Common:Colors.HyperlinkBlueColor}" FontSize="14">
+                            <Label.FormattedText>
+                                <FormattedString>
+                                    <Span Text="For help accessing "/>
+                                    <Span Text="Riverside Score™" FontAttributes="Italic"/>
+                                    <Span Text=", see the"/>
+                                </FormattedString>
+                            </Label.FormattedText>
+                        </Label>
+                        <Label FontFamily="{StaticResource ARIALMT}" HorizontalOptions="Center" TextColor="{x:Static Common:Colors.HyperlinkBlueColor}" FontSize="14">
+                            <Label.Margin>
+                                <OnPlatform x:TypeArguments="Thickness">
+                                    <On Platform="UWP" Value="0,2,0,0"/>
+                                    <On Platform="Android" Value="0,0,0,0"/>
+                                    <On Platform="iOS" Value="0,0,0,0"/>
+                                </OnPlatform>
+                            </Label.Margin>
+                            <Label.FormattedText>
+                                <FormattedString>
+                                    <Span Text="online help" TextDecorations="Underline"/>
+                                </FormattedString>
+                            </Label.FormattedText>
+                            <Label.GestureRecognizers>
+                                <TapGestureRecognizer Tapped="Helplink_Tapped"/>
+                            </Label.GestureRecognizers>
+                        </Label>
+                        <Label FontFamily="{StaticResource ARIALMT}" HorizontalOptions="Center" TextColor="{x:Static Common:Colors.HyperlinkBlueColor}" FontSize="14">
+                            <Label.Margin>
+                                <OnPlatform x:TypeArguments="Thickness">
+                                    <On Platform="UWP" Value="0,2,0,0"/>
+                                    <On Platform="Android" Value="0,0,0,0"/>
+                                    <On Platform="iOS" Value="0,0,0,0"/>
+                                </OnPlatform>
+                            </Label.Margin>
+                            <Label.FormattedText>
+                                <FormattedString>
+                                    <Span Text="for signing in."/>
+                                </FormattedString>
+                            </Label.FormattedText>
+                        </Label>
+                    </StackLayout>
+                </Grid>
+                <Grid Grid.Row="1" Margin="0" Padding="20,0,20,0" HorizontalOptions="FillAndExpand"   VerticalOptions="FillAndExpand" HeightRequest="50" BackgroundColor="White">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+                    <Image Margin="0" Grid.Row="0" Grid.Column="0" Source="Riverside_Insights_Horiz.png" HorizontalOptions="StartAndExpand"
+                         Aspect="AspectFill" HeightRequest="250" WidthRequest="250" VerticalOptions="StartAndExpand"/>
+                    <Grid Padding="0" Margin="0" Grid.Column="1" Grid.Row="0" HorizontalOptions="EndAndExpand" VerticalOptions="Center" ColumnSpacing="10">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*" />
+                            <ColumnDefinition Width="Auto" />
+                            <ColumnDefinition Width="*" />
+                        </Grid.ColumnDefinitions>
+                        <Label FontFamily="{StaticResource ARIALMT}" Text="Terms of Use" FontSize="14" TextColor="{x:Static Common:Colors.HyperlinkBlueColor}" Grid.Column="0">
+                            <Label.GestureRecognizers>
+                                <TapGestureRecognizer Tapped="TermsOfUse_Tapped"/>
+                            </Label.GestureRecognizers>
+                        </Label>
+                        <BoxView WidthRequest="2" HeightRequest="20" Color="{x:Static Common:Colors.TableFieldsColor}" Grid.Column="1" />
+                        <Label FontFamily="{StaticResource ARIALMT}" Text="Privacy Policy" HorizontalOptions="Center" VerticalOptions="Center" TextColor="{x:Static Common:Colors.HyperlinkBlueColor}" FontSize="14" Grid.Column="2">
+                            <Label.GestureRecognizers>
+                                <TapGestureRecognizer Tapped="PrivacyPolicy_Tapped"/>
+                            </Label.GestureRecognizers>
+                        </Label>
+                    </Grid>
+                </Grid>
+            </Grid>
+        </ScrollView>
+    </ContentPage.Content>
+</ContentPage>

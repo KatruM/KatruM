@@ -1,0 +1,22 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<pages:PopupPage
+             xmlns:pages="clr-namespace:Rg.Plugins.Popup.Pages;assembly=Rg.Plugins.Popup"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:renderer="clr-namespace:BDI3Mobile.CustomRenderer"
+    x:Class="BDI3Mobile.Views.ItemAdministrationView.SavePopUp">
+    <Frame x:Name="ContentFrame" VerticalOptions="Center" HorizontalOptions="Center" WidthRequest="500" HeightRequest="228" Padding="0" BackgroundColor="White" Opacity="1">
+        <StackLayout>
+            <BoxView Color="Red" HeightRequest="4" />
+            <StackLayout Padding="24,24,0,0" Spacing="20">
+                <Label x:Name="Header" Text="Data Unsaved" FontSize="20" FontAttributes="Bold" TextColor="Black" />
+                <Label x:Name="Message" Text="Data has not been saved for this session. Are you sure you want to navigate away from this page?" FontSize="14"></Label>
+            </StackLayout>
+            <StackLayout Padding="0,10,0,0" HorizontalOptions="Center" VerticalOptions="Center" Orientation="Horizontal">
+                <renderer:CustomButtonUWP Text="Yes" BackgroundColor="#147CBD" WidthRequest="122" HeightRequest="40" TextColor="#FFFFFF" BorderColor="#147cbd" BorderWidth="2" FontAttributes="Bold" Command="{Binding UnSaveCommand}"/>
+                <renderer:CustomButtonUWP Text="Cancel" BackgroundColor="#147CBD" WidthRequest="122" HeightRequest="40" TextColor="#FFFFFF" BorderColor="#147cbd" BorderWidth="2" FontAttributes="Bold" Command="{Binding CancelCommand}"/>
+                <renderer:CustomButtonUWP Text="Save and Continue" BackgroundColor="#147CBD" WidthRequest="150" HeightRequest="40" TextColor="#FFFFFF" BorderColor="#147cbd" BorderWidth="2" FontAttributes="Bold" Command="{Binding SaveAndContinue}"/>
+            </StackLayout>
+        </StackLayout>
+    </Frame>
+</pages:PopupPage>

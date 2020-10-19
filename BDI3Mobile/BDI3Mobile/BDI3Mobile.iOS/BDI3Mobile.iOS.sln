@@ -1,0 +1,29 @@
+
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 15
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BDI3Mobile.iOS", "BDI3Mobile.iOS.csproj", "{DF62CE8C-BCD0-4FCB-A81F-6202581898AF}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|iPhoneSimulator = Debug|iPhoneSimulator
+		Release|iPhoneSimulator = Release|iPhoneSimulator
+		Debug|iPhone = Debug|iPhone
+		Release|iPhone = Release|iPhone
+		Ad-Hoc|iPhone = Ad-Hoc|iPhone
+		AppStore|iPhone = AppStore|iPhone
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{DF62CE8C-BCD0-4FCB-A81F-6202581898AF}.Debug|iPhoneSimulator.ActiveCfg = Debug|iPhoneSimulator
+		{DF62CE8C-BCD0-4FCB-A81F-6202581898AF}.Debug|iPhoneSimulator.Build.0 = Debug|iPhoneSimulator
+		{DF62CE8C-BCD0-4FCB-A81F-6202581898AF}.Release|iPhoneSimulator.ActiveCfg = Release|iPhoneSimulator
+		{DF62CE8C-BCD0-4FCB-A81F-6202581898AF}.Release|iPhoneSimulator.Build.0 = Release|iPhoneSimulator
+		{DF62CE8C-BCD0-4FCB-A81F-6202581898AF}.Debug|iPhone.ActiveCfg = Debug|iPhone
+		{DF62CE8C-BCD0-4FCB-A81F-6202581898AF}.Debug|iPhone.Build.0 = Debug|iPhone
+		{DF62CE8C-BCD0-4FCB-A81F-6202581898AF}.Release|iPhone.ActiveCfg = Release|iPhone
+		{DF62CE8C-BCD0-4FCB-A81F-6202581898AF}.Release|iPhone.Build.0 = Release|iPhone
+		{DF62CE8C-BCD0-4FCB-A81F-6202581898AF}.Ad-Hoc|iPhone.ActiveCfg = Ad-Hoc|iPhone
+		{DF62CE8C-BCD0-4FCB-A81F-6202581898AF}.Ad-Hoc|iPhone.Build.0 = Ad-Hoc|iPhone
+		{DF62CE8C-BCD0-4FCB-A81F-6202581898AF}.AppStore|iPhone.ActiveCfg = AppStore|iPhone
+		{DF62CE8C-BCD0-4FCB-A81F-6202581898AF}.AppStore|iPhone.Build.0 = AppStore|iPhone
+	EndGlobalSection
+EndGlobal

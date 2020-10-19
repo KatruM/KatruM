@@ -1,0 +1,47 @@
+﻿<?xml version="1.0" encoding="UTF-8" ?>
+<pages:PopupPage xmlns="http://xamarin.com/schemas/2014/forms"
+                 xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+                 xmlns:Common="clr-namespace:BDI3Mobile.Common"
+                 xmlns:pages="clr-namespace:Rg.Plugins.Popup.Pages;assembly=Rg.Plugins.Popup"
+                 xmlns:renderer="clr-namespace:BDI3Mobile.CustomRenderer"
+                 x:Name="Page"
+                 x:Class="BDI3Mobile.Views.PopupViews.ScoringInstructionView"
+                 CloseWhenBackgroundIsClicked="True">
+
+    <Frame CornerRadius="6" HorizontalOptions="Center" Padding="0" VerticalOptions="Center" HeightRequest="350" WidthRequest="700">
+        <StackLayout x:Name="MainFrame" BackgroundColor="White">
+            <BoxView HeightRequest="4" Color="{x:Static Common:Colors.FrameBlueColor}" Margin="0,0,0,0" />
+            <StackLayout Padding="24,24,24,32" Spacing="15">
+
+                <Label VerticalOptions="Start" FontAttributes="Bold" FontSize="20" Text="Scoring Instructions"/>
+
+                <StackLayout>
+                    <Label FontSize="Body" Text="For each design, count the number of errors. An error is defined as any of the following:" />
+                    <Label FontSize="Body" Text="1. The drawing falls outside the sold line (1 error for each instance)."/>
+                    <Label FontSize="Body" Text="2. The drawing begins more than 1/4inch away from the design's start point"/>
+                    <Label FontSize="Body" Text="3. The drawing ends more than 1/4inch aways from the design's end point."/>
+                    <Label FontSize="Body" Text="4. In Design B, the start and end points of the drawing overlap by more than 1/4inch."/>
+                    <Label FontSize="Body" Text="5. The child reverses direction after beginning the drawing. "/>
+                    <Label FontSize="Body" Text="Examples of correct drawings and erros are show on the next page."/>
+                </StackLayout>
+
+                <StackLayout Margin="0,20,0,0" HorizontalOptions="Center" VerticalOptions="Center">
+                    <renderer:MyFrame  HasShadow="True" Padding="0" CornerRadius="3">
+                        <renderer:CustomButtonUWP Clicked="CloseScoringIns"
+                            HeightRequest="50"
+                            WidthRequest="100"
+                            FontAttributes="Bold"
+                            Text="Close"
+                            TextColor="White"
+                            BorderWidth="1.5"
+                            BorderColor="{x:Static Common:Colors.FrameBlueColor}"
+                            BackgroundColor="#147cbd"
+                            FontSize="Default" />
+                    </renderer:MyFrame>
+                   
+                </StackLayout>
+            </StackLayout>
+        </StackLayout>
+    </Frame>
+    
+</pages:PopupPage>

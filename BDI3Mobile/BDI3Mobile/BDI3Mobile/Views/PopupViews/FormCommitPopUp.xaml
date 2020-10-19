@@ -1,0 +1,28 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<pages:PopupPage
+             xmlns:pages="clr-namespace:Rg.Plugins.Popup.Pages;assembly=Rg.Plugins.Popup"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:customrenderer="clr-namespace:BDI3Mobile.CustomRenderer"
+    x:Class="BDI3Mobile.Views.PopupViews.FormCommitPopUp">
+    
+    <Frame x:Name="ContentFrame" VerticalOptions="Center" HorizontalOptions="Center" WidthRequest="600" HeightRequest="300" Padding="0" BackgroundColor="White" Opacity="1">
+        <StackLayout>
+            <BoxView Color="Green" HeightRequest="4" />
+            <StackLayout Padding="24,24,0,0" Spacing="20">
+                <Label x:Name="Header" Text="Commit Test Record" FontSize="20" FontAttributes="Bold" TextColor="Black" />
+                <Label x:Name="Message" Text="You are about to commit this record form and your testing date will be locked. On your next Sync, the committed record will be uploaded to the web and an Electronic Record Form (ERF) will be used to provide reporting. You will have 90 days to make changes or edits to your data." FontSize="14"></Label>
+                <Label x:Name="SubMessage" Text="Are you sure you want to commit your record form? Click Confirm to commit or Cancel to exit without saving changes." FontSize="14"/>
+            </StackLayout>
+
+            <StackLayout Orientation="Horizontal" Margin="20">
+                <StackLayout Margin="0" Padding="0" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand">
+                    <customrenderer:CustomButtonUWP Margin="0" HorizontalOptions="Start" Text="Cancel" BackgroundColor="White" Padding="20,15,20,15" TextColor="#147CBD" BorderColor="#147cbd" BorderWidth="2" FontAttributes="Bold" Command="{Binding CancelCommand}"/>
+                </StackLayout>
+                <StackLayout Margin="0" Padding="0" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand">
+                    <customrenderer:CustomButtonUWP BorderColor="#147CBD" BorderWidth="2" Margin="0" HorizontalOptions="End" Text="Confirm" BackgroundColor="#147CBD" TextColor="White" Padding="20,15,20,15" FontAttributes="Bold" Command="{Binding CommitContinue}"/>
+                </StackLayout>
+            </StackLayout>
+        </StackLayout>
+    </Frame>
+</pages:PopupPage>

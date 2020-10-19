@@ -1,0 +1,58 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<pages:PopupPage
+             xmlns:pages="clr-namespace:Rg.Plugins.Popup.Pages;assembly=Rg.Plugins.Popup"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:renderer="clr-namespace:BDI3Mobile.CustomRenderer"
+             xmlns:Common="clr-namespace:BDI3Mobile.Common"
+             x:Class="BDI3Mobile.Views.PopupViews.CeilingObtainedPopupView">
+            <Frame x:Name="ContentFrame" VerticalOptions="Center" HorizontalOptions="Center" HeightRequest="280" Padding="0" BackgroundColor="White" Opacity="1">
+                <Frame.WidthRequest>
+                <OnPlatform x:TypeArguments="x:Double">
+                      <On Platform="iOS">550</On>
+                      <On Platform="Android,UWP">450</On>
+            </OnPlatform>
+              </Frame.WidthRequest>
+        <StackLayout Padding="24" Spacing="10">
+
+            <StackLayout Orientation="Horizontal" Spacing="7">
+                <Image Source="ceiling_obtained.png" HeightRequest="22" WidthRequest="22"/>
+                <Label x:Name="ceiling" FontAttributes="Bold" Text="Ceiling Obtained" FontSize="20" VerticalOptions="Center"/>
+            </StackLayout>
+            
+            <StackLayout  Spacing="20">
+                <Label x:Name="message_1" FontSize="14"  TextColor="Black" />
+                <Label x:Name="message_2" FontSize="14" TextColor="Black"></Label>
+            </StackLayout>
+            
+     
+
+            <StackLayout Margin="0,20,0,0" Orientation ="Horizontal">
+                <renderer:MyFrame  HasShadow="False" Padding="0" CornerRadius="3">
+                    <renderer:CustomButtonUWP HeightRequest="60"
+                            WidthRequest="120"
+                            FontAttributes="Bold"
+                            Text="Cancel"
+                            Command="{Binding CancelBCCommand}"
+                            TextColor="{x:Static Common:Colors.FrameBlueColor}"
+                            BorderWidth="1.5"
+                            BorderColor="{x:Static Common:Colors.FrameBlueColor}"
+                            BackgroundColor="White"
+                            FontSize="Default" />
+                </renderer:MyFrame>
+                <renderer:MyFrame  HasShadow="False" Padding="0" CornerRadius="3" HorizontalOptions="EndAndExpand">
+                    <renderer:CustomButtonUWP HeightRequest="60"
+                            WidthRequest="195"
+                            BackgroundColor="{x:Static Common:Colors.FrameBlueColor}"
+                            FontAttributes="Bold"
+                            Command="{Binding SaveBCCommand}"
+                            x:Name="SaveandContinue"
+                            TextColor="White" BorderWidth="1.5"
+                            BorderColor="{x:Static Common:Colors.FrameBlueColor}"
+                            FontSize="Default">
+                    </renderer:CustomButtonUWP>
+                </renderer:MyFrame>
+            </StackLayout>
+        </StackLayout>
+    </Frame>
+</pages:PopupPage>

@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<pages:PopupPage xmlns:Common="clr-namespace:BDI3Mobile.Common" xmlns:pages="clr-namespace:Rg.Plugins.Popup.Pages;assembly=Rg.Plugins.Popup" xmlns="http://xamarin.com/schemas/2014/forms" xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+                 xmlns:customrenderer="clr-namespace:BDI3Mobile.CustomRenderer" x:Class="BDI3Mobile.Views.AddChildViews.DuplicateChildView">
+    <Frame VerticalOptions="Center" HorizontalOptions="Center" WidthRequest="450" Padding="0" BackgroundColor="White" Opacity="1">
+        <StackLayout>
+            <BoxView Color="Red" HeightRequest="4" />
+            <StackLayout Padding="24" Spacing="20">
+                <Label Text="Duplicate Child" FontSize="20" FontAttributes="Bold" TextColor="Black" />
+                <Label TextColor="#3d3f3f" Text="{Binding ValidationMessages[0]}"/>
+                <Label TextColor="#3d3f3f" Text="{Binding ValidationMessages[1]}"/>
+            </StackLayout>
+            <StackLayout Orientation="Horizontal" Padding="24,32">
+                <customrenderer:CustomButtonUWP Text="Cancel" BackgroundColor="White" WidthRequest="120" HeightRequest="50" TextColor="#147cbd" BorderColor="#147cbd" BorderWidth="2" FontAttributes="Bold" Command="{Binding CancelPopup}"/>
+                <BoxView Color="Transparent" HorizontalOptions="FillAndExpand"/>
+                <customrenderer:CustomButtonUWP Text="Continue" TextColor="White" BackgroundColor="#147cbd" HeightRequest="50" WidthRequest="120" FontAttributes="Bold" Command="{Binding AddForceCommand}"/>
+            </StackLayout>
+        </StackLayout>
+    </Frame>
+</pages:PopupPage>

@@ -1,0 +1,80 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<pages:PopupPage xmlns="http://xamarin.com/schemas/2014/forms" 
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:pages="clr-namespace:Rg.Plugins.Popup.Pages;assembly=Rg.Plugins.Popup"
+             x:Class="BDI3Mobile.DashboardpopupView">
+    <Frame BackgroundColor="#419bf9" HorizontalOptions="Center" VerticalOptions="Center" Margin="205,0,205,0" Padding="0,4,0,0" WidthRequest="700"  >
+        <Grid Padding="0,10,0,0" BackgroundColor="White">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+            </Grid.RowDefinitions>
+            <Image Grid.Row="0" Source="iconclose.png" WidthRequest="15" HeightRequest="15" Margin="0,30,30,0" HorizontalOptions="End">
+                <Image.GestureRecognizers>
+                    <TapGestureRecognizer Tapped="TapGestureRecognizer_Tapped"/>
+                </Image.GestureRecognizers>
+            </Image>
+            <StackLayout Grid.Row="1" >
+                <Grid  Padding="0" RowSpacing="0" ColumnSpacing="0" Margin="50,0,50,0">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="Auto"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+                    <StackLayout Grid.Column="0" Padding="0" Margin="0">
+                        <Label Text="Tech Support" TextColor="#262626" FontAttributes="Bold" VerticalOptions="Center" HorizontalOptions="Center" FontSize="24"  />
+                        <Label Text="Phone:" Margin="0,20,0,0" TextColor="#262626" HorizontalOptions="Center" FontSize="16" FontAttributes="Bold"  />
+                        <Label Text="1 (800) 323-9540" HorizontalOptions="Center" FontSize="14"/>
+                        <Label Text="Tech Support Email:" Margin="0,20,0,0" TextColor="#262626" FontAttributes="Bold" HorizontalOptions="Center" FontSize="16" Grid.Row="3"/>
+                        <Label x:Name="RiversideTechSupportURI" Text="techsupport@riversideinsights.com" HorizontalOptions="Center" FontSize="14"  TextColor="#147cbd">
+                            <Label.GestureRecognizers>
+                                <TapGestureRecognizer Tapped="TechSupport_Tapped"/>
+                            </Label.GestureRecognizers>
+                        </Label>
+                        <Label Text="DeviceID:" Margin="0,20,0,0" TextColor="#262626" FontAttributes="Bold" HorizontalOptions="Center" FontSize="16" Grid.Row="3"/>
+                        <Label x:Name="deviceid" HorizontalOptions="Center" FontSize="14"  TextColor="#147cbd"/>
+                    </StackLayout>
+                    <BoxView  Color="#C5C5C7" HorizontalOptions="Center" Grid.Column="1" WidthRequest="2" Margin="40,0,40,0"/>
+
+                    <StackLayout Grid.Column="2" Padding="0" Margin="0" >
+
+                        <Label Text="Customer Service" FontAttributes="Bold" TextColor="#262626" HorizontalOptions="Center" VerticalOptions="Center" FontSize="24" />
+                        <Label Text="Phone:" Margin="0,20,0,0" TextColor="#262626" HorizontalOptions="Center" VerticalOptions="Center" FontSize="16" FontAttributes="Bold" Grid.Row="1"/>
+                        <Label Text="US: 1 (800) 323-9540" HorizontalOptions="Center" VerticalOptions="Center"  FontSize="14"/>
+                        <Label Margin="0,20,0,0" Text="Canadian Customers:" HorizontalOptions="Center" VerticalOptions="Center"  FontSize="14"/>
+                        <Label Text="1 (800) 668-0671 ext. 2222" HorizontalOptions="Center" VerticalOptions="Center"  FontSize="14"/>
+                        <!--<Label Text="Email:" Margin="0,20,0,0" TextColor="#262626" HorizontalOptions="Center" FontSize="Small"
+                           FontAttributes="Bold" />-->
+                        <!--<Label x:Name="AssesmentSupportURI" Text="inquiry@riversideinsights.com" HorizontalOptions="Center" FontSize="Small" 
+                            TextColor="#147cbd" />-->
+                        <Label Text="Customer Service Email:" Margin="0,20,0,0" HorizontalOptions="Center" FontSize="16" TextColor="#262626"
+                           FontAttributes="Bold" />
+                        <Label x:Name="CustomCareSupportURI" Text="inquiry@riversideinsights.com" TextColor="#147cbd" HorizontalOptions="Center" VerticalOptions="Center"
+                           FontSize="14" >
+                            <Label.GestureRecognizers>
+                                <TapGestureRecognizer Tapped="TapGestureRecognizer_Tapped_1"/>
+                            </Label.GestureRecognizers>
+                        </Label>
+                    </StackLayout>
+                </Grid>
+
+
+                <StackLayout Margin="50">
+                    <Label Text="To communicate directly with a local sales representative in your area" HorizontalOptions="Center" FontSize="14"/>
+                    <Label HorizontalOptions="Center">
+                        <Label.FormattedText>
+                            <FormattedString>
+                                <Span Text="please visit: " FontSize="14"/>
+                                <Span Text="Find Your Local Representative" FontSize="14" TextColor="#147cbd">
+                                    <Span.GestureRecognizers>
+                                        <TapGestureRecognizer Tapped="FindRepClicked"/>
+                                    </Span.GestureRecognizers>
+                                </Span>
+
+                            </FormattedString>
+                        </Label.FormattedText>
+                    </Label>
+                </StackLayout>
+            </StackLayout>
+        </Grid>
+    </Frame>
+</pages:PopupPage>

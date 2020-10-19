@@ -1,0 +1,144 @@
+﻿<?xml version="1.0" encoding="UTF-8" ?>
+<pages:PopupPage xmlns="http://xamarin.com/schemas/2014/forms"
+                 xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+                 xmlns:Common="clr-namespace:BDI3Mobile.Common"
+                 xmlns:pages="clr-namespace:Rg.Plugins.Popup.Pages;assembly=Rg.Plugins.Popup"
+                 xmlns:renderer="clr-namespace:BDI3Mobile.CustomRenderer"
+                 xmlns:behaviour="clr-namespace:BDI3Mobile.Behaviors"
+                 xmlns:sys="clr-namespace:System;assembly=mscorlib"
+                 xmlns:controls="clr-namespace:XLabs.Forms.Controls;assembly=XLabs.Forms"
+                 x:Name="Page"
+                 x:Class="BDI3Mobile.Views.RecordToolsForms.ItemLevelNotePopup"
+                 CloseWhenBackgroundIsClicked="True"
+                 BackgroundClicked="Page_BackgroundClicked">
+<!--OLD CODE START-->
+    <!--<AbsoluteLayout>
+        <Frame AbsoluteLayout.LayoutBounds="0,0,1,1" CornerRadius="6" AbsoluteLayout.LayoutFlags="All" BackgroundColor="#147cbd" x:Name="MainFrame" HorizontalOptions="Center" VerticalOptions="Center" Padding="0,4,0,0">
+            <Frame.Margin>
+                <OnPlatform x:TypeArguments="Thickness">
+                    <On Platform="UWP" Value="250,0,250,0"/>
+                    <On Platform="Android" Value="110"/>
+                </OnPlatform>
+            </Frame.Margin>
+            <Grid BackgroundColor="White" HorizontalOptions="Center" VerticalOptions="Center" Padding="24,36,24,32">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="40"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                </Grid.RowDefinitions>
+                <Label Grid.Row="0" VerticalOptions="Start">
+                    <Label.FormattedText>
+                        <FormattedString>
+                            <Span Text="{Binding NoteHeaderTextPrefix}" FontAttributes="Bold" FontSize="20" />
+                            <Span Text="{Binding NoteHeaderTextsufix}" FontSize="20" />
+                        </FormattedString>
+                    </Label.FormattedText>
+                </Label>
+
+                <StackLayout Grid.Row="1" Padding="6">
+                    <renderer:MyFrame  BackgroundColor="{x:Static common:Colors.BorderColor}" VerticalOptions="Center"  HasShadow="False" CornerRadius="1">
+                        <renderer:MyFrame.Padding>
+                            <OnPlatform x:TypeArguments="Thickness">
+                                <On Platform="Android,iOS" Value="1"/>
+                                <On Platform="UWP" Value="0"/>
+                            </OnPlatform>
+                        </renderer:MyFrame.Padding>
+                        <Editor MaxLength="280" BackgroundColor="White" Placeholder="Enter additional information here." FontSize="16" HeightRequest="220"/>
+                    </renderer:MyFrame>
+                    
+                </StackLayout>
+                
+                <StackLayout Grid.Row="2" Margin="0,25,0,0" Padding="4">
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="Auto"/>
+                            <ColumnDefinition Width="*" />
+                        </Grid.ColumnDefinitions>
+                        <renderer:MyFrame Grid.Column="0" HasShadow="True" Padding="0" CornerRadius="3">
+                            <Button x:Name="cancelButton" Command="{Binding CloseNotePopup}" HeightRequest="65" FontAttributes="Bold"  Text="Cancel" TextColor="{x:Static common:Colors.FrameBlueColor}"
+                            BorderWidth="3" BorderColor="{x:Static common:Colors.FrameBlueColor}" BackgroundColor="White" FontSize="20" 
+                            Grid.Column="0">
+                            </Button>
+                        </renderer:MyFrame>
+
+                        <ContentView Grid.Column="1">
+                            <ContentView.WidthRequest>
+                                <OnPlatform x:TypeArguments="x:Double">
+                                    <On Platform="Android">350</On>
+                                    <On Platform="iOS">300</On>
+                                    <On Platform="UWP">500</On>
+                                </OnPlatform>
+                            </ContentView.WidthRequest>
+                        </ContentView>
+
+                        <renderer:MyFrame Grid.Column="2" HasShadow="True" Padding="0" CornerRadius="3">
+                            <Button x:Name="btnstart" HeightRequest="65" BackgroundColor="#147cbd" FontAttributes="Bold" Text="Save" TextColor="White"
+                            Command="{Binding CloseNotePopup}" FontSize="20">
+                            </Button>
+                        </renderer:MyFrame>
+
+
+                    </Grid>
+                </StackLayout>
+            </Grid>
+        </Frame>
+    </AbsoluteLayout>-->
+<!--OLD CODE END-->
+    <Frame CornerRadius="6" HorizontalOptions="Center" BackgroundColor="White" Padding="0" VerticalOptions="Center" HeightRequest="369" WidthRequest="700">
+        <StackLayout x:Name="MainFrame" BackgroundColor="White">
+            <BoxView HeightRequest="4" Color="{x:Static Common:Colors.FrameBlueColor}" Margin="0,0,0,0" />
+            <StackLayout Padding="24,24,24,32" Spacing="15">
+
+                <Label Grid.Row="0" VerticalOptions="Start">
+                    <Label.FormattedText>
+                        <FormattedString>
+                            <Span Text="{Binding NoteHeaderTextPrefix}" Style="{StaticResource BoldLabelMediumFontStyle}" />
+                            <Span Text="{Binding NoteHeaderTextsufix}" FontSize="18" TextColor="#4c4f4f"/>
+                        </FormattedString>
+                    </Label.FormattedText>
+                </Label>
+
+                <renderer:MyFrame  BackgroundColor="{x:Static Common:Colors.BorderColor}" VerticalOptions="Center"  HasShadow="False" CornerRadius="1">
+                    <renderer:MyFrame.Padding>
+                        <OnPlatform x:TypeArguments="Thickness">
+                            <On Platform="Android,iOS" Value="1"/>
+                            <On Platform="UWP" Value="0"/>
+                        </OnPlatform>
+                    </renderer:MyFrame.Padding>
+                    <Editor MaxLength="280" Text="{Binding Notes,Mode=TwoWay}" BackgroundColor="White" Placeholder="Enter additional information here." FontSize="16" HeightRequest="180" />
+                </renderer:MyFrame>
+
+                <StackLayout Margin="0,20,0,0" Orientation ="Horizontal">
+                    <renderer:MyFrame  HasShadow="False" Padding="0" CornerRadius="3">
+                        <renderer:CustomButtonUWP Command="{Binding CloseNotePopup}"
+                            HeightRequest="50"
+                            WidthRequest="100"
+                            FontAttributes="Bold"
+                            Text="Cancel"
+                            TextColor="{x:Static Common:Colors.FrameBlueColor}"
+                            BorderWidth="1.5"
+                            BorderColor="{x:Static Common:Colors.FrameBlueColor}"
+                            BackgroundColor="White"
+                            FontSize="Default" />
+                    </renderer:MyFrame>
+                    <renderer:MyFrame  HasShadow="False" Padding="0" CornerRadius="3" HorizontalOptions="EndAndExpand">
+                        <renderer:CustomButtonUWP 
+                            HeightRequest="50"
+                            WidthRequest="100"
+                            BackgroundColor="{x:Static Common:Colors.FrameBlueColor}"
+                            FontAttributes="Bold" Text="Save"
+                            TextColor="White" BorderWidth="1.5"
+                            BorderColor="{x:Static Common:Colors.FrameBlueColor}"
+                            Command="{Binding SaveNoteUp}"
+                            FontSize="Default">
+                        </renderer:CustomButtonUWP>
+                    </renderer:MyFrame>
+                    
+                </StackLayout>
+            </StackLayout>
+        </StackLayout>
+    </Frame>
+
+    
+</pages:PopupPage>

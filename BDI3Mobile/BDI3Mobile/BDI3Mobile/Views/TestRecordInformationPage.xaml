@@ -1,0 +1,117 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<pages:PopupPage
+    xmlns:pages="clr-namespace:Rg.Plugins.Popup.Pages;assembly=Rg.Plugins.Popup" xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:Common="clr-namespace:BDI3Mobile.Common"
+             mc:Ignorable="d"
+             x:Class="BDI3Mobile.Views.TestRecordInformationPage">
+
+    <Frame x:Name="MainFrame" Padding="0,4,0,0" WidthRequest="500" HorizontalOptions="Start" VerticalOptions="FillAndExpand">
+        <Frame.Margin>
+            <OnPlatform x:TypeArguments="Thickness">
+                <On Platform="UWP" Value="0,90,0,0"/>
+            </OnPlatform>
+        </Frame.Margin>
+
+        <AbsoluteLayout BackgroundColor="{x:Static Common:Colors.BackgroundColor}"  >
+            <StackLayout  AbsoluteLayout.LayoutBounds="0,0,1,0.2" AbsoluteLayout.LayoutFlags="All" BackgroundColor="{x:Static Common:Colors.BackgroundColor}" >
+                <StackLayout Orientation="Horizontal" Margin="19,21,10,8.3">
+                    <Image Source="BackBlue.png" HeightRequest="16.5" WidthRequest="9.7" VerticalOptions="Center" Margin="0,5,0,0">
+                    <Image.GestureRecognizers>
+                            <TapGestureRecognizer Tapped="NavigateToItemLevelPage"/>
+                    </Image.GestureRecognizers>
+                </Image>
+                    <Label Text="Back" TextColor="#147cbd"  FontSize="16" HeightRequest="16.5" FontFamily="{StaticResource ARIALMT}" VerticalOptions="Center">
+                        <Label.GestureRecognizers>
+                            <TapGestureRecognizer Tapped="NavigateToItemLevelPage"></TapGestureRecognizer>
+                    </Label.GestureRecognizers>
+                </Label>
+                </StackLayout>
+                <Label Text="Test Record Status Icons" TextColor="Black" FontSize="20"  FontAttributes="Bold" Margin="19,0,0,15" >
+            </Label>
+            </StackLayout>
+            <StackLayout Margin="0,10,0,10"  AbsoluteLayout.LayoutBounds="0,0.4,1,0.65" AbsoluteLayout.LayoutFlags="All" BackgroundColor="{x:Static Common:Colors.WhiteColor}" HorizontalOptions="FillAndExpand" Padding="12">
+                <StackLayout AbsoluteLayout.LayoutBounds="0,0,1,0.2" AbsoluteLayout.LayoutFlags="All"   Orientation="Horizontal">
+                    <Image Source="notStarted.png" HeightRequest="23" WidthRequest="23" Margin="12,0,11.5,0" VerticalOptions="Start">
+                    </Image>
+                    <StackLayout Orientation="Vertical" AbsoluteLayout.LayoutBounds="0.6,0.3,0.4,1" AbsoluteLayout.LayoutFlags="All">
+                        <StackLayout Orientation="Vertical" AbsoluteLayout.LayoutBounds="0.4,0.3,0.8,1" AbsoluteLayout.LayoutFlags="All" >
+                            <Label Text="Not Administered"  FontSize="14" TextColor="Black"  Margin="11.5,0,0,4" FontFamily="{StaticResource SFProRegular}" VerticalOptions="Start"></Label>
+                            <Label Margin="11.5,6,0,20" TextColor="#3d3f3f" FontFamily="{StaticResource ARIALMT}">
+                                <Label.FormattedText>
+                                    <FormattedString>
+                                        <FormattedString.Spans>
+                                            <Span Text="The " />
+                                            <Span Text="Not Administered "  FontSize="14" TextColor="#3d3f3f" FontFamily="{StaticResource Arial-Bold}" FontAttributes="Bold"/>
+                                            <Span Text="icon indicates an item that has not been attempted but is within the appropriate age range." FontFamily="{StaticResource SFProRegular}" FontSize="14" />
+                                        </FormattedString.Spans>
+                                    </FormattedString>
+                                </Label.FormattedText>
+                            </Label>
+                        </StackLayout>
+                    </StackLayout>
+                </StackLayout>
+
+
+                <StackLayout AbsoluteLayout.LayoutBounds="0,0.2,1,0.4" AbsoluteLayout.LayoutFlags="All"  Orientation="Horizontal" >
+                    <Image Source="iconStatusNonitem.png" HeightRequest="23" WidthRequest="23" Margin="12,13,11.5,0" VerticalOptions="Start">
+                    </Image>
+                    <StackLayout Orientation="Vertical" AbsoluteLayout.LayoutBounds="0.4,0.3,0.8,1" AbsoluteLayout.LayoutFlags="All" >
+                        <Label Text="Not Age Appropriate"  FontSize="14" TextColor="Black" Margin="11.5,13,0,4" FontFamily="{StaticResource SFProRegular}"></Label>
+                        <Label Margin="11.5,6,0,20" TextColor="#3d3f3f" FontFamily="{StaticResource ARIALMT}">
+                            <Label.FormattedText>
+                                <FormattedString>
+                                    <FormattedString.Spans>
+                                        <Span Text="The " />
+                                        <Span Text="Not Age Appropriate "  FontSize="14" TextColor="#3d3f3f" FontAttributes="Bold" FontFamily="{StaticResource Arial-Bold}"/>
+                                        <Span Text="icon indicates an item that is outside the test age range and should not be administered." FontFamily="{StaticResource SFProRegular}" FontSize="14" />
+                                    </FormattedString.Spans>
+                                </FormattedString>
+                            </Label.FormattedText>
+                        </Label>
+                    </StackLayout>
+                </StackLayout>
+
+                <StackLayout AbsoluteLayout.LayoutBounds="0,0.6,1,0.4" AbsoluteLayout.LayoutFlags="All" Grid.Row="0" Orientation="Horizontal">
+                    <Image Source="completed_TickMark.png" HeightRequest="23" WidthRequest="23" Margin="12,13,11.5,0" VerticalOptions="Start">
+                    </Image>
+                    <StackLayout Orientation="Vertical" AbsoluteLayout.LayoutBounds="0.4,0.3,0.8,1" AbsoluteLayout.LayoutFlags="All" >
+                        <Label Text="Administered"  FontSize="14" TextColor="Black" Margin="11.5,13,0,4" FontFamily="{StaticResource SFProRegular}"></Label>
+                        <Label Margin="11.5,6,0,10" TextColor="#3d3f3f" FontFamily="{StaticResource ARIALMT}">
+                            <Label.FormattedText>
+                                <FormattedString>
+                                    <FormattedString.Spans>
+                                        <Span Text="The " />
+                                        <Span Text="Administered "  FontSize="14" TextColor="#3d3f3f" FontFamily="{StaticResource Arial-Bold}" FontAttributes="Bold"/>
+                                        <Span Text="icon indicates an item that has been administered to the child." FontFamily="{StaticResource SFProRegular}" FontSize="14" />
+                                    </FormattedString.Spans>
+                                </FormattedString>
+                            </Label.FormattedText>
+                        </Label>
+                    </StackLayout>
+                </StackLayout>
+
+                <StackLayout AbsoluteLayout.LayoutBounds="0,0.8,1,0.2" AbsoluteLayout.LayoutFlags="All"  Orientation="Horizontal">
+                    <Image Source="iconStatusSkipped.png" HeightRequest="23" WidthRequest="23" Margin="12,13,11.5,0" VerticalOptions="Start">
+                    </Image>
+                    <StackLayout Orientation="Vertical" AbsoluteLayout.LayoutBounds="0.4,0.3,0.8,1" AbsoluteLayout.LayoutFlags="All">
+                        <Label Text="Skipped"  FontSize="14" TextColor="Black"  Margin="11.5,13,0,4" FontFamily="{StaticResource SFProRegular}"></Label>
+                        <Label Margin="11.5,6,10,10" TextColor="#3d3f3f" FontFamily="{StaticResource ARIALMT}">
+                            <Label.FormattedText>
+                                <FormattedString>
+                                    <FormattedString.Spans>
+                                        <Span Text="The " />
+                                        <Span Text="Skipped "  FontSize="14" TextColor="#3d3f3f" FontFamily="{StaticResource Arial-Bold}" FontAttributes="Bold"/>
+                                        <Span Text="icon indicates an item that was skipped during testing and should be revisited to obtain basal/or ceiling." FontFamily="{StaticResource SFProRegular}" FontSize="14" />
+                                    </FormattedString.Spans>
+                                </FormattedString>
+                            </Label.FormattedText>
+                        </Label>
+                    </StackLayout>
+                </StackLayout>
+            </StackLayout>
+        </AbsoluteLayout>
+    </Frame>
+</pages:PopupPage>
